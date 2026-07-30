@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Honoring Stories — Harshita | Psychotherapy in Mumbai</title>
+<meta name="description" content="Warm, trauma-informed, queer-affirmative psychotherapy with Harshita. Online sessions for adults worldwide." />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+
+<!-- Fonts: Cormorant Garamond (display serif) + Inter (body). Regular/medium/semibold only, no thin weights. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ========== TOKENS ========== */
+  :root {
+    /* Palette — pulled directly from the logo */
+    --deep-purple: #5B2E6B;
+    --purple: #7A4D8F;
+    --purple-soft: #B295C4;
+    --rose: #D96A9C;
+    --rose-soft: #F2C5D5;
+    --cream: #F8F1E4;
+    --cream-warm: #FDFAF2;
+    --charcoal: #2B1E2F;
+    --charcoal-soft: #4A3C50;
+    --muted: #8A7E90;
+    --line: rgba(91, 46, 107, 0.14);
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Spacing rhythm */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+    --space-2xl: 8rem;
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --dur-slow: 1.2s;
+    --dur-med: 0.8s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ========== BASE ========== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--deep-purple); text-decoration: none; transition: color 0.3s var(--ease-gentle); }
+  a:hover { color: var(--rose); }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--charcoal);
+  }
+  p { margin: 0 0 1em; }
+
+  /* Grain — quiet tactile warmth instead of flat vector-on-vector */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ========== LAYOUT ========== */
+  .wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .wrap { padding: 0 2rem; }
+    body { font-size: 17px; }
+  }
+  @media (min-width: 1024px) {
+    .wrap { padding: 0 3rem; }
+  }
+
+  section {
+    padding: var(--space-xl) 0;
+  }
+  @media (min-width: 768px) {
+    section { padding: var(--space-2xl) 0; }
+  }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 1.25rem;
+    background: rgba(248, 241, 228, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.5s var(--ease-gentle), padding 0.4s var(--ease-gentle);
+  }
+  .nav.scrolled { border-bottom-color: var(--line); padding: 0.75rem 1.25rem; }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo img { height: 36px; width: auto; }
+  .nav-logo span {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--deep-purple);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  @media (max-width: 767px) { .nav-logo span { display: none; } }
+
+  .nav-links {
+    display: none;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--charcoal-soft);
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--rose);
+    transition: width 0.4s var(--ease-gentle);
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--deep-purple);
+    color: var(--cream-warm) !important;
+    padding: 0.55rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle);
+  }
+  .nav-cta:hover { background: var(--rose); transform: translateY(-1px); }
+
+  /* Mobile menu */
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+  }
+  @media (min-width: 900px) { .nav-toggle { display: none; } }
+  .nav-toggle span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: var(--deep-purple);
+    margin: 0 auto;
+    transition: all 0.4s var(--ease-gentle);
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+  }
+  .nav-toggle span:nth-child(1) { top: 12px; }
+  .nav-toggle span:nth-child(2) { top: 18px; }
+  .nav-toggle span:nth-child(3) { top: 24px; }
+  .nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: translateX(-50%) rotate(45deg); }
+  .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: translateX(-50%) rotate(-45deg); }
+
+  .nav-drawer {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: var(--cream-warm);
+    padding: 2rem 1.5rem;
+    transform: translateY(-120%);
+    transition: transform 0.5s var(--ease-gentle);
+    border-bottom: 1px solid var(--line);
+    z-index: 99;
+  }
+  .nav.open .nav-drawer { transform: translateY(0); }
+  @media (min-width: 900px) { .nav-drawer { display: none; } }
+  .nav-drawer a {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 1.05rem;
+    font-family: var(--font-display);
+    color: var(--charcoal);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-drawer a:last-child { border-bottom: none; }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    padding: 8rem 0 4rem;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hero { padding: 10rem 0 6rem; }
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: breathe 14s ease-in-out infinite;
+  }
+  .hero-blob.one {
+    width: 500px; height: 500px;
+    background: var(--rose-soft);
+    top: -150px; right: -100px;
+  }
+  .hero-blob.two {
+    width: 400px; height: 400px;
+    background: var(--purple-soft);
+    bottom: -100px; left: -80px;
+    animation-delay: -7s;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.08) translate(20px, -10px); }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+    }
+  }
+
+  .hero-text .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--rose);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.4s var(--ease-out) 0.3s forwards;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--deep-purple);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1.4s var(--ease-out) 0.5s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+    font-weight: 400;
+  }
+  .hero-note {
+    font-size: 1.05rem;
+    color: var(--charcoal-soft);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1.4s var(--ease-out) 0.75s forwards;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.4s var(--ease-out) 0.95s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle),
+                box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out);
+    letter-spacing: 0.01em;
+    will-change: transform;
+  }
+  .btn-primary {
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+  }
+  .btn-primary:hover {
+    background: var(--rose);
+    color: var(--cream-warm);
+    box-shadow: 0 12px 28px -14px rgba(217, 106, 156, 0.6);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--deep-purple);
+    border-color: var(--deep-purple);
+  }
+  .btn-secondary:hover {
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+  }
+  .btn svg {
+    width: 14px; height: 14px;
+    transition: transform 0.4s var(--ease-gentle);
+  }
+  .btn:hover svg { transform: translateX(3px); }
+
+  /* Hero photo */
+  .hero-photo {
+    opacity: 0;
+    animation: fadeIn 1.8s var(--ease-out) 0.8s forwards;
+    position: relative;
+    perspective: 1000px;
+  }
+  .hero-photo-frame {
+    position: relative;
+    max-width: 440px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transition: transform 0.4s var(--ease-gentle);
+    will-change: transform;
+  }
+  .hero-photo-frame img {
+    width: 100%;
+    border-radius: 50% 50% 18px 18px / 60% 60% 18px 18px;
+    box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.35);
+  }
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--rose-soft);
+    border-radius: 50% 50% 18px 18px / 60% 60% 18px 18px;
+    transform: translate(14px, 14px);
+    z-index: -1;
+    transition: transform 0.8s var(--ease-gentle);
+  }
+  .hero-photo-frame:hover::before {
+    transform: translate(8px, 8px);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 2s var(--ease-out) 1.5s forwards;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--rose), transparent);
+    animation: scrollPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ========== REVEAL (intersection observer) ========== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal.delay-1 { transition-delay: 0.15s; }
+  .reveal.delay-2 { transition-delay: 0.3s; }
+  .reveal.delay-3 { transition-delay: 0.45s; }
+
+  /* Section heading pattern */
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-lg);
+  }
+  .section-head .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--rose);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+  }
+  .section-head h2 {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+  .section-head p {
+    color: var(--charcoal-soft);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  /* Decorative divider (feather-inspired) */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem auto 1.75rem;
+    max-width: 140px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .divider svg {
+    margin: 0 0.75rem;
+    color: var(--rose);
+    opacity: 0.7;
+  }
+
+  /* ========== VALUES ========== */
+  .values {
+    background: var(--cream-warm);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .values-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .value-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    transition: padding-left 0.6s var(--ease-gentle);
+  }
+  .values-grid .value-row:last-child { border-bottom: 1px solid var(--line); }
+  .value-row:hover { padding-left: 0.75rem; }
+  @media (min-width: 768px) {
+    .value-row { grid-template-columns: 6rem 12rem 1fr; gap: 2rem; padding: 2.75rem 0; }
+  }
+  .value-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--rose);
+    opacity: 0.75;
+    letter-spacing: 0.02em;
+  }
+  .value-row h3 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 500;
+    font-style: italic;
+    color: var(--deep-purple);
+    transition: color 0.5s var(--ease-gentle);
+  }
+  .value-row:hover h3 { color: var(--rose); }
+  .value-row p {
+    color: var(--charcoal-soft);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 480px;
+    margin: 0.5rem 0 0;
+  }
+  @media (min-width: 768px) { .value-row p { margin: 0; } }
+
+  /* ========== CONCERNS ========== */
+  .concerns-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .concern-card {
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.6s var(--ease-gentle);
+    position: relative;
+    overflow: hidden;
+  }
+  .concern-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--rose-soft), var(--rose));
+    transition: left 0.8s var(--ease-gentle);
+  }
+  .concern-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--rose-soft);
+    box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2);
+  }
+  .concern-card:hover::before { left: 0; }
+  .concern-card h4 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--charcoal);
+  }
+  .concern-card p {
+    color: var(--charcoal-soft);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ========== BREATH (signature pause) ========== */
+  .breath {
+    position: relative;
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .breath-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 1px solid var(--rose-soft);
+    background: radial-gradient(circle, rgba(242,197,213,0.35), rgba(242,197,213,0) 70%);
+    animation: breathe 7s ease-in-out infinite;
+    margin-bottom: 1.5rem;
+  }
+  .breath-line {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--muted);
+    letter-spacing: 0.01em;
+    text-align: center;
+    margin: 0;
+  }
+  .breath-line span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    transition-delay: calc(var(--i) * 0.06s);
+  }
+  .breath-line.in span { opacity: 1; transform: translateY(0); }
+
+  /* ========== WHY ME / MATCH ========== */
+  .match {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
+  }
+  .match-inner {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .match-inner { grid-template-columns: 1fr 1fr; gap: 5rem; }
+  }
+  .match-text h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin-bottom: 1.25rem;
+  }
+  .match-text h2 em { font-style: italic; color: var(--rose); font-weight: 400; }
+  .match-text p {
+    color: var(--charcoal-soft);
+    font-size: 1.02rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .match-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+  }
+  .match-list li {
+    padding: 0.75rem 0 0.75rem 2rem;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    color: var(--charcoal-soft);
+    font-size: 0.98rem;
+  }
+  .match-list li:last-child { border-bottom: none; }
+  .match-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 1.3rem;
+    width: 16px; height: 1px;
+    background: var(--rose);
+  }
+
+  /* Illustrative SVG side */
+  .match-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  /* ========== TESTIMONIALS ========== */
+  .testimonials {
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonials::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(217, 106, 156, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(242, 197, 213, 0.1), transparent 45%);
+    pointer-events: none;
+  }
+  .testimonials .section-head h2 { color: var(--cream-warm); }
+  .testimonials .section-head .eyebrow { color: var(--rose-soft); }
+  .testimonials .section-head p { color: rgba(253, 250, 242, 0.8); }
+
+  .testimonials-track {
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial {
+    display: none;
+    padding: 2rem 1rem;
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .testimonial.active { display: block; animation: testimonialIn 0.9s var(--ease-out); }
+  @keyframes testimonialIn {
+    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .testimonial .quote-mark {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    line-height: 0.8;
+    color: var(--rose);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .testimonial blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    line-height: 1.55;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 2rem;
+    color: var(--cream-warm);
+  }
+  .testimonial .attribution {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--rose-soft);
+    letter-spacing: 0.02em;
+  }
+  .testimonial .attribution strong {
+    display: block;
+    color: var(--cream-warm);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .testimonial-dots button {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(253, 250, 242, 0.3);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s var(--ease-gentle);
+  }
+  .testimonial-dots button.active {
+    background: var(--rose);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  /* ========== QUALIFICATIONS (timeline) ========== */
+  .quals-grid {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--line);
+  }
+  .qual-item {
+    position: relative;
+    padding: 0 0 2.25rem;
+  }
+  .qual-item:last-child { padding-bottom: 0; }
+  .qual-item::before {
+    content: '';
+    position: absolute;
+    left: -1.98rem;
+    top: 0.4rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1.5px solid var(--rose);
+    transition: all 0.5s var(--ease-gentle);
+  }
+  .qual-item:hover::before {
+    background: var(--rose);
+    transform: scale(1.3);
+  }
+  .qual-item .qual-degree {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 0.2rem;
+  }
+  .qual-item .qual-inst {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ========== BLOG PREVIEW (togglable) ========== */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .blog-card {
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.6s var(--ease-gentle);
+    cursor: pointer;
+  }
+  .blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px -28px rgba(91, 46, 107, 0.25);
+  }
+  .blog-card-image {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-card-image svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+  }
+  .blog-card-body { padding: 1.5rem; }
+  .blog-card-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .blog-card h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .blog-card p {
+    color: var(--charcoal-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ========== FOOTER HELPLINES (footnote) ========== */
+  .footer-helplines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .footer-helplines li {
+    font-size: 0.8rem;
+    color: rgba(253, 250, 242, 0.6);
+  }
+  .footer-helplines a {
+    color: rgba(253, 250, 242, 0.75);
+    font-size: 0.8rem;
+  }
+  .footer-helplines a:hover { color: var(--rose-soft); }
+  .footer-note {
+    font-size: 0.78rem;
+    color: rgba(253, 250, 242, 0.55);
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
+    max-width: 460px;
+  }
+
+  /* ========== CONTACT STRIP ========== */
+  .contact {
+    background: var(--cream-warm);
+    text-align: center;
+  }
+  .contact h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--deep-purple);
+  }
+  .contact p {
+    max-width: 540px;
+    margin: 1rem auto 2rem;
+    color: var(--charcoal-soft);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--charcoal);
+    color: var(--cream-warm);
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(253, 250, 242, 0.12);
+  }
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+  }
+  .footer-brand img { height: 48px; margin-bottom: 1rem; filter: brightness(0) invert(1); opacity: 0.95; }
+  .footer-brand p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--rose-soft);
+    margin: 0;
+  }
+  .footer-col h5 {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rose-soft);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a {
+    color: rgba(253, 250, 242, 0.75);
+    font-size: 0.92rem;
+    transition: color 0.4s var(--ease-gentle);
+  }
+  .footer-col a:hover { color: var(--rose-soft); }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer-bottom { flex-direction: row; text-align: left; }
+  }
+  .footer-bottom small {
+    color: rgba(253, 250, 242, 0.55);
+    font-size: 0.82rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(253, 250, 242, 0.55);
+  }
+  .footer-links a:hover { color: var(--rose-soft); }
+
+  /* ========== DECORATIVE (feather SVG motif) ========== */
+  .feather-accent {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.12;
+    z-index: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Honoring Stories home">
+      <img src="assets/logo.png" alt="Honoring Stories" style="height:52px;width:auto;" />
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work With Me</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#community">Community</a>
+      <a href="#contact" class="nav-cta">Book a Consultation</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer">
+    <a href="#about" onclick="document.getElementById('nav').classList.remove('open')">About</a>
+    <a href="#work" onclick="document.getElementById('nav').classList.remove('open')">Work With Me</a>
+    <a href="#testimonials" onclick="document.getElementById('nav').classList.remove('open')">Testimonials</a>
+    <a href="#community" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
+    <a href="#contact" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation</a>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-bg">
+    <div class="hero-blob one"></div>
+    <div class="hero-blob two"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow">Express · Embrace · Empower</div>
+        <h1>A space to feel seen, <em>heard</em>, and slowly untangle what feels heavy.</h1>
+        <p class="hero-note">Warm, trauma-informed, intersectional psychotherapy for adults navigating life's tender and complex moments. Queer-affirmative. Neurodivergent inclusive.</p>
+        <div class="hero-ctas">
+          <a href="https://calendar.app.google/yhp8no5LA5Ejb77EA" class="btn btn-primary">
+            Book a Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#about" class="btn btn-secondary">About Harshita</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-frame">
+          <!-- Replace src with your actual image path -->
+          <img src="assets/harshita-home.png" alt="Harshita — Psychotherapist"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <!-- Fallback placeholder (hidden when real image loads) -->
+          <div style="display:none;width:100%;aspect-ratio:3/4;border-radius:50% 50% 18px 18px / 60% 60% 18px 18px;background:linear-gradient(160deg,#B295C4,#F2C5D5);align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:#5B2E6B;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;text-align:center;padding:2rem;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            Harshita<br/>Psychotherapist
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- ========== VALUES ========== -->
+<section class="values" id="values">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What I hold as essential</div>
+      <h2>Therapy rooted in care, honesty, and pace</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-row reveal delay-1">
+        <div class="value-num">01</div>
+        <h3>Express</h3>
+        <p>A grounded, non-judgmental space to speak what feels hard to say — at your own pace.</p>
+      </div>
+      <div class="value-row reveal delay-2">
+        <div class="value-num">02</div>
+        <h3>Embrace</h3>
+        <p>Meeting every part of you — the tender, the tired, the uncertain — with warmth and respect.</p>
+      </div>
+      <div class="value-row reveal delay-3">
+        <div class="value-num">03</div>
+        <h3>Empower</h3>
+        <p>Helping you reconnect with your own capacity, clarity, and agency — gently, collaboratively.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONCERNS ========== -->
+<section id="concerns">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Concerns I work with</div>
+      <h2>Where I can walk alongside you</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+      <p>You don't have to go through it alone. Let's explore it together, with honor and care.</p>
+    </div>
+    <div class="concerns-grid">
+      <div class="concern-card reveal delay-1">
+        <h4>Anxiety & Overwhelm</h4>
+        <p>Feeling anxious, low, emotionally flooded, or stuck in patterns that are hard to shift.</p>
+      </div>
+      <div class="concern-card reveal delay-2">
+        <h4>Relationships & Transitions</h4>
+        <p>Navigating relationship dynamics, life transitions, or feeling distant from yourself.</p>
+      </div>
+      <div class="concern-card reveal delay-3">
+        <h4>Past Trauma</h4>
+        <p>Working gently with how earlier pain continues to shape the present.</p>
+      </div>
+      <div class="concern-card reveal delay-1">
+        <h4>Identity & Growth</h4>
+        <p>Exploring who you are, building confidence, and growing through personal challenges.</p>
+      </div>
+      <div class="concern-card reveal delay-2">
+        <h4>Overthinking & Sleep</h4>
+        <p>Managing overthinking, improving sleep, and coping with chronic stress.</p>
+      </div>
+      <div class="concern-card reveal delay-3">
+        <h4>Queer-Affirmative Care</h4>
+        <p>A space that respects and affirms diverse gender and sexual identities, without explanation required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BREATH (signature pause) ========== -->
+<section class="breath" aria-hidden="false">
+  <div class="breath-circle"></div>
+  <p class="breath-line" data-kinetic>Before we go further — take a breath.</p>
+</section>
+
+<!-- ========== WHY ME / MATCH ========== -->
+<section class="match" id="about">
+  <div class="wrap">
+    <div class="match-inner">
+      <div class="match-text reveal">
+        <div class="eyebrow" style="font-family:var(--font-display);font-style:italic;color:var(--rose);margin-bottom:0.5rem;display:block;">Why this space might feel right</div>
+        <h2>Finding the <em>right fit</em> matters more than anything else</h2>
+        <p>Research consistently shows that one of the most important parts of therapy is feeling safe and genuinely connected with your therapist. I care deeply about building that kind of trust into our work.</p>
+        <p>I see the therapy space as honest, transparent, and safe — not only for you, but for me as well. I try to hold moments of lightness alongside what's heavy.</p>
+        <ul class="match-list">
+          <li>6+ years as a therapist, 3+ years as a supervisor</li>
+          <li>Eclectic approach — drawing from different therapeutic methods to suit you</li>
+          <li>Trauma-informed, queer-affirmative, neurodivergent inclusive</li>
+          <li>Online sessions with adults across the world, rooted in Mumbai</li>
+        </ul>
+        <div style="margin-top:2rem;">
+          <a href="#contact" class="btn btn-primary">
+            Book a free consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="match-visual reveal delay-2">
+        <svg width="100%" height="400" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F2C5D5" />
+              <stop offset="100%" stop-color="#B295C4" />
+            </linearGradient>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#5B2E6B" stop-opacity="0.15" />
+              <stop offset="100%" stop-color="#5B2E6B" stop-opacity="0.02" />
+            </linearGradient>
+          </defs>
+          <!-- arched doorway -->
+          <path d="M 80 480 L 80 200 Q 80 60 200 60 Q 320 60 320 200 L 320 480 Z"
+                fill="url(#g2)" stroke="#5B2E6B" stroke-width="1" stroke-opacity="0.3"/>
+          <path d="M 100 470 L 100 200 Q 100 80 200 80 Q 300 80 300 200 L 300 470 Z"
+                fill="none" stroke="#D96A9C" stroke-width="0.8" stroke-opacity="0.5"/>
+          <!-- soft flower/feather motif inside -->
+          <g transform="translate(200,270)">
+            <ellipse cx="0" cy="-60" rx="18" ry="60" fill="url(#g1)" opacity="0.55">
+              <animateTransform attributeName="transform" type="rotate" from="-3 0 0" to="3 0 0" dur="8s" repeatCount="indefinite" values="-3 0 0; 3 0 0; -3 0 0" />
+            </ellipse>
+            <ellipse cx="-40" cy="-30" rx="15" ry="50" fill="url(#g1)" opacity="0.45" transform="rotate(-45)">
+              <animateTransform attributeName="transform" type="rotate" from="-48 0 0" to="-42 0 0" dur="9s" repeatCount="indefinite" values="-48 0 0; -42 0 0; -48 0 0" />
+            </ellipse>
+            <ellipse cx="40" cy="-30" rx="15" ry="50" fill="url(#g1)" opacity="0.45" transform="rotate(45)">
+              <animateTransform attributeName="transform" type="rotate" from="42 0 0" to="48 0 0" dur="9s" repeatCount="indefinite" values="42 0 0; 48 0 0; 42 0 0" />
+            </ellipse>
+            <circle cx="0" cy="0" r="12" fill="#5B2E6B" opacity="0.8"/>
+          </g>
+          <!-- floating dots -->
+          <circle cx="120" cy="150" r="2" fill="#D96A9C" opacity="0.6">
+            <animate attributeName="cy" values="150;140;150" dur="5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="290" cy="180" r="2" fill="#D96A9C" opacity="0.6">
+            <animate attributeName="cy" values="180;170;180" dur="6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="160" cy="420" r="2" fill="#5B2E6B" opacity="0.5">
+            <animate attributeName="cy" values="420;410;420" dur="7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="250" cy="440" r="2" fill="#5B2E6B" opacity="0.5">
+            <animate attributeName="cy" values="440;430;440" dur="5.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WORK WITH ME (preview) ========== -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Ways of working together</div>
+      <h2>Therapy &amp; Supervision</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;" class="work-grid">
+      <a href="#" class="concern-card reveal delay-1" style="display:block;padding:2.5rem 2rem;">
+        <div style="font-family:var(--font-display);font-style:italic;color:var(--rose);font-size:0.9rem;margin-bottom:0.5rem;">For individuals</div>
+        <h4 style="font-size:1.6rem;margin-bottom:1rem;">Psychotherapy Sessions</h4>
+        <p>A safe, supportive space to talk about what you're going through, understand yourself better, and work through challenges with a trained therapist.</p>
+        <div style="margin-top:1.25rem;color:var(--deep-purple);font-weight:500;font-size:0.95rem;">Learn more →</div>
+      </a>
+      <a href="#" class="concern-card reveal delay-2" style="display:block;padding:2.5rem 2rem;">
+        <div style="font-family:var(--font-display);font-style:italic;color:var(--rose);font-size:0.9rem;margin-bottom:0.5rem;">For mental health professionals</div>
+        <h4 style="font-size:1.6rem;margin-bottom:1rem;">Supervision Sessions</h4>
+        <p>Thoughtful, collaborative supervision for practicing therapists and counselors looking to deepen their work and hold their practice with care.</p>
+        <div style="margin-top:1.25rem;color:var(--deep-purple);font-weight:500;font-size:0.95rem;">Learn more →</div>
+      </a>
+    </div>
+    <style>
+      @media (min-width: 768px) { .work-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; } }
+    </style>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Peer Testimonials</div>
+      <h2>Through the eyes of those who've walked alongside me</h2>
+      <p>These reflections come from peers and supervisors — experienced therapists who have witnessed my work, values, and presence in the field.</p>
+    </div>
+    <div class="testimonials-track reveal">
+      <!-- NOTE: Placeholder testimonials. Replace with real ones. -->
+      <div class="testimonial active">
+        <div class="quote-mark">"</div>
+        <blockquote>[Placeholder testimonial text — to be replaced. This is a real, specific reflection from a peer or supervisor about Harshita's presence, warmth, clinical thinking, or specific qualities they've observed in her practice.]</blockquote>
+        <div class="attribution">
+          <strong>[Peer Name 1]</strong>
+          [Qualification — e.g. MA Clinical Psychology, Supervisor]
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>[Placeholder testimonial — real quote from second peer to be inserted here. Keep specific to Harshita's grounded, collaborative, or trauma-informed approach.]</blockquote>
+        <div class="attribution">
+          <strong>[Peer Name 2]</strong>
+          [Qualification]
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>[Placeholder testimonial — real quote from third peer. Could emphasize supervision experience or queer-affirmative lens.]</blockquote>
+        <div class="attribution">
+          <strong>[Peer Name 3]</strong>
+          [Qualification]
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>[Placeholder testimonial — real quote from fourth peer.]</blockquote>
+        <div class="attribution">
+          <strong>[Peer Name 4]</strong>
+          [Qualification]
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>[Placeholder testimonial — real quote from fifth peer.]</blockquote>
+        <div class="attribution">
+          <strong>[Peer Name 5]</strong>
+          [Qualification]
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        <button class="active" data-idx="0" aria-label="Testimonial 1"></button>
+        <button data-idx="1" aria-label="Testimonial 2"></button>
+        <button data-idx="2" aria-label="Testimonial 3"></button>
+        <button data-idx="3" aria-label="Testimonial 4"></button>
+        <button data-idx="4" aria-label="Testimonial 5"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== QUALIFICATIONS ========== -->
+<section id="qualifications">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Education &amp; Training</div>
+      <h2>Qualifications</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="quals-grid">
+      <div class="qual-item reveal delay-1">
+        <div class="qual-degree">MA in Clinical Psychology</div>
+        <div class="qual-inst">Post-graduate qualification</div>
+      </div>
+      <div class="qual-item reveal delay-1">
+        <div class="qual-degree">Diploma in Counseling Psychology</div>
+        <div class="qual-inst">Xavier's College</div>
+      </div>
+      <div class="qual-item reveal delay-2">
+        <div class="qual-degree">Diploma in Supervision for Mental Health Practice</div>
+        <div class="qual-inst">TISS (Tata Institute of Social Sciences)</div>
+      </div>
+      <div class="qual-item reveal delay-2">
+        <div class="qual-degree">Queer Affirmative Counseling Practice</div>
+        <div class="qual-inst">Mariwala Health Initiative</div>
+      </div>
+      <div class="qual-item reveal delay-3">
+        <div class="qual-degree">Gestalt Therapy — Basic &amp; Advanced</div>
+        <div class="qual-inst">60 hours · Psychphoenix</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLOG (togglable — UI toggle via data-blog-enabled) ========== -->
+<section id="blog" data-blog-enabled="true">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Reflections &amp; Writing</div>
+      <h2>From the journal</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal delay-1">
+        <div class="blog-card-image">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="url(#bg1)"/>
+            <defs><linearGradient id="bg1"><stop offset="0" stop-color="#F2C5D5"/><stop offset="1" stop-color="#B295C4"/></linearGradient></defs>
+            <circle cx="100" cy="125" r="40" fill="#5B2E6B" opacity="0.2"/>
+            <circle cx="300" cy="100" r="60" fill="#D96A9C" opacity="0.25"/>
+          </svg>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">[Placeholder — Post Date]</div>
+          <h3>[Placeholder post title about therapy or inner work]</h3>
+          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
+        </div>
+      </article>
+      <article class="blog-card reveal delay-2">
+        <div class="blog-card-image">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="url(#bg2)"/>
+            <defs><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B295C4"/><stop offset="1" stop-color="#F2C5D5"/></linearGradient></defs>
+            <path d="M0,150 Q100,100 200,140 T400,130 L400,250 L0,250 Z" fill="#5B2E6B" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">[Placeholder — Post Date]</div>
+          <h3>[Placeholder post title]</h3>
+          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
+        </div>
+      </article>
+      <article class="blog-card reveal delay-3">
+        <div class="blog-card-image">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="url(#bg3)"/>
+            <defs><linearGradient id="bg3" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8F1E4"/><stop offset="1" stop-color="#F2C5D5"/></linearGradient></defs>
+            <circle cx="200" cy="125" r="80" fill="#5B2E6B" opacity="0.12"/>
+            <circle cx="200" cy="125" r="40" fill="#D96A9C" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">[Placeholder — Post Date]</div>
+          <h3>[Placeholder post title]</h3>
+          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT STRIP ========== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Let's begin a conversation</h2>
+      <p>If any of this feels like it might resonate, I'd gently invite you to reach out. A free consultation call is a soft first step.</p>
+      <div class="hero-ctas" style="justify-content:center;">
+        <a href="#" class="btn btn-primary">
+          Book a Consultation
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:hello@honoringstories.com" class="btn btn-secondary">Send a message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg width="160" height="70" viewBox="0 0 360 88" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:0.5rem;">
+          <g transform="translate(8,2)">
+            <path d="M38 6 Q52 -2 60 10 Q68 22 55 38 Q48 46 36 52 Q30 42 28 30 Q26 18 38 6Z" fill="#E87AAE" opacity="0.85"/>
+            <path d="M42 8 Q54 2 60 12 Q65 22 55 36 Q50 42 40 48 Q36 38 36 26 Q36 16 42 8Z" fill="#F2A0C8" opacity="0.6"/>
+            <line x1="42" y1="8" x2="34" y2="52" stroke="#C05888" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M34 52 Q32 60 30 68" stroke="#C05888" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(2,44)" fill="none" stroke="#B295C4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7">
+            <path d="M4 28 Q2 20 6 16 Q10 12 14 14 Q16 10 20 12 Q22 8 26 10 Q30 8 32 12 Q36 10 36 15 Q38 20 36 26 Q32 30 20 34 Q10 36 4 28Z"/>
+            <path d="M60 28 Q62 20 58 16 Q54 12 50 14 Q48 10 44 12 Q42 8 38 10 Q34 8 34 12"/>
+            <path d="M4 28 Q20 40 36 38 Q50 36 60 28" stroke="#C05888" stroke-width="1.1" opacity="0.5"/>
+          </g>
+          <text x="88" y="36" font-family="Georgia,serif" font-size="28" font-style="italic" fill="#F2C5D5" letter-spacing="1">Honoring</text>
+          <text x="96" y="62" font-family="Georgia,serif" font-size="26" font-style="italic" fill="#F2C5D5" letter-spacing="1">Stories</text>
+          <text x="90" y="80" font-family="Georgia,serif" font-size="9.5" font-style="italic" fill="#E87AAE" letter-spacing="1.5">Express  |  Embrace  |  Empower</text>
+        </svg>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work With Me</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#community">Community</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="mailto:hello@honoringstories.com">Email</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Based in</h5>
+        <ul>
+          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Mumbai, India</li>
+          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Online worldwide</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding-top:2rem;">
+      <p class="footer-note">This is not a crisis helpline. If you need immediate support, please reach out to one of the helplines below.</p>
+      <ul class="footer-helplines">
+        <li><a href="tel:8686139139">MannTalks — 8686139139</a></li>
+        <li><a href="tel:9152987821">iCall — 9152987821</a></li>
+        <li><a href="tel:18005990019">KIRAN (Govt.) — 1800-599-0019</a></li>
+        <li><a href="tel:7389366696">Spandan — 7389366696</a></li>
+        <li><a href="tel:9999666555">Vandrevala Foundation — 9999666555</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <small>© <span id="year"></span> Honoring Stories · Harshita. All rights reserved.</small>
+      <div class="footer-links">
+        <a href="#">Disclaimer</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  // Reveal on intersection — slow, natural
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Testimonials rotator
+  const testimonials = document.querySelectorAll('.testimonial');
+  const dots = document.querySelectorAll('.testimonial-dots button');
+  let current = 0;
+  let tInterval;
+
+  function showTestimonial(i) {
+    testimonials.forEach(t => t.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    testimonials[i].classList.add('active');
+    dots[i].classList.add('active');
+    current = i;
+  }
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    showTestimonial(i);
+    clearInterval(tInterval);
+    tInterval = setInterval(nextTestimonial, 7000);
+  }));
+  function nextTestimonial() {
+    showTestimonial((current + 1) % testimonials.length);
+  }
+  tInterval = setInterval(nextTestimonial, 7000);
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Magnetic buttons — subtle pull toward cursor, physical not gimmicky
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+
+    // Hero photo — gentle parallax tilt on mouse move
+    const heroFrame = document.querySelector('.hero-photo-frame');
+    const heroEl = document.querySelector('.hero');
+    if (heroFrame && heroEl) {
+      heroEl.addEventListener('mousemove', (e) => {
+        const r = heroEl.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        heroFrame.style.transform = `rotateY(${x * 6}deg) rotateX(${y * -6}deg)`;
+      });
+      heroEl.addEventListener('mouseleave', () => { heroFrame.style.transform = ''; });
+    }
+  }
+
+  // Kinetic line reveal — "match" heading builds word by word on scroll
+  const kinetic = document.querySelector('[data-kinetic]');
+  if (kinetic) {
+    const words = kinetic.textContent.trim().split(/\s+/);
+    kinetic.innerHTML = words.map((w, i) => `<span style="--i:${i}">${w}</span>`).join(' ');
+    const kIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { kinetic.classList.add('in'); kIo.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    kIo.observe(kinetic);
+  }
+
+  // Blog toggle (data-blog-enabled controls visibility)
+  const blog = document.getElementById('blog');
+  if (blog.dataset.blogEnabled === 'false') {
+    blog.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
