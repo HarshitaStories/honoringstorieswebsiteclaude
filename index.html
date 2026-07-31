@@ -510,47 +510,43 @@
     border-bottom: 1px solid var(--line);
   }
   .values-grid {
-    display: flex;
-    flex-direction: column;
-  }
-  .value-row {
     display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    gap: 1.5rem;
-    align-items: baseline;
-    padding: 2rem 0;
-    border-top: 1px solid var(--line);
-    transition: padding-left 0.6s var(--ease-gentle);
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  .values-grid .value-row:last-child { border-bottom: 1px solid var(--line); }
-  .value-row:hover { padding-left: 0.75rem; }
-  @media (min-width: 768px) {
-    .value-row { grid-template-columns: 6rem 12rem 1fr; gap: 2rem; padding: 2.75rem 0; }
+  @media (min-width: 640px) {
+    .values-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   }
-  .value-num {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--rose);
-    opacity: 0.75;
-    letter-spacing: 0.02em;
+  .value-card {
+    text-align: center;
+    padding: 1rem;
   }
-  .value-row h3 {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
+  .value-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 1.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose-soft), var(--cream));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--deep-purple);
+    transition: transform 0.6s var(--ease-gentle);
+  }
+  .value-card:hover .value-icon { transform: scale(1.06) rotate(-4deg); }
+  .value-card h3 {
+    font-size: 1.6rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
     font-style: italic;
     color: var(--deep-purple);
-    transition: color 0.5s var(--ease-gentle);
   }
-  .value-row:hover h3 { color: var(--rose); }
-  .value-row p {
+  .value-card p {
     color: var(--charcoal-soft);
-    font-size: 1rem;
-    line-height: 1.75;
-    max-width: 480px;
-    margin: 0.5rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 280px;
+    margin: 0 auto;
   }
-  @media (min-width: 768px) { .value-row p { margin: 0; } }
 
   /* ========== CONCERNS ========== */
   .concerns-grid {
@@ -584,6 +580,12 @@
     box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2);
   }
   .concern-card:hover::before { left: 0; }
+  .concern-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 1rem;
+    color: var(--rose);
+    opacity: 0.85;
+  }
   .concern-card h4 {
     font-size: 1.3rem;
     font-weight: 500;
@@ -693,6 +695,7 @@
     color: var(--cream-warm);
     position: relative;
     overflow: hidden;
+    padding: var(--space-lg) 0;
   }
   .testimonials::before {
     content: '';
@@ -702,9 +705,10 @@
                 radial-gradient(circle at 80% 70%, rgba(242, 197, 213, 0.1), transparent 45%);
     pointer-events: none;
   }
-  .testimonials .section-head h2 { color: var(--cream-warm); }
+  .testimonials .section-head { margin-bottom: var(--space-md); }
+  .testimonials .section-head h2 { color: var(--cream-warm); font-size: clamp(1.6rem, 3vw, 2.2rem); }
   .testimonials .section-head .eyebrow { color: var(--rose-soft); }
-  .testimonials .section-head p { color: rgba(253, 250, 242, 0.8); }
+  .testimonials .section-head p { color: rgba(253, 250, 242, 0.8); font-size: 0.92rem; }
 
   .testimonials-track {
     position: relative;
@@ -712,9 +716,9 @@
   }
   .testimonial {
     display: none;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
     text-align: center;
-    max-width: 780px;
+    max-width: 640px;
     margin: 0 auto;
   }
   .testimonial.active { display: block; animation: testimonialIn 0.9s var(--ease-out); }
@@ -724,25 +728,30 @@
   }
   .testimonial .quote-mark {
     font-family: var(--font-display);
-    font-size: 5rem;
+    font-size: 2.75rem;
     line-height: 0.8;
     color: var(--rose);
     opacity: 0.6;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-style: italic;
   }
   .testimonial blockquote {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    line-height: 1.55;
+    font-size: clamp(0.98rem, 1.6vw, 1.15rem);
+    line-height: 1.6;
     font-weight: 400;
     font-style: italic;
-    margin: 0 0 2rem;
+    margin: 0 0 1.25rem;
     color: var(--cream-warm);
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
   }
+  .testimonial blockquote::-webkit-scrollbar { width: 4px; }
+  .testimonial blockquote::-webkit-scrollbar-thumb { background: rgba(253,250,242,0.25); border-radius: 4px; }
   .testimonial .attribution {
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--rose-soft);
     letter-spacing: 0.02em;
   }
@@ -750,15 +759,16 @@
     display: block;
     color: var(--cream-warm);
     font-weight: 500;
-    margin-bottom: 0.25rem;
-    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.92rem;
   }
 
   .testimonial-dots {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 0.6rem;
-    margin-top: 2rem;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
   }
   .testimonial-dots button {
     width: 8px; height: 8px;
@@ -814,61 +824,6 @@
     font-size: 0.88rem;
     color: var(--muted);
     font-style: italic;
-  }
-
-  /* ========== BLOG PREVIEW (togglable) ========== */
-  .blog-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 900px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
-
-  .blog-card {
-    background: var(--cream-warm);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.6s var(--ease-gentle);
-    cursor: pointer;
-  }
-  .blog-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 48px -28px rgba(91, 46, 107, 0.25);
-  }
-  .blog-card-image {
-    aspect-ratio: 16 / 10;
-    background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
-    position: relative;
-    overflow: hidden;
-  }
-  .blog-card-image svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.6;
-  }
-  .blog-card-body { padding: 1.5rem; }
-  .blog-card-date {
-    font-size: 0.8rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .blog-card h3 {
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
-  .blog-card p {
-    color: var(--charcoal-soft);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0;
   }
 
   /* ========== FOOTER HELPLINES (footnote) ========== */
@@ -1034,7 +989,7 @@
         <h1>A space to feel seen, <em>heard</em>, and slowly untangle what feels heavy.</h1>
         <p class="hero-note">Warm, trauma-informed, intersectional psychotherapy for adults navigating life's tender and complex moments. Queer-affirmative. Neurodivergent inclusive.</p>
         <div class="hero-ctas">
-          <a href="https://calendar.app.google/yhp8no5LA5Ejb77EA" class="btn btn-primary">
+          <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
             Book a Consultation
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
@@ -1069,18 +1024,24 @@
       </div>
     </div>
     <div class="values-grid">
-      <div class="value-row reveal delay-1">
-        <div class="value-num">01</div>
+      <div class="value-card reveal delay-1">
+        <div class="value-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
         <h3>Express</h3>
         <p>A grounded, non-judgmental space to speak what feels hard to say — at your own pace.</p>
       </div>
-      <div class="value-row reveal delay-2">
-        <div class="value-num">02</div>
+      <div class="value-card reveal delay-2">
+        <div class="value-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+        </div>
         <h3>Embrace</h3>
         <p>Meeting every part of you — the tender, the tired, the uncertain — with warmth and respect.</p>
       </div>
-      <div class="value-row reveal delay-3">
-        <div class="value-num">03</div>
+      <div class="value-card reveal delay-3">
+        <div class="value-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2 6h6l-5 4 2 7-5-4-5 4 2-7-5-4h6z"/></svg>
+        </div>
         <h3>Empower</h3>
         <p>Helping you reconnect with your own capacity, clarity, and agency — gently, collaboratively.</p>
       </div>
@@ -1101,26 +1062,32 @@
     </div>
     <div class="concerns-grid">
       <div class="concern-card reveal delay-1">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg>
         <h4>Anxiety & Overwhelm</h4>
         <p>Feeling anxious, low, emotionally flooded, or stuck in patterns that are hard to shift.</p>
       </div>
       <div class="concern-card reveal delay-2">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         <h4>Relationships & Transitions</h4>
         <p>Navigating relationship dynamics, life transitions, or feeling distant from yourself.</p>
       </div>
       <div class="concern-card reveal delay-3">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/><path d="M9 12l2 2 4-4" stroke-width="1.2" opacity="0.7"/></svg>
         <h4>Past Trauma</h4>
         <p>Working gently with how earlier pain continues to shape the present.</p>
       </div>
       <div class="concern-card reveal delay-1">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
         <h4>Identity & Growth</h4>
         <p>Exploring who you are, building confidence, and growing through personal challenges.</p>
       </div>
       <div class="concern-card reveal delay-2">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <h4>Overthinking & Sleep</h4>
         <p>Managing overthinking, improving sleep, and coping with chronic stress.</p>
       </div>
       <div class="concern-card reveal delay-3">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
         <h4>Queer-Affirmative Care</h4>
         <p>A space that respects and affirms diverse gender and sexual identities, without explanation required.</p>
       </div>
@@ -1144,7 +1111,7 @@
         <p>Research consistently shows that one of the most important parts of therapy is feeling safe and genuinely connected with your therapist. I care deeply about building that kind of trust into our work.</p>
         <p>I see the therapy space as honest, transparent, and safe — not only for you, but for me as well. I try to hold moments of lightness alongside what's heavy.</p>
         <ul class="match-list">
-          <li>6+ years as a therapist, 3+ years as a supervisor</li>
+          <li>7+ years as a therapist, 4+ years as a supervisor</li>
           <li>Eclectic approach — drawing from different therapeutic methods to suit you</li>
           <li>Trauma-informed, queer-affirmative, neurodivergent inclusive</li>
           <li>Online sessions with adults across the world, rooted in Mumbai</li>
@@ -1244,45 +1211,80 @@
       <p>These reflections come from peers and supervisors — experienced therapists who have witnessed my work, values, and presence in the field.</p>
     </div>
     <div class="testimonials-track reveal">
-      <!-- NOTE: Placeholder testimonials. Replace with real ones. -->
       <div class="testimonial active">
         <div class="quote-mark">"</div>
-        <blockquote>[Placeholder testimonial text — to be replaced. This is a real, specific reflection from a peer or supervisor about Harshita's presence, warmth, clinical thinking, or specific qualities they've observed in her practice.]</blockquote>
+        <blockquote>I've had the pleasure of sharing a learning space with Harshita, and I admire her gentle yet deeply thoughtful approach to therapeutic work. She brings a calm, grounded presence to every interaction and consistently demonstrates clarity, intelligence, and emotional depth in both clinical discussions and practice. What stands out most is her structured and ethical approach to therapy. She is meticulous in her work, ensuring that every step she takes is thoughtful, intentional, and aligned with best practices. Her strong ethical foundation, combined with her reflective mindset, makes her an incredibly reliable and trustworthy practitioner.</blockquote>
         <div class="attribution">
-          <strong>[Peer Name 1]</strong>
-          [Qualification — e.g. MA Clinical Psychology, Supervisor]
+          <strong>Deepapriya Vishwanthan</strong>
+          MA (Applied Psychology), M.Phil (Social Sciences) · 16 years experience
         </div>
       </div>
       <div class="testimonial">
         <div class="quote-mark">"</div>
-        <blockquote>[Placeholder testimonial — real quote from second peer to be inserted here. Keep specific to Harshita's grounded, collaborative, or trauma-informed approach.]</blockquote>
+        <blockquote>Harshita and I were batchmates and peers while pursuing our PGD together at St Xavier's. I have known her to be a very ethical, structured and meticulous practitioner. I have found myself learning a lot of nuances of the practice from her. Her ability to maintain professionalism and offer direction and care in her client work is commendable.</blockquote>
         <div class="attribution">
-          <strong>[Peer Name 2]</strong>
-          [Qualification]
+          <strong>Rinkle Jain</strong>
+          MA Clinical Psychology, PGD Counselling Psychology · 4.5 years experience
         </div>
       </div>
       <div class="testimonial">
         <div class="quote-mark">"</div>
-        <blockquote>[Placeholder testimonial — real quote from third peer. Could emphasize supervision experience or queer-affirmative lens.]</blockquote>
+        <blockquote>Harshita is a dedicated mental health professional whose values are based on integrity and ownership, which led to the foundation of her private practice. Having known her since our college days, where she was a year junior to me, I have seen her commitment towards continuous learning and passion for the field. Over the years, she has developed skills and adopted therapeutic techniques to cater to her clients' diverse needs. Harshita drives for consistent self-improvement and professional development that reflects in the quality of care she provides.</blockquote>
         <div class="attribution">
-          <strong>[Peer Name 3]</strong>
-          [Qualification]
+          <strong>Aaushi Shah</strong>
+          MA Clinical Psychology · 8 years experience
         </div>
       </div>
       <div class="testimonial">
         <div class="quote-mark">"</div>
-        <blockquote>[Placeholder testimonial — real quote from fourth peer.]</blockquote>
+        <blockquote>I have known Harshita in a professional and personal capacity for over 2 years now, and I truly appreciate her ethical stance and structured approach to therapy. Her personal value of discipline reflects in her professional sphere, which I believe in psychotherapy helps centre the client and allows them to show up better in therapy and otherwise. I also appreciate Harshita's honest personality, which catalyses a deeper and authentic connection with the other person.</blockquote>
         <div class="attribution">
-          <strong>[Peer Name 4]</strong>
-          [Qualification]
+          <strong>Sanika Nanal</strong>
+          Master's in Clinical Psychology, BPS Accredited Chartered Psychologist · 4.5 years experience
         </div>
       </div>
       <div class="testimonial">
         <div class="quote-mark">"</div>
-        <blockquote>[Placeholder testimonial — real quote from fifth peer.]</blockquote>
+        <blockquote>I have been a close witness to Harshita's work for the last few years, and I have consistently seen her as someone who is deeply passionate and committed towards her work. Her reflexivity allows her to practice with immense compassion while holding space for the greys and liminal spaces that might arise in a therapeutic or supervisory space. What inspires me is her ability to continually connect, grow, and become not only a better professional but also a better person.</blockquote>
         <div class="attribution">
-          <strong>[Peer Name 5]</strong>
-          [Qualification]
+          <strong>Anis Syed</strong>
+          Master's in Clinical Psychology, PG Diploma in Supervision for Mental Health Practice · 8 years experience
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>Harshita and I have had many conversations over the years about our approaches and how we show up as psychotherapists. I admire her commitment to learning. From her early days as a psychotherapist, she has kept a grounding activity box on her desk to help her stay completely present in her sessions. I was so inspired by this that I've now incorporated it into my own practice.</blockquote>
+        <div class="attribution">
+          <strong>Zahra Diwan</strong>
+          MA Clinical Psychology (Adults), MSc Child and Adolescents Mental Health · 7 years experience
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>One of the first things I noticed about Harshita when I first interacted with her during our classroom discussions was her ability to be deeply curious AND be patient with herself and others in finding the next step. In this culture of profound hustle and urgency, I have seen Harshita be consistently grounded and intentional in her work and in the way she shows up as a member of the community. Over the years I've seen her think and work from an intersectional lens — she's mindful of the histories and legacies that individuals carry, and she understands them with all their layers.
+        <br><br>
+        As a first-time professor, I also borrowed from Harshita's calm and reassuring presence — a presence that I believe first-time therapy seekers would also greatly benefit from.
+        <br><br>
+        Seeing how therapy is a relational space and who the therapist is as a person lends itself to the healing, I trust that Harshita's integrity, compassion, calm intellect, and ability to hold meaningful silences will help create the safe space that clients come looking for.</blockquote>
+        <div class="attribution">
+          <strong>Rajshree</strong>
+          M.A. Psychology (Counselling) · 10 years experience
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>I've had the privilege of knowing Harshita for the past seven years, and in that time, I've watched her grow into the deeply attuned, compassionate therapist she is today. What stands out most to me is her unwavering ability to hold space for her clients, gently, without judgment, and with profound empathy.
+        <br><br>
+        Harshita truly embodies self-care. She leads by example, prioritizing her own wellbeing so she can be fully present, grounded, and available in her sessions. I truly admire this quality of hers.
+        <br><br>
+        In our many discussions, I've been consistently struck by the way she approaches therapy with curiosity, openness, and a genuine belief in the potential for change. She approaches resistance from a lens of compassion and curiosity rather than a barrier — something to explore, to listen to, to understand and work with.
+        <br><br>
+        She has a way of making people feel seen and heard. Her presence is steady, calm, and accepting. Whether she's speaking, listening, or simply sitting with someone in silence, you can feel it. There's a deep congruence in the way she works.
+        <br><br>
+        What I admire most is that Harshita views therapy not just as a space for healing, but as a journey toward growth, wonder, and transformation. This hopeful lens, rooted in possibility, has always inspired me. Anyone who has the opportunity to work with her will find a therapist who brings not only skill and knowledge, but also care, authenticity, and a deep honoring of each person's inner world.</blockquote>
+        <div class="attribution">
+          <strong>Ananyaa Kale</strong>
+          MA Psychology, MSc Counselling · 6 years experience
         </div>
       </div>
       <div class="testimonial-dots">
@@ -1291,6 +1293,9 @@
         <button data-idx="2" aria-label="Testimonial 3"></button>
         <button data-idx="3" aria-label="Testimonial 4"></button>
         <button data-idx="4" aria-label="Testimonial 5"></button>
+        <button data-idx="5" aria-label="Testimonial 6"></button>
+        <button data-idx="6" aria-label="Testimonial 7"></button>
+        <button data-idx="7" aria-label="Testimonial 8"></button>
       </div>
     </div>
   </div>
@@ -1327,65 +1332,10 @@
         <div class="qual-degree">Gestalt Therapy — Basic &amp; Advanced</div>
         <div class="qual-inst">60 hours · Psychphoenix</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== BLOG (togglable — UI toggle via data-blog-enabled) ========== -->
-<section id="blog" data-blog-enabled="true">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Reflections &amp; Writing</div>
-      <h2>From the journal</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      <div class="qual-item reveal delay-3">
+        <div class="qual-degree">Complexities of Complex Trauma Accelerated</div>
+        <div class="qual-inst">The International Society for the Study of Trauma and Dissociation (ISSTD)</div>
       </div>
-    </div>
-    <div class="blog-grid">
-      <article class="blog-card reveal delay-1">
-        <div class="blog-card-image">
-          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="250" fill="url(#bg1)"/>
-            <defs><linearGradient id="bg1"><stop offset="0" stop-color="#F2C5D5"/><stop offset="1" stop-color="#B295C4"/></linearGradient></defs>
-            <circle cx="100" cy="125" r="40" fill="#5B2E6B" opacity="0.2"/>
-            <circle cx="300" cy="100" r="60" fill="#D96A9C" opacity="0.25"/>
-          </svg>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-date">[Placeholder — Post Date]</div>
-          <h3>[Placeholder post title about therapy or inner work]</h3>
-          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
-        </div>
-      </article>
-      <article class="blog-card reveal delay-2">
-        <div class="blog-card-image">
-          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="250" fill="url(#bg2)"/>
-            <defs><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B295C4"/><stop offset="1" stop-color="#F2C5D5"/></linearGradient></defs>
-            <path d="M0,150 Q100,100 200,140 T400,130 L400,250 L0,250 Z" fill="#5B2E6B" opacity="0.15"/>
-          </svg>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-date">[Placeholder — Post Date]</div>
-          <h3>[Placeholder post title]</h3>
-          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
-        </div>
-      </article>
-      <article class="blog-card reveal delay-3">
-        <div class="blog-card-image">
-          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="250" fill="url(#bg3)"/>
-            <defs><linearGradient id="bg3" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8F1E4"/><stop offset="1" stop-color="#F2C5D5"/></linearGradient></defs>
-            <circle cx="200" cy="125" r="80" fill="#5B2E6B" opacity="0.12"/>
-            <circle cx="200" cy="125" r="40" fill="#D96A9C" opacity="0.3"/>
-          </svg>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-date">[Placeholder — Post Date]</div>
-          <h3>[Placeholder post title]</h3>
-          <p>A brief placeholder excerpt introducing the piece, what it explores, and why it matters.</p>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -1397,11 +1347,11 @@
       <h2>Let's begin a conversation</h2>
       <p>If any of this feels like it might resonate, I'd gently invite you to reach out. A free consultation call is a soft first step.</p>
       <div class="hero-ctas" style="justify-content:center;">
-        <a href="#" class="btn btn-primary">
+        <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
           Book a Consultation
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="mailto:hello@honoringstories.com" class="btn btn-secondary">Send a message</a>
+        <a href="mailto:feelseen@honoringstories.com" class="btn btn-secondary">Send a message</a>
       </div>
     </div>
   </div>
@@ -1441,15 +1391,15 @@
       <div class="footer-col">
         <h5>Connect</h5>
         <ul>
-          <li><a href="mailto:hello@honoringstories.com">Email</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">LinkedIn</a></li>
+          <li><a href="mailto:feelseen@honoringstories.com">Email</a></li>
+          <li><a href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/in/psychologistharshita" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Based in</h5>
         <ul>
-          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Mumbai, India</li>
+          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Andheri West, Mumbai</li>
           <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Online worldwide</li>
         </ul>
       </div>
@@ -1559,11 +1509,6 @@
     kIo.observe(kinetic);
   }
 
-  // Blog toggle (data-blog-enabled controls visibility)
-  const blog = document.getElementById('blog');
-  if (blog.dataset.blogEnabled === 'false') {
-    blog.style.display = 'none';
-  }
 </script>
 
 </body>
