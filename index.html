@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Honoring Stories — Harshita | Psychotherapy in Mumbai</title>
+<title>Honoring Stories · Harshita | Psychotherapy in Mumbai</title>
 <meta name="description" content="Warm, trauma-informed, queer-affirmative psychotherapy with Harshita. Online sessions for adults worldwide." />
 <link rel="icon" type="image/png" href="assets/logo.png" />
 
@@ -15,7 +15,7 @@
 <style>
   /* ========== TOKENS ========== */
   :root {
-    /* Palette — pulled directly from the logo */
+    /* Palette, pulled directly from the logo */
     --deep-purple: #5B2E6B;
     --purple: #7A4D8F;
     --purple-soft: #B295C4;
@@ -84,7 +84,7 @@
   }
   p { margin: 0 0 1em; }
 
-  /* Grain — quiet tactile warmth instead of flat vector-on-vector */
+  /* Grain: quiet tactile warmth instead of flat vector-on-vector */
   body::before {
     content: '';
     position: fixed;
@@ -235,6 +235,56 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-drawer a:last-child { border-bottom: none; }
+
+  /* ========== SECTION RAIL (blueprint nav) ========== */
+  .section-rail {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 60;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s var(--ease-gentle);
+  }
+  @media (min-width: 1100px) { .section-rail { display: flex; } }
+  .section-rail.visible { opacity: 1; pointer-events: auto; }
+  .rail-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(91, 46, 107, 0.22);
+    transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle);
+  }
+  .rail-dot:hover, .rail-dot.active {
+    background: var(--rose);
+    transform: scale(1.5);
+  }
+  .rail-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--deep-purple);
+    background: var(--cream-warm);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px -6px rgba(91, 46, 107, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease-gentle);
+  }
+  .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
 
   /* ========== HERO ========== */
   .hero {
@@ -911,6 +961,17 @@
   </div>
 </nav>
 
+<!-- ========== SECTION RAIL (blueprint nav) ========== -->
+<nav class="section-rail" id="sectionRail" aria-label="Page sections">
+  <a href="#values" class="rail-dot" data-label="What I hold as essential"></a>
+  <a href="#concerns" class="rail-dot" data-label="Concerns I work with"></a>
+  <a href="#about" class="rail-dot" data-label="Why this space might feel right"></a>
+  <a href="#work" class="rail-dot" data-label="Ways of working together"></a>
+  <a href="#testimonials" class="rail-dot" data-label="Peer Testimonials"></a>
+  <a href="#qualifications" class="rail-dot" data-label="Education &amp; Training"></a>
+  <a href="#contact" class="rail-dot" data-label="Let's begin a conversation"></a>
+</nav>
+
 <!-- ========== HERO ========== -->
 <header class="hero">
   <div class="hero-bg">
@@ -934,7 +995,7 @@
       <div class="hero-photo">
         <div class="hero-photo-frame">
           <!-- Replace src with your actual image path -->
-          <img src="assets/harshita-home.png" alt="Harshita — Psychotherapist"
+          <img src="assets/harshita-home.png" alt="Harshita, Psychotherapist"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <!-- Fallback placeholder (hidden when real image loads) -->
           <div style="display:none;width:100%;aspect-ratio:3/4;border-radius:50% 50% 18px 18px / 60% 60% 18px 18px;background:linear-gradient(160deg,#B295C4,#F2C5D5);align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:#5B2E6B;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;text-align:center;padding:2rem;">
@@ -963,21 +1024,21 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>
         </div>
         <h3>Express</h3>
-        <p>A grounded, non-judgmental space to speak what feels hard to say — at your own pace.</p>
+        <p>A grounded, non-judgmental space to speak what feels hard to say, at your own pace.</p>
       </div>
       <div class="value-card reveal delay-2">
         <div class="value-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
         </div>
         <h3>Embrace</h3>
-        <p>Meeting every part of you — the tender, the tired, the uncertain — with warmth and respect.</p>
+        <p>Meeting every part of you, the tender, the tired, the uncertain, with warmth and respect.</p>
       </div>
       <div class="value-card reveal delay-3">
         <div class="value-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2 6h6l-5 4 2 7-5-4-5 4 2-7-5-4h6z"/></svg>
         </div>
         <h3>Empower</h3>
-        <p>Helping you reconnect with your own capacity, clarity, and agency — gently, collaboratively.</p>
+        <p>Helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.</p>
       </div>
     </div>
   </div>
@@ -1037,10 +1098,10 @@
         <div class="eyebrow" style="font-family:var(--font-display);font-style:italic;color:var(--rose);margin-bottom:0.5rem;display:block;">Why this space might feel right</div>
         <h2>Finding the <em>right fit</em> matters more than anything else</h2>
         <p>Research consistently shows that one of the most important parts of therapy is feeling safe and genuinely connected with your therapist. I care deeply about building that kind of trust into our work.</p>
-        <p>I see the therapy space as honest, transparent, and safe — not only for you, but for me as well. I try to hold moments of lightness alongside what's heavy.</p>
+        <p>I see the therapy space as honest, transparent, and safe: not only for you, but for me as well. I try to hold moments of lightness alongside what's heavy.</p>
         <ul class="match-list">
           <li>7+ years as a therapist, 4+ years as a supervisor</li>
-          <li>Eclectic approach — drawing from different therapeutic methods to suit you</li>
+          <li>Eclectic approach, drawing from different therapeutic methods to suit you</li>
           <li>Trauma-informed, queer-affirmative, neurodivergent inclusive</li>
           <li>Online sessions with adults across the world, rooted in Mumbai</li>
         </ul>
@@ -1136,7 +1197,7 @@
     <div class="section-head reveal">
       <div class="eyebrow">Peer Testimonials</div>
       <h2>Through the eyes of those who've walked alongside me</h2>
-      <p>These reflections come from peers and supervisors — experienced therapists who have witnessed my work, values, and presence in the field.</p>
+      <p>These reflections come from peers and supervisors: experienced therapists who have witnessed my work, values, and presence in the field.</p>
     </div>
     <div class="testimonials-track reveal">
       <div class="testimonial active">
@@ -1191,7 +1252,7 @@
         <div class="qual-inst">Mariwala Health Initiative</div>
       </div>
       <div class="qual-item reveal delay-3">
-        <div class="qual-degree">Gestalt Therapy — Basic &amp; Advanced</div>
+        <div class="qual-degree">Gestalt Therapy: Basic &amp; Advanced</div>
         <div class="qual-inst">60 hours · Psychphoenix</div>
       </div>
       <div class="qual-item reveal delay-3">
@@ -1269,11 +1330,11 @@
     <div style="padding-top:2rem;">
       <p class="footer-note">This is not a crisis helpline. If you need immediate support, please reach out to one of the helplines below.</p>
       <ul class="footer-helplines">
-        <li><a href="tel:8686139139">MannTalks — 8686139139</a></li>
-        <li><a href="tel:9152987821">iCall — 9152987821</a></li>
-        <li><a href="tel:18005990019">KIRAN (Govt.) — 1800-599-0019</a></li>
-        <li><a href="tel:7389366696">Spandan — 7389366696</a></li>
-        <li><a href="tel:9999666555">Vandrevala Foundation — 9999666555</a></li>
+        <li><a href="tel:8686139139">MannTalks · 8686139139</a></li>
+        <li><a href="tel:9152987821">iCall · 9152987821</a></li>
+        <li><a href="tel:18005990019">KIRAN (Govt.) · 1800-599-0019</a></li>
+        <li><a href="tel:7389366696">Spandan · 7389366696</a></li>
+        <li><a href="tel:9999666555">Vandrevala Foundation · 9999666555</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
@@ -1295,7 +1356,37 @@
     else nav.classList.remove('scrolled');
   }, { passive: true });
 
-  // Reveal on intersection — slow, natural
+  // Section rail: fade in once past the hero, fade out at the footer,
+  // highlight the dot for whichever section is currently in view.
+  const rail = document.getElementById('sectionRail');
+  if (rail) {
+    const railLinks = [...rail.querySelectorAll('.rail-dot')];
+    const railTargets = railLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    const footerEl = document.querySelector('footer');
+    const heroEl = document.querySelector('.hero');
+
+    window.addEventListener('scroll', () => {
+      const pastHero = heroEl ? window.scrollY > heroEl.offsetHeight * 0.6 : window.scrollY > 400;
+      const nearFooter = footerEl && (window.scrollY + window.innerHeight > footerEl.offsetTop + 80);
+      rail.classList.toggle('visible', pastHero && !nearFooter);
+    }, { passive: true });
+
+    const activeIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const link = railLinks.find(a => document.querySelector(a.getAttribute('href')) === e.target);
+        if (!link) return;
+        if (e.isIntersecting) {
+          railLinks.forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+    railTargets.forEach(t => activeIo.observe(t));
+  }
+
+  // Reveal on intersection, slow and natural
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1332,7 +1423,7 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Magnetic buttons — subtle pull toward cursor, physical not gimmicky
+  // Magnetic buttons: subtle pull toward cursor, physical not gimmicky
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('mousemove', (e) => {
@@ -1344,7 +1435,7 @@
       btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
 
-    // Hero photo — gentle parallax tilt on mouse move
+    // Hero photo: gentle parallax tilt on mouse move
     const heroFrame = document.querySelector('.hero-photo-frame');
     const heroEl = document.querySelector('.hero');
     if (heroFrame && heroEl) {
