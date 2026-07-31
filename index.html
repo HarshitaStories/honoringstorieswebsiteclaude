@@ -599,43 +599,6 @@
     margin: 0;
   }
 
-  /* ========== BREATH (signature pause) ========== */
-  .breath {
-    position: relative;
-    padding: 5rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--cream);
-    overflow: hidden;
-  }
-  .breath-circle {
-    width: 90px; height: 90px;
-    border-radius: 50%;
-    border: 1px solid var(--rose-soft);
-    background: radial-gradient(circle, rgba(242,197,213,0.35), rgba(242,197,213,0) 70%);
-    animation: breathe 7s ease-in-out infinite;
-    margin-bottom: 1.5rem;
-  }
-  .breath-line {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    color: var(--muted);
-    letter-spacing: 0.01em;
-    text-align: center;
-    margin: 0;
-  }
-  .breath-line span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
-    transition-delay: calc(var(--i) * 0.06s);
-  }
-  .breath-line.in span { opacity: 1; transform: translateY(0); }
-
   /* ========== WHY ME / MATCH ========== */
   .match {
     background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
@@ -1095,12 +1058,6 @@
   </div>
 </section>
 
-<!-- ========== BREATH (signature pause) ========== -->
-<section class="breath" aria-hidden="false">
-  <div class="breath-circle"></div>
-  <p class="breath-line" data-kinetic>Before we go further — take a breath.</p>
-</section>
-
 <!-- ========== WHY ME / MATCH ========== -->
 <section class="match" id="about">
   <div class="wrap">
@@ -1430,18 +1387,6 @@
     }
   }
 
-  // Kinetic line reveal — "match" heading builds word by word on scroll
-  const kinetic = document.querySelector('[data-kinetic]');
-  if (kinetic) {
-    const words = kinetic.textContent.trim().split(/\s+/);
-    kinetic.innerHTML = words.map((w, i) => `<span style="--i:${i}">${w}</span>`).join(' ');
-    const kIo = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { kinetic.classList.add('in'); kIo.unobserve(e.target); }
-      });
-    }, { threshold: 0.5 });
-    kIo.observe(kinetic);
-  }
 
 </script>
 
