@@ -170,14 +170,21 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   cancellation policy (free reschedule/cancel up to 3 hrs before session).
 
 ### Supervision sessions
-- Days/hours: Tue–Fri, 8am–6pm IST. Duration: 60 min. Format: video via Google Meet.
+- Days/hours: Tue–Fri, 8am–6pm IST. Duration: 60 min. Format: **online or offline (in-person)**.
+- **Pricing (current): ₹1,800 per session, same rate for both online and offline.**
 - Two tracks: early-career (0–3 yrs) and experienced (3+ yrs) practitioners.
-- Flow: reach out → basic details → free 20-min exploratory call → consent form → time/day
-  scheduled → confirmed + calendar invite after payment (UPI/bank transfer).
+- Flow: reach out, basic details shared, free 20-min exploratory call, consent form, time/day
+  scheduled, confirmed with a calendar invite after payment (UPI/bank transfer).
 - FAQs (6): how to start · preparation (note topics; goals reviewed after first session) ·
   confidentiality (same policy as therapy) · meeting frequency (generally bimonthly/every 2 weeks,
   adjustable) · allowed topics (client cases, ethical dilemmas, logistics, building practice,
   burnout, imposter syndrome) · cancellation (same 3-hr free reschedule/cancel policy).
+
+### Group supervision (planned, not yet scoped)
+Harshita wants to start offering group supervision and wants a dedicated section/space reserved
+for it on the site, but pricing, format, cadence, and other details are not decided yet. Do not
+build this section until the actual content is supplied, other than reserving a clearly-labeled
+placeholder slot in the site plan (see Open Items).
 
 ### Peer testimonials
 8 real testimonials collected via Google Form, all with explicit consent for name, education,
@@ -231,7 +238,9 @@ approved and ready to use on the full Testimonials page whenever it's built.
 
 - About page
 - Psychotherapy page (including the 3-tier pricing presentation)
-- Supervision page
+- Supervision page (updated pricing: ₹1,800/session, online or offline)
+- Group supervision section: reserved space only, content/pricing/format not yet supplied, do not
+  build until Harshita provides details
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)
