@@ -110,17 +110,24 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   dedicated testimonials section, contact strip, footer.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
-    a section head ("A little more, before you decide" / "Grounded in experience, held with
-    care"), an image placeholder reserved for a future photo, and an animated **stat counter row**
-    (see Practice stats in section 5) in place of the old trust-line paragraph. The three
-    self-select links ("For therapy clients", "For practitioners and supervisees", "Curious about
-    me") sit in their own plain section right after testimonials, pointing to the dedicated pages
-    below. This was a deliberate restructure: the homepage should hook, present concerns, give one
-    credibility beat, and then let each audience choose where to go deeper, rather than making
-    everyone scroll through everything.
+    a section head ("A little more to help you decide" / "Grounded in experience, held with
+    care"), then a two-column row of an image placeholder (reserved for a future photo) and a
+    short approach paragraph (see About Harshita / approach paragraph in section 5), followed by
+    a full-width animated **stat counter row** (see Practice stats in section 5) below that row,
+    separated by a hairline divider. The stats were originally squeezed into the half-width text
+    column and got visually clipped by the fixed section-rail tooltip on narrower viewports; moving
+    them to their own full-width row fixed that. The three self-select links ("For therapy
+    clients", "For practitioners and supervisees", "Curious about me") sit in their own plain
+    section right after testimonials, pointing to the dedicated pages below. This was a deliberate
+    restructure: the homepage should hook, present concerns, give one credibility beat, and then
+    let each audience choose where to go deeper, rather than making everyone scroll through
+    everything.
   - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
-    its own "From fellow therapists" eyebrow label and its own entry in the section rail nav. It
-    was originally nested inside glimpse; the user explicitly asked for it to be its own section.
+    its own entry in the section rail nav. It was originally nested inside glimpse; the user
+    explicitly asked for it to be its own section. Its label, "From fellow therapists", is styled
+    left-aligned, larger, and in the site's standard body grey (`--charcoal-soft`), not the small
+    centered rose italic eyebrow style used elsewhere; keep that distinction if it's ever touched
+    again.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
@@ -153,6 +160,15 @@ supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works w
 65; concerns include anxiety, relationship challenges, self-confidence/self-esteem, depression,
 trauma, sleep difficulties, emotional regulation, life transitions. Particular interest in
 anxiety and relational dynamics, identity, self-worth, belonging.
+
+### Approach paragraph (used in the glimpse section, next to the photo placeholder)
+> "My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative
+> approach. I believe that therapy is not a one-size-fits-all process and thoughtfully adapt my
+> approach to each client's pace, needs, and lived experiences. Guided by a sensitivity to the
+> ways in which personal experiences are shaped by relational, cultural, and social contexts, I
+> strive to create a therapeutic space that is responsive to each individual's unique story."
+
+Use this verbatim; it was supplied directly by Harshita for this placement.
 
 ### Practice stats (homepage animated counter row)
 Displayed in the glimpse section as three large animated numbers that count up from zero when
