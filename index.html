@@ -704,15 +704,16 @@
   .glimpse-links {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   @media (min-width: 768px) { .glimpse-links { grid-template-columns: repeat(3, 1fr); } }
   .glimpse-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: var(--cream-warm);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 1.5rem;
+    overflow: hidden;
     transition: all 0.5s var(--ease-gentle);
   }
   .glimpse-link:hover {
@@ -720,19 +721,66 @@
     border-color: var(--rose-soft);
     box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2);
   }
+  .glimpse-link-icon {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .glimpse-link-icon svg {
+    width: 34px;
+    height: 34px;
+    color: var(--deep-purple);
+    opacity: 0.85;
+  }
+  .glimpse-link-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
   .glimpse-link-label {
     display: block;
     font-family: var(--font-display);
     font-style: italic;
     color: var(--rose);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     margin-bottom: 0.5rem;
   }
   .glimpse-link-title {
     display: block;
-    color: var(--deep-purple);
+    color: var(--charcoal);
+    font-family: var(--font-body);
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+  }
+  .glimpse-link-desc {
+    display: block;
+    color: var(--charcoal-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+  .glimpse-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle);
+  }
+  .glimpse-link:hover .glimpse-link-btn {
+    background: var(--rose);
+    transform: translateX(2px);
   }
 
   /* ========== FOOTER HELPLINES (footnote) ========== */
@@ -1038,16 +1086,37 @@
     </div>
     <div class="glimpse-links">
       <a href="#" class="glimpse-link reveal delay-1">
-        <span class="glimpse-link-label">For therapy clients</span>
-        <span class="glimpse-link-title">Explore psychotherapy sessions →</span>
+        <div class="glimpse-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+        </div>
+        <div class="glimpse-link-body">
+          <span class="glimpse-link-label">For therapy clients</span>
+          <span class="glimpse-link-title">Psychotherapy sessions</span>
+          <span class="glimpse-link-desc">A safe, supportive space to talk about what you're going through and work through it together.</span>
+          <span class="glimpse-link-btn">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </div>
       </a>
       <a href="#" class="glimpse-link reveal delay-2">
-        <span class="glimpse-link-label">For practitioners &amp; supervisees</span>
-        <span class="glimpse-link-title">Explore supervision →</span>
+        <div class="glimpse-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="glimpse-link-body">
+          <span class="glimpse-link-label">For practitioners &amp; supervisees</span>
+          <span class="glimpse-link-title">Supervision sessions</span>
+          <span class="glimpse-link-desc">Thoughtful, collaborative supervision for practitioners looking to deepen their work.</span>
+          <span class="glimpse-link-btn">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </div>
       </a>
       <a href="#" class="glimpse-link reveal delay-3">
-        <span class="glimpse-link-label">Curious about me</span>
-        <span class="glimpse-link-title">More about my approach →</span>
+        <div class="glimpse-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="glimpse-link-body">
+          <span class="glimpse-link-label">Curious about me</span>
+          <span class="glimpse-link-title">More about my approach</span>
+          <span class="glimpse-link-desc">My background, qualifications, and how I hold the space we'd be working in together.</span>
+          <span class="glimpse-link-btn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </div>
       </a>
     </div>
   </div>
