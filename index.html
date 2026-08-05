@@ -58,7 +58,8 @@
 
   /* ========== BASE ========== */
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
   body {
     margin: 0;
     font-family: var(--font-body);
@@ -249,10 +250,11 @@
     gap: 1.1rem;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.7s var(--ease-gentle);
+    transition: opacity 0.25s ease;
   }
   @media (min-width: 1100px) { .section-rail { display: flex; } }
   .section-rail.visible { opacity: 1; pointer-events: auto; }
+  .section-rail.visible.idle { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
   .rail-dot {
     position: relative;
     width: 8px;
@@ -276,7 +278,10 @@
     font-style: italic;
     font-size: 0.82rem;
     color: var(--deep-purple);
-    background: var(--cream-warm);
+    background: rgba(253, 250, 242, 0.55);
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 0.3rem 0.7rem;
     border-radius: 999px;
     box-shadow: 0 6px 16px -6px rgba(91, 46, 107, 0.25);
@@ -736,21 +741,6 @@
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .meta-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
-    color: var(--deep-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.98rem;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.1rem;
-  }
   .meta-name {
     font-family: var(--font-body);
     font-weight: 500;
@@ -766,10 +756,10 @@
     margin-bottom: 0.6rem;
   }
   .meta-years {
-    font-family: var(--font-display);
-    font-style: italic;
-    color: var(--rose);
-    font-size: 0.92rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--deep-purple);
+    font-size: 1.15rem;
   }
   .testimonial-body { position: relative; }
   .testimonial-body .quote-mark {
@@ -1266,49 +1256,41 @@
       <div class="testimonial-grid">
         <div class="testimonial-meta" id="metaTrack">
           <div class="meta-slide active">
-            <div class="meta-avatar">DV</div>
             <div class="meta-name">Deepapriya Vishwanthan</div>
             <div class="meta-detail">MA (Applied Psychology), M.Phil (Social Sciences)</div>
             <div class="meta-years">16 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">RJ</div>
             <div class="meta-name">Rinkle Jain</div>
             <div class="meta-detail">M.A. Clinical Psychology, PGD Counselling Psychology</div>
             <div class="meta-years">4.5 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">AS</div>
             <div class="meta-name">Aaushi Shah</div>
             <div class="meta-detail">MA Clinical Psychology</div>
             <div class="meta-years">8 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">SN</div>
             <div class="meta-name">Sanika Nanal</div>
             <div class="meta-detail">Master's in Clinical Psychology, BPS Accredited Chartered Psychologist</div>
             <div class="meta-years">4.5 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">AS</div>
             <div class="meta-name">Anis Syed</div>
             <div class="meta-detail">Master's in Clinical Psychology, PG Diploma in Supervision for Mental Health Practice</div>
             <div class="meta-years">8 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">ZD</div>
             <div class="meta-name">Zahra Diwan</div>
             <div class="meta-detail">MA Clinical Psychology (Adults), MSc Child and Adolescents Mental Health</div>
             <div class="meta-years">7 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">R</div>
             <div class="meta-name">Rajshree</div>
             <div class="meta-detail">M.A. Psychology (Counselling)</div>
             <div class="meta-years">10 years experience</div>
           </div>
           <div class="meta-slide">
-            <div class="meta-avatar">AK</div>
             <div class="meta-name">Ananyaa Kale</div>
             <div class="meta-detail">MA Psychology, MSc Counselling</div>
             <div class="meta-years">6 years experience</div>
@@ -1362,6 +1344,10 @@
       <div class="glimpse-dots" id="carDots"></div>
       <button class="carousel-arrow" id="carNext" aria-label="Next testimonial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button class="carousel-arrow" id="carPlayPause" aria-label="Pause slideshow">
+        <svg id="carPauseIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg id="carPlayIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M7 5l12 7-12 7V5z"/></svg>
       </button>
     </div>
   </div>
@@ -1528,6 +1514,17 @@
       });
     }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
     railTargets.forEach(t => activeIo.observe(t));
+
+    // Idle fade: hide the rail after 2s of no mouse activity, fade back in on movement
+    let idleTimer;
+    function resetRailIdle() {
+      rail.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => rail.classList.add('idle'), 2000);
+    }
+    window.addEventListener('mousemove', resetRailIdle, { passive: true });
+    window.addEventListener('scroll', resetRailIdle, { passive: true });
+    resetRailIdle();
   }
 
   // Reveal on intersection, slow and natural
@@ -1599,13 +1596,27 @@
     }
     function next() { goTo(idx + 1); }
     function prev() { goTo(idx - 1, true); }
+    let paused = false;
     function restart() {
       clearInterval(timer);
-      timer = setInterval(next, 5000);
+      if (!paused) timer = setInterval(next, 5000);
     }
 
     document.getElementById('carNext').addEventListener('click', () => goTo(idx + 1, true));
     document.getElementById('carPrev').addEventListener('click', prev);
+
+    const playPauseBtn = document.getElementById('carPlayPause');
+    const pauseIcon = document.getElementById('carPauseIcon');
+    const playIcon = document.getElementById('carPlayIcon');
+    playPauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseIcon.style.display = paused ? 'none' : 'block';
+      playIcon.style.display = paused ? 'block' : 'none';
+      playPauseBtn.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      if (paused) clearInterval(timer);
+      else restart();
+    });
+
     restart();
   }
 
