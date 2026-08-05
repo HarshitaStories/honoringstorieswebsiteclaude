@@ -100,10 +100,6 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   translucent cream-white base (`rgba(253,250,242,0.8)`), a strong backdrop blur plus saturation
   boost, a light inner top highlight, and a soft white border, tuned to read clearly as frosted
   glass rather than a barely-there tint. Keep both of these behaviors if the rail is touched again.
-- The nav bar's "Book a Consultation" button (`.nav-cta`) is also glassmorphic: a translucent
-  purple-to-rose gradient fill, backdrop blur plus saturation, a soft white glass border, an inset
-  top highlight, and a floating drop shadow, shifting toward rose on hover. It replaced a solid
-  deep-purple fill; keep the glass treatment if this button is touched again.
 - The native browser scrollbar is hidden site-wide (`scrollbar-width: none` plus the
   `::-webkit-scrollbar` equivalent) while scrolling itself still works normally. This was an
   explicit request; don't reintroduce a visible scrollbar.
