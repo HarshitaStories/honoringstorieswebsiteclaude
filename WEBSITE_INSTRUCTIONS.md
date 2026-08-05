@@ -110,15 +110,16 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   strip, footer.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with one compact block:
-    a one-line trust statement, an image placeholder reserved for a future photo, one testimonial
-    quote, and three self-select links ("For therapy clients", "For practitioners and
-    supervisees", "Curious about me") pointing to the dedicated pages below. This was a deliberate
-    restructure: the homepage should hook, present concerns, give one credibility beat, and then
-    let each audience choose where to go deeper, rather than making everyone scroll through
-    everything.
-  - Full qualifications, the full "why this fits" narrative, and the complete testimonial set are
-    intentionally **not** on the homepage anymore. They belong on the About and Testimonials pages
-    once built. This is an accepted, explicit tradeoff, not an oversight.
+    a one-line trust statement, an image placeholder reserved for a future photo, an 8-quote
+    autosliding testimonial carousel (see Peer testimonials in section 5), and three self-select
+    links ("For therapy clients", "For practitioners and supervisees", "Curious about me")
+    pointing to the dedicated pages below. This was a deliberate restructure: the homepage should
+    hook, present concerns, give one credibility beat, and then let each audience choose where to
+    go deeper, rather than making everyone scroll through everything.
+  - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
+    homepage anymore. They belong on the About page once built. This is an accepted, explicit
+    tradeoff, not an oversight. The full testimonial set, by contrast, now lives directly on the
+    homepage as the carousel described above.
 - **About** (not yet built): full photo, about-me, education and experience (full qualifications
   timeline), the fuller "why this fits" narrative that used to live on the homepage,
   approach/concerns written to an ideal client, small embedded "Contact me" section.
@@ -214,13 +215,14 @@ placeholder slot in the site plan (see Open Items).
 8 real testimonials collected via Google Form, all with explicit consent for name, education,
 years of experience, and testimonial text to appear on the site. Full text lives in this repo's
 private working notes, not committed, because the source spreadsheet contains personal emails.
-Ask if the full 8 need to be re-supplied for the dedicated Testimonials page. The homepage
-currently shows just **one** static teaser quote as part of the consolidated glimpse section
-(see section 4):
-- Deepapriya Vishwanthan, MA (Applied Psychology), M.Phil (Social Sciences), 16 years experience
 
-The other 7 (Rinkle Jain, Aaushi Shah, Sanika Nanal, Anis Syed, Zahra Diwan, Rajshree, Ananyaa
-Kale) are approved and ready to use on the full Testimonials page whenever it's built.
+The homepage glimpse section (see section 4) shows all 8 in an **autosliding carousel**: one
+quote visible at a time, manual prev/next arrow buttons plus dot navigation, autoplay every 5
+seconds that resets whenever someone interacts manually. This reverses an earlier decision to
+show only a 1-quote static teaser; the user explicitly asked for all 8 back with autoplay. Order:
+Deepapriya Vishwanthan, Rinkle Jain, Aaushi Shah, Sanika Nanal, Anis Syed, Zahra Diwan, Rajshree,
+Ananyaa Kale. The same full set should be reused (not re-collected) if a dedicated Testimonials
+page is built later.
 
 ### Helpline numbers (footer only, quiet placement, non-crisis-service disclaimer alongside)
 1. MannTalks, 8686139139 (Mon to Sun, 10am to 6pm)
