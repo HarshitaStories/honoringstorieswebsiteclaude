@@ -93,7 +93,15 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   (desktop only, 1100px and up), invisible over the hero, fades in once scrolled past the hero,
   fades out at the footer. Dots map to each remaining homepage section; hovering, or the active
   section, reveals the label as a pill tooltip. Keep this in sync with whatever sections actually
-  exist on the homepage; it currently lists Values, Concerns, Glimpse, and Contact.
+  exist on the homepage; it currently lists Values, Concerns, Glimpse, Testimonials, and Contact.
+  On top of the scroll-based visibility, the rail also **auto-fades on idle**: after 2 seconds
+  with no mouse movement or scroll, it fades out over 1 second; any mouse/scroll activity fades it
+  back in quickly (0.25s). The label tooltip pill uses a glassmorphism treatment (translucent
+  background plus backdrop blur), not a solid fill. Keep both of these behaviors if the rail is
+  touched again.
+- The native browser scrollbar is hidden site-wide (`scrollbar-width: none` plus the
+  `::-webkit-scrollbar` equivalent) while scrolling itself still works normally. This was an
+  explicit request; don't reintroduce a visible scrollbar.
 - Homepage uses **progressive disclosure** past the Concerns section: rather than stacking several
   full trust-building sections (a "why this fits" narrative, a Work With Me preview, a testimonial
   carousel, and a full qualifications timeline), those are consolidated into one compact "glimpse"
@@ -130,12 +138,16 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     2. Then redesigned into its current form: "From fellow therapists" is a proper section header
        (eyebrow "In their own words" + `<h2>`, same section-head pattern as Values/Concerns/
        Glimpse), and the card below splits into a **3:6 grid** (`.testimonial-grid`,
-       `grid-template-columns: 3fr 6fr`): a smaller left column (`.testimonial-meta`) with an
-       initials avatar, name, qualifications, and years experience, and a bigger right column
-       (`.testimonial-body`) with the full write-up. Both columns are driven by parallel slide
-       arrays (`.meta-slide` / `.body-slide`, matched by index) so a single prev/next/dot/autoplay
-       carousel advances them together. Nav controls (arrows + dots) sit in one centered row below
-       the card. Keep this structure; don't revert to the single-column quote-only layout.
+       `grid-template-columns: 3fr 6fr`): a smaller left column (`.testimonial-meta`) with name,
+       qualifications, and years experience (styled bigger, deep-purple, not the small pink
+       italic used for the "meta-years" figure originally), and a bigger right column
+       (`.testimonial-body`) with the full write-up. An initials avatar circle was tried and then
+       explicitly removed; don't re-add it. Both columns are driven by parallel slide arrays
+       (`.meta-slide` / `.body-slide`, matched by index) so a single prev/next/dot/autoplay
+       carousel advances them together, with an added pause/play toggle button
+       (`#carPlayPause`) that stops/resumes the 5s autoplay. Nav controls (arrows, dots,
+       play/pause) sit in one centered row below the card. Keep this structure; don't revert to
+       the single-column quote-only layout.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
