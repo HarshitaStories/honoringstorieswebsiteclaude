@@ -707,9 +707,35 @@
     font-style: italic;
     font-size: 0.95rem;
   }
+  .testimonials-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .testimonials-label {
+    flex-shrink: 0;
+    width: 200px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    color: var(--charcoal-soft);
+  }
+  .testimonials-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .testimonials-row { flex-direction: column; align-items: stretch; gap: 1.25rem; }
+    .testimonials-label { width: auto; text-align: center; }
+  }
   .glimpse-carousel {
     position: relative;
     max-width: 720px;
+    width: 100%;
     margin: 0 auto 2.5rem;
     display: flex;
     align-items: center;
@@ -1214,7 +1240,9 @@
 <!-- ========== TESTIMONIALS ========== -->
 <section id="testimonials">
   <div class="wrap">
-    <div style="font-family:var(--font-body);font-weight:500;font-size:1.3rem;color:var(--charcoal-soft);text-align:left;max-width:720px;margin:0 auto 1.5rem;">From fellow therapists</div>
+    <div class="testimonials-row">
+      <div class="testimonials-label">From fellow therapists</div>
+      <div class="testimonials-content">
     <div class="glimpse-carousel reveal delay-2">
       <button class="carousel-arrow" id="carPrev" aria-label="Previous testimonial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1295,6 +1323,8 @@
       </button>
     </div>
     <div class="glimpse-dots" id="carDots"></div>
+      </div>
+    </div>
   </div>
 </section>
 
