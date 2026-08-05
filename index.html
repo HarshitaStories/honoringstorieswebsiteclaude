@@ -650,6 +650,39 @@
     line-height: 1.7;
     margin: 0;
   }
+  .stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 2.75rem;
+    width: 100%;
+  }
+  .stat-item { min-width: 110px; }
+  .stat-num-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+  }
+  .stat-num {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    color: var(--deep-purple);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-plus {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    color: var(--rose);
+    line-height: 1;
+  }
+  .stat-label {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--charcoal-soft);
+    font-weight: 400;
+  }
   .glimpse-visual {
     aspect-ratio: 4 / 3;
     border: 1.5px dashed var(--purple-soft);
@@ -1016,6 +1049,7 @@
   <a href="#values" class="rail-dot" data-label="What I hold as essential"></a>
   <a href="#concerns" class="rail-dot" data-label="Concerns I work with"></a>
   <a href="#glimpse" class="rail-dot" data-label="A little more, before you decide"></a>
+  <a href="#testimonials" class="rail-dot" data-label="From fellow therapists"></a>
   <a href="#contact" class="rail-dot" data-label="Let's begin a conversation"></a>
 </nav>
 
@@ -1153,10 +1187,29 @@
         <span>Photo to be added</span>
       </div>
       <div class="glimpse-trust reveal delay-2">
-        <p>7+ years as a therapist, 4+ years as a supervisor. Trauma-informed, queer-affirmative, and neurodivergent inclusive. Online sessions with adults across the world, held here from Andheri West, Mumbai.</p>
+        <div class="stats-row" id="statsRow">
+          <div class="stat-item">
+            <div class="stat-num-wrap"><span class="stat-num" data-target="7">0</span><span class="stat-plus">+</span></div>
+            <div class="stat-label">Years</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num-wrap"><span class="stat-num" data-target="400">0</span><span class="stat-plus">+</span></div>
+            <div class="stat-label">Clients served</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num-wrap"><span class="stat-num" data-target="2000">0</span><span class="stat-plus">+</span></div>
+            <div class="stat-label">Sessions completed</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="eyebrow" style="font-family:var(--font-display);font-style:italic;color:var(--rose);text-align:center;margin-bottom:1rem;">From fellow therapists</div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="eyebrow" style="font-family:var(--font-display);font-style:italic;color:var(--rose);text-align:center;margin-bottom:1rem;display:block;">From fellow therapists</div>
     <div class="glimpse-carousel reveal delay-2">
       <button class="carousel-arrow" id="carPrev" aria-label="Previous testimonial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1237,6 +1290,12 @@
       </button>
     </div>
     <div class="glimpse-dots" id="carDots"></div>
+  </div>
+</section>
+
+<!-- ========== SELF-SELECT LINKS ========== -->
+<section class="glimpse">
+  <div class="wrap">
     <div class="glimpse-links">
       <a href="#" class="glimpse-link reveal delay-1">
         <div class="glimpse-link-icon">
@@ -1410,6 +1469,32 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Stat counters: count up from 0 once the stats row scrolls into view
+  const statsRow = document.getElementById('statsRow');
+  if (statsRow) {
+    const statNums = statsRow.querySelectorAll('.stat-num');
+    const statIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        statNums.forEach(el => {
+          const target = parseInt(el.dataset.target, 10);
+          const dur = 1600;
+          const start = performance.now();
+          function tick(now) {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased).toLocaleString('en-IN');
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = target.toLocaleString('en-IN');
+          }
+          requestAnimationFrame(tick);
+        });
+        statIo.unobserve(e.target);
+      });
+    }, { threshold: 0.4 });
+    statIo.observe(statsRow);
+  }
 
   // Testimonial carousel: autoslide every 5s, manual prev/next resets the timer
   const slides = document.querySelectorAll('.glimpse-quote-slide');
