@@ -96,9 +96,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   exist on the homepage; it currently lists Values, Concerns, Glimpse, Testimonials, and Contact.
   On top of the scroll-based visibility, the rail also **auto-fades on idle**: after 2 seconds
   with no mouse movement or scroll, it fades out over 1 second; any mouse/scroll activity fades it
-  back in quickly (0.25s). The label tooltip pill uses a glassmorphism treatment (translucent
-  background plus backdrop blur), not a solid fill. Keep both of these behaviors if the rail is
-  touched again.
+  back in quickly (0.25s). The label tooltip pill uses a glassmorphism treatment: an opaque-leaning
+  translucent cream-white base (`rgba(253,250,242,0.8)`), a strong backdrop blur plus saturation
+  boost, a light inner top highlight, and a soft white border, tuned to read clearly as frosted
+  glass rather than a barely-there tint. Keep both of these behaviors if the rail is touched again.
 - The native browser scrollbar is hidden site-wide (`scrollbar-width: none` plus the
   `::-webkit-scrollbar` equivalent) while scrolling itself still works normally. This was an
   explicit request; don't reintroduce a visible scrollbar.
@@ -138,11 +139,13 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     2. Then redesigned into its current form: "From fellow therapists" is a proper section header
        (eyebrow "In their own words" + `<h2>`, same section-head pattern as Values/Concerns/
        Glimpse), and the card below splits into a **3:6 grid** (`.testimonial-grid`,
-       `grid-template-columns: 3fr 6fr`): a smaller left column (`.testimonial-meta`) with name,
-       qualifications, and years experience (styled bigger, deep-purple, not the small pink
-       italic used for the "meta-years" figure originally), and a bigger right column
-       (`.testimonial-body`) with the full write-up. An initials avatar circle was tried and then
-       explicitly removed; don't re-add it. Both columns are driven by parallel slide arrays
+       `grid-template-columns: 3fr 6fr`): a smaller left column (`.testimonial-meta`, content
+       vertically centered) with name, qualifications, and years experience, and a bigger right
+       column (`.testimonial-body`) with the full write-up. Years experience is a small, subtle
+       rose-tinted pill badge (`.meta-years`), not a large bold line; a bigger bold deep-purple
+       treatment was tried and rejected as too loud for the section's quiet tone. An initials
+       avatar circle was also tried and then explicitly removed; don't re-add either. Both
+       columns are driven by parallel slide arrays
        (`.meta-slide` / `.body-slide`, matched by index) so a single prev/next/dot/autoplay
        carousel advances them together, with an added pause/play toggle button
        (`#carPlayPause`) that stops/resumes the 5s autoplay. Nav controls (arrows, dots,
