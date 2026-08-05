@@ -106,19 +106,24 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 
 ## 4. Site structure
 
-- **Home** (`index.html`, built): hero, values, concerns, a consolidated "glimpse" section, contact
-  strip, footer.
+- **Home** (`index.html`, built): hero, values, concerns, a consolidated "glimpse" section, a
+  dedicated testimonials section, contact strip, footer.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
-    Work With Me preview, testimonials carousel, qualifications timeline) with one compact block:
-    a one-line trust statement, an image placeholder reserved for a future photo, an 8-quote
-    autosliding testimonial carousel (see Peer testimonials in section 5), and three self-select
-    links ("For therapy clients", "For practitioners and supervisees", "Curious about me")
-    pointing to the dedicated pages below. This was a deliberate restructure: the homepage should
-    hook, present concerns, give one credibility beat, and then let each audience choose where to
-    go deeper, rather than making everyone scroll through everything.
+    Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
+    a section head ("A little more, before you decide" / "Grounded in experience, held with
+    care"), an image placeholder reserved for a future photo, and an animated **stat counter row**
+    (see Practice stats in section 5) in place of the old trust-line paragraph. The three
+    self-select links ("For therapy clients", "For practitioners and supervisees", "Curious about
+    me") sit in their own plain section right after testimonials, pointing to the dedicated pages
+    below. This was a deliberate restructure: the homepage should hook, present concerns, give one
+    credibility beat, and then let each audience choose where to go deeper, rather than making
+    everyone scroll through everything.
+  - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
+    its own "From fellow therapists" eyebrow label and its own entry in the section rail nav. It
+    was originally nested inside glimpse; the user explicitly asked for it to be its own section.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
-    tradeoff, not an oversight. The full testimonial set, by contrast, now lives directly on the
+    tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
     homepage as the carousel described above.
 - **About** (not yet built): full photo, about-me, education and experience (full qualifications
   timeline), the fuller "why this fits" narrative that used to live on the homepage,
@@ -148,6 +153,16 @@ supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works w
 65; concerns include anxiety, relationship challenges, self-confidence/self-esteem, depression,
 trauma, sleep difficulties, emotional regulation, life transitions. Particular interest in
 anxiety and relational dynamics, identity, self-worth, belonging.
+
+### Practice stats (homepage animated counter row)
+Displayed in the glimpse section as three large animated numbers that count up from zero when
+scrolled into view, replacing the earlier trust-line paragraph:
+- 7+, Years
+- 400+, Clients served
+- 2,000+, Sessions completed
+
+Style convention: number huge and bold, label small and light, "+" used consistently on all
+three. Keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
