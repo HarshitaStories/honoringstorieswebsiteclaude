@@ -124,10 +124,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     everything.
   - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
     its own entry in the section rail nav. It was originally nested inside glimpse; the user
-    explicitly asked for it to be its own section. Its label, "From fellow therapists", is styled
-    left-aligned, larger, and in the site's standard body grey (`--charcoal-soft`), not the small
-    centered rose italic eyebrow style used elsewhere; keep that distinction if it's ever touched
-    again.
+    explicitly asked for it to be its own section. Its label, "From fellow therapists", sits in a
+    left-hand gutter column (`.testimonials-label`, fixed width, vertically centered) next to the
+    carousel card on desktop, stacking above it on narrower screens (900px and below). It is
+    styled larger and in the site's standard body grey (`--charcoal-soft`), not the small centered
+    rose italic eyebrow style used elsewhere; keep that distinction if it's ever touched again.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
