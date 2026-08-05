@@ -124,11 +124,18 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     everything.
   - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
     its own entry in the section rail nav. It was originally nested inside glimpse; the user
-    explicitly asked for it to be its own section. Its label, "From fellow therapists", sits in a
-    left-hand gutter column (`.testimonials-label`, fixed width, vertically centered) next to the
-    carousel card on desktop, stacking above it on narrower screens (900px and below). It is
-    styled larger and in the site's standard body grey (`--charcoal-soft`), not the small centered
-    rose italic eyebrow style used elsewhere; keep that distinction if it's ever touched again.
+    explicitly asked for it to be its own section, then went through two layout iterations before
+    settling on the current one:
+    1. First tried as a side-gutter label next to the carousel card.
+    2. Then redesigned into its current form: "From fellow therapists" is a proper section header
+       (eyebrow "In their own words" + `<h2>`, same section-head pattern as Values/Concerns/
+       Glimpse), and the card below splits into a **3:6 grid** (`.testimonial-grid`,
+       `grid-template-columns: 3fr 6fr`): a smaller left column (`.testimonial-meta`) with an
+       initials avatar, name, qualifications, and years experience, and a bigger right column
+       (`.testimonial-body`) with the full write-up. Both columns are driven by parallel slide
+       arrays (`.meta-slide` / `.body-slide`, matched by index) so a single prev/next/dot/autoplay
+       carousel advances them together. Nav controls (arrows + dots) sit in one centered row below
+       the card. Keep this structure; don't revert to the single-column quote-only layout.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
