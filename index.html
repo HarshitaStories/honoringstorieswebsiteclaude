@@ -499,6 +499,11 @@
     font-size: clamp(1.9rem, 4vw, 2.8rem);
     margin-bottom: 1rem;
   }
+  .section-head.wide { max-width: 900px; }
+  .title-oneline { white-space: normal; }
+  @media (min-width: 640px) {
+    .title-oneline { white-space: nowrap; font-size: clamp(1.6rem, 3.4vw, 2.5rem); }
+  }
   .section-head p {
     color: var(--charcoal-soft);
     font-size: 1.02rem;
@@ -665,11 +670,27 @@
     font-style: italic;
     font-size: 0.95rem;
   }
+  .glimpse-carousel {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
   .glimpse-quote {
     background: var(--cream-warm);
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 1.75rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .glimpse-quote-slide { display: none; }
+  .glimpse-quote-slide.active { display: block; animation: testimonialIn 0.7s var(--ease-out); }
+  @keyframes testimonialIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .glimpse-quote .quote-mark {
     font-family: var(--font-display);
@@ -683,12 +704,17 @@
   }
   .glimpse-quote blockquote {
     font-family: var(--font-display);
-    font-size: 1rem;
+    font-size: 0.98rem;
     line-height: 1.6;
     font-style: italic;
     color: var(--charcoal-soft);
     margin: 0 0 1rem;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 0.4rem;
   }
+  .glimpse-quote blockquote::-webkit-scrollbar { width: 4px; }
+  .glimpse-quote blockquote::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
   .glimpse-quote .attribution {
     font-size: 0.85rem;
     color: var(--muted);
@@ -700,6 +726,48 @@
     font-size: 0.92rem;
     margin-bottom: 0.15rem;
     font-family: var(--font-body);
+  }
+  .carousel-arrow {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    color: var(--deep-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-gentle);
+  }
+  .carousel-arrow:hover {
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+    border-color: var(--deep-purple);
+  }
+  .carousel-arrow svg { width: 16px; height: 16px; }
+  .glimpse-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: -1.5rem auto 2.5rem;
+  }
+  .glimpse-dots button {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    border: none;
+    background: var(--purple-soft);
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s var(--ease-gentle);
+  }
+  .glimpse-dots button.active {
+    background: var(--rose);
+    opacity: 1;
+    width: 20px;
+    border-radius: 4px;
   }
   .glimpse-links {
     display: grid;
@@ -806,7 +874,10 @@
     color: rgba(253, 250, 242, 0.55);
     line-height: 1.6;
     margin: 0 0 0.5rem;
-    max-width: 460px;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .footer-note { white-space: normal; }
   }
 
   /* ========== CONTACT STRIP ========== */
@@ -987,9 +1058,9 @@
 <!-- ========== VALUES ========== -->
 <section class="values" id="values">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head reveal wide">
       <div class="eyebrow">What I hold as essential</div>
-      <h2>Therapy rooted in care, honesty, and pace</h2>
+      <h2 class="title-oneline">Therapy rooted in care, honesty, and pace</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
@@ -1069,9 +1140,9 @@
 <!-- ========== GLIMPSE (consolidated credibility strip) ========== -->
 <section class="glimpse" id="glimpse">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head reveal wide">
       <div class="eyebrow">A little more, before you decide</div>
-      <h2>Grounded in experience, held with care</h2>
+      <h2 class="title-oneline">Grounded in experience, held with care</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
@@ -1085,14 +1156,86 @@
         <p>7+ years as a therapist, 4+ years as a supervisor. Trauma-informed, queer-affirmative, and neurodivergent inclusive. Online sessions with adults across the world, held here from Andheri West, Mumbai.</p>
       </div>
     </div>
-    <div class="glimpse-quote reveal delay-2" style="max-width:680px;margin:0 auto 2.5rem;">
-      <span class="quote-mark">"</span>
-      <blockquote>I've had the pleasure of sharing a learning space with Harshita, and I admire her gentle yet deeply thoughtful approach to therapeutic work. She brings a calm, grounded presence to every interaction and consistently demonstrates clarity, intelligence, and emotional depth in both clinical discussions and practice.</blockquote>
-      <div class="attribution">
-        <strong>Deepapriya Vishwanthan</strong>
-        MA (Applied Psychology), M.Phil (Social Sciences) · 16 years experience
+    <div class="glimpse-carousel reveal delay-2">
+      <button class="carousel-arrow" id="carPrev" aria-label="Previous testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="glimpse-quote">
+        <span class="quote-mark">"</span>
+        <div class="glimpse-quote-slide active">
+          <blockquote>I've had the pleasure of sharing a learning space with Harshita, and I admire her gentle yet deeply thoughtful approach to therapeutic work. She brings a calm, grounded presence to every interaction and consistently demonstrates clarity, intelligence, and emotional depth in both clinical discussions and practice. What stands out most is her structured and ethical approach to therapy. She is meticulous in her work, ensuring that every step she takes is thoughtful, intentional, and aligned with best practices. Her strong ethical foundation, combined with her reflective mindset, makes her an incredibly reliable and trustworthy practitioner.</blockquote>
+          <div class="attribution">
+            <strong>Deepapriya Vishwanthan</strong>
+            MA (Applied Psychology), M.Phil (Social Sciences) · 16 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>Harshita and I were batchmates and peers while pursuing our PGD together at St Xavier's. I have known her to be a very ethical, structured and meticulous practitioner. I have found myself learning a lot of nuances of the practice from her. Her ability to maintain professionalism and offer direction and care in her client work is commendable.</blockquote>
+          <div class="attribution">
+            <strong>Rinkle Jain</strong>
+            M.A. Clinical Psychology, PGD Counselling Psychology · 4.5 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>Harshita is a dedicated mental health professional whose values are based on integrity and ownership, which led to the foundation of her private practice. Having known her since our college days, where she was a year junior to me, I have seen her commitment towards continuous learning and passion for the field. Over the years, she has developed skills and adopted therapeutic techniques to cater to her clients' diverse needs. Harshita drives for consistent self-improvement and professional development that reflects in the quality of care she provides.</blockquote>
+          <div class="attribution">
+            <strong>Aaushi Shah</strong>
+            MA Clinical Psychology · 8 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>I have known Harshita in a professional and personal capacity for over 2 years now, and I truly appreciate her ethical stance and structured approach to therapy. Her personal value of discipline reflects in her professional sphere, which I believe in psychotherapy helps centre the client and allows them to show up better in therapy and otherwise. I also appreciate Harshita's honest personality, which catalyses a deeper and authentic connection with the other person.</blockquote>
+          <div class="attribution">
+            <strong>Sanika Nanal</strong>
+            Master's in Clinical Psychology, BPS Accredited Chartered Psychologist · 4.5 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>I have been a close witness to Harshita's work for the last few years, and I have consistently seen her as someone who is deeply passionate and committed towards her work. Her reflexivity allows her to practice with immense compassion while holding space for the greys and liminal spaces that might arise in a therapeutic or supervisory space. What inspires me is her ability to continually connect, grow, and become not only a better professional but also a better person. This intersection of personal and professional is what makes her a great space holder for clients and supervisees alike.</blockquote>
+          <div class="attribution">
+            <strong>Anis Syed</strong>
+            Master's in Clinical Psychology, PG Diploma in Supervision for Mental Health Practice · 8 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>Harshita and I have had many conversations over the years about our approaches and how we show up as psychotherapists. I admire her commitment to learning. From her early days as a psychotherapist, she has kept a grounding activity box on her desk to help her stay completely present in her sessions. I was so inspired by this that I've now incorporated it into my own practice.</blockquote>
+          <div class="attribution">
+            <strong>Zahra Diwan</strong>
+            MA Clinical Psychology (Adults), MSc Child and Adolescents Mental Health · 7 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>One of the first things I noticed about Harshita when I first interacted with her during our classroom discussions was her ability to be deeply curious and be patient with herself and others in finding the next step. In this culture of profound hustle and urgency, I have seen Harshita be consistently grounded and intentional in her work and in the way she shows up as a member of the community. Over the years I've seen her think and work from an intersectional lens: she's mindful of the histories and legacies that individuals carry, and she understands them with all their layers.
+          <br><br>
+          As a first-time professor, I also borrowed from Harshita's calm and reassuring presence, a presence that I believe first-time therapy seekers would also greatly benefit from.
+          <br><br>
+          Seeing how therapy is a relational space, and who the therapist is as a person lends itself to the healing, I trust that Harshita's integrity, compassion, calm intellect, and ability to hold meaningful silences will help create the safe space that clients come looking for.</blockquote>
+          <div class="attribution">
+            <strong>Rajshree</strong>
+            M.A. Psychology (Counselling) · 10 years experience
+          </div>
+        </div>
+        <div class="glimpse-quote-slide">
+          <blockquote>I've had the privilege of knowing Harshita for the past seven years, and in that time, I've watched her grow into the deeply attuned, compassionate therapist she is today. What stands out most to me is her unwavering ability to hold space for her clients, gently, without judgment, and with profound empathy.
+          <br><br>
+          Harshita truly embodies self-care. She leads by example, prioritizing her own wellbeing so she can be fully present, grounded, and available in her sessions. I truly admire this quality of hers.
+          <br><br>
+          In our many discussions, I've been consistently struck by the way she approaches therapy with curiosity, openness, and a genuine belief in the potential for change. She approaches resistance from a lens of compassion and curiosity rather than a barrier, something to explore, to listen to, to understand and work with.
+          <br><br>
+          She has a way of making people feel seen and heard. Her presence is steady, calm, and accepting. Whether she's speaking, listening, or simply sitting with someone in silence, you can feel it. There's a deep congruence in the way she works.
+          <br><br>
+          What I admire most is that Harshita views therapy not just as a space for healing, but as a journey toward growth, wonder, and transformation. This hopeful lens, rooted in possibility, has always inspired me. Anyone who has the opportunity to work with her will find a therapist who brings not only skill and knowledge, but also care, authenticity, and a deep honoring of each person's inner world.</blockquote>
+          <div class="attribution">
+            <strong>Ananyaa Kale</strong>
+            MA Psychology, MSc Counselling · 6 years experience
+          </div>
+        </div>
       </div>
+      <button class="carousel-arrow" id="carNext" aria-label="Next testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
+    <div class="glimpse-dots" id="carDots"></div>
     <div class="glimpse-links">
       <a href="#" class="glimpse-link reveal delay-1">
         <div class="glimpse-link-icon">
@@ -1182,15 +1325,15 @@
         <h5>Connect</h5>
         <ul>
           <li><a href="mailto:feelseen@honoringstories.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</a></li>
-          <li><a href="https://wa.me/919152801719" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.55L3 20l1.05-5.4A8.5 8.5 0 1121 11.5z"/><path d="M8.5 10.5c.3 2.5 2.7 4.9 5.2 5.2" stroke-width="1.3"/></svg>WhatsApp</a></li>
+          <li><a href="https://wa.me/919152801719" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>WhatsApp</a></li>
           <li><a href="https://www.linkedin.com/in/psychologistharshita" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="11" x2="8" y2="16"/><circle cx="8" cy="8" r="0.6" fill="currentColor" stroke="none"/><path d="M12 16v-3a2 2 0 014 0v3"/><line x1="12" y1="11" x2="12" y2="16"/></svg>LinkedIn</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Based in</h5>
         <ul>
-          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Andheri West, Mumbai</li>
-          <li style="color:rgba(253,250,242,0.75);font-size:0.92rem;">Online worldwide</li>
+          <li style="display:flex;align-items:center;gap:0.55rem;color:rgba(253,250,242,0.75);font-size:0.92rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.8;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>Andheri West, Mumbai</li>
+          <li style="display:flex;align-items:center;gap:0.55rem;color:rgba(253,250,242,0.75);font-size:0.92rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.8;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg>Online worldwide</li>
         </ul>
       </div>
     </div>
@@ -1205,7 +1348,7 @@
       </ul>
     </div>
     <div class="footer-bottom">
-      <small>© <span id="year"></span> Honoring Stories · Harshita. All rights reserved.</small>
+      <small>© <span id="year"></span> Honoring Stories · Harshita Sarda. All rights reserved.</small>
       <div class="footer-links">
         <a href="#">Disclaimer</a>
         <a href="#">Privacy Policy</a>
@@ -1266,6 +1409,41 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Testimonial carousel: autoslide every 5s, manual prev/next resets the timer
+  const slides = document.querySelectorAll('.glimpse-quote-slide');
+  const dotsWrap = document.getElementById('carDots');
+  if (slides.length && dotsWrap) {
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+      if (i === 0) b.classList.add('active');
+      b.addEventListener('click', () => goTo(i, true));
+      dotsWrap.appendChild(b);
+    });
+    const dots = dotsWrap.querySelectorAll('button');
+    let idx = 0;
+    let timer;
+
+    function goTo(i, manual) {
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+      if (manual) restart();
+    }
+    function next() { goTo(idx + 1); }
+    function prev() { goTo(idx - 1, true); }
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    document.getElementById('carNext').addEventListener('click', () => goTo(idx + 1, true));
+    document.getElementById('carPrev').addEventListener('click', prev);
+    restart();
+  }
 
   // Magnetic buttons: subtle pull toward cursor, physical not gimmicky
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
