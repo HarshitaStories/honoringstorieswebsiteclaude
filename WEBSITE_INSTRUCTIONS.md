@@ -1,4 +1,4 @@
-# Honoring Stories — Website Instructions
+# Honoring Stories · Website Instructions
 
 This file is the living source of truth for building this site. It is updated every time new
 instructions, content, or decisions come in during a session, including reversals of earlier
@@ -11,18 +11,21 @@ Last updated: 2026-08-01
 
 ## 1. Who this is for
 
-**Harshita Sarda** (she/her) — practicing psychotherapist and clinical supervisor, Andheri West,
+**Harshita Sarda** (she/her), practicing psychotherapist and clinical supervisor, Andheri West,
 Mumbai. Contact: feelseen@honoringstories.com.
 
-Two audiences:
-- Prospective therapy clients (adults 20–65, worldwide, online)
-- Mental health professionals (for supervision, and peer networking via "Sip & Swap")
+The site serves several **adult** audiences in one place, and copy/structure should stay
+professionally credible for all of them, not just warm for one:
+- Prospective therapy clients, India and abroad, signing up for the first time
+- Existing clients
+- Existing and prospective supervisees
+- Colleagues and peers in the mental health field
 
 Site name: **Honoring Stories**. Tagline system: *Express · Embrace · Empower*.
 
 ---
 
-## 2. Tech stack & hosting plan
+## 2. Tech stack and hosting plan
 
 - **Static HTML/CSS/JS only.** No frameworks, no build step, no Vercel, no Supabase. This is a
   deliberate choice: the site will eventually migrate into WordPress, and a plain static site
@@ -59,58 +62,78 @@ Palette (CSS custom properties, already in `index.html`):
 | `--muted` | `#8A7E90` |
 | `--line` | `rgba(91,46,107,0.14)` |
 
-Typography: `Cormorant Garamond` (display serif, headings) + `Inter` (body). Loaded from Google
-Fonts.
+Typography: `Cormorant Garamond` (display serif, headings) plus `Inter` (body). Loaded from
+Google Fonts.
 
-**Color discipline (standing rule):** headings default to charcoal, not purple. Purple/rose are
-reserved for deliberate emotional beats only — the hero, the "right fit" callout in the About/Why
-Me section, the final CTA. Do not drift back to coloring every heading purple; that was identified
-and fixed as a "generic template" problem.
+**Color discipline (standing rule):** headings default to charcoal, not purple. Purple and rose
+are reserved for deliberate emotional beats only, such as the hero, a "right fit" style callout,
+and the final CTA. Do not drift back to coloring every heading purple; that was identified and
+fixed as a "generic template" problem.
 
-**Content style rule (standing rule, absolute): never use an em dash (—) anywhere on this site —
-copy, code comments, alt text, anything.** Rewrite with natural punctuation (commas, colons,
-restructured sentences) or a middle dot (`·`) for label/separator use (matches the qualifications
-and testimonial-attribution style already in use). This was explicitly requested and must be
-treated as permanent, not a one-time cleanup.
+**Content style rule (standing rule, absolute): never use an em dash anywhere on this site,**
+including copy, code comments, alt text, and this instructions file itself. Rewrite with natural
+punctuation (commas, colons, periods, restructured sentences) or a middle dot (`·`) for
+label/separator use, matching the qualifications and testimonial-attribution style already in
+use. This was explicitly requested and must be treated as permanent, not a one-time cleanup.
 
 **Layout/component conventions established so far:**
-- Values section (Express / Embrace / Empower): icon-in-circle card style — **not** the numbered
-  editorial list that was tried and explicitly rejected. Keep the icon-card format.
-- Qualifications: vertical timeline format (dot markers, left border) — explicitly liked, keep
-  this format when adding new entries.
+- Values section (Express / Embrace / Empower): icon-in-circle card style, not the numbered
+  editorial list that was tried and explicitly rejected. Keep the icon-card format wherever
+  values are shown.
+- Qualifications: vertical timeline format (dot markers, left border), explicitly liked. Keep
+  this format wherever qualifications are shown, even though the full list has moved off the
+  homepage (see section 4).
 - Concerns cards: each has a small line-icon (added per request).
-- Helpline numbers live only in the footer, as a quiet "footnote," never as a prominent mid-page
-  banner (a loud pink mid-page crisis banner was explicitly removed for this reason).
+- Helpline numbers live only in the footer, as a quiet footnote, never as a prominent mid-page
+  banner. A loud pink mid-page crisis banner was explicitly removed for this reason.
 - No blog/journal section on the homepage (removed; may return later if requested).
-- No decorative "breath" pause section, no "Scroll" hint under the hero (both were tried and then
-  explicitly removed).
+- No decorative "breath" pause section, no "Scroll" hint under the hero. Both were tried and then
+  explicitly removed.
 - A secondary "section rail" navigation exists: a slim vertical dot-rail fixed to the right edge
-  (desktop only, ≥1100px), invisible over the hero, fades in once scrolled to "What I hold as
-  essential," fades out at the footer. Dots map to each section's eyebrow label; hovering (or the
-  active section) reveals the label as a pill tooltip. This must stay visually unobtrusive and
-  never crowd or duplicate the main top nav.
-- Testimonials: homepage shows only a **2-quote teaser** (not all 8), rotating. The full 8 are
-  reserved for a dedicated Peer Testimonials page (not yet built).
+  (desktop only, 1100px and up), invisible over the hero, fades in once scrolled past the hero,
+  fades out at the footer. Dots map to each remaining homepage section; hovering, or the active
+  section, reveals the label as a pill tooltip. Keep this in sync with whatever sections actually
+  exist on the homepage; it currently lists Values, Concerns, Glimpse, and Contact.
+- Homepage uses **progressive disclosure** past the Concerns section: rather than stacking several
+  full trust-building sections (a "why this fits" narrative, a Work With Me preview, a testimonial
+  carousel, and a full qualifications timeline), those are consolidated into one compact "glimpse"
+  section (see section 4) that links out to dedicated pages for anyone who wants more.
+- Reserved image placeholders (dashed border, "Photo to be added" label) are an acceptable
+  standing pattern when content is promised but not yet supplied; replace with the real asset
+  when it arrives instead of redesigning around its absence.
 
 ---
 
 ## 4. Site structure
 
-- **Home** (`index.html`, built): hero, values, concerns, why-this-fits/about teaser, work-with-me
-  preview, testimonials teaser, qualifications, contact strip, footer.
-- **About** (not yet built): full photo, about-me, education & experience, approach/concerns
-  written to an ideal client, small embedded "Contact me" section.
-- **Work With Me → Psychotherapy** (not yet built): about, process/logistics **including
-  pricing**, exploratory-call link, FAQs, contact section.
-- **Work With Me → Supervision** (not yet built): about (two tracks: early-career 0–3 yrs,
-  experienced 3+ yrs), process/logistics, exploratory-call link, FAQs, contact section.
+- **Home** (`index.html`, built): hero, values, concerns, a consolidated "glimpse" section, contact
+  strip, footer.
+  - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
+    Work With Me preview, testimonials carousel, qualifications timeline) with one compact block:
+    a one-line trust statement, an image placeholder reserved for a future photo, one testimonial
+    quote, and three self-select links ("For therapy clients", "For practitioners and
+    supervisees", "Curious about me") pointing to the dedicated pages below. This was a deliberate
+    restructure: the homepage should hook, present concerns, give one credibility beat, and then
+    let each audience choose where to go deeper, rather than making everyone scroll through
+    everything.
+  - Full qualifications, the full "why this fits" narrative, and the complete testimonial set are
+    intentionally **not** on the homepage anymore. They belong on the About and Testimonials pages
+    once built. This is an accepted, explicit tradeoff, not an oversight.
+- **About** (not yet built): full photo, about-me, education and experience (full qualifications
+  timeline), the fuller "why this fits" narrative that used to live on the homepage,
+  approach/concerns written to an ideal client, small embedded "Contact me" section.
+- **Work With Me, Psychotherapy** (not yet built): about, process/logistics including pricing,
+  exploratory-call link, FAQs, contact section.
+- **Work With Me, Supervision** (not yet built): about (two tracks: early-career 0 to 3 years,
+  experienced 3-plus years), process/logistics including pricing, exploratory-call link, FAQs,
+  contact section, plus a reserved space for group supervision once scoped.
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
-- **Community → Shared Ways of Coping** (not yet built): anonymous Google Form embed,
+- **Community, Shared Ways of Coping** (not yet built): anonymous Google Form embed,
   admin-moderated before publishing.
-- **Community → Sip and Swap Stories** (not yet built): professionals-only networking via
+- **Community, Sip and Swap Stories** (not yet built): professionals-only networking via
   email/WhatsApp, not for clients or supervisees.
 
-**Important scoping rule:** pricing does **not** appear on the homepage. It belongs only on the
+**Important scoping rule:** pricing does not appear on the homepage. It belongs only on the
 dedicated Psychotherapy and Supervision pages once built.
 
 ---
@@ -120,65 +143,66 @@ dedicated Psychotherapy and Supervision pages once built.
 ### About Harshita
 MA in Clinical Psychology; Diploma in Counseling Psychology (Xavier's College); Diploma in
 Supervision for Mental Health Practice (TISS). **7+ years as a therapist, 4+ years as a
-supervisor** (this was corrected from an earlier 6+/3+ figure — always use 7+/4+). Works with
-adults 20–65; concerns include anxiety, relationship challenges, self-confidence/self-esteem,
-depression, trauma, sleep difficulties, emotional regulation, life transitions. Particular
-interest in anxiety and relational dynamics, identity, self-worth, belonging.
+supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works with adults 20 to
+65; concerns include anxiety, relationship challenges, self-confidence/self-esteem, depression,
+trauma, sleep difficulties, emotional regulation, life transitions. Particular interest in
+anxiety and relational dynamics, identity, self-worth, belonging.
 
-### Approach / values (Express · Embrace · Empower)
-- **Express** — a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
-- **Embrace** — meeting every part of you, the tender, the tired, the uncertain, with warmth and respect.
-- **Empower** — helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.
+### Approach / values (Express, Embrace, Empower)
+- **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
+- **Embrace**: meeting every part of you, the tender, the tired, the uncertain, with warmth and respect.
+- **Empower**: helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.
 
 Eclectic, trauma-informed, queer-affirmative, intersectional, neurodivergent inclusive. Completed
 Queer Affirmative Practice course (Mariwala Health Foundation) and complex trauma training
 (ISSTD).
 
-### Qualifications (timeline, in order)
+### Qualifications (timeline format, in order; currently reserved for the About page)
 1. MA in Clinical Psychology
 2. Diploma in Counseling Psychology, Xavier's College
 3. Diploma in Supervision for Mental Health Practice, TISS
 4. Queer Affirmative Counseling Practice, Mariwala Health Initiative
-5. Gestalt Therapy: Basic & Advanced (60 hours, Psychphoenix)
+5. Gestalt Therapy: Basic and Advanced (60 hours, Psychphoenix)
 6. **Complexities of Complex Trauma Accelerated**, The International Society for the Study of
-   Trauma and Dissociation (ISSTD) — added per explicit request
+   Trauma and Dissociation (ISSTD), added per explicit request
 
 ### Previous work experience
-- Private Practice, since 2023 (individual therapy + supervision)
+- Private Practice, since 2023 (individual therapy and supervision)
 - Xavier's College, Field Supervisor for MA 2nd-year interns (contractual, since Feb 2021)
-- Cultfit, freelance psychologist, online 1:1 therapy, Jun 2020–Feb 2023, 1050+ positive reviews
-- iCall, Covid Mental Health Helpline volunteer counselor, Sep 2020–Jan 2021
-- CanKids, pediatric cancer patients/caregivers at Tata Memorial Hospital, Feb–Aug 2020
-- Naraindas Morbai Budhrani Trust, psychologist for cancer patients/caregivers at Nair, KEM, Wadia
-  Hospitals, Jul–Dec 2019
+- Cultfit, freelance psychologist, online 1:1 therapy, Jun 2020 to Feb 2023, 1050+ positive reviews
+- iCall, Covid Mental Health Helpline volunteer counselor, Sep 2020 to Jan 2021
+- CanKids, pediatric cancer patients/caregivers at Tata Memorial Hospital, Feb to Aug 2020
+- Naraindas Morbai Budhrani Trust, psychologist for cancer patients/caregivers at Nair, KEM,
+  Wadia Hospitals, Jul to Dec 2019
 
 ### Psychotherapy sessions
-- Days/hours: Tue–Sat, 8am–6pm IST. Duration: 50 min. Format: video/voice via Google Meet or
-  WhatsApp.
+- Days/hours: Tue to Sat, 8am to 6pm IST. Duration: 50 min. Format: video/voice via Google Meet
+  or WhatsApp.
 - **Pricing (current, to be placed only on the Psychotherapy page, presented thoughtfully rather
   than as a bare price table):**
-  - ₹2,100 — online sessions, India-based clients
-  - ₹2,500 — online sessions, clients based outside India
-  - ₹3,000 — in-person/offline sessions, Andheri West, Mumbai
-- Flow: reach out → basic details shared → free 20-min exploratory call → book via link/payment →
+  - Rs 2,100, online sessions, India-based clients
+  - Rs 2,500, online sessions, clients based outside India
+  - Rs 3,000, in-person/offline sessions, Andheri West, Mumbai
+- Flow: reach out, basic details shared, free 20-min exploratory call, book via link/payment,
   confirmed via UPI or bank transfer.
-- FAQs (8): how to start · what to prepare (nothing needed; join on time, quiet private space,
-  good internet, steady device; optional water/notebook/pen) · confidentiality (private; exception
-  is risk of harm, discussed upfront) · not knowing what to talk about (fine, can start anywhere) ·
-  session frequency (usually weekly to start, revisited collaboratively) · feeling worse before
-  better (normal, supported, feedback taken) · stopping anytime (client-led, ended thoughtfully) ·
+- FAQs (8): how to start; what to prepare (nothing needed, join on time, quiet private space,
+  good internet, steady device, optional water/notebook/pen); confidentiality (private, exception
+  is risk of harm, discussed upfront); not knowing what to talk about (fine, can start anywhere);
+  session frequency (usually weekly to start, revisited collaboratively); feeling worse before
+  better (normal, supported, feedback taken); stopping anytime (client-led, ended thoughtfully);
   cancellation policy (free reschedule/cancel up to 3 hrs before session).
 
 ### Supervision sessions
-- Days/hours: Tue–Fri, 8am–6pm IST. Duration: 60 min. Format: **online or offline (in-person)**.
-- **Pricing (current): ₹1,800 per session, same rate for both online and offline.**
-- Two tracks: early-career (0–3 yrs) and experienced (3+ yrs) practitioners.
+- Days/hours: Tue to Fri, 8am to 6pm IST. Duration: 60 min. Format: **online or offline
+  (in-person)**.
+- **Pricing (current): Rs 1,800 per session, same rate for both online and offline.**
+- Two tracks: early-career (0 to 3 years) and experienced (3-plus years) practitioners.
 - Flow: reach out, basic details shared, free 20-min exploratory call, consent form, time/day
   scheduled, confirmed with a calendar invite after payment (UPI/bank transfer).
-- FAQs (6): how to start · preparation (note topics; goals reviewed after first session) ·
-  confidentiality (same policy as therapy) · meeting frequency (generally bimonthly/every 2 weeks,
-  adjustable) · allowed topics (client cases, ethical dilemmas, logistics, building practice,
-  burnout, imposter syndrome) · cancellation (same 3-hr free reschedule/cancel policy).
+- FAQs (6): how to start; preparation (note topics, goals reviewed after first session);
+  confidentiality (same policy as therapy); meeting frequency (generally bimonthly/every 2 weeks,
+  adjustable); allowed topics (client cases, ethical dilemmas, logistics, building practice,
+  burnout, imposter syndrome); cancellation (same 3-hr free reschedule/cancel policy).
 
 ### Group supervision (planned, not yet scoped)
 Harshita wants to start offering group supervision and wants a dedicated section/space reserved
@@ -189,22 +213,21 @@ placeholder slot in the site plan (see Open Items).
 ### Peer testimonials
 8 real testimonials collected via Google Form, all with explicit consent for name, education,
 years of experience, and testimonial text to appear on the site. Full text lives in this repo's
-private working notes (not committed, due to the source spreadsheet containing personal emails) —
-**ask if the full 8 need to be re-supplied for the dedicated Testimonials page.** Homepage
-currently shows a 2-quote rotating teaser:
-1. Deepapriya Vishwanthan — MA (Applied Psychology), M.Phil (Social Sciences), 16 yrs experience
-2. Zahra Diwan — MA Clinical Psychology (Adults), MSc Child and Adolescents Mental Health, 7 yrs
-   experience
+private working notes, not committed, because the source spreadsheet contains personal emails.
+Ask if the full 8 need to be re-supplied for the dedicated Testimonials page. The homepage
+currently shows just **one** static teaser quote as part of the consolidated glimpse section
+(see section 4):
+- Deepapriya Vishwanthan, MA (Applied Psychology), M.Phil (Social Sciences), 16 years experience
 
-The other 6 (Rinkle Jain, Aaushi Shah, Sanika Nanal, Anis Syed, Rajshree, Ananyaa Kale) are
-approved and ready to use on the full Testimonials page whenever it's built.
+The other 7 (Rinkle Jain, Aaushi Shah, Sanika Nanal, Anis Syed, Zahra Diwan, Rajshree, Ananyaa
+Kale) are approved and ready to use on the full Testimonials page whenever it's built.
 
 ### Helpline numbers (footer only, quiet placement, non-crisis-service disclaimer alongside)
-1. MannTalks — 8686139139 (Mon–Sun, 10am–6pm)
-2. iCall — 9152987821 (Mon–Sat, 10am–8pm)
-3. KIRAN Mental Health (Government) — 1800-599-0019 (24/7)
-4. Spandan — 7389366696 (24/7)
-5. Vandrevala Foundation — 9999666555 (24/7)
+1. MannTalks, 8686139139 (Mon to Sun, 10am to 6pm)
+2. iCall, 9152987821 (Mon to Sat, 10am to 8pm)
+3. KIRAN Mental Health (Government), 1800-599-0019 (24/7)
+4. Spandan, 7389366696 (24/7)
+5. Vandrevala Foundation, 9999666555 (24/7)
 
 ### Contact details (use these everywhere, not placeholders)
 - Email: **feelseen@honoringstories.com**
@@ -214,35 +237,50 @@ approved and ready to use on the full Testimonials page whenever it's built.
 - Location: Andheri West, Mumbai (not just "Mumbai, India")
 - Instagram: deliberately **not** linked in the footer (removed per request)
 
+### Pending visual asset
+A photo was referenced by screenshot earlier in the project for a "why this fits" style visual,
+but never successfully uploaded. The homepage's glimpse section currently has a dashed-border
+"Photo to be added" placeholder reserved for it (or a different photo Harshita provides later).
+Replace that placeholder when the real image arrives; do not build further design around its
+absence.
+
 ---
 
-## 6. Standing behavioral rules for whoever (human or AI) works on this repo next
+## 6. Standing behavioral rules for whoever, human or AI, works on this repo next
 
-1. Never use an em dash. Anywhere. Ever.
+1. Never use an em dash. Anywhere. Ever. Including in this file.
 2. Keep pricing off the homepage; it belongs on the Psychotherapy/Supervision pages only.
-3. Keep the Values section as icon-cards, and Qualifications as a vertical timeline. Don't
-   "improve" these into a different layout without being asked.
+3. Keep the Values section as icon-cards, and Qualifications as a vertical timeline, wherever
+   either appears. Don't "improve" these into a different layout without being asked.
 4. Helpline numbers stay a quiet footer footnote, never a prominent banner.
-5. Commit and push after finishing a requested change without waiting to be asked, unless the user
-   says otherwise. Only pause for confirmation on destructive/unusual git operations.
-6. This file must be updated whenever new instructions, content, or corrections come in, including
-   when the user removes or reverses something already built. Treat omissions as information too:
-   if a feature is explicitly removed, note that it was tried and rejected so it doesn't get
-   silently re-added later.
-7. Full peer testimonial data and any other personal-data-bearing source files stay out of git
+5. Homepage content past the Concerns section should stay light: one consolidated credibility
+   section plus a single contact CTA, not a stack of separate proof sections. Deeper material
+   (full qualifications, full testimonials, full "why this fits" narrative, Work With Me details)
+   belongs on dedicated pages linked from the homepage, not inline on it.
+6. Commit and push after finishing a requested change without waiting to be asked, unless the
+   user says otherwise. Only pause for confirmation on destructive/unusual git operations.
+7. This file must be updated whenever new instructions, content, or corrections come in,
+   including when the user removes or reverses something already built. Treat omissions as
+   information too: if a feature is explicitly removed, note that it was tried and rejected so
+   it doesn't get silently re-added later.
+8. Full peer testimonial data and any other personal-data-bearing source files stay out of git
    (see `.gitignore`); only their approved, ready-to-publish text belongs in HTML or in this file.
+9. Do not build or implement anything until explicitly told to create. Gathering, confirming, and
+   logging instructions is fine and expected in the meantime.
 
 ---
 
 ## 7. Open items / not yet built
 
-- About page
+- About page: needs the full qualifications timeline and the full "why this fits" narrative that
+  used to live on the homepage, plus the about-me content already listed in section 5.
 - Psychotherapy page (including the 3-tier pricing presentation)
-- Supervision page (updated pricing: ₹1,800/session, online or offline)
-- Group supervision section: reserved space only, content/pricing/format not yet supplied, do not
-  build until Harshita provides details
+- Supervision page (pricing: Rs 1,800/session, online or offline), plus a reserved group
+  supervision section once details are supplied
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)
-- Footer legal pages: Disclaimer, Privacy Policy, Terms & Conditions (currently placeholder links)
+- Footer legal pages: Disclaimer, Privacy Policy, Terms and Conditions (currently placeholder
+  links)
+- Real photo for the homepage glimpse section's image placeholder
 - Real Instagram/blog content, if ever reintroduced
