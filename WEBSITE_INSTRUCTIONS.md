@@ -110,6 +110,9 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - Reserved image placeholders (dashed border, "Photo to be added" label) are an acceptable
   standing pattern when content is promised but not yet supplied; replace with the real asset
   when it arrives instead of redesigning around its absence.
+- The footer logo is now the real brand logo image (`assets/logo-full.png`, feather, cupped hands,
+  wordmark, tagline), shown at full color, not the earlier hand-drawn inline SVG approximation or
+  an inverted/white-filtered version. Keep it in its original colors against the dark footer.
 
 ---
 
@@ -330,9 +333,15 @@ absence.
 
 - About page: needs the full qualifications timeline and the full "why this fits" narrative that
   used to live on the homepage, plus the about-me content already listed in section 5.
-- Psychotherapy page (including the 3-tier pricing presentation)
+- Psychotherapy page (including the 3-tier pricing presentation). Hero artwork is already staged
+  at `assets/therapy-hero.jpg`: a 4-panel illustrated collage (forced-smile mirror surrounded by
+  pressure phrases, a cracked achievement trophy, a "that comment still hurts" note, a calendar
+  with a circled date), matching the site's hand-drawn illustration style. Use it when the page is
+  built.
 - Supervision page (pricing: Rs 1,800/session, online or offline), plus a reserved group
-  supervision section once details are supplied
+  supervision section once details are supplied. Hero artwork is already staged at
+  `assets/supervision-hero.png`: an illustration of two figures shaking hands at a door shaped
+  like a head, with abstract "thought clutter" shapes inside. Use it when the page is built.
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)
