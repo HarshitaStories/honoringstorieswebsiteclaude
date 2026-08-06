@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Harshita · Honoring Stories</title>
+<meta name="description" content="Get to know Harshita Sarda, psychotherapist and clinical supervisor: her approach, qualifications, and experience." />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --deep-purple: #5B2E6B;
+    --purple: #7A4D8F;
+    --purple-soft: #B295C4;
+    --rose: #D96A9C;
+    --rose-soft: #F2C5D5;
+    --cream: #F8F1E4;
+    --cream-warm: #FDFAF2;
+    --charcoal: #2B1E2F;
+    --charcoal-soft: #4A3C50;
+    --muted: #8A7E90;
+    --line: rgba(91, 46, 107, 0.14);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+    --space-2xl: 8rem;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--deep-purple); text-decoration: none; transition: color 0.3s var(--ease-gentle); }
+  a:hover { color: var(--rose); }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--charcoal);
+  }
+  p { margin: 0 0 1em; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+  @media (min-width: 768px) { .wrap { padding: 0 2rem; } body { font-size: 17px; } }
+  @media (min-width: 1024px) { .wrap { padding: 0 3rem; } }
+  section { padding: var(--space-xl) 0; }
+  @media (min-width: 768px) { section { padding: var(--space-2xl) 0; } }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 1.25rem;
+    background: rgba(248, 241, 228, 0.85);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.5s var(--ease-gentle), padding 0.4s var(--ease-gentle);
+  }
+  .nav.scrolled { border-bottom-color: var(--line); padding: 0.75rem 1.25rem; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
+  .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-logo img { height: 36px; width: auto; }
+  .nav-logo span { font-family: var(--font-display); font-size: 1.15rem; color: var(--deep-purple); font-weight: 500; letter-spacing: 0.01em; }
+  @media (max-width: 767px) { .nav-logo span { display: none; } }
+  .nav-links { display: none; gap: 2rem; align-items: center; }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--charcoal-soft); letter-spacing: 0.02em; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--rose); transition: width 0.4s var(--ease-gentle); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { background: var(--deep-purple); color: var(--cream-warm) !important; padding: 0.55rem 1.25rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500; transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle); }
+  .nav-cta:hover { background: var(--rose); transform: translateY(-1px); }
+  .nav-toggle { display: block; background: none; border: none; width: 36px; height: 36px; cursor: pointer; padding: 0; position: relative; }
+  @media (min-width: 900px) { .nav-toggle { display: none; } }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--deep-purple); margin: 0 auto; transition: all 0.4s var(--ease-gentle); position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-toggle span:nth-child(1) { top: 12px; }
+  .nav-toggle span:nth-child(2) { top: 18px; }
+  .nav-toggle span:nth-child(3) { top: 24px; }
+  .nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: translateX(-50%) rotate(45deg); }
+  .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: translateX(-50%) rotate(-45deg); }
+  .nav-drawer { position: fixed; top: 64px; left: 0; right: 0; background: var(--cream-warm); padding: 2rem 1.5rem; transform: translateY(-120%); transition: transform 0.5s var(--ease-gentle); border-bottom: 1px solid var(--line); z-index: 99; }
+  .nav.open .nav-drawer { transform: translateY(0); }
+  @media (min-width: 900px) { .nav-drawer { display: none; } }
+  .nav-drawer a { display: block; padding: 0.75rem 0; font-size: 1.05rem; font-family: var(--font-display); color: var(--charcoal); border-bottom: 1px solid var(--line); }
+  .nav-drawer a:last-child { border-bottom: none; }
+
+  /* ========== SECTION RAIL ========== */
+  .section-rail { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 1.1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+  @media (min-width: 1100px) { .section-rail { display: flex; } }
+  .section-rail.visible { opacity: 1; pointer-events: auto; }
+  .section-rail.visible.idle { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+  .rail-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: rgba(91, 46, 107, 0.22); transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle); }
+  .rail-dot:hover, .rail-dot.active { background: var(--rose); transform: scale(1.5); }
+  .rail-dot::before {
+    content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--deep-purple);
+    background: rgba(253, 250, 242, 0.8); backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.7); padding: 0.3rem 0.7rem; border-radius: 999px;
+    box-shadow: 0 8px 20px -6px rgba(91, 46, 107, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle);
+  }
+  .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
+
+  /* ========== PAGE HEADER ========== */
+  .page-hero { position: relative; padding: 8rem 0 4rem; overflow: hidden; }
+  @media (min-width: 768px) { .page-hero { padding: 10rem 0 5rem; } }
+  .page-hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: breathe 14s ease-in-out infinite; }
+  .hero-blob.one { width: 500px; height: 500px; background: var(--rose-soft); top: -150px; right: -100px; }
+  .hero-blob.two { width: 400px; height: 400px; background: var(--purple-soft); bottom: -100px; left: -80px; animation-delay: -7s; }
+  @keyframes breathe { 0%, 100% { transform: scale(1) translate(0, 0); } 50% { transform: scale(1.08) translate(20px, -10px); } }
+  .page-hero-inner { position: relative; z-index: 1; display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 900px) { .page-hero-inner { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; } }
+  .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1rem; }
+  .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 480px; line-height: 1.7; }
+
+  .full-photo {
+    aspect-ratio: 3 / 4;
+    border: 1.5px dashed var(--purple-soft);
+    border-radius: 20px;
+    background: var(--cream-warm);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
+    color: var(--muted); text-align: center; padding: 2rem;
+    max-width: 380px; margin: 0 auto;
+  }
+  .full-photo svg { width: 48px; height: 48px; opacity: 0.6; }
+  .full-photo span { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem;
+    font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out);
+    letter-spacing: 0.01em; will-change: transform;
+  }
+  .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
+  .btn-primary:hover { background: var(--rose); color: var(--cream-warm); box-shadow: 0 12px 28px -14px rgba(217, 106, 156, 0.6); }
+  .btn-secondary { background: transparent; color: var(--deep-purple); border-color: var(--deep-purple); }
+  .btn-secondary:hover { background: var(--deep-purple); color: var(--cream-warm); }
+  .btn svg { width: 14px; height: 14px; transition: transform 0.4s var(--ease-gentle); }
+  .btn:hover svg { transform: translateX(3px); }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.delay-1 { transition-delay: 0.15s; }
+  .reveal.delay-2 { transition-delay: 0.3s; }
+  .reveal.delay-3 { transition-delay: 0.45s; }
+
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); }
+  .section-head .eyebrow { font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--rose); letter-spacing: 0.05em; margin-bottom: 0.75rem; display: inline-block; }
+  .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+  .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; }
+
+  .divider { display: flex; align-items: center; justify-content: center; margin: 1.25rem auto 1.75rem; max-width: 140px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; }
+
+  /* ========== BIO ========== */
+  .bio-text { max-width: 720px; margin: 0 auto; }
+  .bio-text p { color: var(--charcoal-soft); font-size: 1.05rem; line-height: 1.85; }
+  .bio-text p:last-child {
+    font-family: var(--font-display); font-style: italic; color: var(--deep-purple); font-size: 1.2rem; line-height: 1.6; margin-top: 1.5rem;
+  }
+
+  /* ========== VALUES (5-card grid, reusing concern-card language) ========== */
+  .about-values { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-values-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  @media (min-width: 640px) { .about-values-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .about-values-grid { grid-template-columns: repeat(3, 1fr); } }
+  .avalue-card {
+    background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem;
+    transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden;
+  }
+  @media (min-width: 640px) { .about-values-grid { background: none; } }
+  .avalue-card { background: var(--cream); }
+  .avalue-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose-soft), var(--rose)); transition: left 0.8s var(--ease-gentle); }
+  .avalue-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
+  .avalue-card:hover::before { left: 0; }
+  .avalue-icon { width: 36px; height: 36px; margin-bottom: 1rem; color: var(--rose); opacity: 0.85; }
+  .avalue-card h4 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--deep-purple); font-style: italic; }
+  .avalue-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+
+  /* ========== TIMELINE (qualifications + experience, shared) ========== */
+  .timeline-grid { max-width: 720px; margin: 0 auto; position: relative; padding-left: 1.75rem; border-left: 1px solid var(--line); }
+  .timeline-item { position: relative; padding: 0 0 2.25rem; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -1.98rem; top: 0.4rem; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--cream); border: 1.5px solid var(--rose); transition: all 0.5s var(--ease-gentle);
+  }
+  .timeline-item:hover::before { background: var(--rose); transform: scale(1.3); }
+  .timeline-item .t-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.2rem; }
+  .timeline-item .t-sub { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+
+  /* ========== CONTACT ========== */
+  .contact { background: var(--cream-warm); text-align: center; }
+  .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-style: italic; font-weight: 400; color: var(--deep-purple); }
+  .contact p { max-width: 540px; margin: 1rem auto 2rem; color: var(--charcoal-soft); }
+  .contact-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+  /* ========== FOOTER ========== */
+  footer { background: var(--charcoal); color: var(--cream-warm); padding: var(--space-lg) 0 var(--space-md); }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(253, 250, 242, 0.12); }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; } }
+  .footer-brand img { height: 64px; width: auto; margin-bottom: 1rem; }
+  .footer-col h5 { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose-soft); margin-bottom: 1.25rem; font-weight: 500; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a { color: rgba(253, 250, 242, 0.75); font-size: 0.92rem; transition: color 0.4s var(--ease-gentle); display: inline-flex; align-items: center; gap: 0.55rem; }
+  .footer-col a svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.8; }
+  .footer-col a:hover { color: var(--rose-soft); }
+  .footer-bottom { padding-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; align-items: center; justify-content: space-between; text-align: center; }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; text-align: left; } }
+  .footer-bottom small { color: rgba(253, 250, 242, 0.55); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { font-size: 0.82rem; color: rgba(253, 250, 242, 0.55); }
+  .footer-links a:hover { color: var(--rose-soft); }
+  .footer-note { font-size: 0.78rem; color: rgba(253, 250, 242, 0.55); line-height: 1.6; margin: 0 0 0.5rem; }
+  .footer-helplines { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+  .footer-helplines li { font-size: 0.8rem; color: rgba(253, 250, 242, 0.6); }
+  .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
+  .footer-helplines a:hover { color: var(--rose-soft); }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Honoring Stories home">
+      <img src="assets/logo.png" alt="Honoring Stories" style="height:52px;width:auto;" />
+    </a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="index.html#glimpse">Work With Me</a>
+      <a href="index.html#community">Community</a>
+      <a href="#contact" class="nav-cta">Book a Consultation Call</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer">
+    <a href="about.html" onclick="document.getElementById('nav').classList.remove('open')">About</a>
+    <a href="index.html#glimpse" onclick="document.getElementById('nav').classList.remove('open')">Work With Me</a>
+    <a href="index.html#community" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
+    <a href="#contact" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation Call</a>
+  </div>
+</nav>
+
+<!-- ========== SECTION RAIL ========== -->
+<nav class="section-rail" id="sectionRail" aria-label="Page sections">
+  <a href="#bio" class="rail-dot" data-label="Getting to know Harshita"></a>
+  <a href="#values" class="rail-dot" data-label="My values and lens"></a>
+  <a href="#qualifications" class="rail-dot" data-label="Qualifications"></a>
+  <a href="#experience" class="rail-dot" data-label="Experience"></a>
+  <a href="#contact" class="rail-dot" data-label="Let's connect"></a>
+</nav>
+
+<!-- ========== PAGE HEADER ========== -->
+<header class="page-hero">
+  <div class="page-hero-bg">
+    <div class="hero-blob one"></div>
+    <div class="hero-blob two"></div>
+  </div>
+  <div class="wrap">
+    <div class="page-hero-inner">
+      <div class="reveal">
+        <div class="full-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Photo to be added</span>
+        </div>
+      </div>
+      <div class="reveal delay-1">
+        <div class="eyebrow">About</div>
+        <h1>Harshita Sarda</h1>
+        <p class="page-hero-note">She/her · Psychotherapist &amp; Clinical Supervisor · Andheri West, Mumbai</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== BIO ========== -->
+<section id="bio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">In her own words</div>
+      <h2>Getting to know Harshita</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="bio-text reveal delay-1">
+      <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>
+      <p>I work with adults between the ages of 20 to 65, supporting concerns that include anxiety, relationship challenges, self-confidence and self-esteem, depression, trauma, sleep difficulties, emotional regulation, and life transitions. I have a particular interest in working with anxiety and in exploring relationships in all their forms, with partners, family, friends, and with oneself. I am interested in how our relational experiences shape the way we feel, respond, and move through the world.</p>
+      <p>I also work with individuals navigating questions of identity, self-worth, and belonging. My aim is to support clients in building emotional awareness, making sense of patterns that may feel difficult or repetitive, and reconnecting with parts of themselves that feel overwhelmed, disconnected, or unheard.</p>
+      <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe therapy is not a one-size-fits-all process, and I gently adapt my approach to each person's pace, needs, and lived experience.</p>
+      <p>I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and have received training in working with complex trauma through the International Society for the Study of Trauma and Dissociation. My work is guided by a sensitivity to how personal experiences are shaped by relational, cultural, and social contexts.</p>
+      <p>I see therapy as a collaborative and evolving space, one where you can show up as you are, without pressure or judgment, and feel supported in exploring both the difficult and meaningful parts of your inner world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VALUES ========== -->
+<section class="about-values" id="values">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How I show up</div>
+      <h2>My values and lens as a therapist</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="about-values-grid">
+      <div class="avalue-card reveal delay-1">
+        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
+        <h4>Eclectic</h4>
+        <p>I draw from different methods and techniques of psychotherapy to tailor each session to suit your unique challenges and experiences.</p>
+      </div>
+      <div class="avalue-card reveal delay-2">
+        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+        <h4>Trauma-informed</h4>
+        <p>I work with care and awareness of how past pain may show up in the present.</p>
+      </div>
+      <div class="avalue-card reveal delay-3">
+        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+        <h4>Queer-affirmative</h4>
+        <p>I offer a space that respects and affirms diverse gender and sexual identities.</p>
+      </div>
+      <div class="avalue-card reveal delay-1">
+        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg>
+        <h4>Intersectional</h4>
+        <p>I understand how different parts of your identity and social context shape your experiences, and I keep them in mind while working through your concerns.</p>
+      </div>
+      <div class="avalue-card reveal delay-2">
+        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 2-1 3-1 5v2H8v-2c0-2-1-3-1-5a5 5 0 015-5z"/><path d="M9 19h6M10 22h4"/></svg>
+        <h4>Neurodivergent inclusive</h4>
+        <p>I support and welcome people who experience and process the world differently, with understanding and nurturance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== QUALIFICATIONS ========== -->
+<section id="qualifications">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Education &amp; Training</div>
+      <h2>Qualifications</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="timeline-grid">
+      <div class="timeline-item reveal delay-1">
+        <div class="t-title">MA in Clinical Psychology</div>
+        <div class="t-sub">Post-graduate qualification</div>
+      </div>
+      <div class="timeline-item reveal delay-1">
+        <div class="t-title">Diploma in Counseling Psychology</div>
+        <div class="t-sub">Xavier's College</div>
+      </div>
+      <div class="timeline-item reveal delay-2">
+        <div class="t-title">Diploma in Supervision for Mental Health Practice</div>
+        <div class="t-sub">TISS (Tata Institute of Social Sciences)</div>
+      </div>
+      <div class="timeline-item reveal delay-2">
+        <div class="t-title">Queer Affirmative Counseling Practice</div>
+        <div class="t-sub">Mariwala Health Initiative</div>
+      </div>
+      <div class="timeline-item reveal delay-3">
+        <div class="t-title">Gestalt Therapy: Basic &amp; Advanced</div>
+        <div class="t-sub">60 hours · Psychphoenix</div>
+      </div>
+      <div class="timeline-item reveal delay-3">
+        <div class="t-title">Complexities of Complex Trauma Accelerated</div>
+        <div class="t-sub">The International Society for the Study of Trauma and Dissociation (ISSTD)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EXPERIENCE ========== -->
+<section id="experience" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Where she's worked</div>
+      <h2>Experience</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="timeline-grid">
+      <div class="timeline-item reveal delay-1">
+        <div class="t-title">Private Practice</div>
+        <div class="t-sub">Individual therapy and supervision · since 2023</div>
+      </div>
+      <div class="timeline-item reveal delay-1">
+        <div class="t-title">Field Supervisor, Xavier's College</div>
+        <div class="t-sub">Contractual, for MA second-year interns · since Feb 2021</div>
+      </div>
+      <div class="timeline-item reveal delay-2">
+        <div class="t-title">Cultfit</div>
+        <div class="t-sub">Freelance psychologist, online one-on-one therapy · Jun 2020 to Feb 2023 · 1050+ positive reviews</div>
+      </div>
+      <div class="timeline-item reveal delay-2">
+        <div class="t-title">iCall</div>
+        <div class="t-sub">Covid Mental Health Helpline, volunteer counselor · Sep 2020 to Jan 2021</div>
+      </div>
+      <div class="timeline-item reveal delay-3">
+        <div class="t-title">CanKids</div>
+        <div class="t-sub">Pediatric cancer patients and caregivers, Tata Memorial Hospital · Feb 2020 to Aug 2020</div>
+      </div>
+      <div class="timeline-item reveal delay-3">
+        <div class="t-title">Naraindas Morbai Budhrani Trust</div>
+        <div class="t-sub">Cancer patients and caregivers at Nair, KEM, and Wadia Hospitals · Jul 2019 to Dec 2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ME ========== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Let's connect</h2>
+      <p>If something here resonates, I'd gently invite you to reach out. A free consultation call is a soft first step.</p>
+      <div class="contact-ctas">
+        <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
+          Book a Consultation Call
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Reach out</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-full.png" alt="Honoring Stories" />
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>About</a></li>
+          <li><a href="index.html#glimpse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Work With Me</a></li>
+          <li><a href="index.html#community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>Community</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="mailto:feelseen@honoringstories.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</a></li>
+          <li><a href="https://wa.me/919152801719" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/in/psychologistharshita" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="11" x2="8" y2="16"/><circle cx="8" cy="8" r="0.6" fill="currentColor" stroke="none"/><path d="M12 16v-3a2 2 0 014 0v3"/><line x1="12" y1="11" x2="12" y2="16"/></svg>LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Based in</h5>
+        <ul>
+          <li style="display:flex;align-items:center;gap:0.55rem;color:rgba(253,250,242,0.75);font-size:0.92rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.8;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>Andheri West, Mumbai</li>
+          <li style="display:flex;align-items:center;gap:0.55rem;color:rgba(253,250,242,0.75);font-size:0.92rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.8;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg>Online worldwide</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding-top:2rem;">
+      <p class="footer-note">This is not a crisis helpline. If you need immediate support, please reach out to one of the helplines below.</p>
+      <ul class="footer-helplines">
+        <li><a href="tel:8686139139">MannTalks · 8686139139</a></li>
+        <li><a href="tel:9152987821">iCall · 9152987821</a></li>
+        <li><a href="tel:18005990019">KIRAN (Govt.) · 1800-599-0019</a></li>
+        <li><a href="tel:7389366696">Spandan · 7389366696</a></li>
+        <li><a href="tel:9999666555">Vandrevala Foundation · 9999666555</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <small>© <span id="year"></span> Honoring Stories · Harshita Sarda. All rights reserved.</small>
+      <div class="footer-links">
+        <a href="#">Disclaimer</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  const rail = document.getElementById('sectionRail');
+  if (rail) {
+    const railLinks = [...rail.querySelectorAll('.rail-dot')];
+    const railTargets = railLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const footerEl = document.querySelector('footer');
+    const heroEl = document.querySelector('.page-hero');
+
+    window.addEventListener('scroll', () => {
+      const pastHero = heroEl ? window.scrollY > heroEl.offsetHeight * 0.6 : window.scrollY > 400;
+      const nearFooter = footerEl && (window.scrollY + window.innerHeight > footerEl.offsetTop + 80);
+      rail.classList.toggle('visible', pastHero && !nearFooter);
+    }, { passive: true });
+
+    const activeIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const link = railLinks.find(a => document.querySelector(a.getAttribute('href')) === e.target);
+        if (!link) return;
+        if (e.isIntersecting) {
+          railLinks.forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+    railTargets.forEach(t => activeIo.observe(t));
+
+    let idleTimer;
+    function resetRailIdle() {
+      rail.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => rail.classList.add('idle'), 2000);
+    }
+    window.addEventListener('mousemove', resetRailIdle, { passive: true });
+    window.addEventListener('scroll', resetRailIdle, { passive: true });
+    resetRailIdle();
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
+</script>
+
+</body>
+</html>
