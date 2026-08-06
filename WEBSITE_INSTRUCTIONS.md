@@ -158,9 +158,18 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
     homepage as the carousel described above.
-- **About** (not yet built): full photo, about-me, education and experience (full qualifications
-  timeline), the fuller "why this fits" narrative that used to live on the homepage,
-  approach/concerns written to an ideal client, small embedded "Contact me" section.
+- **About** (`about.html`, built): full-picture placeholder (dashed border, not the small circular
+  hero-photo style), complete bio write-up (de-duplicated from the near-identical "About me page"
+  and "Approach as a therapist" source docs, using the fuller version once), a 5-card values
+  section (Eclectic, Trauma-informed, Queer-affirmative, Intersectional, Neurodivergent inclusive),
+  Qualifications (same vertical timeline component as originally built for the homepage, all 6
+  entries), an Experience section in the same timeline style (Private Practice, Xavier's College,
+  Cultfit, iCall, CanKids, Budhrani Trust), and a small embedded "Contact me" section. Shares the
+  homepage's design system (own copy of the CSS, not a shared stylesheet) but is a fully separate
+  file; built without touching `index.html` per explicit instruction. The homepage's "Curious about
+  me" self-select link still points to `#` rather than `about.html`; that update was intentionally
+  left undone since editing the homepage wasn't in scope for this task; do it next time homepage
+  changes are allowed.
 - **Work With Me, Psychotherapy** (not yet built): about, process/logistics including pricing,
   exploratory-call link, FAQs, contact section.
 - **Work With Me, Supervision** (not yet built): about (two tracks: early-career 0 to 3 years,
@@ -331,8 +340,8 @@ absence.
 
 ## 7. Open items / not yet built
 
-- About page: needs the full qualifications timeline and the full "why this fits" narrative that
-  used to live on the homepage, plus the about-me content already listed in section 5.
+- Update the homepage's "Curious about me" self-select link to point to `about.html` instead of
+  `#`, once homepage edits are back in scope.
 - Psychotherapy page (including the 3-tier pricing presentation). Hero artwork is already staged
   at `assets/therapy-hero.jpg`: a 4-panel illustrated collage (forced-smile mirror surrounded by
   pressure phrases, a cracked achievement trophy, a "that comment still hurts" note, a calendar
