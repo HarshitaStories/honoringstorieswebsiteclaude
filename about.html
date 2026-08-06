@@ -139,20 +139,6 @@
   }
   .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
 
-  /* ========== PAGE HEADER ========== */
-  .page-hero { position: relative; padding: 8rem 0 4rem; overflow: hidden; }
-  @media (min-width: 768px) { .page-hero { padding: 10rem 0 5rem; } }
-  .page-hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-  .hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: breathe 14s ease-in-out infinite; }
-  .hero-blob.one { width: 500px; height: 500px; background: var(--rose-soft); top: -150px; right: -100px; }
-  .hero-blob.two { width: 400px; height: 400px; background: var(--purple-soft); bottom: -100px; left: -80px; animation-delay: -7s; }
-  @keyframes breathe { 0%, 100% { transform: scale(1) translate(0, 0); } 50% { transform: scale(1.08) translate(20px, -10px); } }
-  .page-hero-inner { position: relative; z-index: 1; display: grid; gap: 3rem; align-items: center; }
-  @media (min-width: 900px) { .page-hero-inner { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; } }
-  .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; }
-  .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1rem; }
-  .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 480px; line-height: 1.7; }
-
   .full-photo {
     aspect-ratio: 3 / 4;
     border: 1.5px dashed var(--purple-soft);
@@ -160,10 +146,13 @@
     background: var(--cream-warm);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
     color: var(--muted); text-align: center; padding: 2rem;
-    max-width: 380px; margin: 0 auto;
+    max-width: 320px; margin: 0 auto;
   }
   .full-photo svg { width: 48px; height: 48px; opacity: 0.6; }
   .full-photo span { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; }
+
+  .bio-inner { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .bio-inner { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
 
   .btn {
     display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem;
@@ -195,7 +184,7 @@
   .divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; }
 
   /* ========== BIO ========== */
-  .bio-text { max-width: 720px; margin: 0 auto; }
+  .bio-text {}
   .bio-text p { color: var(--charcoal-soft); font-size: 1.05rem; line-height: 1.85; }
   .bio-text p:last-child {
     font-family: var(--font-display); font-style: italic; color: var(--deep-purple); font-size: 1.2rem; line-height: 1.6; margin-top: 1.5rem;
@@ -296,31 +285,8 @@
   <a href="#contact" class="rail-dot" data-label="Let's connect"></a>
 </nav>
 
-<!-- ========== PAGE HEADER ========== -->
-<header class="page-hero">
-  <div class="page-hero-bg">
-    <div class="hero-blob one"></div>
-    <div class="hero-blob two"></div>
-  </div>
-  <div class="wrap">
-    <div class="page-hero-inner">
-      <div class="reveal">
-        <div class="full-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Photo to be added</span>
-        </div>
-      </div>
-      <div class="reveal delay-1">
-        <div class="eyebrow">About</div>
-        <h1>Harshita Sarda</h1>
-        <p class="page-hero-note">She/her · Psychotherapist &amp; Clinical Supervisor · Andheri West, Mumbai</p>
-      </div>
-    </div>
-  </div>
-</header>
-
 <!-- ========== BIO ========== -->
-<section id="bio">
+<section id="bio" style="padding-top:8rem;">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">In her own words</div>
@@ -329,13 +295,21 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="bio-text reveal delay-1">
-      <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>
-      <p>I work with adults between the ages of 20 to 65, supporting concerns that include anxiety, relationship challenges, self-confidence and self-esteem, depression, trauma, sleep difficulties, emotional regulation, and life transitions. I have a particular interest in working with anxiety and in exploring relationships in all their forms, with partners, family, friends, and with oneself. I am interested in how our relational experiences shape the way we feel, respond, and move through the world.</p>
-      <p>I also work with individuals navigating questions of identity, self-worth, and belonging. My aim is to support clients in building emotional awareness, making sense of patterns that may feel difficult or repetitive, and reconnecting with parts of themselves that feel overwhelmed, disconnected, or unheard.</p>
-      <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe therapy is not a one-size-fits-all process, and I gently adapt my approach to each person's pace, needs, and lived experience.</p>
-      <p>I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and have received training in working with complex trauma through the International Society for the Study of Trauma and Dissociation. My work is guided by a sensitivity to how personal experiences are shaped by relational, cultural, and social contexts.</p>
-      <p>I see therapy as a collaborative and evolving space, one where you can show up as you are, without pressure or judgment, and feel supported in exploring both the difficult and meaningful parts of your inner world.</p>
+    <div class="bio-inner">
+      <div class="reveal">
+        <div class="full-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Photo to be added</span>
+        </div>
+      </div>
+      <div class="bio-text reveal delay-1">
+        <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>
+        <p>I work with adults 18+, supporting concerns that include anxiety, relationship challenges, self-confidence and self-esteem, depression, trauma, sleep difficulties, emotional regulation, and life transitions. I have a particular interest in working with anxiety and in exploring relationships in all their forms, with partners, family, friends, and with oneself. I am interested in how our relational experiences shape the way we feel, respond, and move through the world.</p>
+        <p>I also work with individuals navigating questions of identity, self-worth, and belonging. My aim is to support clients in building emotional awareness, making sense of patterns that may feel difficult or repetitive, and reconnecting with parts of themselves that feel overwhelmed, disconnected, or unheard.</p>
+        <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe therapy is not a one-size-fits-all process, and I gently adapt my approach to each person's pace, needs, and lived experience.</p>
+        <p>I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and have received training in working with complex trauma through the International Society for the Study of Trauma and Dissociation. My work is guided by a sensitivity to how personal experiences are shaped by relational, cultural, and social contexts.</p>
+        <p>I see therapy as a collaborative and evolving space, one where you can show up as you are, without pressure or judgment, and feel supported in exploring both the difficult and meaningful parts of your inner world.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -539,7 +513,7 @@
     const railLinks = [...rail.querySelectorAll('.rail-dot')];
     const railTargets = railLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const footerEl = document.querySelector('footer');
-    const heroEl = document.querySelector('.page-hero');
+    const heroEl = document.querySelector('#bio');
 
     window.addEventListener('scroll', () => {
       const pastHero = heroEl ? window.scrollY > heroEl.offsetHeight * 0.6 : window.scrollY > 400;
