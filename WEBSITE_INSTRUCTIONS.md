@@ -158,18 +158,21 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
     homepage as the carousel described above.
-- **About** (`about.html`, built): full-picture placeholder (dashed border, not the small circular
-  hero-photo style), complete bio write-up (de-duplicated from the near-identical "About me page"
-  and "Approach as a therapist" source docs, using the fuller version once), a 5-card values
-  section (Eclectic, Trauma-informed, Queer-affirmative, Intersectional, Neurodivergent inclusive),
-  Qualifications (same vertical timeline component as originally built for the homepage, all 6
-  entries), an Experience section in the same timeline style (Private Practice, Xavier's College,
-  Cultfit, iCall, CanKids, Budhrani Trust), and a small embedded "Contact me" section. Shares the
-  homepage's design system (own copy of the CSS, not a shared stylesheet) but is a fully separate
-  file; built without touching `index.html` per explicit instruction. The homepage's "Curious about
-  me" self-select link still points to `#` rather than `about.html`; that update was intentionally
-  left undone since editing the homepage wasn't in scope for this task; do it next time homepage
-  changes are allowed.
+- **About** (`about.html`, built): no standalone photo/name hero banner (one was tried and then
+  removed as redundant with the bio section right below it). Instead, the bio section itself opens
+  with a two-column row: a full-picture placeholder (dashed border, not the small circular
+  hero-photo style) on the left, the write-up on the right, stacking on narrower screens. Bio copy
+  is de-duplicated from the near-identical "About me page" and "Approach as a therapist" source
+  docs (used the fuller version once), with the age range stated as "18+" (not the source docs'
+  "20 to 65"). Then: a 5-card values section (Eclectic, Trauma-informed, Queer-affirmative,
+  Intersectional, Neurodivergent inclusive), Qualifications (same vertical timeline component
+  originally built for the homepage, all 6 entries), an Experience section in the same timeline
+  style (Private Practice, Xavier's College, Cultfit, iCall, CanKids, Budhrani Trust), and a small
+  embedded "Contact me" section. Shares the homepage's design system (own copy of the CSS, not a
+  shared stylesheet) but is a fully separate file; built without touching `index.html` per explicit
+  instruction. The homepage's "Curious about me" self-select link still points to `#` rather than
+  `about.html`; that update was intentionally left undone since editing the homepage wasn't in
+  scope; do it next time homepage changes are allowed.
 - **Work With Me, Psychotherapy** (not yet built): about, process/logistics including pricing,
   exploratory-call link, FAQs, contact section.
 - **Work With Me, Supervision** (not yet built): about (two tracks: early-career 0 to 3 years,
@@ -191,8 +194,9 @@ dedicated Psychotherapy and Supervision pages once built.
 ### About Harshita
 MA in Clinical Psychology; Diploma in Counseling Psychology (Xavier's College); Diploma in
 Supervision for Mental Health Practice (TISS). **7+ years as a therapist, 4+ years as a
-supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works with adults 20 to
-65; concerns include anxiety, relationship challenges, self-confidence/self-esteem, depression,
+supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works with adults 18+
+(corrected from an earlier 20 to 65 range; always use 18+ going forward). Concerns include
+anxiety, relationship challenges, self-confidence/self-esteem, depression,
 trauma, sleep difficulties, emotional regulation, life transitions. Particular interest in
 anxiety and relational dynamics, identity, self-worth, belonging.
 
