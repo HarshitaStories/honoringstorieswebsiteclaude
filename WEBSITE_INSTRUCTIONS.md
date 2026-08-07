@@ -178,10 +178,14 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   step-by-step process timeline including a consent-form step (real link supplied, see section 5),
   all 8 FAQs as native `<details>` accordions, a languages note, and a contact section.
 - **Work With Me, Supervision** (`supervision.html`, built): same pattern, using
-  `assets/supervision-hero.png`. Includes a two-track section (early-career / experienced), a
+  `assets/supervision-hero.png`. Includes a two-track section (early-career / "3 to 6 years"), a
   2-tier pricing block, a reserved "Coming soon: Group Supervision" card (no details yet, per
   standing rule), the consent-form step with its real link, all 6 FAQs, a languages note, and a
-  contact section.
+  contact section. A third "6+ years" track card is planned; see Open Items.
+- On both Psychotherapy and Supervision pages: the consent-form link in the process step is
+  styled as a small rose pill (`.consent-link` class) so it's more visible without being loud, and
+  the contact section has a `.contact-direct` row with a plainly visible, clickable email and
+  WhatsApp link beneath the CTA buttons.
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
 - **Community, Shared Ways of Coping** (not yet built): anonymous Google Form embed,
   admin-moderated before publishing.
@@ -252,12 +256,12 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   Wadia Hospitals, Jul to Dec 2019
 
 ### Psychotherapy sessions
-- Days/hours: Tue to Sat, 8am to 6pm IST. Duration: 50 min. Format: video/voice via Google Meet
-  or WhatsApp.
+- Days/hours: Tue to Sat, 8am to 6pm IST. Duration: 50 min. Format: **video call only** via Google
+  Meet or WhatsApp (no voice-only sessions offered, per explicit correction).
 - **Pricing (current, to be placed only on the Psychotherapy page, presented thoughtfully rather
   than as a bare price table):**
-  - Rs 2,100, online sessions, India-based clients
-  - Rs 2,500, online sessions, clients based outside India
+  - Rs 2,100, 50-min video session via Google Meet or WhatsApp, India-based clients
+  - Rs 2,500, 50-min video session via Google Meet or WhatsApp, clients based outside India
   - Rs 3,000, in-person/offline sessions, Andheri West, Mumbai
 - Flow: reach out, basic details shared, free 20-min exploratory call, **fill the consent form**,
   book via link/payment, confirmed via UPI or bank transfer. The consent-form step was added after
@@ -273,10 +277,14 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   cancellation policy (free reschedule/cancel up to 3 hrs before session).
 
 ### Supervision sessions
-- Days/hours: Tue to Fri, 8am to 6pm IST. Duration: 60 min. Format: **online or offline
-  (in-person)**.
-- **Pricing (current): Rs 1,800 per session, same rate for both online and offline.**
-- Two tracks: early-career (0 to 3 years) and experienced (3-plus years) practitioners.
+- Days/hours: Tue to Fri, 8am to 6pm IST. Duration: 60 min. Format: **online (video call) or
+  offline (in-person)**.
+- **Pricing (current): Rs 1,800 per session online; Rs 2,500 per 60-min session in person at
+  Andheri West, Mumbai (corrected from an earlier equal Rs 1,800 for both, in-person is now
+  priced separately).**
+- Currently two tracks shown on the page: early-career (0 to 3 years) and 3 to 6 years
+  (label updated from "3+ years"). A third track for 6+ years practitioners is planned (see Open
+  Items) with new write-up copy pending approval.
 - Flow: reach out, basic details shared, free 20-min exploratory call, consent form, time/day
   scheduled, confirmed with a calendar invite after payment (UPI/bank transfer).
 - **Consent form (supervision):**
@@ -355,6 +363,12 @@ absence.
 
 ## 7. Open items / not yet built
 
+- Third supervision track card, "6+ years", on the "Wherever you are in your practice" section.
+  Middle card was renamed from "3+ years" to "3 to 6 years" already; the third card's write-up
+  (drafted from "A space to further understand yourself as a professional and changes in the
+  professional self") is proposed but awaiting the user's approval before being added.
+- Therapy FAQs (8) and Supervision FAQs (6): warmer, more caring rewrite requested. Revised copy
+  must be shown to the user and approved before being written into the pages.
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)
