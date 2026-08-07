@@ -232,8 +232,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   instruction. All homepage nav "About" references (top nav, mobile drawer, hero button, footer,
   and the glimpse-links "Curious about me" card) now point to `about.html`.
 - **Work With Me, Psychotherapy** (`psychotherapy.html`, built): hero using the staged
-  `assets/therapy-hero.jpg` artwork, a concerns recap, a pictorial logistics row (icon stat cards
-  for days, duration, format, location instead of plain text), a 3-tier pricing block, a
+  `assets/therapy-hero.jpg` artwork, a concerns recap, a **logistics infographic** (days, duration,
+  format, location, see the note below), a 3-tier pricing block, a
   step-by-step process timeline including a consent-form step (real link supplied, see section 5),
   all 8 FAQs as native `<details>` accordions, a languages note, and a contact section.
 - **Work With Me, Supervision** (`supervision.html`, built): same pattern, using
@@ -243,6 +243,30 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   proposed write-up). Pricing is Rs 1,800/session online, Rs 2,500 per 60-min in-person session
   (corrected from an earlier equal Rs 1,800 for both); a reserved "Coming soon: Group Supervision"
   card; the consent-form step with its real link; all 6 FAQs; a languages note; a contact section.
+- **Session logistics infographic** (`.logistics-grid`, on both Psychotherapy and Supervision).
+  Replaced the original four bordered cards, which were explicitly rejected: "create this section in
+  info graphic UI without containers with dynamic mouse interaction". Current form:
+  - **No containers.** `.logistic-card` keeps only `text-align: center`; no background, border,
+    radius, padding, or hover lift. Do not put the boxes back.
+  - The four points are **beads threaded on a single line**. `.logistics-grid::before` draws the
+    thread, bounded `left: 12.5%; right: 12.5%`, which lands exactly on the first and last icon
+    centres in a 4-column grid. Each icon's first `box-shadow` is a 7px ring in the **section's own
+    background colour** (`var(--cream)`), punching a gap in the thread so the icons read as beads on
+    it. If a page ever gives this section a different background, that ring colour must change too.
+    The thread is hidden below 700px, where the grid drops to two columns.
+  - **Dynamic mouse interaction**: each point carries a `--prox` custom property (0 to 1) that JS
+    sets every frame from the cursor's distance, driving icon lift, scale, and shadow, plus a small
+    lift on the label and value. A second pseudo-element (`::after`) is a brighter stretch of thread
+    masked by a radial gradient that follows the pointer via `--mx`.
+  - Tuning that matters, do not casually change: the falloff radius is **380px, deliberately wider
+    than the ~224px gap between points**, so a neighbouring point lifts gently instead of the effect
+    being all-or-nothing like plain hover (an earlier 210px radius was strictly narrower than the
+    gap, which made it behave exactly like `:hover`). Vertical distance is weighted at 0.55 because
+    the points sit in a horizontal row and the cursor is usually below the icon over the text.
+  - Easing is done in **JS** (values lerp toward target each frame); there is deliberately **no CSS
+    transition** on these properties, since a transition would restart on every `pointermove` and
+    lag behind the cursor. The whole script is skipped on touch input and under
+    `prefers-reduced-motion`, leaving the section static and fully readable.
 - On both Psychotherapy and Supervision pages: the consent-form link in the process step is
   styled as a small rose pill (`.consent-link` class) so it's more visible without being loud. The
   clickable email and WhatsApp links live in the "Reach out" (step 1) process item, not the

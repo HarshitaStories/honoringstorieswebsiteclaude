@@ -135,14 +135,23 @@
   .track-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
 
   /* ========== LOGISTICS ========== */
-  .logistics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 760px; margin: 0 auto; }
-  @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); } }
-  .logistic-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 18px; padding: 1.75rem 1.25rem; text-align: center; transition: all 0.5s var(--ease-gentle); }
-  .logistic-card:hover { transform: translateY(-4px); border-color: var(--rose-soft); box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2); }
-  .logistic-icon { width: 44px; height: 44px; margin: 0 auto 1rem; border-radius: 50%; background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft)); display: flex; align-items: center; justify-content: center; color: var(--deep-purple); }
-  .logistic-icon svg { width: 22px; height: 22px; }
-  .logistic-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
-  .logistic-value { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--deep-purple); line-height: 1.3; }
+  /* Infographic, no containers: four points threaded on one line, each reacting
+     continuously to how near the cursor is (--prox, 0 to 1, set per frame by JS)
+     rather than only on direct hover. */
+  .logistics-grid { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
+  @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+  /* The thread. Ends sit on the first and last icon centres, which in a 4-column grid are at 12.5% and 87.5%. */
+  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; top: 26px; left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
+  .logistics-grid::before { background: linear-gradient(90deg, transparent, var(--rose-soft) 8%, var(--rose-soft) 92%, transparent); }
+  /* Brighter stretch of thread that tracks the pointer. */
+  .logistics-grid::after { background: var(--rose); opacity: calc(var(--thread, 0) * 0.75); -webkit-mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); }
+  @media (min-width: 700px) { .logistics-grid::before, .logistics-grid::after { display: block; } }
+  .logistic-card { --prox: 0; position: relative; text-align: center; background: none; border: none; padding: 0; }
+  /* The first shadow is a ring in the section's own background colour, punching a gap in the thread so each icon reads as a bead on it. */
+  .logistic-icon { position: relative; z-index: 1; width: 52px; height: 52px; margin: 0 auto 1.15rem; border-radius: 50%; background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft)); display: flex; align-items: center; justify-content: center; color: var(--deep-purple); box-shadow: 0 0 0 7px var(--cream), 0 8px calc(14px + var(--prox) * 22px) rgba(91, 46, 107, calc(0.1 + var(--prox) * 0.22)); transform: translateY(calc(var(--prox) * -6px)) scale(calc(1 + var(--prox) * 0.14)); }
+  .logistic-icon svg { width: 24px; height: 24px; }
+  .logistic-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.45rem; transform: translateY(calc(var(--prox) * -3px)); }
+  .logistic-value { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--deep-purple); line-height: 1.35; transform: translateY(calc(var(--prox) * -3px)); }
 
   /* ========== PRICING ========== */
   .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 640px; margin: 0 auto; }
@@ -578,6 +587,64 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Session logistics infographic: each point reacts to how near the cursor is
+  // rather than only to direct hover, and a brighter stretch of the connecting
+  // thread follows the pointer. Values are eased toward their target once per
+  // frame in JS, so no CSS transition is used (a transition here would restart
+  // on every pointermove and lag behind). Skipped entirely on touch input and
+  // when the visitor prefers reduced motion, leaving the section static.
+  (function () {
+    const grid = document.querySelector('.logistics-grid');
+    if (!grid) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const items = [...grid.querySelectorAll('.logistic-card')];
+    const prox = items.map(() => 0);
+    // Wider than the ~224px gap between points, so a neighbouring point lifts
+    // gently too rather than the effect being all-or-nothing like plain hover.
+    const RADIUS = 380;
+    const ICON_CENTRE_Y = 26;
+    // Vertical distance counts for less: the points sit in a horizontal row and
+    // the cursor is usually below the icon, over the label and value text.
+    const Y_WEIGHT = 0.55;
+    let mx = 0, my = 0, inside = false, thread = 0, raf = null;
+
+    function start() { if (!raf) raf = requestAnimationFrame(frame); }
+
+    grid.addEventListener('pointermove', (e) => {
+      mx = e.clientX; my = e.clientY; inside = true; start();
+    });
+    grid.addEventListener('pointerleave', () => { inside = false; start(); });
+
+    function frame() {
+      const gridRect = grid.getBoundingClientRect();
+      let settling = false;
+
+      items.forEach((el, i) => {
+        let target = 0;
+        if (inside) {
+          const r = el.getBoundingClientRect();
+          const dx = mx - (r.left + r.width / 2);
+          const dy = (my - (r.top + ICON_CENTRE_Y)) * Y_WEIGHT;
+          target = Math.max(0, 1 - Math.hypot(dx, dy) / RADIUS);
+          target = Math.pow(target, 1.5); // nearest point clearly leads, its neighbour follows softly
+        }
+        prox[i] += (target - prox[i]) * 0.14;
+        if (Math.abs(target - prox[i]) > 0.002) settling = true;
+        el.style.setProperty('--prox', prox[i].toFixed(3));
+      });
+
+      const threadTarget = inside ? 1 : 0;
+      thread += (threadTarget - thread) * 0.14;
+      if (Math.abs(threadTarget - thread) > 0.002) settling = true;
+      grid.style.setProperty('--thread', thread.toFixed(3));
+      grid.style.setProperty('--mx', (mx - gridRect.left).toFixed(1) + 'px');
+
+      raf = settling ? requestAnimationFrame(frame) : null;
+    }
+  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
