@@ -131,15 +131,18 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       `center`. The inner pages centre because illustration and text are near equal height; the
       home portrait is much taller, and centring pushed the eyebrow far down the page. Top-aligning
       puts "Express · Embrace · Empower" at the same level as "For individuals" (160px vs 166px).
-    - `assets/harshita-home.png` is a **transparent PNG cut-out**, so Harshita sits directly on the
-      warm hero background with no backdrop of her own. Because of that there is no frame,
-      no `border-radius` and no rectangular `box-shadow`; a `drop-shadow()` filter is used instead
-      so the shadow follows her silhouette. Do not reintroduce the old arch frame or the offset
-      rose outline unless the photo goes back to being a rectangular image.
-    - `.hero-photo::before` adds a soft glowing white radial gradient behind the cut-out (`inset:
-      -10%`, `z-index: -1`), standing in for the backdrop the photo no longer has. Requested
-      explicitly ("radial gradient of white fade, like glowing radial"); keep it centred slightly
-      above the vertical middle (`50% 40%`) so the glow reads behind her face/shoulders, not her feet.
+    - `assets/harshita-home.png` is a **transparent PNG cut-out**. The photo went through two
+      framing treatments: first, floating with no frame and a `drop-shadow()` following her
+      silhouette, plus a separate glowing white radial gradient behind her via `.hero-photo::before`
+      (`inset: -10%`, `z-index: -1`). The user then asked for it to sit in "a rectangular rounded
+      cornered safe area... similar to the psychotherapy session hero banner image", so it now
+      matches `.hero-art` from the inner pages: `.hero-photo-frame` itself has `border-radius: 20px`,
+      `overflow: hidden`, and the same `box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3)`. The
+      radial-gradient glow moved from the separate `::before` onto the frame's own `background`
+      (`radial-gradient(circle at 50% 32%, #fff 0%, rgba(255,255,255,0.55) 42%, var(--rose-soft)
+      100%)`), now clipped to those rounded corners instead of bleeding past the frame's edges. Do
+      not reintroduce the old free-floating/no-frame version; the rounded rectangle is the current
+      direction, matching the inner-page hero images.
     - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
       cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
       not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
@@ -151,11 +154,17 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     a section head ("A little more to help you decide" / "Grounded in experience, held with
     care"), then a two-column row of an image placeholder (reserved for a future photo) and a
     right-hand column (`.glimpse-trust`) holding the short approach paragraph (see About Harshita
-    / approach paragraph in section 5) followed immediately by a compact "More about my approach"
-    link card (`.approach-link`), both stacked in that column. This card used to be the third of
-    three self-select cards further down the page; it was folded up here instead, "beside the
-    photo placeholder... above the number stats" per explicit request, so the About pathway reads
-    as part of the intro rather than a fourth destination competing with Psychotherapy/Supervision.
+    / approach paragraph in section 5) followed immediately by a "More about my approach" link
+    (`.approach-link`), both stacked in that column. This link used to be the third of three
+    self-select cards further down the page; it was folded up here instead, "beside the photo
+    placeholder... above the number stats" per explicit request, so the About pathway reads as part
+    of the intro rather than a fourth destination competing with Psychotherapy/Supervision.
+    `.approach-link` is deliberately **not** a bordered/boxed card and has **no icon/avatar** (both
+    were tried and explicitly rejected as not feeling "seamless" with the paragraph above it); it's
+    just a `border-top` hairline, an italic serif title, and a description, reading as a natural
+    continuation of the paragraph rather than a separate floating component. The paragraph's font
+    size (`0.98rem`) was also matched to `.value-card p` on request, "make this font similar to"
+    the Express/Embrace/Empower body text.
     Below the two-column row sits the full-width animated **stat counter row** (see Practice stats
     in section 5), separated by a petal divider. The stats were originally squeezed into the
     half-width text column and got visually clipped by the fixed section-rail tooltip on narrower
@@ -271,19 +280,28 @@ scrolled into view, replacing the earlier trust-line paragraph:
 - 2,000+, Sessions completed
 
 Style convention: keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
-The original treatment (heavy bold sans-serif numbers above a flat full-width rule) was rejected
-as "very corporate for a safe psychotherapist's website". The next pass made the numbers serif but
-italic, which read as "too cursive and decorative"; current treatment drops the italic entirely so
-the "+" and labels are upright serif like the rest of the site's headings, not a display flourish.
-The count-up animation also moved from a sharp ease-out cubic to a gentle ease-in-out smoothstep
-(`p*p*(3-2p)`, 2000ms) so the numbers settle calmly instead of racing up and snapping to a stop.
-If these ever need revisiting, move further toward calm and upright, not back toward italic or
-decorative.
+Went through three passes: (1) heavy bold sans-serif numbers above a flat full-width rule, rejected
+as "very corporate for a safe psychotherapist's website"; (2) upright-but-still-bare serif numbers
+on the same flat layout, rejected again ("I don't like the stats UI... improve the design to suit
+the page's theme"); (3) **current**: each stat is its own `.stat-card`, the same soft-card language
+used for logistics/concern/price cards elsewhere (cream-warm fill, hairline border, 18px radius,
+gentle hover lift), in a 3-column grid (`max-width: 720px`), each with a small gradient icon circle
+(clock, people, checkmark) above the number, matching `.logistic-card`'s icon treatment. The
+numbers themselves stay upright serif (not italic; that read as "too cursive and decorative" in an
+earlier pass). The count-up animation eases in and out with a gentle smoothstep (`p*p*(3-2p)`,
+2000ms) rather than a sharp ease-out cubic, so the numbers settle calmly instead of racing up and
+snapping to a stop. If revisited again, stay with the card-based, on-theme direction, not bare
+numbers on a rule.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
 - **Embrace**: meeting every part of you, the tender, the tired, the uncertain, with warmth and respect.
 - **Empower**: helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.
+
+The three `.value-icon` circles have a slow ambient glow pulse (`iconGlow` keyframes, box-shadow
+0 to `0 0 26px 8px rgba(217,106,156,0.3)` and back, 7s ease-in-out infinite, each card offset by a
+negative `animation-delay` so they don't glow in unison), requested explicitly ("glow in glow out
+in slow speed"). This is separate from the existing hover scale/rotate, which still applies on top.
 
 Eclectic, trauma-informed, queer-affirmative, intersectional, neurodivergent inclusive. Completed
 Queer Affirmative Practice course (Mariwala Health Foundation) and complex trauma training
