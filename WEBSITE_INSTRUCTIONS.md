@@ -190,7 +190,9 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     own. It sits in its own plain section right after testimonials, pointing to the dedicated pages
     below. This was a deliberate restructure: the homepage should hook, present concerns, give one
     credibility beat, and then let each audience choose where to go deeper, rather than making
-    everyone scroll through everything.
+    everyone scroll through everything. **This section is no longer a nav destination** (see the
+    nav dropdown note below); it stays purely as homepage content, and its `#work-with-me` id is
+    now unreferenced by any link.
   - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
     its own entry in the section rail nav. It was originally nested inside glimpse; the user
     explicitly asked for it to be its own section, then went through two layout iterations before
@@ -246,9 +248,26 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   clickable email and WhatsApp links live in the "Reach out" (step 1) process item, not the
   bottom contact section (moved there per explicit request, since having them in both places felt
   redundant).
-- All internal anchor links (e.g. `index.html#work-with-me`) account for the fixed nav bar via
+- All internal anchor links (e.g. `index.html#community`) account for the fixed nav bar via
   `scroll-padding-top: 90px` on `html` in every page. Without it, the fixed ~77px nav sat directly
   on top of the scrolled-to section and made it look like the link had gone nowhere.
+- **"Work With Me" is a nav dropdown, not a link.** It previously pointed at `#work-with-me`, which
+  scrolled to the two-card section on the homepage; that was explicitly rejected as the wrong
+  destination. It now works like this, consistently on all four pages:
+  - **Desktop** (`.nav-dropdown`): the label is a `<button>`, deliberately **not** a link, with
+    `cursor: default`. It only opens the menu; clicking the words does nothing. The menu opens on
+    `:hover` **and** `:focus-within`, so it is reachable by keyboard. A `::before` pseudo-element on
+    the menu bridges the `0.9rem` gap below the label, otherwise the menu closes as the pointer
+    travels down to it. `.nav-dropdown-menu a::after { display: none }` suppresses the inherited
+    `.nav-links a` underline sweep on the menu items.
+  - **Mobile drawer**: there is no hover, so both destinations are always listed, indented
+    (`.nav-drawer-sub`) under a plain non-clickable `.nav-drawer-label`. Do not convert this into a
+    tap-to-expand accordion; always-visible was the chosen behaviour.
+  - **Footer "Explore" column**: split into two flat links, "Psychotherapy sessions" and
+    "Supervision sessions" (footers list flat links rather than dropdowns). The heart icon is used
+    for Psychotherapy and the people icon for Supervision, matching the homepage self-select cards.
+  - Both sub-items go straight to `psychotherapy.html` and `supervision.html`. Nothing in the nav
+    or footer scrolls to the homepage `#work-with-me` section any more.
 - Both Psychotherapy and Supervision FAQs were rewritten in a warmer, more caring tone (2026-08-08,
   approved by the user before implementing). Style note the user gave afterward: avoid contractions
   like "I'll"/"we'll"/"you'll", spell them out as "I will"/"we will"/"you will" throughout FAQ copy

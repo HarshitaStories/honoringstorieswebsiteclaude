@@ -236,6 +236,93 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-drawer a:last-child { border-bottom: none; }
+  /* Drawer has no hover, so the two Work With Me pages are always listed,
+     indented under a plain (non-clickable) label. */
+  .nav-drawer-label {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 1.05rem;
+    font-family: var(--font-display);
+    color: var(--charcoal);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-drawer a.nav-drawer-sub {
+    padding-left: 1.1rem;
+    font-size: 0.98rem;
+    color: var(--charcoal-soft);
+  }
+
+  /* ========== NAV DROPDOWN (Work With Me) ========== */
+  /* The label itself is not a link: it only opens the menu. Opening on
+     :focus-within as well as :hover keeps it reachable by keyboard. */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: default;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--charcoal-soft);
+    transition: color 0.3s var(--ease-gentle);
+  }
+  .nav-dropdown-toggle svg {
+    width: 9px; height: 9px;
+    transition: transform 0.4s var(--ease-gentle);
+  }
+  .nav-dropdown:hover .nav-dropdown-toggle,
+  .nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--rose); }
+  .nav-dropdown:hover .nav-dropdown-toggle svg,
+  .nav-dropdown:focus-within .nav-dropdown-toggle svg { transform: rotate(180deg); }
+  .nav-dropdown-menu {
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translate(-50%, 6px);
+    margin-top: 0.9rem;
+    min-width: 232px;
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px -22px rgba(91, 46, 107, 0.35);
+    padding: 0.45rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease-gentle), transform 0.35s var(--ease-gentle), visibility 0.35s;
+  }
+  /* Bridges the gap between label and menu so the menu does not close while
+     the pointer travels down to it. */
+  .nav-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: -0.9rem;
+    height: 0.9rem;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 0.6rem 0.85rem;
+    border-radius: 9px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--charcoal-soft);
+    transition: background 0.3s var(--ease-gentle), color 0.3s var(--ease-gentle);
+  }
+  .nav-dropdown-menu a::after { display: none; }
+  .nav-dropdown-menu a:hover {
+    background: rgba(217, 106, 156, 0.1);
+    color: var(--deep-purple);
+  }
 
   /* ========== SECTION RAIL (blueprint nav) ========== */
   .section-rail {
@@ -1137,7 +1224,16 @@
     </a>
     <div class="nav-links">
       <a href="about.html">About</a>
-      <a href="#work-with-me">Work With Me</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-haspopup="true">
+          Work With Me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="psychotherapy.html">Psychotherapy sessions</a>
+          <a href="supervision.html">Supervision sessions</a>
+        </div>
+      </div>
       <a href="#community">Community</a>
       <a href="#contact" class="nav-cta">Book a Consultation Call</a>
     </div>
@@ -1147,7 +1243,9 @@
   </div>
   <div class="nav-drawer">
     <a href="about.html" onclick="document.getElementById('nav').classList.remove('open')">About</a>
-    <a href="#work-with-me" onclick="document.getElementById('nav').classList.remove('open')">Work With Me</a>
+    <span class="nav-drawer-label">Work With Me</span>
+    <a href="psychotherapy.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Psychotherapy sessions</a>
+    <a href="supervision.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Supervision sessions</a>
     <a href="#community" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
     <a href="#contact" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation Call</a>
   </div>
@@ -1499,7 +1597,8 @@
         <h5>Explore</h5>
         <ul>
           <li><a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>About</a></li>
-          <li><a href="#work-with-me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Work With Me</a></li>
+          <li><a href="psychotherapy.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>Psychotherapy sessions</a></li>
+          <li><a href="supervision.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Supervision sessions</a></li>
           <li><a href="#community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>Community</a></li>
         </ul>
       </div>
