@@ -298,22 +298,6 @@ numbers on a rule.
 - **Embrace**: meeting every part of you, the tender, the tired, the uncertain, with warmth and respect.
 - **Empower**: helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.
 
-**Wave divider** (`.wave-divider`, home page only so far): replaces the flat `1px solid var(--line)`
-hairline that used to mark the Hero→Values and Values→Concerns background-colour seams (cream to
-cream-warm and back). The user found that hairline "very subtly visible" and asked for it to become
-"moving curvy lines that animate the feeling of calm waves... bump and valley very shallow but
-evident... going from bumpy to straight which signifies chaos to calmness". Implementation: an
-inline SVG `<path>` per seam, animated via SMIL `<animate attributeName="d">` between a bumpy `d`
-and a shallow, near-flat `d` that share identical x-anchors (so the interpolation stays smooth,
-no ballooning), `16s`, eased in/out, holding briefly on the calm frame before drifting back to
-bumpy and repeating. The second divider is offset with `begin="-6s"` so the two don't pulse in
-lockstep. SMIL animation is **not** covered by the site's existing
-`* { animation-duration: 0.01ms !important }` reduced-motion rule (that only touches CSS
-Animations), so a small script explicitly strips the `<animate>` elements under
-`prefers-reduced-motion: reduce`, leaving the path frozen on its default (calm) `d`. This same
-treatment could be extended to the equivalent seams on the inner pages (`.who-for` borders on
-Psychotherapy/Supervision/About) if asked; it has not been done there yet.
-
 The three `.value-icon` circles have a slow ambient glow pulse (`iconGlow` keyframes, box-shadow
 0 to `0 0 26px 8px rgba(217,106,156,0.3)` and back, 7s ease-in-out infinite, each card offset by a
 negative `animation-delay` so they don't glow in unison), requested explicitly ("glow in glow out
