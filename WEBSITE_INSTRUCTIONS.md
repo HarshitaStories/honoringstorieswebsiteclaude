@@ -138,11 +138,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       cornered safe area... similar to the psychotherapy session hero banner image", so it now
       matches `.hero-art` from the inner pages: `.hero-photo-frame` itself has `border-radius: 20px`,
       `overflow: hidden`, and the same `box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3)`. The
-      radial-gradient glow moved from the separate `::before` onto the frame's own `background`
-      (`radial-gradient(circle at 50% 32%, #fff 0%, rgba(255,255,255,0.55) 42%, var(--rose-soft)
-      100%)`), now clipped to those rounded corners instead of bleeding past the frame's edges. Do
-      not reintroduce the old free-floating/no-frame version; the rounded rectangle is the current
-      direction, matching the inner-page hero images.
+      frame's background is **plain white** (`#ffffff`). A radial-gradient version of that backdrop
+      (white centre fading out to `--rose-soft`) was tried and explicitly rejected in favour of flat
+      white, so do not reintroduce a gradient or tint here. Do not reintroduce the old
+      free-floating/no-frame version either; the white rounded rectangle is the current direction,
+      matching the inner-page hero images.
     - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
       cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
       not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
@@ -159,12 +159,14 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     self-select cards further down the page; it was folded up here instead, "beside the photo
     placeholder... above the number stats" per explicit request, so the About pathway reads as part
     of the intro rather than a fourth destination competing with Psychotherapy/Supervision.
-    `.approach-link` is deliberately **not** a bordered/boxed card and has **no icon/avatar** (both
-    were tried and explicitly rejected as not feeling "seamless" with the paragraph above it); it's
-    just a `border-top` hairline, an italic serif title, and a description, reading as a natural
-    continuation of the paragraph rather than a separate floating component. The paragraph's font
-    size (`0.98rem`) was also matched to `.value-card p` on request, "make this font similar to"
-    the Express/Embrace/Empower body text.
+    `.approach-link` has been stripped down over three passes, each time toward "seamless": it
+    started as a bordered card with an avatar icon and a description, then lost the box and icon but
+    kept a `border-top` rule and the description, and is **now just the italic serif words "More
+    about my approach" plus a small arrow**, with no rule, no box, no icon, and no supporting
+    copy. Do not reintroduce any of those; the whole point is that it reads as the last line of the
+    paragraph above it, not a separate component. The paragraph's font size (`0.98rem`) was also
+    matched to `.value-card p` on request, "make this font similar to" the Express/Embrace/Empower
+    body text.
     Below the two-column row sits the full-width animated **stat counter row** (see Practice stats
     in section 5), separated by a petal divider. The stats were originally squeezed into the
     half-width text column and got visually clipped by the fixed section-rail tooltip on narrower
@@ -280,18 +282,17 @@ scrolled into view, replacing the earlier trust-line paragraph:
 - 2,000+, Sessions completed
 
 Style convention: keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
-Went through three passes: (1) heavy bold sans-serif numbers above a flat full-width rule, rejected
-as "very corporate for a safe psychotherapist's website"; (2) upright-but-still-bare serif numbers
-on the same flat layout, rejected again ("I don't like the stats UI... improve the design to suit
-the page's theme"); (3) **current**: each stat is its own `.stat-card`, the same soft-card language
-used for logistics/concern/price cards elsewhere (cream-warm fill, hairline border, 18px radius,
-gentle hover lift), in a 3-column grid (`max-width: 720px`), each with a small gradient icon circle
-(clock, people, checkmark) above the number, matching `.logistic-card`'s icon treatment. The
-numbers themselves stay upright serif (not italic; that read as "too cursive and decorative" in an
-earlier pass). The count-up animation eases in and out with a gentle smoothstep (`p*p*(3-2p)`,
-2000ms) rather than a sharp ease-out cubic, so the numbers settle calmly instead of racing up and
-snapping to a stop. If revisited again, stay with the card-based, on-theme direction, not bare
-numbers on a rule.
+Went through four passes: (1) heavy bold sans-serif numbers above a flat full-width rule, rejected
+as "very corporate for a safe psychotherapist's website"; (2) upright serif numbers on the same
+flat layout, rejected as well ("I don't like the stats UI... improve the design to suit the page's
+theme"); (3) boxed `.stat-card`s with borders, hover lift, and gradient icon circles, also rejected
+("remove the icons and boxes, make it seamless"); (4) **current**: frameless. `.stat-card` keeps
+only `text-align: center` in a 3-column grid (`max-width: 720px`); no background, border, radius,
+padding, hover lift, or icons. The numbers sit directly on the section background so the row reads
+as one calm band. Numbers are upright serif (not italic; that read as "too cursive and decorative"
+in an earlier pass). The count-up eases in and out with a gentle smoothstep (`p*p*(3-2p)`) over
+**3200ms**, progressively slowed from 1600 to 2000 to 3200 across passes as the user kept asking
+for calmer motion. If revisited, keep going simpler and slower, not back toward cards or icons.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
