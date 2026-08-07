@@ -444,9 +444,24 @@
     position: relative;
     perspective: 1000px;
   }
+  /* Soft warm halo bleeding into the cream, so the frame reads as sitting in
+     the page rather than pasted on top of it. Replaces a hard drop shadow,
+     which the mask below would have clipped. */
+  .hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: 6% -7% 0;
+    border-radius: 32px;
+    background: radial-gradient(ellipse at 50% 42%, rgba(178, 149, 196, 0.3) 0%, rgba(217, 106, 156, 0.14) 45%, rgba(217, 106, 156, 0) 72%);
+    filter: blur(26px);
+    z-index: -1;
+    pointer-events: none;
+  }
   /* A rounded rectangular "safe area", matching the Psychotherapy/Supervision
      hero-art treatment. The photo is a transparent cut-out, so the frame's own
-     plain white background stands in for a backdrop. */
+     plain white background stands in for a backdrop. The lower edge is masked
+     to transparent so she emerges out of the frame instead of being sliced by
+     a hard horizontal crop across her torso. */
   .hero-photo-frame {
     position: relative;
     max-width: 440px;
@@ -454,7 +469,12 @@
     border-radius: 20px;
     overflow: hidden;
     background: #ffffff;
-    box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, rgba(0, 0, 0, 0.6) 82%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 62%, rgba(0, 0, 0, 0.6) 82%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
     transform-style: preserve-3d;
     transition: transform 0.4s var(--ease-gentle);
     will-change: transform;
@@ -462,6 +482,12 @@
   .hero-photo-frame img {
     width: 100%;
     display: block;
+    /* The subject sits right-of-centre in the source photo (17.5% empty margin
+       on the left, 0.5% on the right), which left her visibly shoved to one
+       side of the frame. Nudge left so the margins either side of her are even.
+       The strip this exposes on the right is the frame's own white, so nothing
+       shows through. */
+    transform: translateX(-8.5%);
   }
   @keyframes fadeIn {
     from { opacity: 0; }

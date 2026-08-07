@@ -136,13 +136,25 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       silhouette, plus a separate glowing white radial gradient behind her via `.hero-photo::before`
       (`inset: -10%`, `z-index: -1`). The user then asked for it to sit in "a rectangular rounded
       cornered safe area... similar to the psychotherapy session hero banner image", so it now
-      matches `.hero-art` from the inner pages: `.hero-photo-frame` itself has `border-radius: 20px`,
-      `overflow: hidden`, and the same `box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3)`. The
-      frame's background is **plain white** (`#ffffff`). A radial-gradient version of that backdrop
-      (white centre fading out to `--rose-soft`) was tried and explicitly rejected in favour of flat
-      white, so do not reintroduce a gradient or tint here. Do not reintroduce the old
-      free-floating/no-frame version either; the white rounded rectangle is the current direction,
-      matching the inner-page hero images.
+      matches `.hero-art` from the inner pages: `.hero-photo-frame` has `border-radius: 20px` and
+      `overflow: hidden`. The frame's background is **plain white** (`#ffffff`). A radial-gradient
+      version of that backdrop (white centre fading out to `--rose-soft`) was tried and explicitly
+      rejected in favour of flat white, so do not reintroduce a gradient or tint here. Do not
+      reintroduce the old free-floating/no-frame version either; the white rounded rectangle is the
+      current direction, matching the inner-page hero images.
+    - That white card then read as "abruptly placed", fixed three ways, all of which should stay:
+      1. **Bottom edge is masked to transparent** (`mask-image: linear-gradient(180deg, #000 0%,
+         #000 62%, rgba(0,0,0,0.6) 82%, transparent 100%)`, `mask-repeat: no-repeat`). She emerges
+         out of the frame instead of being sliced by a hard horizontal crop across her torso.
+         Include the `-webkit-` prefixed properties for Safari.
+      2. **The drop shadow was removed** and replaced by a soft blurred halo on `.hero-photo::before`
+         (`filter: blur(26px)`, purple-soft to rose fading to transparent), so the card sits in the
+         page rather than on top of it. A `box-shadow` cannot be used here: the mask would clip it.
+      3. **The photo is nudged left**, `transform: translateX(-8.5%)` on the `img`. The subject sits
+         right-of-centre in the source file (measured: 17.5% empty margin on the left, 0.5% on the
+         right), which left her visibly shoved to one side of the frame. The strip this exposes on
+         the right is the frame's own white, so nothing shows through. If the photo is ever
+         re-cut or replaced, re-measure the subject's bounding box and redo this offset.
     - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
       cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
       not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
