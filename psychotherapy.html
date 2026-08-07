@@ -22,7 +22,7 @@
   }
   @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; scroll-padding-top: 90px; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
   body { margin: 0; font-family: var(--font-body); font-weight: 400; font-size: 16px; line-height: 1.65; color: var(--charcoal); background: var(--cream); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
   img { max-width: 100%; height: auto; display: block; }
@@ -166,9 +166,6 @@
   .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-style: italic; font-weight: 400; color: var(--deep-purple); }
   .contact p { max-width: 540px; margin: 1rem auto 2rem; color: var(--charcoal-soft); }
   .contact-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-  .contact-direct { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; justify-content: center; margin-top: 1.5rem; font-size: 0.92rem; }
-  .contact-direct a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--deep-purple); font-weight: 500; }
-  .contact-direct a svg { width: 15px; height: 15px; opacity: 0.85; }
 
   /* ========== FOOTER ========== */
   footer { background: var(--charcoal); color: var(--cream-warm); padding: var(--space-lg) 0 var(--space-md); }
@@ -380,7 +377,7 @@
     <div class="process-grid">
       <div class="process-item reveal delay-1" data-step="1">
         <div class="process-title">Reach out</div>
-        <div class="process-desc">Send a message by email or WhatsApp to get started.</div>
+        <div class="process-desc">Send a message by <a href="mailto:feelseen@honoringstories.com">email</a> or <a href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a> to get started.</div>
       </div>
       <div class="process-item reveal delay-1" data-step="2">
         <div class="process-title">Share a few basic details</div>
@@ -419,35 +416,35 @@
     <div class="faq-list reveal delay-1">
       <details class="faq-item">
         <summary>How do I start my therapy journey?</summary>
-        <p>Reach out by email or WhatsApp, share a few basic details, and we'll set up a free 20-minute exploratory call to see if this feels like the right fit before booking a full session.</p>
+        <p>Just reach out by email or WhatsApp whenever you are ready, there is no need to have it all figured out first. Share a few basic details, and we will set up a free 20-minute call to gently explore whether this feels like the right fit.</p>
       </details>
       <details class="faq-item">
         <summary>What do I need to prepare before a session?</summary>
-        <p>Nothing in particular. Just join on time, in a quiet, private space, with good internet and a steady device. Keeping water, a notebook, and a pen nearby is optional but can help.</p>
+        <p>Nothing, really. Just come as you are. Find a quiet, private space with good internet, and settle in a few minutes early if you can. Some people like having water, a notebook, or a pen nearby, but that is entirely optional.</p>
       </details>
       <details class="faq-item">
         <summary>Is what I share confidential?</summary>
-        <p>Yes, our sessions are private. The one exception is if there's a risk of harm to yourself or someone else, and that boundary is always discussed upfront so there are no surprises.</p>
+        <p>Yes, always. This is your space, and what you share stays between us. The one exception is if there is a risk of harm to you or someone else, and I will always talk that boundary through with you upfront, so nothing feels sprung on you.</p>
       </details>
       <details class="faq-item">
         <summary>What if I don't know what to talk about?</summary>
-        <p>That's completely fine. We can start anywhere, and often the space to simply think out loud is where the useful things surface.</p>
+        <p>That is completely okay, and more common than you would think. We can start anywhere, even with "I don't know where to start." Often that is exactly where something important begins to surface.</p>
       </details>
       <details class="faq-item">
         <summary>How often will we meet?</summary>
-        <p>Usually weekly to start, and we revisit that frequency together as we go, based on what feels right for you.</p>
+        <p>Usually weekly to begin with, so we can build some momentum together. We will revisit that rhythm as we go, based on what feels supportive for you.</p>
       </details>
       <details class="faq-item">
         <summary>Is it normal to feel worse before feeling better?</summary>
-        <p>Yes, this can happen as we work through difficult material. It's a normal part of the process, and I'll support you through it, checking in and adjusting based on your feedback.</p>
+        <p>It can happen, and if it does, it does not mean something is wrong. Working through difficult material can stir things up before it settles. I will be checking in with you along the way, and we will move at a pace that feels okay for you.</p>
       </details>
       <details class="faq-item">
         <summary>Can I stop therapy whenever I want?</summary>
-        <p>Yes, this is entirely client-led. When you feel ready to stop, we'll aim to end thoughtfully rather than abruptly.</p>
+        <p>Yes, this is always your decision to make. When you feel ready to step away, we will take the time to close things thoughtfully together, rather than cutting it short.</p>
       </details>
       <details class="faq-item">
         <summary>What's the cancellation policy?</summary>
-        <p>You can reschedule or cancel for free up to 3 hours before your session.</p>
+        <p>Life happens. You are welcome to reschedule or cancel at no cost up to 3 hours before your session.</p>
       </details>
     </div>
   </div>
@@ -465,10 +462,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Reach out</a>
-      </div>
-      <div class="contact-direct">
-        <a href="mailto:feelseen@honoringstories.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>feelseen@honoringstories.com</a>
-        <a href="https://wa.me/919152801719" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>+91 91528 01719</a>
       </div>
     </div>
   </div>

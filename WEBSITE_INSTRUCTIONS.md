@@ -178,14 +178,25 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   step-by-step process timeline including a consent-form step (real link supplied, see section 5),
   all 8 FAQs as native `<details>` accordions, a languages note, and a contact section.
 - **Work With Me, Supervision** (`supervision.html`, built): same pattern, using
-  `assets/supervision-hero.png`. Includes a two-track section (early-career / "3 to 6 years"), a
-  2-tier pricing block, a reserved "Coming soon: Group Supervision" card (no details yet, per
-  standing rule), the consent-form step with its real link, all 6 FAQs, a languages note, and a
-  contact section. A third "6+ years" track card is planned; see Open Items.
+  `assets/supervision-hero.png`. Includes a **three-track** section ("Wherever you are in your
+  practice", eyebrow "Three ways in"): 0-3 years/Early-career, 3-6 years/Mid-career, 6+ years/
+  Experienced (this third card and the "Mid-career" rename were added after the user approved the
+  proposed write-up). Pricing is Rs 1,800/session online, Rs 2,500 per 60-min in-person session
+  (corrected from an earlier equal Rs 1,800 for both); a reserved "Coming soon: Group Supervision"
+  card; the consent-form step with its real link; all 6 FAQs; a languages note; a contact section.
 - On both Psychotherapy and Supervision pages: the consent-form link in the process step is
-  styled as a small rose pill (`.consent-link` class) so it's more visible without being loud, and
-  the contact section has a `.contact-direct` row with a plainly visible, clickable email and
-  WhatsApp link beneath the CTA buttons.
+  styled as a small rose pill (`.consent-link` class) so it's more visible without being loud. The
+  clickable email and WhatsApp links live in the "Reach out" (step 1) process item, not the
+  bottom contact section (moved there per explicit request, since having them in both places felt
+  redundant).
+- All internal anchor links (e.g. `index.html#work-with-me`) account for the fixed nav bar via
+  `scroll-padding-top: 90px` on `html` in every page. Without it, the fixed ~77px nav sat directly
+  on top of the scrolled-to section and made it look like the link had gone nowhere.
+- Both Psychotherapy and Supervision FAQs were rewritten in a warmer, more caring tone (2026-08-08,
+  approved by the user before implementing). Style note the user gave afterward: avoid contractions
+  like "I'll"/"we'll"/"you'll", spell them out as "I will"/"we will"/"you will" throughout FAQ copy
+  (and the word "cadence" was flagged as not simple enough, replaced with "schedule" in the
+  supervision "how often will we meet" answer).
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
 - **Community, Shared Ways of Coping** (not yet built): anonymous Google Form embed,
   admin-moderated before publishing.
@@ -363,12 +374,6 @@ absence.
 
 ## 7. Open items / not yet built
 
-- Third supervision track card, "6+ years", on the "Wherever you are in your practice" section.
-  Middle card was renamed from "3+ years" to "3 to 6 years" already; the third card's write-up
-  (drafted from "A space to further understand yourself as a professional and changes in the
-  professional self") is proposed but awaiting the user's approval before being added.
-- Therapy FAQs (8) and Supervision FAQs (6): warmer, more caring rewrite requested. Revised copy
-  must be shown to the user and approved before being written into the pages.
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)

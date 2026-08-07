@@ -22,7 +22,7 @@
   }
   @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; scroll-padding-top: 90px; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
   body { margin: 0; font-family: var(--font-body); font-weight: 400; font-size: 16px; line-height: 1.65; color: var(--charcoal); background: var(--cream); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
   img { max-width: 100%; height: auto; display: block; }
@@ -109,8 +109,9 @@
 
   /* ========== TRACKS ========== */
   .who-for { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .track-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+  .track-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 1080px; margin: 0 auto; }
   @media (min-width: 700px) { .track-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .track-grid { grid-template-columns: repeat(3, 1fr); } }
   .track-card { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; transition: all 0.5s var(--ease-gentle); }
   .track-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
   .track-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.5rem; }
@@ -168,9 +169,6 @@
   .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-style: italic; font-weight: 400; color: var(--deep-purple); }
   .contact p { max-width: 540px; margin: 1rem auto 2rem; color: var(--charcoal-soft); }
   .contact-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-  .contact-direct { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; justify-content: center; margin-top: 1.5rem; font-size: 0.92rem; }
-  .contact-direct a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--deep-purple); font-weight: 500; }
-  .contact-direct a svg { width: 15px; height: 15px; opacity: 0.85; }
 
   /* ========== FOOTER ========== */
   footer { background: var(--charcoal); color: var(--cream-warm); padding: var(--space-lg) 0 var(--space-md); }
@@ -262,7 +260,7 @@
 <section class="who-for" id="who">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Two ways in</div>
+      <div class="eyebrow">Three ways in</div>
       <h2>Wherever you are in your practice</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
@@ -276,8 +274,13 @@
       </div>
       <div class="track-card reveal delay-2">
         <div class="track-label">3 to 6 years</div>
-        <h4>Experienced</h4>
+        <h4>Mid-career</h4>
         <p>A space to pause and reflect on how you are doing as a person and a practitioner. Navigate complex cases, burnout, and stuckness, and reconnect with your intentions to deepen your work.</p>
+      </div>
+      <div class="track-card reveal delay-3">
+        <div class="track-label">6+ years</div>
+        <h4>Experienced</h4>
+        <p>A space to further understand yourself as a professional, and explore how you continue to grow and change as you deepen into your work.</p>
       </div>
     </div>
   </div>
@@ -361,7 +364,7 @@
     <div class="process-grid">
       <div class="process-item reveal delay-1" data-step="1">
         <div class="process-title">Reach out</div>
-        <div class="process-desc">Send a message by email or WhatsApp to get started.</div>
+        <div class="process-desc">Send a message by <a href="mailto:feelseen@honoringstories.com">email</a> or <a href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a> to get started.</div>
       </div>
       <div class="process-item reveal delay-1" data-step="2">
         <div class="process-title">Share a few basic details</div>
@@ -400,27 +403,27 @@
     <div class="faq-list reveal delay-1">
       <details class="faq-item">
         <summary>How do I start my supervision journey?</summary>
-        <p>Reach out by email or WhatsApp, share a few basic details, and we'll set up a free 20-minute exploratory call to see if this feels like the right fit before booking a full session.</p>
+        <p>Reach out by email or WhatsApp whenever it feels right, and share a few basic details. We will set up a free 20-minute call first, so you can get a feel for whether this is a space that fits what you are looking for.</p>
       </details>
       <details class="faq-item">
         <summary>What should I prepare before a session?</summary>
-        <p>It helps to note down the topics you'd like to address. Join on time, in a quiet space, with good internet. Keeping water, a notebook, and a pen nearby is optional but can help. We'll review your goals together after the first session.</p>
+        <p>It helps to jot down what has been on your mind, a case, a feeling, a question you can't quite shake. Join on time, somewhere quiet, with steady internet. We will shape your goals together after that first session.</p>
       </details>
       <details class="faq-item">
         <summary>Is what I share confidential?</summary>
-        <p>Yes, the same confidentiality policy as therapy applies here: our sessions are private, with the one exception being risk of harm, which is always discussed upfront.</p>
+        <p>Yes. The same care around privacy that applies to therapy applies here too, our conversations stay between us, with the one exception of risk of harm, which we would always discuss openly first.</p>
       </details>
       <details class="faq-item">
         <summary>How often will we meet?</summary>
-        <p>Generally bimonthly or every two weeks, though this is adjustable based on what works for your practice and needs.</p>
+        <p>Generally every two weeks or so, though we will shape that schedule around what actually supports your practice and pace.</p>
       </details>
       <details class="faq-item">
         <summary>What topics can we cover?</summary>
-        <p>Client cases, ethical dilemmas, the logistics of building your practice, burnout, imposter syndrome, and anything else relevant to your work. If you're unsure whether something fits, just ask.</p>
+        <p>Whatever is alive for you as a practitioner, client cases, ethical grey areas, burnout, imposter syndrome, the everyday logistics of building your practice. If you are unsure whether something belongs here, bring it anyway.</p>
       </details>
       <details class="faq-item">
         <summary>What's the cancellation policy?</summary>
-        <p>You can reschedule or cancel for free up to 3 hours before your session.</p>
+        <p>You are welcome to reschedule or cancel at no cost up to 3 hours before your session.</p>
       </details>
     </div>
   </div>
@@ -438,10 +441,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Reach out</a>
-      </div>
-      <div class="contact-direct">
-        <a href="mailto:feelseen@honoringstories.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>feelseen@honoringstories.com</a>
-        <a href="https://wa.me/919152801719" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>+91 91528 01719</a>
       </div>
     </div>
   </div>
