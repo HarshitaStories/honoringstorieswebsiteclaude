@@ -170,14 +170,18 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   style (Private Practice, Xavier's College, Cultfit, iCall, CanKids, Budhrani Trust), and a small
   embedded "Contact me" section. Shares the homepage's design system (own copy of the CSS, not a
   shared stylesheet) but is a fully separate file; built without touching `index.html` per explicit
-  instruction. The homepage's "Curious about me" self-select link still points to `#` rather than
-  `about.html`; that update was intentionally left undone since editing the homepage wasn't in
-  scope; do it next time homepage changes are allowed.
-- **Work With Me, Psychotherapy** (not yet built): about, process/logistics including pricing,
-  exploratory-call link, FAQs, contact section.
-- **Work With Me, Supervision** (not yet built): about (two tracks: early-career 0 to 3 years,
-  experienced 3-plus years), process/logistics including pricing, exploratory-call link, FAQs,
-  contact section, plus a reserved space for group supervision once scoped.
+  instruction. All homepage nav "About" references (top nav, mobile drawer, hero button, footer,
+  and the glimpse-links "Curious about me" card) now point to `about.html`.
+- **Work With Me, Psychotherapy** (`psychotherapy.html`, built): hero using the staged
+  `assets/therapy-hero.jpg` artwork, a concerns recap, a pictorial logistics row (icon stat cards
+  for days, duration, format, location instead of plain text), a 3-tier pricing block, a
+  step-by-step process timeline including a consent-form step (real link supplied, see section 5),
+  all 8 FAQs as native `<details>` accordions, a languages note, and a contact section.
+- **Work With Me, Supervision** (`supervision.html`, built): same pattern, using
+  `assets/supervision-hero.png`. Includes a two-track section (early-career / experienced), a
+  2-tier pricing block, a reserved "Coming soon: Group Supervision" card (no details yet, per
+  standing rule), the consent-form step with its real link, all 6 FAQs, a languages note, and a
+  contact section.
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
 - **Community, Shared Ways of Coping** (not yet built): anonymous Google Form embed,
   admin-moderated before publishing.
@@ -198,7 +202,8 @@ supervisor** (corrected from an earlier 6+/3+ figure; always use 7+/4+). Works w
 (corrected from an earlier 20 to 65 range; always use 18+ going forward). Concerns include
 anxiety, relationship challenges, self-confidence/self-esteem, depression,
 trauma, sleep difficulties, emotional regulation, life transitions. Particular interest in
-anxiety and relational dynamics, identity, self-worth, belonging.
+anxiety and relational dynamics, identity, self-worth, belonging. **Sessions offered in English
+and Hindi** (shown as a small pill note on the About, Psychotherapy, and Supervision pages).
 
 ### Approach paragraph (used in the glimpse section, next to the photo placeholder)
 > "My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative
@@ -254,8 +259,12 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   - Rs 2,100, online sessions, India-based clients
   - Rs 2,500, online sessions, clients based outside India
   - Rs 3,000, in-person/offline sessions, Andheri West, Mumbai
-- Flow: reach out, basic details shared, free 20-min exploratory call, book via link/payment,
-  confirmed via UPI or bank transfer.
+- Flow: reach out, basic details shared, free 20-min exploratory call, **fill the consent form**,
+  book via link/payment, confirmed via UPI or bank transfer. The consent-form step was added after
+  the therapy consent form link was supplied (previously only supervision had this step); use the
+  same pattern for both going forward.
+- **Consent form (therapy):**
+  `https://docs.google.com/forms/d/e/1FAIpQLSfmgCVHweP1bHLzMb8dAdRFE3fAfggpMXOXX3KUnOakmR02qA/viewform?usp=sharing&ouid=110517816113101014359`
 - FAQs (8): how to start; what to prepare (nothing needed, join on time, quiet private space,
   good internet, steady device, optional water/notebook/pen); confidentiality (private, exception
   is risk of harm, discussed upfront); not knowing what to talk about (fine, can start anywhere);
@@ -270,6 +279,8 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
 - Two tracks: early-career (0 to 3 years) and experienced (3-plus years) practitioners.
 - Flow: reach out, basic details shared, free 20-min exploratory call, consent form, time/day
   scheduled, confirmed with a calendar invite after payment (UPI/bank transfer).
+- **Consent form (supervision):**
+  `https://docs.google.com/forms/d/e/1FAIpQLSdYik7Trg3YT__pQjntHeagLircLKxFBlJfZq-RfbGMm1bS6g/viewform?usp=sharing&ouid=110517816113101014359`
 - FAQs (6): how to start; preparation (note topics, goals reviewed after first session);
   confidentiality (same policy as therapy); meeting frequency (generally bimonthly/every 2 weeks,
   adjustable); allowed topics (client cases, ethical dilemmas, logistics, building practice,
@@ -344,17 +355,6 @@ absence.
 
 ## 7. Open items / not yet built
 
-- Update the homepage's "Curious about me" self-select link to point to `about.html` instead of
-  `#`, once homepage edits are back in scope.
-- Psychotherapy page (including the 3-tier pricing presentation). Hero artwork is already staged
-  at `assets/therapy-hero.jpg`: a 4-panel illustrated collage (forced-smile mirror surrounded by
-  pressure phrases, a cracked achievement trophy, a "that comment still hurts" note, a calendar
-  with a circled date), matching the site's hand-drawn illustration style. Use it when the page is
-  built.
-- Supervision page (pricing: Rs 1,800/session, online or offline), plus a reserved group
-  supervision section once details are supplied. Hero artwork is already staged at
-  `assets/supervision-hero.png`: an illustration of two figures shaking hands at a door shaped
-  like a head, with abstract "thought clutter" shapes inside. Use it when the page is built.
 - Peer Testimonials page (full 8 testimonials)
 - Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
   Stories (email/WhatsApp flow, professionals only)
