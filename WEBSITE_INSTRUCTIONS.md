@@ -136,6 +136,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       no `border-radius` and no rectangular `box-shadow`; a `drop-shadow()` filter is used instead
       so the shadow follows her silhouette. Do not reintroduce the old arch frame or the offset
       rose outline unless the photo goes back to being a rectangular image.
+    - `.hero-photo::before` adds a soft glowing white radial gradient behind the cut-out (`inset:
+      -10%`, `z-index: -1`), standing in for the backdrop the photo no longer has. Requested
+      explicitly ("radial gradient of white fade, like glowing radial"); keep it centred slightly
+      above the vertical middle (`50% 40%`) so the glow reads behind her face/shoulders, not her feet.
     - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
       cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
       not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
@@ -146,16 +150,24 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
     a section head ("A little more to help you decide" / "Grounded in experience, held with
     care"), then a two-column row of an image placeholder (reserved for a future photo) and a
-    short approach paragraph (see About Harshita / approach paragraph in section 5), followed by
-    a full-width animated **stat counter row** (see Practice stats in section 5) below that row,
-    separated by a hairline divider. The stats were originally squeezed into the half-width text
-    column and got visually clipped by the fixed section-rail tooltip on narrower viewports; moving
-    them to their own full-width row fixed that. The three self-select links ("For therapy
-    clients", "For practitioners and supervisees", "Curious about me") sit in their own plain
-    section right after testimonials, pointing to the dedicated pages below. This was a deliberate
-    restructure: the homepage should hook, present concerns, give one credibility beat, and then
-    let each audience choose where to go deeper, rather than making everyone scroll through
-    everything.
+    right-hand column (`.glimpse-trust`) holding the short approach paragraph (see About Harshita
+    / approach paragraph in section 5) followed immediately by a compact "More about my approach"
+    link card (`.approach-link`), both stacked in that column. This card used to be the third of
+    three self-select cards further down the page; it was folded up here instead, "beside the
+    photo placeholder... above the number stats" per explicit request, so the About pathway reads
+    as part of the intro rather than a fourth destination competing with Psychotherapy/Supervision.
+    Below the two-column row sits the full-width animated **stat counter row** (see Practice stats
+    in section 5), separated by a petal divider. The stats were originally squeezed into the
+    half-width text column and got visually clipped by the fixed section-rail tooltip on narrower
+    viewports; moving them to their own full-width row fixed that.
+  - The self-select links section (`#work-with-me`) now holds only **two** cards, "Psychotherapy
+    sessions" and "Supervision sessions" (the third, About, moved up into glimpse as described
+    above). It has its own section head, eyebrow "Ready when you are", title "Work With Me", same
+    pattern as every other section head on the page; previously this section had no heading of its
+    own. It sits in its own plain section right after testimonials, pointing to the dedicated pages
+    below. This was a deliberate restructure: the homepage should hook, present concerns, give one
+    credibility beat, and then let each audience choose where to go deeper, rather than making
+    everyone scroll through everything.
   - The testimonials carousel has its own section (`#testimonials`), separate from glimpse, with
     its own entry in the section rail nav. It was originally nested inside glimpse; the user
     explicitly asked for it to be its own section, then went through two layout iterations before
@@ -260,11 +272,13 @@ scrolled into view, replacing the earlier trust-line paragraph:
 
 Style convention: keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
 The original treatment (heavy bold sans-serif numbers above a flat full-width rule) was rejected
-as "very corporate for a safe psychotherapist's website". Current treatment, keep this feel: the
-numbers use the serif display font at weight 500, the "+" and the labels are italic display type,
-and the section is introduced by the same small rose petal divider used elsewhere on the page
-rather than a hard horizontal line. If these ever need revisiting, move further toward gentle and
-away from dashboard-style stat tiles, not back.
+as "very corporate for a safe psychotherapist's website". The next pass made the numbers serif but
+italic, which read as "too cursive and decorative"; current treatment drops the italic entirely so
+the "+" and labels are upright serif like the rest of the site's headings, not a display flourish.
+The count-up animation also moved from a sharp ease-out cubic to a gentle ease-in-out smoothstep
+(`p*p*(3-2p)`, 2000ms) so the numbers settle calmly instead of racing up and snapping to a stop.
+If these ever need revisiting, move further toward calm and upright, not back toward italic or
+decorative.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.

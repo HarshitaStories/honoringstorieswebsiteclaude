@@ -444,6 +444,16 @@
     position: relative;
     perspective: 1000px;
   }
+  /* Soft glowing radial behind the cut-out portrait, standing in for a
+     backdrop now that the photo itself has none. */
+  .hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: -10%;
+    background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 38%, rgba(255, 255, 255, 0) 68%);
+    z-index: -1;
+    pointer-events: none;
+  }
   .hero-photo-frame {
     position: relative;
     max-width: 440px;
@@ -639,7 +649,9 @@
   }
   .glimpse-trust {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.75rem;
   }
   .glimpse-trust p {
     font-family: var(--font-body);
@@ -649,6 +661,56 @@
     line-height: 1.7;
     margin: 0;
   }
+  .approach-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.1rem 1.25rem;
+    transition: all 0.5s var(--ease-gentle);
+  }
+  .approach-link:hover {
+    transform: translateY(-3px);
+    border-color: var(--rose-soft);
+    box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2);
+  }
+  .approach-link-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--deep-purple);
+  }
+  .approach-link-icon svg { width: 20px; height: 20px; }
+  .approach-link-body { flex: 1; min-width: 0; }
+  .approach-link-title {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.02rem;
+    color: var(--charcoal);
+    margin-bottom: 0.2rem;
+  }
+  .approach-link-desc {
+    display: block;
+    font-size: 0.86rem;
+    color: var(--charcoal-soft);
+    line-height: 1.55;
+  }
+  .approach-link-arrow {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    color: var(--rose);
+    transition: transform 0.4s var(--ease-gentle);
+  }
+  .approach-link:hover .approach-link-arrow { transform: translateX(3px); }
   .stats-divider {
     display: flex;
     align-items: center;
@@ -681,8 +743,7 @@
   }
   .stat-plus {
     font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     color: var(--rose);
     line-height: 1;
@@ -690,8 +751,7 @@
   .stat-label {
     margin-top: 0.5rem;
     font-family: var(--font-display);
-    font-style: italic;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--charcoal-soft);
     font-weight: 400;
   }
@@ -853,7 +913,7 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  @media (min-width: 768px) { .glimpse-links { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 700px) { .glimpse-links { grid-template-columns: repeat(2, 1fr); max-width: 780px; margin: 0 auto; } }
   .glimpse-link {
     display: flex;
     flex-direction: column;
@@ -1234,6 +1294,16 @@
       </div>
       <div class="glimpse-trust reveal delay-2">
         <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe that therapy is not a one-size-fits-all process and thoughtfully adapt my approach to each client's pace, needs, and lived experiences. Guided by a sensitivity to the ways in which personal experiences are shaped by relational, cultural, and social contexts, I strive to create a therapeutic space that is responsive to each individual's unique story.</p>
+        <a href="about.html" class="approach-link">
+          <div class="approach-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="approach-link-body">
+            <span class="approach-link-title">More about my approach</span>
+            <span class="approach-link-desc">My background, qualifications, and how I hold the space we'd be working in together.</span>
+          </div>
+          <svg class="approach-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
     <div class="stats-divider">
@@ -1370,6 +1440,13 @@
 <!-- ========== SELF-SELECT LINKS ========== -->
 <section class="glimpse" id="work-with-me">
   <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Ready when you are</div>
+      <h2>Work With Me</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
     <div class="glimpse-links">
       <a href="psychotherapy.html" class="glimpse-link reveal delay-1">
         <div class="glimpse-link-icon">
@@ -1391,17 +1468,6 @@
           <span class="glimpse-link-title">Supervision sessions</span>
           <span class="glimpse-link-desc">Thoughtful, collaborative supervision for practitioners looking to deepen their work.</span>
           <span class="glimpse-link-btn">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-      <a href="about.html" class="glimpse-link reveal delay-3">
-        <div class="glimpse-link-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="glimpse-link-body">
-          <span class="glimpse-link-label">Curious about me</span>
-          <span class="glimpse-link-title">More about my approach</span>
-          <span class="glimpse-link-desc">My background, qualifications, and how I hold the space we'd be working in together.</span>
-          <span class="glimpse-link-btn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
         </div>
       </a>
     </div>
@@ -1549,11 +1615,13 @@
         if (!e.isIntersecting) return;
         statNums.forEach(el => {
           const target = parseInt(el.dataset.target, 10);
-          const dur = 1600;
+          const dur = 2000;
           const start = performance.now();
+          // Gentle ease-in-out (smoothstep) rather than a sharp ease-out, so the
+          // count settles calmly instead of racing up and snapping to a stop.
           function tick(now) {
             const p = Math.min((now - start) / dur, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
+            const eased = p * p * (3 - 2 * p);
             el.textContent = Math.round(target * eased).toLocaleString('en-IN');
             if (p < 1) requestAnimationFrame(tick);
             else el.textContent = target.toLocaleString('en-IN');
