@@ -120,6 +120,28 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 
 - **Home** (`index.html`, built): hero, values, concerns, a consolidated "glimpse" section, a
   dedicated testimonials section, contact strip, footer.
+  - **Hero**, deliberately aligned to the Psychotherapy page hero (that page is the reference the
+    home page follows, per explicit instruction):
+    - Headline is "A space to feel seen, heard, and slowly *untangle* what feels heavy." The rose
+      italic `<em>` emphasis is on **untangle** (moved off "heard" on request).
+    - `h1` uses the same `clamp(2.4rem, 5.5vw, 3.6rem)` as `.page-hero h1`, so both render at an
+      identical size. Do not scale the home headline independently of the inner pages.
+    - `.hero-inner` matches `.page-hero-inner` (`1.05fr 0.95fr`, `gap: 4rem`, padding
+      `10rem 0 5rem`) with one intentional exception: it is `align-items: flex-start` rather than
+      `center`. The inner pages centre because illustration and text are near equal height; the
+      home portrait is much taller, and centring pushed the eyebrow far down the page. Top-aligning
+      puts "Express · Embrace · Empower" at the same level as "For individuals" (160px vs 166px).
+    - `assets/harshita-home.png` is a **transparent PNG cut-out**, so Harshita sits directly on the
+      warm hero background with no backdrop of her own. Because of that there is no frame,
+      no `border-radius` and no rectangular `box-shadow`; a `drop-shadow()` filter is used instead
+      so the shadow follows her silhouette. Do not reintroduce the old arch frame or the offset
+      rose outline unless the photo goes back to being a rectangular image.
+    - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
+      cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
+      not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
+      eye whites are white too, so a plain "remove all white" pass punches holes through them.
+      Any future re-cut must preserve that border-connected constraint.
+    - `assets/harshita-home 2.png` is the older grey-studio-backdrop photo, now unused.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
     a section head ("A little more to help you decide" / "Grounded in experience, held with
@@ -236,8 +258,13 @@ scrolled into view, replacing the earlier trust-line paragraph:
 - 400+, Clients served
 - 2,000+, Sessions completed
 
-Style convention: number huge and bold, label small and light, "+" used consistently on all
-three. Keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
+Style convention: keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
+The original treatment (heavy bold sans-serif numbers above a flat full-width rule) was rejected
+as "very corporate for a safe psychotherapist's website". Current treatment, keep this feel: the
+numbers use the serif display font at weight 500, the "+" and the labels are italic display type,
+and the section is introduced by the same small rose petal divider used elsewhere on the page
+rather than a hard horizontal line. If these ever need revisiting, move further toward gentle and
+away from dashboard-style stat tiles, not back.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.

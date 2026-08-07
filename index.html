@@ -298,7 +298,7 @@
     overflow: hidden;
   }
   @media (min-width: 768px) {
-    .hero { padding: 10rem 0 6rem; }
+    .hero { padding: 10rem 0 5rem; }
   }
 
   .hero-bg {
@@ -338,10 +338,15 @@
     gap: 3rem;
     align-items: center;
   }
+  /* Matches .page-hero-inner on the Psychotherapy/Supervision pages. Those
+     centre their columns because the illustration and the text are near equal
+     height; here the cut-out portrait is noticeably taller, so the columns are
+     top-aligned to keep the eyebrow level with "For individuals" over there. */
   @media (min-width: 900px) {
     .hero-inner {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: 4rem;
+      align-items: flex-start;
     }
   }
 
@@ -447,23 +452,12 @@
     transition: transform 0.4s var(--ease-gentle);
     will-change: transform;
   }
+  /* The photo is a transparent cut-out, so it sits directly on the hero
+     background with a soft shadow that follows her silhouette rather than a
+     rectangular frame. */
   .hero-photo-frame img {
     width: 100%;
-    border-radius: 50% 50% 18px 18px / 60% 60% 18px 18px;
-    box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.35);
-  }
-  .hero-photo-frame::before {
-    content: '';
-    position: absolute;
-    inset: 12px;
-    border: 1px solid var(--rose-soft);
-    border-radius: 50% 50% 18px 18px / 60% 60% 18px 18px;
-    transform: translate(14px, 14px);
-    z-index: -1;
-    transition: transform 0.8s var(--ease-gentle);
-  }
-  .hero-photo-frame:hover::before {
-    transform: translate(8px, 8px);
+    filter: drop-shadow(0 22px 34px rgba(91, 46, 107, 0.16));
   }
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -1115,7 +1109,7 @@
     <div class="hero-inner">
       <div class="hero-text">
         <div class="eyebrow">Express · Embrace · Empower</div>
-        <h1>A space to feel seen, <em>heard</em>, and slowly untangle what feels heavy.</h1>
+        <h1>A space to feel seen, heard, and slowly <em>untangle</em> what feels heavy.</h1>
         <p class="hero-note">Warm, trauma-informed, intersectional psychotherapy for adults navigating life's tender and complex moments.</p>
         <div class="hero-ctas">
           <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
