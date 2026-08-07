@@ -534,11 +534,29 @@
     opacity: 0.7;
   }
 
+  /* ========== WAVE DIVIDER ========== */
+  /* Replaces the flat hairline at background-colour seams with a slow,
+     breathing wave: bumpy/uneven settling into a calm, near-flat line and
+     back, a small chaos-to-calm gesture repeated at each transition. */
+  .wave-divider {
+    display: block;
+    width: 100%;
+    height: 22px;
+    line-height: 0;
+    overflow: hidden;
+  }
+  .wave-divider svg { width: 100%; height: 100%; display: block; }
+  .wave-divider path {
+    fill: none;
+    stroke: var(--rose-soft);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    opacity: 0.8;
+  }
+
   /* ========== VALUES ========== */
   .values {
     background: var(--cream-warm);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
   .values-grid {
     display: grid;
@@ -1214,6 +1232,17 @@
 
 <!-- ========== VALUES ========== -->
 <section class="values" id="values">
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+      <path d="M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20">
+        <animate class="wave-anim" attributeName="d" calcMode="spline" keyTimes="0;0.4;0.75;1" keySplines="0.42 0 0.58 1;0 0 0 0;0.42 0 0.58 1" dur="16s" repeatCount="indefinite"
+          values="M0,20 C100,4 200,34 300,18 C400,2 500,36 600,20 C700,6 800,32 900,16 C1000,0 1100,38 1200,20;
+                  M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20;
+                  M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20;
+                  M0,20 C100,4 200,34 300,18 C400,2 500,36 600,20 C700,6 800,32 900,16 C1000,0 1100,38 1200,20" />
+      </path>
+    </svg>
+  </div>
   <div class="wrap">
     <div class="section-head reveal wide">
       <div class="eyebrow">What I hold as essential</div>
@@ -1245,6 +1274,17 @@
         <p>Helping you reconnect with your own capacity, clarity, and agency, gently and collaboratively.</p>
       </div>
     </div>
+  </div>
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+      <path d="M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20">
+        <animate class="wave-anim" attributeName="d" calcMode="spline" keyTimes="0;0.4;0.75;1" keySplines="0.42 0 0.58 1;0 0 0 0;0.42 0 0.58 1" dur="16s" begin="-6s" repeatCount="indefinite"
+          values="M0,20 C100,4 200,34 300,18 C400,2 500,36 600,20 C700,6 800,32 900,16 C1000,0 1100,38 1200,20;
+                  M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20;
+                  M0,20 C100,17 200,23 300,20 C400,17 500,23 600,20 C700,17 800,23 900,20 C1000,17 1100,23 1200,20;
+                  M0,20 C100,4 200,34 300,18 C400,2 500,36 600,20 C700,6 800,32 900,16 C1000,0 1100,38 1200,20" />
+      </path>
+    </svg>
   </div>
 </section>
 
@@ -1561,6 +1601,13 @@
 </footer>
 
 <script>
+  // Wave dividers use SVG SMIL <animate>, which the global reduced-motion
+  // CSS rule (animation-duration override) does not reach, so freeze them
+  // manually on the calm/flat frame when the user prefers reduced motion.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.wave-divider animate').forEach(el => el.remove());
+  }
+
   // Nav scroll state
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
