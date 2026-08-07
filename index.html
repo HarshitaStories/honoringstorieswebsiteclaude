@@ -356,10 +356,10 @@
     animation: fadeUp 1.4s var(--ease-out) 0.3s forwards;
   }
   .hero h1 {
-    font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
     font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.015em;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     color: var(--deep-purple);
     margin-bottom: 1.5rem;
     opacity: 0;
@@ -655,40 +655,49 @@
     line-height: 1.7;
     margin: 0;
   }
+  .stats-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem auto 0;
+    max-width: 140px;
+  }
+  .stats-divider::before, .stats-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .stats-divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; flex-shrink: 0; }
   .stats-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2.5rem 4rem;
     width: 100%;
-    margin-top: 3rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--line);
+    margin-top: 1.75rem;
   }
   .stat-item { min-width: 110px; text-align: center; }
   .stat-num-wrap {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.15rem;
+    gap: 0.2rem;
   }
   .stat-num {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.6vw, 2.9rem);
     color: var(--deep-purple);
     line-height: 1;
-    letter-spacing: -0.02em;
   }
   .stat-plus {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     color: var(--rose);
     line-height: 1;
   }
   .stat-label {
     margin-top: 0.5rem;
-    font-size: 0.85rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
     color: var(--charcoal-soft);
     font-weight: 400;
   }
@@ -1232,6 +1241,9 @@
       <div class="glimpse-trust reveal delay-2">
         <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe that therapy is not a one-size-fits-all process and thoughtfully adapt my approach to each client's pace, needs, and lived experiences. Guided by a sensitivity to the ways in which personal experiences are shaped by relational, cultural, and social contexts, I strive to create a therapeutic space that is responsive to each individual's unique story.</p>
       </div>
+    </div>
+    <div class="stats-divider">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
     </div>
     <div class="stats-row" id="statsRow">
       <div class="stat-item">
