@@ -202,6 +202,17 @@
   .note-pill svg { width: 14px; height: 14px; color: var(--rose); flex-shrink: 0; }
   /* Quiet, non-alarming way to state who a space is not for. Deliberately not a loud warning banner. */
   .gentle-note { border-left: 2px solid var(--rose-soft); padding: 0.3rem 0 0.3rem 1rem; margin: 1.75rem 0 0; font-size: 0.9rem; color: var(--charcoal-soft); line-height: 1.65; }
+  /* Published notes. Quote only, deliberately no name, credentials or any other
+     attribution: the whole point of this space is that it stays anonymous. */
+  .notes-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; max-width: 980px; margin: 3rem auto 0; }
+  @media (min-width: 760px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+  .note-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 18px; padding: 1.75rem; transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
+  .note-card:hover { transform: translateY(-4px); border-color: var(--rose-soft); box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2); }
+  .note-mark { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--rose-soft); margin-bottom: 0.35rem; }
+  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.75; color: var(--charcoal-soft); margin: 0; }
+  .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
+  .notes-cta { text-align: center; margin-top: 2.5rem; }
+  .safety-note { max-width: 640px; margin: 1.25rem auto 0; text-align: center; font-size: 0.84rem; line-height: 1.7; color: var(--muted); }
   .reserved-block { max-width: 720px; margin: 2.5rem auto 0; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); padding: 2rem 1.75rem; text-align: center; }
   .reserved-block .tag { display: inline-block; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: var(--rose); margin-bottom: 0.5rem; }
   .reserved-block h4 { font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); margin-bottom: 0.5rem; }
@@ -313,10 +324,23 @@
         </div>
       </div>
     </div>
-    <div class="reserved-block reveal delay-3">
+    <!-- Notes render here. Cards are built in JS so approved entries can be
+         pulled from the responses sheet without editing this file. -->
+    <div class="notes-grid reveal delay-3" id="notesGrid"></div>
+    <p class="notes-notice" id="notesNotice" hidden></p>
+
+    <div class="notes-cta reveal delay-3" id="notesCta" hidden>
+      <a class="btn btn-primary" id="notesFormLink" href="#" target="_blank" rel="noopener">
+        Share what helped you
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <p class="safety-note">Sharing is anonymous and entirely optional, and everything is read before it goes up. Please note this space is not monitored, so it is not a way to reach me. If you need to talk to someone now, the helplines at the bottom of this page are there for you.</p>
+    </div>
+
+    <div class="reserved-block reveal delay-3" id="notesFormPending">
       <span class="tag">Coming soon</span>
       <h4>A place to share what helped</h4>
-      <p>The anonymous sharing form and the notes people have offered will live here. Everything shared is read before it is published, so this space stays gentle for whoever finds it next.</p>
+      <p>The anonymous sharing form will live here. Everything shared is read before it is published, so this space stays gentle for whoever finds it next.</p>
     </div>
   </div>
 </section>
@@ -505,6 +529,131 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ===================================================================
+     SHARED WAYS OF COPING: published notes
+     ===================================================================
+     Fill in these two values once the Google Form and Sheet exist. Until
+     then the page shows sample notes, clearly labelled as samples, so the
+     layout can be reviewed without pretending they are real submissions.
+
+     SHARED_NOTES_CSV
+       File > Share > Publish to web, in the responses spreadsheet.
+       Publish ONLY the "Approved" tab, as CSV.
+       Do NOT publish the raw responses tab: that would make every
+       unmoderated submission publicly readable and defeat the whole point
+       of moderating. The Approved tab should be a formula pulling just the
+       rows you have ticked, e.g.
+         =FILTER(Responses!B2:B, Responses!C2:C=TRUE)
+
+     SHARED_FORM_URL
+       The public "send" link of the Google Form. Make sure the form's
+       "Collect email addresses" setting is OFF, otherwise submissions are
+       not actually anonymous.
+     =================================================================== */
+  const SHARED_NOTES_CSV = '';
+  const SHARED_FORM_URL  = '';
+
+  // Shown only while SHARED_NOTES_CSV is empty, so the design can be judged.
+  // These are written examples, not real submissions, and the notice below
+  // says so on the page. They disappear the moment a real source is set.
+  const SAMPLE_NOTES = [
+    'Keeping a glass of water and a notebook by my bed. On the nights my thoughts race, writing one sentence down is often enough to stop it spiralling.',
+    'Going for a walk without my phone, even just ten minutes. Not to clear my head, only to be somewhere else for a while.',
+    'Telling one person the honest version of how my week went, instead of saying I am fine.'
+  ];
+
+  (function () {
+    const grid = document.getElementById('notesGrid');
+    const notice = document.getElementById('notesNotice');
+    const cta = document.getElementById('notesCta');
+    const formLink = document.getElementById('notesFormLink');
+    const pending = document.getElementById('notesFormPending');
+    if (!grid) return;
+
+    if (SHARED_FORM_URL) {
+      formLink.href = SHARED_FORM_URL;
+      cta.hidden = false;
+      pending.hidden = true;
+    }
+
+    function render(notes, isSample) {
+      grid.textContent = '';
+      notes.forEach(text => {
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        const mark = document.createElement('span');
+        mark.className = 'note-mark';
+        mark.textContent = '“';
+        const p = document.createElement('p');
+        // textContent, never innerHTML: this is text submitted through a
+        // public form, so treating it as markup would be an injection hole
+        // even with a human moderating.
+        p.textContent = text;
+        card.appendChild(mark);
+        card.appendChild(p);
+        grid.appendChild(card);
+      });
+      if (isSample) {
+        notice.textContent = 'These are example notes, shown while the anonymous sharing space is being set up. Real notes will replace them once it opens.';
+        notice.hidden = false;
+      } else {
+        notice.hidden = true;
+      }
+    }
+
+    // Minimal CSV reader: handles quoted fields containing commas, newlines
+    // and escaped double quotes, which free-text answers routinely include.
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = '', inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (inQuotes) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { field += '"'; i++; }
+            else inQuotes = false;
+          } else field += c;
+        } else if (c === '"') inQuotes = true;
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+        else if (c !== '\r') field += c;
+      }
+      if (field !== '' || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    if (!SHARED_NOTES_CSV) {
+      render(SAMPLE_NOTES, true);
+      return;
+    }
+
+    fetch(SHARED_NOTES_CSV, { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(text => {
+        const headerish = /^(timestamp|note|notes|response|what helped)/i;
+        // The Approved tab is a single column, so rejoin the fields rather
+        // than taking r[0]. If a note's commas ever arrive unquoted, taking
+        // the first field alone would silently truncate it mid-sentence,
+        // publishing half of what someone wrote with no visible error.
+        const notes = parseCSV(text)
+          .map(r => r.join(',').trim())
+          .filter(v => v && !headerish.test(v));
+        if (notes.length) render(notes, false);
+        else {
+          // Nothing approved yet. Say so plainly rather than showing an
+          // empty space or falling back to samples on the live site.
+          grid.textContent = '';
+          notice.textContent = 'No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.';
+          notice.hidden = false;
+        }
+      })
+      .catch(() => {
+        grid.textContent = '';
+        notice.textContent = 'The shared notes could not be loaded just now. Please try again a little later.';
+        notice.hidden = false;
+      });
+  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 

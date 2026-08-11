@@ -334,9 +334,37 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     slot would look unfinished.
   - **Shared Ways of Coping** (`#shared-ways`): intro copy beside a reserved
     `.visual-placeholder` (the source doc explicitly says "add relevant image"), three
-    `.note-pill`s (anonymous / optional / read before publishing), then a `.reserved-block`
-    standing in for the anonymous Google Form and the published notes. **The Google Form URL has
-    never been supplied**, so nothing is embedded yet, see Open Items.
+    `.note-pill`s (anonymous / optional / read before publishing), then the published notes and
+    the sharing call to action.
+  - **Published notes system** (chosen deliberately over the alternatives, see below). Notes are
+    rendered by JS from a **Google Sheet**, so new ones appear without editing this repo:
+    - Two constants at the top of the page script drive everything: `SHARED_NOTES_CSV` and
+      `SHARED_FORM_URL`. Both are currently **empty**, which is what makes the page show three
+      clearly-labelled sample notes plus a "Coming soon" block. Filling them in switches the page
+      to live data automatically; nothing else needs changing.
+    - **Publish only the "Approved" tab** of the responses sheet as CSV, never the raw responses
+      tab. Publishing the raw tab would make every unmoderated submission publicly readable and
+      defeat the point of moderating. The Approved tab should be a formula pulling only ticked
+      rows, e.g. `=FILTER(Responses!B2:B, Responses!C2:C=TRUE)`.
+    - The form's **"Collect email addresses" setting must be OFF**, otherwise the space is not
+      actually anonymous despite saying so.
+    - Note text is inserted with **`textContent`, never `innerHTML`**. This is text arriving from
+      a public form, so treating it as markup would be an injection hole even with a human
+      moderating. Do not "improve" this to innerHTML to allow formatting.
+    - The CSV reader rejoins fields (`r.join(',')`) rather than taking `r[0]`, because the
+      Approved tab is a single column. Taking the first field alone silently truncates a note
+      mid-sentence if its commas ever arrive unquoted, publishing half of what someone wrote with
+      no visible error. Verified against quoted commas, embedded newlines, escaped quotes,
+      unquoted commas, a header row, and an empty sheet.
+    - Cards are **quote only, with no name, credentials or years**, unlike the homepage
+      testimonial cards they are visually modelled on. The anonymity is the point.
+    - Empty and failed states both say something gentle rather than showing a blank area, and the
+      sample notes never appear once a real source is configured.
+    - Alternatives considered and why not: a custom backend (Supabase/Firebase) is ruled out by
+      the project's no-backend rule and is heavy for a page of short notes; a WordPress form
+      plugin is the natural long-term home but needs the migration first; Airtable adds another
+      vendor. Because the submissions live in Google Sheets, none of this is trapped: after the
+      WordPress move the same sheet can be read or imported.
   - **Sip and Swap Stories** (`#sip-and-swap`): three `.concern-card`s covering who it is for
     (2+ years experience), the format (40-minute one-to-one video call), and what gets talked
     about, then the intention paragraph, then the fit note. That note, that the space is **not**
@@ -538,10 +566,13 @@ absence.
 ## 7. Open items / not yet built
 
 - Peer Testimonials page (full 8 testimonials)
-- **Anonymous Google Form URL for Shared Ways of Coping.** `community.html` is built and live, but
-  the form itself has never been supplied, so that part of the page is a `.reserved-block`
-  placeholder. Once the URL arrives, embed or link it there and drop the placeholder. The moderated
-  notes people submit will also need somewhere to render in that section.
+- **Google Form and Sheet for Shared Ways of Coping.** The display and the fetch/moderation
+  plumbing are built and tested; only the two URLs are missing. To go live: create the anonymous
+  form (email collection OFF), link its responses sheet, add an "Approved" tab filtered to ticked
+  rows, publish **that tab only** as CSV, then set `SHARED_NOTES_CSV` and `SHARED_FORM_URL` in
+  `community.html`. The sample notes and the "Coming soon" block disappear on their own once both
+  are set. Until then the samples are labelled as samples on the page so nothing reads as a real
+  submission.
 - Artwork for the Community page: the hero (currently text-only by design) and the reserved
   `.visual-placeholder` in Shared Ways of Coping, which the source doc asks for.
 - Footer legal pages: Disclaimer, Privacy Policy, Terms and Conditions (currently placeholder
