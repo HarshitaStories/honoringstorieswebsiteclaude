@@ -65,6 +65,17 @@ Palette (CSS custom properties, already in `index.html`):
 Typography: `Cormorant Garamond` (display serif, headings) plus `Inter` (body). Loaded from
 Google Fonts.
 
+**The Google Fonts `<link>` must be byte-identical on every page.** The canonical URL is:
+
+    https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap
+
+`supervision.html` once carried a corrupted variant of this (`0,500;0,500;0,600`, weight 400
+missing and 500 duplicated). Google Fonts rejects a malformed weight tuple with **HTTP 400 for the
+whole request**, so both Cormorant Garamond *and* Inter silently failed there and the page fell
+back to Georgia, making it visibly different from every other page. The failure is easy to miss
+because nothing errors visibly, the type just looks wrong. If a page's type ever looks off, fetch
+its font URL and check for a 400 before touching any CSS.
+
 **Color discipline (standing rule):** headings default to charcoal, not purple. Purple and rose
 are reserved for deliberate emotional beats only, such as the hero, a "right fit" style callout,
 and the final CTA. Do not drift back to coloring every heading purple; that was identified and
@@ -223,8 +234,17 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   hero-photo style) on the left, the write-up on the right, stacking on narrower screens. Bio copy
   is de-duplicated from the near-identical "About me page" and "Approach as a therapist" source
   docs (used the fuller version once), with the age range stated as "18+" (not the source docs'
-  "20 to 65"). Then: a 5-card values section (Eclectic, Trauma-informed, Queer-affirmative,
-  Intersectional, Neurodivergent inclusive), Qualifications (same vertical timeline component
+  "20 to 65"). Then: a 5-card values section in this **exact order, set deliberately**: Eclectic,
+  Trauma-informed, Intersectional, Queer-affirmative, Neurodivergent inclusive. At the 3-up
+  breakpoint (1000px+) the grid is declared as **six** columns with each card spanning two, and
+  cards 4 and 5 pinned to `grid-column: 2 / span 2` and `4 / span 2`. That shifts the second row by
+  exactly half a card so it sits centred beneath the three above, instead of sitting flush left with
+  a gap on the right. Six columns of width c with gap g make a two-column card 2c+g wide, and three
+  of those plus gaps total 6c+5g, so row-one widths are identical to a plain 3-column grid.
+  Verified: all five cards render 355px wide, and row two's centre matches row one's. The offset is
+  applied **only** at this breakpoint; below it the grid is 2-up then 1-up, where a half-card shift
+  would look broken. Reordering the cards will break the intended pairing, so move the markup and
+  the nth-child rules together. Then Qualifications (same vertical timeline component
   originally built for the homepage, all 6 entries), an Experience section in the same timeline
   style (Private Practice, Xavier's College, Cultfit, iCall, CanKids, Budhrani Trust), and a small
   embedded "Contact me" section. Shares the homepage's design system (own copy of the CSS, not a
