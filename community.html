@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About Harshita · Honoring Stories</title>
-<meta name="description" content="Get to know Harshita Sarda, psychotherapist and clinical supervisor: her approach, qualifications, and experience." />
+<title>Community · Honoring Stories</title>
+<meta name="description" content="Two gentle spaces at Honoring Stories: Shared Ways of Coping, anonymous notes on what helped, and Sip and Swap Stories, casual one-to-one conversations for mental health professionals." />
 <link rel="icon" type="image/png" href="assets/logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,72 +13,24 @@
 
 <style>
   :root {
-    --deep-purple: #5B2E6B;
-    --purple: #7A4D8F;
-    --purple-soft: #B295C4;
-    --rose: #D96A9C;
-    --rose-soft: #F2C5D5;
-    --cream: #F8F1E4;
-    --cream-warm: #FDFAF2;
-    --charcoal: #2B1E2F;
-    --charcoal-soft: #4A3C50;
-    --muted: #8A7E90;
-    --line: rgba(91, 46, 107, 0.14);
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-    --space-xs: 0.5rem;
-    --space-sm: 1rem;
-    --space-md: 2rem;
-    --space-lg: 4rem;
-    --space-xl: 6rem;
-    --space-2xl: 8rem;
-    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-    --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --deep-purple: #5B2E6B; --purple: #7A4D8F; --purple-soft: #B295C4;
+    --rose: #D96A9C; --rose-soft: #F2C5D5; --cream: #F8F1E4; --cream-warm: #FDFAF2;
+    --charcoal: #2B1E2F; --charcoal-soft: #4A3C50; --muted: #8A7E90; --line: rgba(91, 46, 107, 0.14);
+    --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 2rem; --space-lg: 4rem; --space-xl: 6rem; --space-2xl: 8rem;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-  }
-
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; scroll-padding-top: 90px; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
-  body {
-    margin: 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--charcoal);
-    background: var(--cream);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
+  body { margin: 0; font-family: var(--font-body); font-weight: 400; font-size: 16px; line-height: 1.65; color: var(--charcoal); background: var(--cream); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
   img { max-width: 100%; height: auto; display: block; }
   a { color: var(--deep-purple); text-decoration: none; transition: color 0.3s var(--ease-gentle); }
   a:hover { color: var(--rose); }
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin: 0;
-    color: var(--charcoal);
-  }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin: 0; color: var(--charcoal); }
   p { margin: 0 0 1em; }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
-
+  body::before { content: ''; position: fixed; inset: 0; z-index: 2000; pointer-events: none; opacity: 0.035; mix-blend-mode: multiply; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
   .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
   @media (min-width: 768px) { .wrap { padding: 0 2rem; } body { font-size: 17px; } }
   @media (min-width: 1024px) { .wrap { padding: 0 3rem; } }
@@ -86,20 +38,11 @@
   @media (min-width: 768px) { section { padding: var(--space-2xl) 0; } }
 
   /* ========== NAV ========== */
-  .nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1rem 1.25rem;
-    background: rgba(248, 241, 228, 0.85);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.5s var(--ease-gentle), padding 0.4s var(--ease-gentle);
-  }
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 1.25rem; background: rgba(248, 241, 228, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.5s var(--ease-gentle), padding 0.4s var(--ease-gentle); }
   .nav.scrolled { border-bottom-color: var(--line); padding: 0.75rem 1.25rem; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
   .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
   .nav-logo img { height: 36px; width: auto; }
-  .nav-logo span { font-family: var(--font-display); font-size: 1.15rem; color: var(--deep-purple); font-weight: 500; letter-spacing: 0.01em; }
-  @media (max-width: 767px) { .nav-logo span { display: none; } }
   .nav-links { display: none; gap: 2rem; align-items: center; }
   @media (min-width: 900px) { .nav-links { display: flex; } }
   .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--charcoal-soft); letter-spacing: 0.02em; position: relative; }
@@ -110,9 +53,7 @@
   .nav-toggle { display: block; background: none; border: none; width: 36px; height: 36px; cursor: pointer; padding: 0; position: relative; }
   @media (min-width: 900px) { .nav-toggle { display: none; } }
   .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--deep-purple); margin: 0 auto; transition: all 0.4s var(--ease-gentle); position: absolute; left: 50%; transform: translateX(-50%); }
-  .nav-toggle span:nth-child(1) { top: 12px; }
-  .nav-toggle span:nth-child(2) { top: 18px; }
-  .nav-toggle span:nth-child(3) { top: 24px; }
+  .nav-toggle span:nth-child(1) { top: 12px; } .nav-toggle span:nth-child(2) { top: 18px; } .nav-toggle span:nth-child(3) { top: 24px; }
   .nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: translateX(-50%) rotate(45deg); }
   .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: translateX(-50%) rotate(-45deg); }
@@ -145,40 +86,20 @@
   .section-rail.visible.idle { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
   .rail-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: rgba(91, 46, 107, 0.22); transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle); }
   .rail-dot:hover, .rail-dot.active { background: var(--rose); transform: scale(1.5); }
-  .rail-dot::before {
-    content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-    white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--deep-purple);
-    background: rgba(253, 250, 242, 0.8); backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.7); padding: 0.3rem 0.7rem; border-radius: 999px;
-    box-shadow: 0 8px 20px -6px rgba(91, 46, 107, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle);
-  }
+  .rail-dot::before { content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--deep-purple); background: rgba(253, 250, 242, 0.8); backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%); border: 1px solid rgba(255, 255, 255, 0.7); padding: 0.3rem 0.7rem; border-radius: 999px; box-shadow: 0 8px 20px -6px rgba(91, 46, 107, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6); opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle); }
   .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
 
-  .full-photo {
-    aspect-ratio: 3 / 4;
-    border: 1.5px dashed var(--purple-soft);
-    border-radius: 20px;
-    background: var(--cream-warm);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
-    color: var(--muted); text-align: center; padding: 2rem;
-    max-width: 320px; margin: 0 auto;
-  }
-  .full-photo svg { width: 48px; height: 48px; opacity: 0.6; }
-  .full-photo span { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; }
+  /* ========== HERO ========== */
+  .page-hero { position: relative; padding: 8rem 0 4rem; overflow: hidden; }
+  @media (min-width: 768px) { .page-hero { padding: 10rem 0 5rem; } }
+  .page-hero-inner { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 900px) { .page-hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; } }
+  .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1.25rem; }
+  .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 520px; line-height: 1.75; margin-bottom: 1.5rem; }
+  .hero-art { border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3); }
 
-  .bio-inner { display: grid; gap: 2.5rem; align-items: start; }
-  @media (min-width: 900px) { .bio-inner { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
-  .lang-note { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.88rem; color: var(--charcoal-soft); margin-top: 0.5rem; }
-  .lang-note svg { width: 16px; height: 16px; color: var(--rose); flex-shrink: 0; }
-
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem;
-    font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px;
-    border: 1px solid transparent; cursor: pointer;
-    transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out);
-    letter-spacing: 0.01em; will-change: transform;
-  }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
   .btn-primary:hover { background: var(--rose); color: var(--cream-warm); box-shadow: 0 12px 28px -14px rgba(217, 106, 156, 0.6); }
   .btn-secondary { background: transparent; color: var(--deep-purple); border-color: var(--deep-purple); }
@@ -188,67 +109,52 @@
 
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out); }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal.delay-1 { transition-delay: 0.15s; }
-  .reveal.delay-2 { transition-delay: 0.3s; }
-  .reveal.delay-3 { transition-delay: 0.45s; }
+  .reveal.delay-1 { transition-delay: 0.15s; } .reveal.delay-2 { transition-delay: 0.3s; } .reveal.delay-3 { transition-delay: 0.45s; }
 
   .section-head { text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); }
   .section-head .eyebrow { font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--rose); letter-spacing: 0.05em; margin-bottom: 0.75rem; display: inline-block; }
   .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1rem; }
   .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; }
-
   .divider { display: flex; align-items: center; justify-content: center; margin: 1.25rem auto 1.75rem; max-width: 140px; }
   .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
   .divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; }
 
-  /* ========== BIO ========== */
-  .bio-text {}
-  .bio-text p { color: var(--charcoal-soft); font-size: 1.05rem; line-height: 1.85; }
-  .bio-text p:last-child {
-    font-family: var(--font-display); font-style: italic; color: var(--deep-purple); font-size: 1.2rem; line-height: 1.6; margin-top: 1.5rem;
-  }
+  /* ========== LANGUAGES NOTE ========== */
+  .lang-note { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.88rem; color: var(--charcoal-soft); }
+  .lang-note svg { width: 16px; height: 16px; color: var(--rose); flex-shrink: 0; }
 
-  /* ========== VALUES (5-card grid, reusing concern-card language) ========== */
-  .about-values { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about-values-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  @media (min-width: 640px) { .about-values-grid { grid-template-columns: repeat(2, 1fr); } }
-  /* Three-up is really a six-column grid with each card spanning two, so the
-     two cards on the second row can be shifted by one column, half a card, and
-     sit centred beneath the three above instead of flush left. Six columns of
-     width c with gap g gives a two-column card 2c+g wide, and three of those
-     plus their gaps come to exactly 6c+5g, so the row-one widths are identical
-     to a plain three-column grid. Only applied at this breakpoint: below it the
-     grid drops to two columns and then one, where an offset would look broken. */
-  @media (min-width: 1000px) {
-    .about-values-grid { grid-template-columns: repeat(6, 1fr); }
-    .avalue-card { grid-column: span 2; }
-    .avalue-card:nth-child(4) { grid-column: 2 / span 2; }
-    .avalue-card:nth-child(5) { grid-column: 4 / span 2; }
-  }
-  .avalue-card {
-    background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem;
-    transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden;
-  }
-  @media (min-width: 640px) { .about-values-grid { background: none; } }
-  .avalue-card { background: var(--cream); }
-  .avalue-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose-soft), var(--rose)); transition: left 0.8s var(--ease-gentle); }
-  .avalue-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
-  .avalue-card:hover::before { left: 0; }
-  .avalue-icon { width: 36px; height: 36px; margin-bottom: 1rem; color: var(--rose); opacity: 0.85; }
-  .avalue-card h4 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--deep-purple); font-style: italic; }
-  .avalue-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+  /* ========== CONCERNS RECAP ========== */
+  .who-for { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .concerns-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
+  .concern-card { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden; }
+  .concern-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose-soft), var(--rose)); transition: left 0.8s var(--ease-gentle); }
+  .concern-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
+  .concern-card:hover::before { left: 0; }
+  .concern-icon { width: 32px; height: 32px; margin-bottom: 0.85rem; color: var(--rose); opacity: 0.85; }
+  .concern-card h4 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--charcoal); }
+  .concern-card p { color: var(--charcoal-soft); font-size: 0.92rem; line-height: 1.65; margin: 0; }
 
-  /* ========== TIMELINE (qualifications + experience, shared) ========== */
-  .timeline-grid { max-width: 720px; margin: 0 auto; position: relative; padding-left: 1.75rem; border-left: 1px solid var(--line); }
-  .timeline-item { position: relative; padding: 0 0 2.25rem; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-item::before {
-    content: ''; position: absolute; left: -1.98rem; top: 0.4rem; width: 9px; height: 9px; border-radius: 50%;
-    background: var(--cream); border: 1.5px solid var(--rose); transition: all 0.5s var(--ease-gentle);
-  }
-  .timeline-item:hover::before { background: var(--rose); transform: scale(1.3); }
-  .timeline-item .t-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.2rem; }
-  .timeline-item .t-sub { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+  /* ========== PROCESS ========== */
+  .process-grid { max-width: 640px; margin: 0 auto; position: relative; padding-left: 1.75rem; border-left: 1px solid var(--line); }
+  .process-item { position: relative; padding: 0 0 2rem; }
+  .process-item:last-child { padding-bottom: 0; }
+  .process-item::before { content: attr(data-step); position: absolute; left: -2.55rem; top: -0.1rem; width: 26px; height: 26px; border-radius: 50%; background: var(--cream-warm); border: 1.5px solid var(--rose); color: var(--deep-purple); font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; justify-content: center; font-family: var(--font-body); transition: all 0.5s var(--ease-gentle); }
+  .process-item:hover::before { background: var(--rose); color: var(--cream-warm); }
+  .process-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.2rem; }
+  .process-desc { font-size: 0.92rem; color: var(--charcoal-soft); line-height: 1.6; }
+  .consent-link { display: inline-flex; align-items: center; background: rgba(217, 106, 156, 0.12); color: var(--rose); font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px; transition: background 0.4s var(--ease-gentle); }
+  .consent-link:hover { background: rgba(217, 106, 156, 0.2); color: var(--rose); }
+
+  /* ========== FAQ ========== */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); padding: 0; }
+  .faq-item summary { cursor: pointer; padding: 1.25rem 0; font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; color: var(--charcoal); list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 1.4rem; color: var(--rose); flex-shrink: 0; transition: transform 0.4s var(--ease-gentle); }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; padding: 0 0 1.25rem; margin: 0; }
 
   /* ========== CONTACT ========== */
   .contact { background: var(--cream-warm); text-align: center; }
@@ -278,6 +184,29 @@
   .footer-helplines li { font-size: 0.8rem; color: rgba(253, 250, 242, 0.6); }
   .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
   .footer-helplines a:hover { color: var(--rose-soft); }
+  /* ========== COMMUNITY ========== */
+  .community-hero { text-align: center; max-width: 720px; margin: 0 auto; }
+  .community-hero h1 { margin-bottom: 1.25rem; }
+  .community-hero .page-hero-note { margin-left: auto; margin-right: auto; }
+  .split { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 900px) { .split { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
+  /* Standing pattern for a promised-but-unsupplied asset. The source copy for this section
+     explicitly asks for a relevant image, so the slot is reserved rather than designed around. */
+  .visual-placeholder { aspect-ratio: 4 / 3; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
+  .visual-placeholder svg { width: 32px; height: 32px; opacity: 0.6; }
+  .visual-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; }
+  .community-copy p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.75; }
+  .community-copy p:last-of-type { margin-bottom: 1.5rem; }
+  .note-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
+  .note-pill { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.45rem 0.9rem; font-size: 0.85rem; color: var(--charcoal-soft); }
+  .note-pill svg { width: 14px; height: 14px; color: var(--rose); flex-shrink: 0; }
+  /* Quiet, non-alarming way to state who a space is not for. Deliberately not a loud warning banner. */
+  .gentle-note { border-left: 2px solid var(--rose-soft); padding: 0.3rem 0 0.3rem 1rem; margin: 1.75rem 0 0; font-size: 0.9rem; color: var(--charcoal-soft); line-height: 1.65; }
+  .reserved-block { max-width: 720px; margin: 2.5rem auto 0; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); padding: 2rem 1.75rem; text-align: center; }
+  .reserved-block .tag { display: inline-block; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: var(--rose); margin-bottom: 0.5rem; }
+  .reserved-block h4 { font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); margin-bottom: 0.5rem; }
+  .reserved-block p { font-size: 0.92rem; color: var(--charcoal-soft); line-height: 1.7; margin: 0; }
+
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
      low-opacity halo that stays noticeable without pulling focus off the page.
@@ -332,176 +261,140 @@
 
 <!-- ========== SECTION RAIL ========== -->
 <nav class="section-rail" id="sectionRail" aria-label="Page sections">
-  <a href="#bio" class="rail-dot" data-label="Getting to know Harshita"></a>
-  <a href="#values" class="rail-dot" data-label="My values and lens"></a>
-  <a href="#qualifications" class="rail-dot" data-label="Qualifications"></a>
-  <a href="#experience" class="rail-dot" data-label="Experience"></a>
-  <a href="#contact" class="rail-dot" data-label="Let's connect"></a>
+  <a href="#shared-ways" class="rail-dot" data-label="Shared Ways of Coping"></a>
+  <a href="#sip-and-swap" class="rail-dot" data-label="Sip and Swap Stories"></a>
+  <a href="#how" class="rail-dot" data-label="How it works"></a>
+  <a href="#contact" class="rail-dot" data-label="Say hello"></a>
 </nav>
 
-<!-- ========== BIO ========== -->
-<section id="bio" style="padding-top:8rem;">
+<!-- ========== HERO ========== -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="community-hero reveal">
+      <span class="eyebrow">Community</span>
+      <h1>Spaces to share and connect</h1>
+      <p class="page-hero-note">Two gentle spaces that sit alongside the therapy and supervision work: one for anonymous notes on what has helped people through hard times, and one for gathering with fellow mental health professionals over a conversation.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ========== SHARED WAYS OF COPING ========== -->
+<section class="who-for" id="shared-ways">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">In her own words</div>
-      <h2>Getting to know Harshita</h2>
+      <div class="eyebrow">Anonymous and optional</div>
+      <h2>Shared Ways of Coping</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="bio-inner">
-      <div class="reveal">
-        <div class="full-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Photo to be added</span>
+    <div class="split">
+      <div class="visual-placeholder reveal delay-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Image to be added</span>
+      </div>
+      <div class="community-copy reveal delay-2">
+        <p>This is a gentle space where those who have walked through difficult times share what supported them, anonymously. These are small notes, reminders, or practices that brought a little ease, comfort, or grounding.</p>
+        <p>The intention in creating this space is to offer reassurance. Sometimes, knowing we are not alone in our struggles, and seeing what has helped someone else, can be a gentle companion in our own journey.</p>
+        <p>You are welcome to read through, or even share something that has helped you, from or outside of therapy, if and when it feels right.</p>
+        <div class="note-pills">
+          <span class="note-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+            Completely anonymous
+          </span>
+          <span class="note-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+            Sharing is optional
+          </span>
+          <span class="note-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Read before publishing
+          </span>
         </div>
       </div>
-      <div class="bio-text reveal delay-1">
-        <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>
-        <p>I work with adults 18+, supporting concerns that include anxiety, relationship challenges, self-confidence and self-esteem, depression, trauma, sleep difficulties, emotional regulation, and life transitions. I have a particular interest in working with anxiety and in exploring relationships in all their forms, with partners, family, friends, and with oneself. I am interested in how our relational experiences shape the way we feel, respond, and move through the world.</p>
-        <p>I also work with individuals navigating questions of identity, self-worth, and belonging. My aim is to support clients in building emotional awareness, making sense of patterns that may feel difficult or repetitive, and reconnecting with parts of themselves that feel overwhelmed, disconnected, or unheard.</p>
-        <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe therapy is not a one-size-fits-all process, and I gently adapt my approach to each person's pace, needs, and lived experience.</p>
-        <p>I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and have received training in working with complex trauma through the International Society for the Study of Trauma and Dissociation. My work is guided by a sensitivity to how personal experiences are shaped by relational, cultural, and social contexts.</p>
-        <p>I see therapy as a collaborative and evolving space, one where you can show up as you are, without pressure or judgment, and feel supported in exploring both the difficult and meaningful parts of your inner world.</p>
-        <div class="lang-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h10M9 5v3M13 5c-1 3-3.5 6-7 8M7 9c1.5 2.5 4 4.5 6.5 5.5"/><path d="M13 20l4-9 4 9M14.5 17h5"/></svg>
-          Sessions offered in English and Hindi
-        </div>
-      </div>
+    </div>
+    <div class="reserved-block reveal delay-3">
+      <span class="tag">Coming soon</span>
+      <h4>A place to share what helped</h4>
+      <p>The anonymous sharing form and the notes people have offered will live here. Everything shared is read before it is published, so this space stays gentle for whoever finds it next.</p>
     </div>
   </div>
 </section>
 
-<!-- ========== VALUES ========== -->
-<section class="about-values" id="values">
+<!-- ========== SIP AND SWAP STORIES ========== -->
+<section id="sip-and-swap">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">How I show up</div>
-      <h2>My values and lens as a therapist</h2>
+      <div class="eyebrow">For mental health professionals</div>
+      <h2>Sip and Swap Stories</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+      <p>A gentle, casual space for therapists, psychologists, and mental health professionals to connect with me one to one.</p>
+    </div>
+    <div class="concerns-grid">
+      <div class="concern-card reveal delay-1">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <h4>Who it is for</h4>
+        <p>Therapists, psychologists, and mental health professionals with at least 2 years of experience.</p>
+      </div>
+      <div class="concern-card reveal delay-2">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M22 8l-5 4 5 4V8z"/></svg>
+        <h4>The format</h4>
+        <p>A 40-minute video call, one to one. No agenda beyond a real conversation.</p>
+      </div>
+      <div class="concern-card reveal delay-3">
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8M8 14h5"/><path d="M21 12a8 8 0 01-8 8H7l-4 3v-5.5A8 8 0 1121 12z"/></svg>
+        <h4>What we might talk about</h4>
+        <p>Sharing stories, exploring possibilities for collaboration or referrals, or simply a meaningful conversation, person to person.</p>
+      </div>
+    </div>
+    <div class="community-copy reveal delay-2" style="max-width:720px;margin:3rem auto 0;">
+      <p>My intention is to get to know your work, share mine, and create a space where we can uplift each other. Over time, I hope this grows into a thoughtful, non-isolating community for us in the mental health field, and that we get to know each other outside of our professional identities.</p>
+      <p class="gentle-note">A note on fit: this space is not meant for existing, previous, or potential therapy clients or supervisees. If we are already working together in either of those ways, our sessions remain the space for that.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Getting started</div>
+      <h2>How Sip and Swap works</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="about-values-grid">
-      <div class="avalue-card reveal delay-1">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
-        <h4>Eclectic</h4>
-        <p>I draw from different methods and techniques of psychotherapy to tailor each session to suit your unique challenges and experiences.</p>
+    <div class="process-grid">
+      <div class="process-item reveal delay-1" data-step="1">
+        <div class="process-title">Reach out with your LinkedIn</div>
+        <div class="process-desc">Send a message by <a class="consent-link" href="mailto:feelseen@honoringstories.com">Email</a> or <a class="consent-link" href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a>, and include your LinkedIn profile so I have a bit of context before we connect.</div>
       </div>
-      <div class="avalue-card reveal delay-2">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
-        <h4>Trauma-informed</h4>
-        <p>I work with care and awareness of how past pain may show up in the present.</p>
+      <div class="process-item reveal delay-2" data-step="2">
+        <div class="process-title">We find a time</div>
+        <div class="process-desc">I will share my calendar so we can pick a slot that works for both of us.</div>
       </div>
-      <div class="avalue-card reveal delay-3">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg>
-        <h4>Intersectional</h4>
-        <p>I understand how different parts of your identity and social context shape your experiences, and I keep them in mind while working through your concerns.</p>
-      </div>
-      <div class="avalue-card reveal delay-1">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
-        <h4>Queer-affirmative</h4>
-        <p>I offer a space that respects and affirms diverse gender and sexual identities.</p>
-      </div>
-      <div class="avalue-card reveal delay-2">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 2-1 3-1 5v2H8v-2c0-2-1-3-1-5a5 5 0 015-5z"/><path d="M9 19h6M10 22h4"/></svg>
-        <h4>Neurodivergent inclusive</h4>
-        <p>I support and welcome people who experience and process the world differently, with understanding and nurturance.</p>
+      <div class="process-item reveal delay-3" data-step="3">
+        <div class="process-title">We talk, for 40 minutes</div>
+        <div class="process-desc">A video call, one to one. Come as you are, no preparation needed.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========== QUALIFICATIONS ========== -->
-<section id="qualifications">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Education &amp; Training</div>
-      <h2>Qualifications</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
-      </div>
-    </div>
-    <div class="timeline-grid">
-      <div class="timeline-item reveal delay-1">
-        <div class="t-title">MA in Clinical Psychology</div>
-        <div class="t-sub">Post-graduate qualification</div>
-      </div>
-      <div class="timeline-item reveal delay-1">
-        <div class="t-title">Diploma in Counseling Psychology</div>
-        <div class="t-sub">Xavier's College</div>
-      </div>
-      <div class="timeline-item reveal delay-2">
-        <div class="t-title">Diploma in Supervision for Mental Health Practice</div>
-        <div class="t-sub">TISS (Tata Institute of Social Sciences)</div>
-      </div>
-      <div class="timeline-item reveal delay-2">
-        <div class="t-title">Queer Affirmative Counseling Practice</div>
-        <div class="t-sub">Mariwala Health Initiative</div>
-      </div>
-      <div class="timeline-item reveal delay-3">
-        <div class="t-title">Gestalt Therapy: Basic &amp; Advanced</div>
-        <div class="t-sub">60 hours · Psychphoenix</div>
-      </div>
-      <div class="timeline-item reveal delay-3">
-        <div class="t-title">Complexities of Complex Trauma Accelerated</div>
-        <div class="t-sub">The International Society for the Study of Trauma and Dissociation (ISSTD)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== EXPERIENCE ========== -->
-<section id="experience" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Where she's worked</div>
-      <h2>Experience</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
-      </div>
-    </div>
-    <div class="timeline-grid">
-      <div class="timeline-item reveal delay-1">
-        <div class="t-title">Private Practice</div>
-        <div class="t-sub">Individual therapy and supervision · since 2023</div>
-      </div>
-      <div class="timeline-item reveal delay-1">
-        <div class="t-title">Field Supervisor, Xavier's College</div>
-        <div class="t-sub">Contractual, for MA second-year interns · since Feb 2021</div>
-      </div>
-      <div class="timeline-item reveal delay-2">
-        <div class="t-title">Cultfit</div>
-        <div class="t-sub">Freelance psychologist, online one-on-one therapy · Jun 2020 to Feb 2023 · 1050+ positive reviews</div>
-      </div>
-      <div class="timeline-item reveal delay-2">
-        <div class="t-title">iCall</div>
-        <div class="t-sub">Covid Mental Health Helpline, volunteer counselor · Sep 2020 to Jan 2021</div>
-      </div>
-      <div class="timeline-item reveal delay-3">
-        <div class="t-title">CanKids</div>
-        <div class="t-sub">Pediatric cancer patients and caregivers, Tata Memorial Hospital · Feb 2020 to Aug 2020</div>
-      </div>
-      <div class="timeline-item reveal delay-3">
-        <div class="t-title">Naraindas Morbai Budhrani Trust</div>
-        <div class="t-sub">Cancer patients and caregivers at Nair, KEM, and Wadia Hospitals · Jul 2019 to Dec 2019</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== CONTACT ME ========== -->
+<!-- ========== CONTACT ========== -->
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="reveal">
-      <h2>Let's connect</h2>
-      <p>If something here resonates, I'd gently invite you to reach out. A free consultation call is a soft first step.</p>
+      <h2>If this resonates, say hello</h2>
+      <p>For Sip and Swap Stories, send a message with your LinkedIn profile and I will share my calendar. For anything else here, you are welcome to just reach out.</p>
       <div class="contact-ctas">
-        <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
-          Book a Consultation Call
+        <a href="mailto:feelseen@honoringstories.com" class="btn btn-primary">
+          Email me
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Reach out</a>
+        <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Message on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -542,15 +435,15 @@
     <div style="padding-top:2rem;">
       <p class="footer-note">This is not a crisis helpline. If you need immediate support, please reach out to one of the helplines below.</p>
       <ul class="footer-helplines">
-        <li><a href="tel:8686139139">MannTalks · 8686139139</a></li>
-        <li><a href="tel:9152987821">iCall · 9152987821</a></li>
-        <li><a href="tel:18005990019">KIRAN (Govt.) · 1800-599-0019</a></li>
-        <li><a href="tel:7389366696">Spandan · 7389366696</a></li>
-        <li><a href="tel:9999666555">Vandrevala Foundation · 9999666555</a></li>
+        <li><a href="tel:8686139139">MannTalks &middot; 8686139139</a></li>
+        <li><a href="tel:9152987821">iCall &middot; 9152987821</a></li>
+        <li><a href="tel:18005990019">KIRAN (Govt.) &middot; 1800-599-0019</a></li>
+        <li><a href="tel:7389366696">Spandan &middot; 7389366696</a></li>
+        <li><a href="tel:9999666555">Vandrevala Foundation &middot; 9999666555</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
-      <small>© <span id="year"></span> Honoring Stories · Harshita Sarda. All rights reserved.</small>
+      <small>&copy; <span id="year"></span> Honoring Stories &middot; Harshita Sarda. All rights reserved.</small>
       <div class="footer-links">
         <a href="#">Disclaimer</a>
         <a href="#">Privacy Policy</a>
@@ -572,10 +465,10 @@
     const railLinks = [...rail.querySelectorAll('.rail-dot')];
     const railTargets = railLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const footerEl = document.querySelector('footer');
-    const heroEl = document.querySelector('#bio');
+    const heroEl = document.querySelector('#who');
 
     window.addEventListener('scroll', () => {
-      const pastHero = heroEl ? window.scrollY > heroEl.offsetHeight * 0.6 : window.scrollY > 400;
+      const pastHero = heroEl ? window.scrollY > heroEl.offsetTop * 0.6 : window.scrollY > 400;
       const nearFooter = footerEl && (window.scrollY + window.innerHeight > footerEl.offsetTop + 80);
       rail.classList.toggle('visible', pastHero && !nearFooter);
     }, { passive: true });

@@ -325,10 +325,31 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   (and the word "cadence" was flagged as not simple enough, replaced with "schedule" in the
   supervision "how often will we meet" answer).
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
-- **Community, Shared Ways of Coping** (not yet built): anonymous Google Form embed,
-  admin-moderated before publishing.
-- **Community, Sip and Swap Stories** (not yet built): professionals-only networking via
-  email/WhatsApp, not for clients or supervisees.
+- **Community** (`community.html`, built): one page holding both community spaces, built from the
+  `psychotherapy.html` template so nav, footer, CSS and scripts stay identical. Copy is taken from
+  the source docs `About - Shared ways of coping.docx` and `About - Sip and Swap stories.docx` in
+  `InstructionsWebsite.zip`, lightly edited only to remove contractions and em dashes.
+  - Hero is deliberately **single-column and centred**, unlike the two-column inner-page heroes,
+    because there is no artwork for this page yet and a dashed placeholder in the most prominent
+    slot would look unfinished.
+  - **Shared Ways of Coping** (`#shared-ways`): intro copy beside a reserved
+    `.visual-placeholder` (the source doc explicitly says "add relevant image"), three
+    `.note-pill`s (anonymous / optional / read before publishing), then a `.reserved-block`
+    standing in for the anonymous Google Form and the published notes. **The Google Form URL has
+    never been supplied**, so nothing is embedded yet, see Open Items.
+  - **Sip and Swap Stories** (`#sip-and-swap`): three `.concern-card`s covering who it is for
+    (2+ years experience), the format (40-minute one-to-one video call), and what gets talked
+    about, then the intention paragraph, then the fit note. That note, that the space is **not**
+    for existing, previous, or potential therapy clients or supervisees, is a `.gentle-note`
+    (a quiet left rule), deliberately not a loud warning banner. It comes straight from the
+    source doc and must not be dropped.
+  - **How Sip and Swap works** (`#how`): three-step process timeline. Step 1 asks for a LinkedIn
+    profile alongside the message, which is how the source doc describes it.
+  - Unused CSS and the logistics-infographic script inherited from the psychotherapy template were
+    stripped out of this file rather than left dead.
+  - Before this page existed, the "Community" nav item on all four pages pointed at
+    `index.html#community`, **an anchor that never existed anywhere**, so the link was silently
+    dead site-wide. All 15 Community links now point to `community.html`.
 
 **Important scoping rule:** pricing does not appear on the homepage. It belongs only on the
 dedicated Psychotherapy and Supervision pages once built.
@@ -517,8 +538,12 @@ absence.
 ## 7. Open items / not yet built
 
 - Peer Testimonials page (full 8 testimonials)
-- Community pages: Shared Ways of Coping (Google Form embed, admin-moderated), Sip and Swap
-  Stories (email/WhatsApp flow, professionals only)
+- **Anonymous Google Form URL for Shared Ways of Coping.** `community.html` is built and live, but
+  the form itself has never been supplied, so that part of the page is a `.reserved-block`
+  placeholder. Once the URL arrives, embed or link it there and drop the placeholder. The moderated
+  notes people submit will also need somewhere to render in that section.
+- Artwork for the Community page: the hero (currently text-only by design) and the reserved
+  `.visual-placeholder` in Shared Ways of Coping, which the source doc asks for.
 - Footer legal pages: Disclaimer, Privacy Policy, Terms and Conditions (currently placeholder
   links)
 - Real photo for the homepage glimpse section's image placeholder
