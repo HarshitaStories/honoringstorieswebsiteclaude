@@ -213,8 +213,21 @@
   .footer-helplines li { font-size: 0.8rem; color: rgba(253, 250, 242, 0.6); }
   .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
   .footer-helplines a:hover { color: var(--rose-soft); }
-</style>
-</head>
+  /* ========== WHATSAPP FLOAT ========== */
+  /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
+     low-opacity halo that stays noticeable without pulling focus off the page.
+     The global reduced-motion rule already flattens the pulse. */
+  .wa-float { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 90; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft)); color: var(--deep-purple); box-shadow: 0 10px 26px -12px rgba(91, 46, 107, 0.4); animation: waGlow 6s ease-in-out infinite; transition: transform 0.5s var(--ease-gentle); }
+  .wa-float:hover { color: var(--deep-purple); transform: translateY(-3px) scale(1.04); }
+  .wa-float svg { width: 26px; height: 26px; }
+  @keyframes waGlow {
+    0%, 100% { box-shadow: 0 10px 26px -12px rgba(91, 46, 107, 0.4), 0 0 0 0 rgba(217, 106, 156, 0); }
+    50% { box-shadow: 0 10px 26px -12px rgba(91, 46, 107, 0.4), 0 0 20px 6px rgba(217, 106, 156, 0.26); }
+  }
+  .wa-float::after { content: 'Reach out on WhatsApp'; position: absolute; right: calc(100% + 0.65rem); top: 50%; transform: translateY(-50%); white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--deep-purple); background: rgba(253, 250, 242, 0.85); backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%); border: 1px solid rgba(255, 255, 255, 0.7); padding: 0.3rem 0.7rem; border-radius: 999px; box-shadow: 0 8px 20px -6px rgba(91, 46, 107, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle); }
+  .wa-float:hover::after { opacity: 1; }
+  @media (max-width: 600px) { .wa-float::after { display: none; } }
+</style></head>
 <body>
 
 <!-- ========== NAV ========== -->
@@ -681,5 +694,9 @@
   }
 </script>
 
-</body>
-</html>
+<!-- ========== WHATSAPP FLOAT ========== -->
+<a class="wa-float" href="https://wa.me/919152801719" target="_blank" rel="noopener" aria-label="Reach out on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>
+</a>
+
+</body></html>

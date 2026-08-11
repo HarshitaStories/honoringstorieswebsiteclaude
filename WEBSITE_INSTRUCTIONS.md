@@ -121,6 +121,13 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - Reserved image placeholders (dashed border, "Photo to be added" label) are an acceptable
   standing pattern when content is promised but not yet supplied; replace with the real asset
   when it arrives instead of redesigning around its absence.
+- A **floating WhatsApp button** (`.wa-float`) is fixed to the bottom right of every page. Styled in
+  the site palette (rose-soft to purple-soft gradient, deep-purple glyph) rather than WhatsApp
+  green, which would clash with the cream/purple scheme. It carries a slow 6s `waGlow` halo pulse,
+  deliberately low-opacity: the brief was "very gentle soft glow, very subtle and not loud but
+  still visible". Keep it that way, do not raise the opacity or speed it up. An italic glass pill
+  tooltip ("Reach out on WhatsApp", same treatment as the section-rail labels) appears on hover and
+  is hidden below 600px. The existing reduced-motion rule already flattens the pulse.
 - The footer logo is now the real brand logo image (`assets/logo-full.png`, feather, cupped hands,
   wordmark, tagline), shown at full color, not the earlier hand-drawn inline SVG approximation or
   an inverted/white-filtered version. Keep it in its original colors against the dark footer.
