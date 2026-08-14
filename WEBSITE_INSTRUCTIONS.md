@@ -149,30 +149,38 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       `center`. The inner pages centre because illustration and text are near equal height; the
       home portrait is much taller, and centring pushed the eyebrow far down the page. Top-aligning
       puts "Express · Embrace · Empower" at the same level as "For individuals" (160px vs 166px).
-    - `assets/harshita-home.png` is a **transparent PNG cut-out**. The photo went through two
-      framing treatments: first, floating with no frame and a `drop-shadow()` following her
-      silhouette, plus a separate glowing white radial gradient behind her via `.hero-photo::before`
-      (`inset: -10%`, `z-index: -1`). The user then asked for it to sit in "a rectangular rounded
-      cornered safe area... similar to the psychotherapy session hero banner image", so it now
-      matches `.hero-art` from the inner pages: `.hero-photo-frame` has `border-radius: 20px` and
-      `overflow: hidden`. The frame's background is **plain white** (`#ffffff`). A radial-gradient
-      version of that backdrop (white centre fading out to `--rose-soft`) was tried and explicitly
-      rejected in favour of flat white, so do not reintroduce a gradient or tint here. Do not
-      reintroduce the old free-floating/no-frame version either; the white rounded rectangle is the
-      current direction, matching the inner-page hero images.
-    - That white card then read as "abruptly placed", fixed three ways, all of which should stay:
-      1. **Bottom edge is masked to transparent** (`mask-image: linear-gradient(180deg, #000 0%,
-         #000 62%, rgba(0,0,0,0.6) 82%, transparent 100%)`, `mask-repeat: no-repeat`). She emerges
-         out of the frame instead of being sliced by a hard horizontal crop across her torso.
-         Include the `-webkit-` prefixed properties for Safari.
-      2. **The drop shadow was removed** and replaced by a soft blurred halo on `.hero-photo::before`
-         (`filter: blur(26px)`, purple-soft to rose fading to transparent), so the card sits in the
-         page rather than on top of it. A `box-shadow` cannot be used here: the mask would clip it.
-      3. **The photo is nudged left**, `transform: translateX(-8.5%)` on the `img`. The subject sits
-         right-of-centre in the source file (measured: 17.5% empty margin on the left, 0.5% on the
-         right), which left her visibly shoved to one side of the frame. The strip this exposes on
-         the right is the frame's own white, so nothing shows through. If the photo is ever
-         re-cut or replaced, re-measure the subject's bounding box and redo this offset.
+    - `assets/harshita-home.png` is a **transparent PNG cut-out**. Its framing went through three
+      treatments; only the third is current. (1) Free-floating with a `drop-shadow()` following her
+      silhouette. (2) A white rounded rectangle matching `.hero-art`, with the bottom edge masked
+      away and a blurred halo on `.hero-photo::before`. (3) **Current: a soft radial "safe area"
+      with no box at all.** Both the earlier versions are superseded, so do not reintroduce the
+      rounded rectangle, the white fill, the `border-radius`, or the `::before` halo, which is
+      deleted outright.
+    - How the current treatment works, and why each part is needed:
+      - `.hero-photo-frame` carries **both** a radial-gradient `background` and a radial-gradient
+        `mask-image` whose stops **mirror each other exactly**. If they diverge, the fill and the
+        alpha falloff draw two separate edges instead of one. The fill uses the page's own cream
+        (`--cream-warm` into `--cream`), not white, so it reads as the photo dissolving into the
+        page rather than a spotlight behind her.
+      - The taper uses **many stops approximating an ease curve** rather than two or three. A short
+        taper leaves a visible ring where her dark hair meets the page.
+      - `padding: 0 18% 2%` is load-bearing: it gives the gradient room to reach full transparency
+        *inside* the element. Without it, a radius wider than 50% is clipped by the element edge
+        partway through the fade, which draws exactly the vertical boundary the mask is meant to
+        avoid.
+      - The `img` transform is `translateX(-8.5%) translateY(-4%) scale(1.16)`. The `-8.5%` centres
+        her (the source has 17.5% empty margin on the left against 0.5% on the right); the scale
+        and vertical shift crop out roughly 12% of dead transparent space above her hair so her
+        head sits at the top of the frame instead of floating mid-way down. Overflow from this is
+        caught by `overflow: hidden`, which is safe because the mask has already faded those edges
+        to near-zero opacity. **If the photo is re-cut or replaced, re-measure the subject's
+        bounding box and redo these numbers.**
+      - Negative margins (`.hero-photo-frame { margin: 0 -8% }`, `-20%` at 900px+) deliberately
+        let the frame spill past its grid column, because the overspill is fully-faded glow rather
+        than content. `.hero-photo { margin-bottom: -4rem }` (`-5rem` at 900px+) cancels the hero's
+        bottom padding so she reaches the section's base edge, and `margin-top: 2.75rem` on desktop
+        lines her hairline up with the top of the headline rather than the eyebrow above it.
+        Verified there is no horizontal page overflow at 800px despite the negative margins.
     - `assets/harshita-home-source.png` is the original flat-white-background version, kept so the
       cut-out can be redone. The cut-out was made by flood-filling inward from the image borders,
       not by a global colour key: her shirt is only ~23 units from pure white and her teeth and
@@ -241,7 +249,18 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   hero-photo style) on the left, the write-up on the right, stacking on narrower screens. Bio copy
   is de-duplicated from the near-identical "About me page" and "Approach as a therapist" source
   docs (used the fuller version once), with the age range stated as "18+" (not the source docs'
-  "20 to 65"). Then: a 5-card values section in this **exact order, set deliberately**: Eclectic,
+  "20 to 65").
+  - The bio is **truncated behind a "Read more" toggle**: the first two paragraphs always show,
+    the remaining four (including the closing italic `p.bio-quote`) sit inside `.bio-more` and
+    expand on click, with the link text flipping to "Read less". The collapse uses the
+    `grid-template-rows: 0fr -> 1fr` technique so it animates to the content's natural height
+    without hard-coding a max-height. `.read-more-link` is deliberately **plain underlined text,
+    not a pill or button**, so it sits in the paragraph flow rather than reading as a UI control.
+  - Two things to watch if this is edited: the closing quote paragraph is styled via
+    `p.bio-quote`, **not** `p:last-child`, because it is no longer the last child once nested
+    inside `.bio-more`. And the "Sessions offered in English and Hindi" `.lang-note` must stay
+    **outside** the collapsible block so it is always visible.
+  Then: a 5-card values section in this **exact order, set deliberately**: Eclectic,
   Trauma-informed, Intersectional, Queer-affirmative, Neurodivergent inclusive. At the 3-up
   breakpoint (1000px+) the grid is declared as **six** columns with each card spanning two, and
   cards 4 and 5 pinned to `grid-column: 2 / span 2` and `4 / span 2`. That shifts the second row by
