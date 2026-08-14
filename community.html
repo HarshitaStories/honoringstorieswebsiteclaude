@@ -190,11 +190,6 @@
   .community-hero .page-hero-note { margin-left: auto; margin-right: auto; }
   .split { display: grid; gap: 2.5rem; align-items: center; }
   @media (min-width: 900px) { .split { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
-  /* Standing pattern for a promised-but-unsupplied asset. The source copy for this section
-     explicitly asks for a relevant image, so the slot is reserved rather than designed around. */
-  .visual-placeholder { aspect-ratio: 4 / 3; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
-  .visual-placeholder svg { width: 32px; height: 32px; opacity: 0.6; }
-  .visual-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; }
   .community-copy p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.75; }
   .community-copy p:last-of-type { margin-bottom: 1.5rem; }
   .note-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
@@ -300,9 +295,8 @@
       </div>
     </div>
     <div class="split">
-      <div class="visual-placeholder reveal delay-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Image to be added</span>
+      <div class="reveal delay-1">
+        <img class="hero-art" src="assets/sharedwaysofcoping.png" alt="A pencil illustration of an open umbrella covered in small notes reading Breathe, Rest, Tea, Journal, Walk, Music and Call a friend, with a smiling raindrop sheltering beneath it." />
       </div>
       <div class="community-copy reveal delay-2">
         <p>This is a gentle space where those who have walked through difficult times share what supported them, anonymously. These are small notes, reminders, or practices that brought a little ease, comfort, or grounding.</p>
