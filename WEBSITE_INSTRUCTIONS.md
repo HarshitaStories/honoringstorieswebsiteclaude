@@ -360,16 +360,22 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     the space usable at all. It states plainly that the employer receives no names, notes, or
     account of what was discussed, only broad non-identifying themes, with the risk-of-harm
     exception. Keep this prominent; it is also repeated as an FAQ because people look in both places.
-  - **This page is written in "we", not "I".** It is the only page on the site that is, and that is
-    deliberate: it reads better to an organisation deciding whether to engage a practice. The one
-    exception is the "A little about me" block, which stays first person singular ("I am Harshita
-    Sarda...", "More about my background") because it is about her personally. Keep that split if
-    the copy is edited.
-  - **Do not blind find-and-replace "me" with "us" in the confidentiality passages.** They now read
-    "What an individual shares in their session stays there", with the pronoun removed rather than
-    pluralised. "Shares with us" would imply a team can read what an employee said, which weakens
-    the exact promise the page depends on and may not even be accurate. This applies to both the
-    `.confidential` block and the FAQ that restates it.
+  - **Written in "I", like every other page. This was decided after trying the alternative.** The
+    page was briefly rewritten in a corporate "we" voice and then reverted, so do not switch it
+    again. The reasons it went back:
+    1. Honoring Stories is a **sole proprietorship**. There is no team, so "we" is not accurate,
+       and it contradicts the Terms and Privacy Policy, which say the same thing in the first
+       person singular.
+    2. **The confidentiality promise is stronger in "I".** "What an individual shares with me stays
+       with them" reassures an employee precisely because it names one person holding it. Any
+       plural form implies a group can read what was said, which is the opposite of the point. In
+       the "we" version this sentence had to be reworded around the pronoun to avoid the problem,
+       which was a signal the voice was fighting the content.
+    3. A named clinician is the **differentiator** against large impersonal EAP vendors, not a
+       weakness to disguise.
+    Note that four naturally plural phrases remain and are correct: "Themes we can work with" and
+    "we will find something workable" are the collaborative you-and-me sense, and two FAQ questions
+    ("Will we be told...", "our industry") are written in the enquiring organisation's own voice.
   - **Deliberately claims no corporate track record.** Nothing in the source material describes
     previous organisational work, so there are no client names, logos, "trusted by" lines, or
     outcome statistics. If real ones are supplied later they belong near the top. Do not invent
