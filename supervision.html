@@ -97,7 +97,10 @@
   .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; display: block; }
   .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1.25rem; }
   .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 520px; line-height: 1.75; margin-bottom: 1.5rem; }
-  .hero-art { border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3); }
+  /* The illustration's own backdrop has been flattened to the page cream, so it
+     now sits directly on the banner. No radius or shadow here: both would draw
+     the edges of a card that no longer visually exists. */
+  .hero-art { display: block; }
 
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
