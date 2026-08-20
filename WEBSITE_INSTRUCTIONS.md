@@ -360,6 +360,16 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     the space usable at all. It states plainly that the employer receives no names, notes, or
     account of what was discussed, only broad non-identifying themes, with the risk-of-harm
     exception. Keep this prominent; it is also repeated as an FAQ because people look in both places.
+  - **This page is written in "we", not "I".** It is the only page on the site that is, and that is
+    deliberate: it reads better to an organisation deciding whether to engage a practice. The one
+    exception is the "A little about me" block, which stays first person singular ("I am Harshita
+    Sarda...", "More about my background") because it is about her personally. Keep that split if
+    the copy is edited.
+  - **Do not blind find-and-replace "me" with "us" in the confidentiality passages.** They now read
+    "What an individual shares in their session stays there", with the pronoun removed rather than
+    pluralised. "Shares with us" would imply a team can read what an employee said, which weakens
+    the exact promise the page depends on and may not even be accurate. This applies to both the
+    `.confidential` block and the FAQ that restates it.
   - **Deliberately claims no corporate track record.** Nothing in the source material describes
     previous organisational work, so there are no client names, logos, "trusted by" lines, or
     outcome statistics. If real ones are supplied later they belong near the top. Do not invent
