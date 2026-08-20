@@ -192,12 +192,16 @@
   .logistics-grid { --icon-h: 32px; --icon-gap: 0.75rem; --dot: 12px; position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
   @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
   /* The thread. Ends sit on the first and last icon centres, which in a 4-column grid are at 12.5% and 87.5%. */
-  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; top: calc(var(--icon-h) + var(--icon-gap) + var(--dot) / 2); left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
+  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; z-index: 0; top: calc(var(--icon-h) + var(--icon-gap) + var(--dot) / 2); left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
   .logistics-grid::before { background: linear-gradient(90deg, transparent, var(--rose-soft) 8%, var(--rose-soft) 92%, transparent); }
   /* Brighter stretch of thread that tracks the pointer. */
   .logistics-grid::after { background: var(--rose); opacity: calc(var(--thread, 0) * 0.75); -webkit-mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); }
   @media (min-width: 700px) { .logistics-grid::before, .logistics-grid::after { display: block; } }
-  .logistic-card { --prox: 0; position: relative; text-align: center; background: none; border: none; padding: 0; }
+  /* The .reveal class puts a transform on this card, which creates a stacking
+     context and traps the dot's z-index inside it. Without an explicit z-index
+     here the grid's ::after thread, a later sibling, paints straight over the
+     dots. Lifting the whole card above the thread is what keeps the dots solid. */
+  .logistic-card { --prox: 0; position: relative; z-index: 1; text-align: center; background: none; border: none; padding: 0; }
   /* The first shadow is a ring in the section's own background colour, punching a gap in the thread so each icon reads as a bead on it. */
   /* No container at all now: the glyph sits bare above the line, and the dot
      below it is the marker that actually meets the thread. */
@@ -228,7 +232,10 @@
   .price-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.25); }
   .price-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.75rem; }
   .price-amount { font-family: var(--font-body); font-weight: 600; font-size: clamp(2rem, 4vw, 2.6rem); color: var(--deep-purple); line-height: 1; margin-bottom: 0.5rem; }
-  .price-amount span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+  /* Targets the unit by class, not every span. The generic "span" selector used
+     to catch the wrapped price figures too, shrinking and muting them so the
+     online card no longer matched the in-person one. */
+  .price-amount .price-unit { font-size: 1rem; font-weight: 500; color: var(--muted); }
   .price-desc { font-size: 0.92rem; color: var(--charcoal-soft); }
 
   /* ========== PROCESS ========== */
@@ -466,12 +473,12 @@
         <!-- Both figures are in the markup and one is hidden by CSS, chosen by
              the geo-intl class the head script sets. Swapping text in JS after
              load would let the wrong price paint first and then visibly flip. -->
-        <div class="price-amount"><span class="price-in">&#8377;2,100</span><span class="price-intl">&#8377;2,500</span> <span>/ session</span></div>
+        <div class="price-amount"><span class="price-in">&#8377;2,100</span><span class="price-intl">&#8377;2,500</span> <span class="price-unit">/ session</span></div>
         <div class="price-desc">50-minute video session via Google Meet or WhatsApp.</div>
       </div>
       <div class="price-card reveal delay-2">
         <div class="price-label">In person</div>
-        <div class="price-amount">&#8377;3,000 <span>/ session</span></div>
+        <div class="price-amount">&#8377;3,000 <span class="price-unit">/ session</span></div>
         <div class="price-desc">50-minute session at Andheri West, Mumbai.</div>
       </div>
     </div>

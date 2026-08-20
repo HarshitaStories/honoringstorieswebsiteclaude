@@ -149,12 +149,16 @@
   .logistics-grid { --icon-h: 32px; --icon-gap: 0.75rem; --dot: 12px; position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
   @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
   /* The thread. Ends sit on the first and last icon centres, which in a 4-column grid are at 12.5% and 87.5%. */
-  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; top: calc(var(--icon-h) + var(--icon-gap) + var(--dot) / 2); left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
+  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; z-index: 0; top: calc(var(--icon-h) + var(--icon-gap) + var(--dot) / 2); left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
   .logistics-grid::before { background: linear-gradient(90deg, transparent, var(--rose-soft) 8%, var(--rose-soft) 92%, transparent); }
   /* Brighter stretch of thread that tracks the pointer. */
   .logistics-grid::after { background: var(--rose); opacity: calc(var(--thread, 0) * 0.75); -webkit-mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); }
   @media (min-width: 700px) { .logistics-grid::before, .logistics-grid::after { display: block; } }
-  .logistic-card { --prox: 0; position: relative; text-align: center; background: none; border: none; padding: 0; }
+  /* The .reveal class puts a transform on this card, which creates a stacking
+     context and traps the dot's z-index inside it. Without an explicit z-index
+     here the grid's ::after thread, a later sibling, paints straight over the
+     dots. Lifting the whole card above the thread is what keeps the dots solid. */
+  .logistic-card { --prox: 0; position: relative; z-index: 1; text-align: center; background: none; border: none; padding: 0; }
   /* The first shadow is a ring in the section's own background colour, punching a gap in the thread so each icon reads as a bead on it. */
   /* No container at all now: the glyph sits bare above the line, and the dot
      below it is the marker that actually meets the thread. */
