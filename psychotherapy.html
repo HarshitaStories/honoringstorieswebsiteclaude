@@ -118,7 +118,10 @@
   .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; display: block; }
   .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1.25rem; }
   .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 520px; line-height: 1.75; margin-bottom: 1.5rem; }
-  .hero-art { border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3); }
+  /* The illustration's own white backdrop has been flattened to the page cream,
+     so it now sits directly on the banner. No radius or shadow here: both would
+     draw the edges of a card that no longer visually exists. */
+  .hero-art { display: block; }
 
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
@@ -186,7 +189,7 @@
   /* The three measurements below drive both the dot stack and the thread's
      vertical position, so the line always meets the dots' centres even if the
      icon size or spacing is changed. */
-  .logistics-grid { --icon-h: 26px; --icon-gap: 0.7rem; --dot: 11px; position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
+  .logistics-grid { --icon-h: 32px; --icon-gap: 0.75rem; --dot: 12px; position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
   @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
   /* The thread. Ends sit on the first and last icon centres, which in a 4-column grid are at 12.5% and 87.5%. */
   .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; top: calc(var(--icon-h) + var(--icon-gap) + var(--dot) / 2); left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
@@ -202,15 +205,15 @@
   .logistic-icon svg { width: var(--icon-h); height: var(--icon-h); }
   /* The milestone. The first shadow is a ring in the section background, giving
      the dot a little breathing space where it meets the thread. */
-  .logistic-dot { position: relative; z-index: 1; width: var(--dot); height: var(--dot); margin: 0 auto 1rem; border-radius: 50%; background: var(--purple-soft); box-shadow: 0 0 0 calc(4px + var(--prox) * 2px) var(--cream), 0 0 calc(var(--prox) * 14px) rgba(122, 77, 143, calc(var(--prox) * 0.45)); transform: scale(calc(1 + var(--prox) * 0.45)); }
+  .logistic-dot { position: relative; z-index: 1; width: var(--dot); height: var(--dot); margin: 0 auto 1rem; border-radius: 50%; background: #fff; border: 1px solid rgba(122, 77, 143, calc(0.3 + var(--prox) * 0.3)); box-shadow: 0 0 0 calc(4px + var(--prox) * 2px) var(--cream), 0 0 calc(var(--prox) * 14px) rgba(122, 77, 143, calc(var(--prox) * 0.4)); transform: scale(calc(1 + var(--prox) * 0.45)); }
   .logistic-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.13em; margin-bottom: 0.5rem; transform: translateY(calc(var(--prox) * -3px)); }
   /* Each point now carries exactly one headline value and one supporting line,
      so the four columns share a shape instead of running to one, two or three
      ragged lines each. min-height keeps the row aligned even if a supporting
      line wraps at a narrow width. */
   .logistic-text { min-height: 3.5rem; }
-  .logistic-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); line-height: 1.3; transform: translateY(calc(var(--prox) * -3px)); }
-  .logistic-sub { margin-top: 0.32rem; font-size: 0.84rem; line-height: 1.5; color: var(--muted); transform: translateY(calc(var(--prox) * -3px)); }
+  .logistic-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--charcoal); line-height: 1.3; transform: translateY(calc(var(--prox) * -3px)); }
+  .logistic-sub { margin-top: 0.3rem; font-size: 0.78rem; line-height: 1.5; color: var(--muted); transform: translateY(calc(var(--prox) * -3px)); }
 
   /* ========== PRICING ========== */
   .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 720px; margin: 0 auto; }
