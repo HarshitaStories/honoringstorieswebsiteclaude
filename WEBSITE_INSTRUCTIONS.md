@@ -380,6 +380,29 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     previous organisational work, so there are no client names, logos, "trusted by" lines, or
     outcome statistics. If real ones are supplied later they belong near the top. Do not invent
     percentages about attrition or productivity to fill the gap.
+- **Legal pages** (`disclaimer.html`, `privacy-policy.html`, `terms-and-conditions.html`, all
+  built). Drafted as plain content first, reviewed by the user, and **still to be checked by a
+  lawyer** before the site goes public. Written from scratch rather than adapted from another
+  practice's pages, both because legal text is copyrighted and because a copied policy would
+  misdescribe this practice's actual setup.
+  - Shared identity block on all three: sole proprietorship, private practice of Harshita Sarda,
+    **Udyam Registration Number UDYAM-MH-18-0422743**. Udyam is deliberately described as a
+    **business** registration, not a professional or clinical one, since it is an MSME registration
+    and implying clinical accreditation would be misleading. Effective date on all three:
+    **1 September 2026**.
+  - Confirmed facts these documents rely on, verified against the code rather than assumed: the
+    site sets **no cookies, runs no analytics and has no tracking scripts**; the only passive data
+    flow is **Google Fonts**, which gives Google visitors' IP addresses on every page. If analytics
+    are ever added, or the fonts are self-hosted, the Privacy Policy must be updated to match.
+  - Clinical record retention is **7 years after active work is completed**.
+  - By explicit decision: **no registered postal address**, **no named grievance officer** (concerns
+    route to `feelseen@honoringstories.com`, which keeps a stated mechanism in place), and **no
+    GDPR section**, the user having confirmed it is not needed.
+  - Layout: no section rail (single flowing documents, so the rail script is stripped too), a
+    centred hero with the effective date, `.legal-body` prose styling, a `.legal-crisis` block in
+    the Disclaimer giving the helplines prominence, and `.legal-links` cross-links between the
+    three. The footer's three previously dead `href="#"` placeholders are now wired on all nine
+    pages.
 - **Community** (`community.html`, built): one page holding both community spaces, built from the
   `psychotherapy.html` template so nav, footer, CSS and scripts stay identical. Copy is taken from
   the source docs `About - Shared ways of coping.docx` and `About - Sip and Swap stories.docx` in
@@ -630,7 +653,7 @@ absence.
   submission.
 - Artwork for the Community page: the hero (currently text-only by design) and the reserved
   `.visual-placeholder` in Shared Ways of Coping, which the source doc asks for.
-- Footer legal pages: Disclaimer, Privacy Policy, Terms and Conditions (currently placeholder
-  links)
+- **Legal review of the three policy pages.** They are written and live, and the footer links are
+  wired, but a lawyer has not yet been through them. Do this before the site is public.
 - Real photo for the homepage glimpse section's image placeholder
 - Real Instagram/blog content, if ever reintroduced

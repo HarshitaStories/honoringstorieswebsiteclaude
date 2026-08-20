@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Supervision Sessions · Honoring Stories</title>
-<meta name="description" content="Thoughtful, collaborative clinical supervision with Harshita for early-career and experienced mental health practitioners, online or in Andheri West, Mumbai." />
+<title>Disclaimer &#183; Honoring Stories</title>
+<meta name="description" content="Disclaimer for Honoring Stories: this website is not a crisis service, and its content is general information rather than clinical advice." />
 <link rel="icon" type="image/png" href="assets/logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -123,51 +123,18 @@
   .lang-note { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.88rem; color: var(--charcoal-soft); }
   .lang-note svg { width: 16px; height: 16px; color: var(--rose); flex-shrink: 0; }
 
-  /* ========== TRACKS ========== */
+  /* ========== CONCERNS RECAP ========== */
   .who-for { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .track-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 1080px; margin: 0 auto; }
-  @media (min-width: 700px) { .track-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 960px) { .track-grid { grid-template-columns: repeat(3, 1fr); } }
-  .track-card { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; transition: all 0.5s var(--ease-gentle); }
-  .track-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
-  .track-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.5rem; }
-  .track-card h4 { font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--deep-purple); }
-  .track-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
-
-  /* ========== LOGISTICS ========== */
-  /* Infographic, no containers: four points threaded on one line, each reacting
-     continuously to how near the cursor is (--prox, 0 to 1, set per frame by JS)
-     rather than only on direct hover. */
-  .logistics-grid { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1rem; max-width: 880px; margin: 0 auto; }
-  @media (min-width: 700px) { .logistics-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
-  /* The thread. Ends sit on the first and last icon centres, which in a 4-column grid are at 12.5% and 87.5%. */
-  .logistics-grid::before, .logistics-grid::after { content: ''; position: absolute; top: 26px; left: 12.5%; right: 12.5%; height: 1px; display: none; pointer-events: none; }
-  .logistics-grid::before { background: linear-gradient(90deg, transparent, var(--rose-soft) 8%, var(--rose-soft) 92%, transparent); }
-  /* Brighter stretch of thread that tracks the pointer. */
-  .logistics-grid::after { background: var(--rose); opacity: calc(var(--thread, 0) * 0.75); -webkit-mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); mask-image: radial-gradient(140px 30px at var(--mx, 50%) 50%, #000, transparent 70%); }
-  @media (min-width: 700px) { .logistics-grid::before, .logistics-grid::after { display: block; } }
-  .logistic-card { --prox: 0; position: relative; text-align: center; background: none; border: none; padding: 0; }
-  /* The first shadow is a ring in the section's own background colour, punching a gap in the thread so each icon reads as a bead on it. */
-  .logistic-icon { position: relative; z-index: 1; width: 52px; height: 52px; margin: 0 auto 1.15rem; border-radius: 50%; background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft)); display: flex; align-items: center; justify-content: center; color: var(--deep-purple); box-shadow: 0 0 0 7px var(--cream), 0 8px calc(14px + var(--prox) * 22px) rgba(91, 46, 107, calc(0.1 + var(--prox) * 0.22)); transform: translateY(calc(var(--prox) * -6px)) scale(calc(1 + var(--prox) * 0.14)); }
-  .logistic-icon svg { width: 24px; height: 24px; }
-  .logistic-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.45rem; transform: translateY(calc(var(--prox) * -3px)); }
-  .logistic-value { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--deep-purple); line-height: 1.35; transform: translateY(calc(var(--prox) * -3px)); }
-
-  /* ========== PRICING ========== */
-  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 640px; margin: 0 auto; }
-  @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
-  .price-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 20px; padding: 2rem 1.75rem; text-align: center; transition: all 0.5s var(--ease-gentle); }
-  .price-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.25); }
-  .price-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.75rem; }
-  .price-amount { font-family: var(--font-body); font-weight: 600; font-size: clamp(2rem, 4vw, 2.6rem); color: var(--deep-purple); line-height: 1; margin-bottom: 0.5rem; }
-  .price-amount span { font-size: 1rem; font-weight: 500; color: var(--muted); }
-  .price-desc { font-size: 0.92rem; color: var(--charcoal-soft); }
-
-  /* ========== GROUP SUPERVISION (reserved) ========== */
-  .coming-soon { max-width: 640px; margin: 3rem auto 0; border: 1.5px dashed var(--purple-soft); border-radius: 20px; padding: 2.25rem; text-align: center; background: var(--cream-warm); }
-  .coming-soon .tag { display: inline-block; background: rgba(217, 106, 156, 0.12); color: var(--deep-purple); font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 999px; margin-bottom: 1rem; }
-  .coming-soon h4 { font-size: 1.4rem; color: var(--deep-purple); margin-bottom: 0.6rem; }
-  .coming-soon p { color: var(--charcoal-soft); font-size: 0.95rem; margin: 0; }
+  .concerns-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
+  .concern-card { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden; }
+  .concern-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose-soft), var(--rose)); transition: left 0.8s var(--ease-gentle); }
+  .concern-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
+  .concern-card:hover::before { left: 0; }
+  .concern-icon { width: 32px; height: 32px; margin-bottom: 0.85rem; color: var(--rose); opacity: 0.85; }
+  .concern-card h4 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--charcoal); }
+  .concern-card p { color: var(--charcoal-soft); font-size: 0.92rem; line-height: 1.65; margin: 0; }
 
   /* ========== PROCESS ========== */
   .process-grid { max-width: 640px; margin: 0 auto; position: relative; padding-left: 1.75rem; border-left: 1px solid var(--line); }
@@ -217,6 +184,32 @@
   .footer-helplines li { font-size: 0.8rem; color: rgba(253, 250, 242, 0.6); }
   .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
   .footer-helplines a:hover { color: var(--rose-soft); }
+  /* ========== LEGAL DOCUMENTS ========== */
+  .legal-hero { text-align: center; max-width: 720px; margin: 0 auto; }
+  .legal-hero h1 { margin-bottom: 0.85rem; }
+  .legal-meta { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--muted); }
+  .legal-body { max-width: 760px; margin: 0 auto; }
+  .legal-body h2 { font-size: 1.45rem; font-weight: 500; color: var(--deep-purple); margin: 3rem 0 1rem; }
+  .legal-body > h2:first-child { margin-top: 0; }
+  .legal-body h3 { font-family: var(--font-display); font-style: italic; font-size: 1.12rem; font-weight: 500; color: var(--charcoal); margin: 1.75rem 0 0.5rem; }
+  .legal-body p { color: var(--charcoal-soft); font-size: 1rem; line-height: 1.85; }
+  .legal-body ul { padding-left: 1.3rem; margin: 0 0 1.25rem; }
+  .legal-body li { color: var(--charcoal-soft); font-size: 1rem; line-height: 1.8; margin-bottom: 0.45rem; }
+  .legal-body strong { color: var(--charcoal); font-weight: 600; }
+  .legal-body a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(217, 106, 156, 0.4); }
+  /* Identity block sits at the top of each document so the practice, its legal
+     form and its registration number are stated once, consistently. */
+  .legal-identity { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 2.5rem; }
+  .legal-identity p { font-size: 0.95rem; line-height: 1.75; margin: 0; }
+  /* The crisis block is the one thing on these pages that must not be missed. */
+  .legal-crisis { background: var(--cream-warm); border: 1px solid var(--line); border-left: 3px solid var(--rose); border-radius: 14px; padding: 1.6rem 1.75rem; margin: 1.5rem 0 2rem; }
+  .legal-crisis ul { list-style: none; padding-left: 0; margin: 1rem 0 0; }
+  .legal-crisis li { margin-bottom: 0.55rem; font-size: 0.95rem; }
+  .legal-crisis a { font-weight: 500; }
+  /* Cross-links so someone reading one document can reach the other two. */
+  .legal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; max-width: 760px; margin: 3.5rem auto 0; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+  .legal-links a { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--charcoal-soft); text-decoration: none; transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle); }
+  .legal-links a:hover { transform: translateY(-2px); border-color: var(--rose-soft); color: var(--deep-purple); }
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
      low-opacity halo that stays noticeable without pulling focus off the page.
@@ -271,228 +264,65 @@
   </div>
 </nav>
 
-<!-- ========== SECTION RAIL ========== -->
-<nav class="section-rail" id="sectionRail" aria-label="Page sections">
-  <a href="#who" class="rail-dot" data-label="Who this is for"></a>
-  <a href="#logistics" class="rail-dot" data-label="Logistics"></a>
-  <a href="#pricing" class="rail-dot" data-label="Pricing"></a>
-  <a href="#process" class="rail-dot" data-label="How it works"></a>
-  <a href="#faqs" class="rail-dot" data-label="Questions"></a>
-  <a href="#contact" class="rail-dot" data-label="Let's begin"></a>
-</nav>
-
-<!-- ========== HERO ========== -->
 <header class="page-hero">
   <div class="wrap">
-    <div class="page-hero-inner">
-      <div class="reveal">
-        <span class="eyebrow">For mental health professionals</span>
-        <h1>Supervision Sessions</h1>
-        <p class="page-hero-note">Thoughtful, collaborative supervision for practicing therapists and counselors, whether you're early in your career or years into your practice. A space to reflect on your work, your clients, and yourself as a practitioner, and to deepen how you hold the work with care.</p>
-        <div class="lang-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h10M9 5v3M13 5c-1 3-3.5 6-7 8M7 9c1.5 2.5 4 4.5 6.5 5.5"/><path d="M13 20l4-9 4 9M14.5 17h5"/></svg>
-          Sessions offered in English and Hindi
-        </div>
-        <div style="margin-top:2rem;">
-          <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
-            Book a free exploratory call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="reveal delay-1">
-        <img class="hero-art" src="assets/supervision-hero.jpg" alt="An illustration of two figures shaking hands at a doorway shaped like a head, opening into a reflective space." />
-      </div>
+    <div class="legal-hero reveal">
+      <span class="eyebrow">Legal</span>
+      <h1>Disclaimer</h1>
+      <p class="legal-meta">Effective date: 1 September 2026</p>
     </div>
   </div>
 </header>
 
-<!-- ========== WHO THIS IS FOR ========== -->
-<section class="who-for" id="who">
+<section id="doc" style="padding-top:0;">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Three ways in</div>
-      <h2>Wherever you are in your practice</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
-      </div>
-    </div>
-    <div class="track-grid">
-      <div class="track-card reveal delay-1">
-        <div class="track-label">0 to 3 years</div>
-        <h4>Early-career</h4>
-        <p>A space where you can feel supported as you build your practice and grow into your identity as a therapist. Bring your questions, doubts, and emotional experiences, imposter syndrome included, into a safe, non-judgmental space.</p>
-      </div>
-      <div class="track-card reveal delay-2">
-        <div class="track-label">3 to 6 years</div>
-        <h4>Mid-career</h4>
-        <p>A space to pause and reflect on how you are doing as a person and a practitioner. Navigate complex cases, burnout, and stuckness, and reconnect with your intentions to deepen your work.</p>
-      </div>
-      <div class="track-card reveal delay-3">
-        <div class="track-label">6+ years</div>
-        <h4>Experienced</h4>
-        <p>A space to further understand yourself as a professional, and explore how you continue to grow and change as you deepen into your work.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="legal-body reveal">
 
-<!-- ========== LOGISTICS ========== -->
-<section id="logistics">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">The practical bits</div>
-      <h2>Session logistics</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      <div class="legal-identity">
+        <p>Honoring Stories is a sole proprietorship, the private practice of Harshita Sarda, psychotherapist and clinical supervisor, based in Andheri West, Mumbai, India.<br />
+        <strong>Udyam Registration Number: UDYAM-MH-18-0422743</strong></p>
       </div>
-    </div>
-    <div class="logistics-grid">
-      <div class="logistic-card reveal delay-1">
-        <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
-        <div class="logistic-label">Days</div>
-        <div class="logistic-value">Tue&ndash;Fri<br/>8am&ndash;6pm IST</div>
-      </div>
-      <div class="logistic-card reveal delay-2">
-        <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div class="logistic-label">Duration</div>
-        <div class="logistic-value">60 minutes</div>
-      </div>
-      <div class="logistic-card reveal delay-3">
-        <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M22 8l-5 4 5 4V8z"/></svg></div>
-        <div class="logistic-label">Format</div>
-        <div class="logistic-value">Video call<br/>via Google Meet</div>
-      </div>
-      <div class="logistic-card reveal delay-1">
-        <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div class="logistic-label">Where</div>
-        <div class="logistic-value">Worldwide, online<br/>or in person, Andheri West</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ========== PRICING ========== -->
-<section id="pricing" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Investment</div>
-      <h2>Pricing</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
-      </div>
-    </div>
-    <div class="pricing-grid">
-      <div class="price-card reveal delay-1">
-        <div class="price-label">Online</div>
-        <div class="price-amount">&#8377;1,800 <span>/ session</span></div>
-        <div class="price-desc">60-minute session via Google Meet.</div>
-      </div>
-      <div class="price-card reveal delay-2">
-        <div class="price-label">In person</div>
-        <div class="price-amount">&#8377;2,500 <span>/ session</span></div>
-        <div class="price-desc">60-minute session in person, at Andheri West, Mumbai.</div>
-      </div>
-    </div>
-    <div class="coming-soon reveal delay-3">
-      <span class="tag">Coming soon</span>
-      <h4>Group Supervision</h4>
-      <p>A space is being reserved for group supervision. Format, cadence, and pricing will be shared here once ready. Reach out if you'd like to be kept in the loop.</p>
-    </div>
-  </div>
-</section>
+      <h2>Not an emergency service</h2>
+      <p>This website is not a crisis service and is not monitored for emergencies. Messages sent by email or WhatsApp may not be seen for some time.</p>
 
-<!-- ========== PROCESS ========== -->
-<section id="process">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Getting started</div>
-      <h2>How it works</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      <div class="legal-crisis">
+        <p><strong>If you or someone else is in immediate danger, or you are thinking of harming yourself,</strong> please contact emergency services or one of these helplines:</p>
+        <ul>
+          <li><a href="tel:8686139139">MannTalks &middot; 8686139139</a> (Mon to Sun, 10am to 6pm)</li>
+          <li><a href="tel:9152987821">iCall &middot; 9152987821</a> (Mon to Sat, 10am to 8pm)</li>
+          <li><a href="tel:18005990019">KIRAN Mental Health, Government of India &middot; 1800-599-0019</a> (24 hours)</li>
+          <li><a href="tel:7389366696">Spandan &middot; 7389366696</a> (24 hours)</li>
+          <li><a href="tel:9999666555">Vandrevala Foundation &middot; 9999666555</a> (24 hours)</li>
+        </ul>
       </div>
-    </div>
-    <div class="process-grid">
-      <div class="process-item reveal delay-1" data-step="1">
-        <div class="process-title">Reach out</div>
-        <div class="process-desc">Send a message by <a class="consent-link" href="mailto:feelseen@honoringstories.com">Email</a> or <a class="consent-link" href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a> to get started.</div>
-      </div>
-      <div class="process-item reveal delay-1" data-step="2">
-        <div class="process-title">Share a few basic details</div>
-        <div class="process-desc">A short exchange so I have some context before we speak.</div>
-      </div>
-      <div class="process-item reveal delay-2" data-step="3">
-        <div class="process-title">Free 20-minute exploratory call</div>
-        <div class="process-desc">A no-pressure conversation to see if this feels like the right fit.</div>
-      </div>
-      <div class="process-item reveal delay-2" data-step="4">
-        <div class="process-title">Fill the consent form</div>
-        <div class="process-desc"><a class="consent-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdYik7Trg3YT__pQjntHeagLircLKxFBlJfZq-RfbGMm1bS6g/viewform?usp=sharing&ouid=110517816113101014359" target="_blank" rel="noopener">Fill out the supervision consent form</a> before your first session.</div>
-      </div>
-      <div class="process-item reveal delay-3" data-step="5">
-        <div class="process-title">Time and day scheduled</div>
-        <div class="process-desc">We find a slot that works, and you'll receive a calendar invite once payment is confirmed via UPI or bank transfer.</div>
-      </div>
-      <div class="process-item reveal delay-3" data-step="6">
-        <div class="process-title">We begin</div>
-        <div class="process-desc">Your session is scheduled, and we start the work together.</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ========== FAQS ========== -->
-<section id="faqs" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Good to know</div>
-      <h2>Frequently asked questions</h2>
-      <div class="divider">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
-      </div>
-    </div>
-    <div class="faq-list reveal delay-1">
-      <details class="faq-item">
-        <summary>How do I start my supervision journey?</summary>
-        <p>Reach out by email or WhatsApp whenever it feels right, and share a few basic details. We will set up a free 20-minute call first, so you can get a feel for whether this is a space that fits what you are looking for.</p>
-      </details>
-      <details class="faq-item">
-        <summary>What should I prepare before a session?</summary>
-        <p>It helps to jot down what has been on your mind, a case, a feeling, a question you can't quite shake. Join on time, somewhere quiet, with steady internet. We will shape your goals together after that first session.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Is what I share confidential?</summary>
-        <p>Yes. The same care around privacy that applies to therapy applies here too, our conversations stay between us, with the one exception of risk of harm, which we would always discuss openly first.</p>
-      </details>
-      <details class="faq-item">
-        <summary>How often will we meet?</summary>
-        <p>Generally every two weeks or so, though we will shape that schedule around what actually supports your practice and pace.</p>
-      </details>
-      <details class="faq-item">
-        <summary>What topics can we cover?</summary>
-        <p>Whatever is alive for you as a practitioner, client cases, ethical grey areas, burnout, imposter syndrome, the everyday logistics of building your practice. If you are unsure whether something belongs here, bring it anyway.</p>
-      </details>
-      <details class="faq-item">
-        <summary>What's the cancellation policy?</summary>
-        <p>You are welcome to reschedule or cancel at no cost up to 3 hours before your session.</p>
-      </details>
-    </div>
-  </div>
-</section>
+      <h2>Information, not treatment</h2>
+      <p>Everything on this website is offered for general information. It is not psychological, medical, or clinical advice, and it is not a diagnosis or a treatment plan. Reading this site is not a substitute for speaking to a qualified professional about your own situation.</p>
 
-<!-- ========== CONTACT ========== -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="reveal">
-      <h2>Let's begin a conversation</h2>
-      <p>If this feels like a space you'd like to bring your practice into, I'd gently invite you to reach out. A free exploratory call is a soft first step.</p>
-      <div class="contact-ctas">
-        <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="btn btn-primary">
-          Book a Consultation Call
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="https://wa.me/919152801719" target="_blank" rel="noopener" class="btn btn-secondary">Reach out</a>
-      </div>
+      <h2>No therapeutic relationship is created by this website</h2>
+      <p>Visiting this site, reading it, or sending an enquiry does not create a therapist and client relationship or a supervisory relationship. That begins only when we have spoken, agreed to work together, and you have completed the relevant consent form.</p>
+
+      <h2>Outcomes differ from person to person</h2>
+      <p>Therapy and supervision are collaborative processes, and what they bring up is different for everyone. Nothing here is a promise of any particular outcome, timeline, or result.</p>
+
+      <h2>Peer testimonials</h2>
+      <p>Testimonials on this site are from fellow mental health professionals, shared with their consent. They describe those individuals' own impressions and are not a guarantee of anyone else's experience.</p>
+
+      <h2>Shared Ways of Coping</h2>
+      <p>Notes shared in this space come from members of the public describing what helped them personally. They are lived experience, not clinical guidance, and they are not reviewed as recommendations. Something that helped one person may not suit you, and none of it replaces speaking to a professional about your own circumstances.</p>
+
+      <h2>External links</h2>
+      <p>This site links to other services, including WhatsApp, LinkedIn, Google Forms, and a scheduling tool. Those services are run by other organisations, and their content and privacy practices are their own responsibility.</p>
+
+      <h2>Professional scope</h2>
+      <p>Services are for adults aged 18 and over. They are not intended for children or adolescents, and this site does not offer psychiatric care, medication advice, emergency intervention, or any court-directed or forensic assessment.</p>
+
+    </div>
+    <div class="legal-links reveal delay-1">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms and Conditions</a>
+      <a href="index.html">Back to home</a>
     </div>
   </div>
 </section>
@@ -558,42 +388,6 @@
     else nav.classList.remove('scrolled');
   }, { passive: true });
 
-  const rail = document.getElementById('sectionRail');
-  if (rail) {
-    const railLinks = [...rail.querySelectorAll('.rail-dot')];
-    const railTargets = railLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const footerEl = document.querySelector('footer');
-    const heroEl = document.querySelector('#who');
-
-    window.addEventListener('scroll', () => {
-      const pastHero = heroEl ? window.scrollY > heroEl.offsetTop * 0.6 : window.scrollY > 400;
-      const nearFooter = footerEl && (window.scrollY + window.innerHeight > footerEl.offsetTop + 80);
-      rail.classList.toggle('visible', pastHero && !nearFooter);
-    }, { passive: true });
-
-    const activeIo = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        const link = railLinks.find(a => document.querySelector(a.getAttribute('href')) === e.target);
-        if (!link) return;
-        if (e.isIntersecting) {
-          railLinks.forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
-    railTargets.forEach(t => activeIo.observe(t));
-
-    let idleTimer;
-    function resetRailIdle() {
-      rail.classList.remove('idle');
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => rail.classList.add('idle'), 2000);
-    }
-    window.addEventListener('mousemove', resetRailIdle, { passive: true });
-    window.addEventListener('scroll', resetRailIdle, { passive: true });
-    resetRailIdle();
-  }
-
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -603,64 +397,6 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Session logistics infographic: each point reacts to how near the cursor is
-  // rather than only to direct hover, and a brighter stretch of the connecting
-  // thread follows the pointer. Values are eased toward their target once per
-  // frame in JS, so no CSS transition is used (a transition here would restart
-  // on every pointermove and lag behind). Skipped entirely on touch input and
-  // when the visitor prefers reduced motion, leaving the section static.
-  (function () {
-    const grid = document.querySelector('.logistics-grid');
-    if (!grid) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const items = [...grid.querySelectorAll('.logistic-card')];
-    const prox = items.map(() => 0);
-    // Wider than the ~224px gap between points, so a neighbouring point lifts
-    // gently too rather than the effect being all-or-nothing like plain hover.
-    const RADIUS = 380;
-    const ICON_CENTRE_Y = 26;
-    // Vertical distance counts for less: the points sit in a horizontal row and
-    // the cursor is usually below the icon, over the label and value text.
-    const Y_WEIGHT = 0.55;
-    let mx = 0, my = 0, inside = false, thread = 0, raf = null;
-
-    function start() { if (!raf) raf = requestAnimationFrame(frame); }
-
-    grid.addEventListener('pointermove', (e) => {
-      mx = e.clientX; my = e.clientY; inside = true; start();
-    });
-    grid.addEventListener('pointerleave', () => { inside = false; start(); });
-
-    function frame() {
-      const gridRect = grid.getBoundingClientRect();
-      let settling = false;
-
-      items.forEach((el, i) => {
-        let target = 0;
-        if (inside) {
-          const r = el.getBoundingClientRect();
-          const dx = mx - (r.left + r.width / 2);
-          const dy = (my - (r.top + ICON_CENTRE_Y)) * Y_WEIGHT;
-          target = Math.max(0, 1 - Math.hypot(dx, dy) / RADIUS);
-          target = Math.pow(target, 1.5); // nearest point clearly leads, its neighbour follows softly
-        }
-        prox[i] += (target - prox[i]) * 0.14;
-        if (Math.abs(target - prox[i]) > 0.002) settling = true;
-        el.style.setProperty('--prox', prox[i].toFixed(3));
-      });
-
-      const threadTarget = inside ? 1 : 0;
-      thread += (threadTarget - thread) * 0.14;
-      if (Math.abs(threadTarget - thread) > 0.002) settling = true;
-      grid.style.setProperty('--thread', thread.toFixed(3));
-      grid.style.setProperty('--mx', (mx - gridRect.left).toFixed(1) + 'px');
-
-      raf = settling ? requestAnimationFrame(frame) : null;
-    }
-  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
