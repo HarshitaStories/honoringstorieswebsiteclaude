@@ -344,6 +344,26 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   (and the word "cadence" was flagged as not simple enough, replaced with "schedule" in the
   supervision "how often will we meet" answer).
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
+- **Work With Me, For Organisations** (`corporates.html`, built): the third entry in the Work With
+  Me dropdown, aimed at companies and teams. Built from the `psychotherapy.html` template so nav,
+  footer and styling stay identical. Copy was drafted and approved by the user before any building.
+  - **No pricing anywhere on this page, by explicit instruction.** The pricing CSS inherited from
+    the template was stripped out rather than left dead, so it cannot creep back in. The "A
+    conversation" step in the process is what handles the pricing question instead. Do not add a
+    price table, a "from" figure, or a package tier here without being asked.
+  - Sections: hero (centred, single column, no artwork yet), Why this matters, What I offer
+    (three `.concern-card`s: Workshops, One-on-one mini sessions, Customised plans), Themes
+    (`.theme-pill` list of 8, plus a note inviting their own), Confidentiality, How it works
+    (5-step process), a short About block linking to `about.html`, 7 FAQs, and a contact CTA.
+  - **Confidentiality has its own block** (`.confidential`) rather than being a line in the copy.
+    For the organisation it is usually the deciding question, and for the employee it is what makes
+    the space usable at all. It states plainly that the employer receives no names, notes, or
+    account of what was discussed, only broad non-identifying themes, with the risk-of-harm
+    exception. Keep this prominent; it is also repeated as an FAQ because people look in both places.
+  - **Deliberately claims no corporate track record.** Nothing in the source material describes
+    previous organisational work, so there are no client names, logos, "trusted by" lines, or
+    outcome statistics. If real ones are supplied later they belong near the top. Do not invent
+    percentages about attrition or productivity to fill the gap.
 - **Community** (`community.html`, built): one page holding both community spaces, built from the
   `psychotherapy.html` template so nav, footer, CSS and scripts stay identical. Copy is taken from
   the source docs `About - Shared ways of coping.docx` and `About - Sip and Swap stories.docx` in

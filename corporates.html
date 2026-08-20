@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Community · Honoring Stories</title>
-<meta name="description" content="Two gentle spaces at Honoring Stories: Shared Ways of Coping, anonymous notes on what helped, and Sip and Swap Stories, casual one-to-one conversations for mental health professionals." />
+<title>For Organisations · Honoring Stories</title>
+<meta name="description" content="Workshops, confidential one-to-one mini sessions, and customised wellbeing plans for teams and organisations, with psychotherapist Harshita Sarda. Online anywhere, or in person in Mumbai." />
 <link rel="icon" type="image/png" href="assets/logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -184,34 +184,25 @@
   .footer-helplines li { font-size: 0.8rem; color: rgba(253, 250, 242, 0.6); }
   .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
   .footer-helplines a:hover { color: var(--rose-soft); }
-  /* ========== COMMUNITY ========== */
-  .community-hero { text-align: center; max-width: 720px; margin: 0 auto; }
-  .community-hero h1 { margin-bottom: 1.25rem; }
-  .community-hero .page-hero-note { margin-left: auto; margin-right: auto; }
-  .split { display: grid; gap: 2.5rem; align-items: center; }
-  @media (min-width: 900px) { .split { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
-  .community-copy p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.75; }
-  .community-copy p:last-of-type { margin-bottom: 1.5rem; }
-  .note-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
-  .note-pill { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.45rem 0.9rem; font-size: 0.85rem; color: var(--charcoal-soft); }
-  .note-pill svg { width: 14px; height: 14px; color: var(--rose); flex-shrink: 0; }
-  /* Quiet, non-alarming way to state who a space is not for. Deliberately not a loud warning banner. */
-  .gentle-note { border-left: 2px solid var(--rose-soft); padding: 0.3rem 0 0.3rem 1rem; margin: 1.75rem 0 0; font-size: 0.9rem; color: var(--charcoal-soft); line-height: 1.65; }
-  /* Published notes. Quote only, deliberately no name, credentials or any other
-     attribution: the whole point of this space is that it stays anonymous. */
-  .notes-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; max-width: 980px; margin: 3rem auto 0; }
-  @media (min-width: 760px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
-  .note-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 18px; padding: 1.75rem; transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
-  .note-card:hover { transform: translateY(-4px); border-color: var(--rose-soft); box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2); }
-  .note-mark { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--rose-soft); margin-bottom: 0.35rem; }
-  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.75; color: var(--charcoal-soft); margin: 0; }
-  .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
-  .notes-cta { text-align: center; margin-top: 2.5rem; }
-  .safety-note { max-width: 640px; margin: 1.25rem auto 0; text-align: center; font-size: 0.84rem; line-height: 1.7; color: var(--muted); }
-  .reserved-block { max-width: 720px; margin: 2.5rem auto 0; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); padding: 2rem 1.75rem; text-align: center; }
-  .reserved-block .tag { display: inline-block; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: var(--rose); margin-bottom: 0.5rem; }
-  .reserved-block h4 { font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); margin-bottom: 0.5rem; }
-  .reserved-block p { font-size: 0.92rem; color: var(--charcoal-soft); line-height: 1.7; margin: 0; }
+  /* ========== ORGANISATIONS ========== */
+  .corp-hero { text-align: center; max-width: 760px; margin: 0 auto; }
+  .corp-hero h1 { margin-bottom: 1.25rem; }
+  .corp-hero .page-hero-note { margin-left: auto; margin-right: auto; }
+  .corp-hero .lang-note { margin-top: 0.5rem; }
+  .corp-prose { max-width: 720px; margin: 0 auto; }
+  .corp-prose p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.8; }
+  .corp-prose p:last-child { margin-bottom: 0; }
+  .theme-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; max-width: 880px; margin: 0 auto; }
+  .theme-pill { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.65rem 1.15rem; font-size: 0.92rem; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle); }
+  .theme-pill:hover { transform: translateY(-2px); border-color: var(--rose-soft); color: var(--deep-purple); }
+  .theme-note { text-align: center; font-size: 0.9rem; color: var(--muted); font-style: italic; margin: 1.5rem auto 0; }
+  /* Confidentiality gets its own block rather than a line in the copy: for an
+     organisation it is usually the deciding question, and for the employee it
+     is what makes the space usable at all. */
+  .confidential { max-width: 720px; margin: 0 auto; background: var(--cream-warm); border: 1px solid var(--line); border-left: 3px solid var(--rose-soft); border-radius: 14px; padding: 1.85rem 1.9rem; }
+  .confidential h3 { font-size: 1.3rem; font-weight: 500; color: var(--deep-purple); font-style: italic; margin-bottom: 0.85rem; }
+  .confidential p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.8; }
+  .confidential p:last-child { margin-bottom: 0; }
 
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
@@ -269,109 +260,115 @@
 
 <!-- ========== SECTION RAIL ========== -->
 <nav class="section-rail" id="sectionRail" aria-label="Page sections">
-  <a href="#shared-ways" class="rail-dot" data-label="Shared Ways of Coping"></a>
-  <a href="#sip-and-swap" class="rail-dot" data-label="Sip and Swap Stories"></a>
+  <a href="#why" class="rail-dot" data-label="Why this matters"></a>
+  <a href="#offer" class="rail-dot" data-label="What I offer"></a>
+  <a href="#themes" class="rail-dot" data-label="Themes"></a>
   <a href="#how" class="rail-dot" data-label="How it works"></a>
-  <a href="#contact" class="rail-dot" data-label="Say hello"></a>
+  <a href="#faqs" class="rail-dot" data-label="Questions"></a>
+  <a href="#contact" class="rail-dot" data-label="Let's talk"></a>
 </nav>
 
 <!-- ========== HERO ========== -->
 <header class="page-hero">
   <div class="wrap">
-    <div class="community-hero reveal">
-      <span class="eyebrow">Community</span>
-      <h1>Spaces to share and connect</h1>
-      <p class="page-hero-note">Two gentle spaces that sit alongside the therapy and supervision work: one for anonymous notes on what has helped people through hard times, and one for gathering with fellow mental health professionals over a conversation.</p>
+    <div class="corp-hero reveal">
+      <span class="eyebrow">For organisations and teams</span>
+      <h1>Support that meets people where they actually are</h1>
+      <p class="page-hero-note">Most workplaces do not have a mental health problem to solve. They have people carrying a lot, often quietly, alongside deadlines and change and each other. I work with organisations to create spaces where that can be spoken about honestly, and where support feels genuinely available rather than announced once a year.</p>
+      <div class="lang-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h10M9 5v3M13 5c-1 3-3.5 6-7 8M7 9c1.5 2.5 4 4.5 6.5 5.5"/><path d="M13 20l4-9 4 9M14.5 17h5"/></svg>
+        In English and Hindi, online anywhere or in person in Mumbai
+      </div>
+      <div style="margin-top:2rem;">
+        <a href="mailto:feelseen@honoringstories.com" class="btn btn-primary">
+          Start a conversation
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ========== SHARED WAYS OF COPING ========== -->
-<section class="who-for" id="shared-ways">
+<!-- ========== WHY THIS MATTERS ========== -->
+<section class="who-for" id="why">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Anonymous and optional</div>
-      <h2>Shared Ways of Coping</h2>
+      <div class="eyebrow">Why this matters</div>
+      <h2>Beyond awareness</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="split">
-      <div class="reveal delay-1">
-        <img class="hero-art" src="assets/sharedwaysofcoping.jpg" alt="A pencil illustration of an open umbrella covered in small notes reading Breathe, Rest, Tea, Journal, Walk, Music and Call a friend, with a smiling raindrop sheltering beneath it." />
-      </div>
-      <div class="community-copy reveal delay-2">
-        <p>This is a gentle space where those who have walked through difficult times share what supported them, anonymously. These are small notes, reminders, or practices that brought a little ease, comfort, or grounding.</p>
-        <p>The intention in creating this space is to offer reassurance. Sometimes, knowing we are not alone in our struggles, and seeing what has helped someone else, can be a gentle companion in our own journey.</p>
-        <p>You are welcome to read through, or even share something that has helped you, from or outside of therapy, if and when it feels right.</p>
-        <div class="note-pills">
-          <span class="note-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-            Completely anonymous
-          </span>
-          <span class="note-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
-            Sharing is optional
-          </span>
-          <span class="note-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Read before publishing
-          </span>
-        </div>
-      </div>
-    </div>
-    <!-- Notes render here. Cards are built in JS so approved entries can be
-         pulled from the responses sheet without editing this file. -->
-    <div class="notes-grid reveal delay-3" id="notesGrid"></div>
-    <p class="notes-notice" id="notesNotice" hidden></p>
-
-    <div class="notes-cta reveal delay-3" id="notesCta" hidden>
-      <a class="btn btn-primary" id="notesFormLink" href="#" target="_blank" rel="noopener">
-        Share what helped you
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <p class="safety-note">Sharing is anonymous and entirely optional, and everything is read before it goes up. Please note this space is not monitored, so it is not a way to reach me. If you need to talk to someone now, the helplines at the bottom of this page are there for you.</p>
-    </div>
-
-    <div class="reserved-block reveal delay-3" id="notesFormPending">
-      <span class="tag">Coming soon</span>
-      <h4>A place to share what helped</h4>
-      <p>The anonymous sharing form will live here. Everything shared is read before it is published, so this space stays gentle for whoever finds it next.</p>
+    <div class="corp-prose reveal delay-1">
+      <p>Wellbeing initiatives often stop at awareness. People learn what burnout is, but not what to do the following Monday, and rarely get a space to say how they are actually doing.</p>
+      <p>What I bring is clinical practice rather than a slide deck. Seven years of sitting with people through anxiety, exhaustion, difficult transitions and the ordinary weight of being human means the work stays practical, grounded, and free of jargon. The aim is that people leave with something they can use, and with a clearer sense that support is available if they want it.</p>
     </div>
   </div>
 </section>
 
-<!-- ========== SIP AND SWAP STORIES ========== -->
-<section id="sip-and-swap">
+<!-- ========== WHAT I OFFER ========== -->
+<section id="offer">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">For mental health professionals</div>
-      <h2>Sip and Swap Stories</h2>
+      <div class="eyebrow">Ways to work together</div>
+      <h2>What I offer</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
-      <p>A gentle, casual space for therapists, psychologists, and mental health professionals to connect with me one to one.</p>
+      <p>Three starting points, each shaped around your organisation rather than delivered off a shelf.</p>
     </div>
     <div class="concerns-grid">
       <div class="concern-card reveal delay-1">
         <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        <h4>Who it is for</h4>
-        <p>Therapists, psychologists, and mental health professionals with at least 2 years of experience.</p>
+        <h4>Workshops</h4>
+        <p>Interactive sessions for teams, built around a theme and shaped to your context. These are conversations rather than lectures, with room to reflect, ask, and practise. Suitable for whole teams, specific departments, or leadership groups.</p>
       </div>
       <div class="concern-card reveal delay-2">
-        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M22 8l-5 4 5 4V8z"/></svg>
-        <h4>The format</h4>
-        <p>A 40-minute video call, one to one. No agenda beyond a real conversation.</p>
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8M8 14h5"/><path d="M21 12a8 8 0 01-8 8H7l-4 3v-5.5A8 8 0 1121 12z"/></svg>
+        <h4>One-on-one mini sessions</h4>
+        <p>Short, confidential individual slots offered on site or online across a day or half day. For many people the hardest part of getting support is arranging it. This removes that step, and is often used for wellbeing days or during periods of real pressure or change.</p>
       </div>
       <div class="concern-card reveal delay-3">
-        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8M8 14h5"/><path d="M21 12a8 8 0 01-8 8H7l-4 3v-5.5A8 8 0 1121 12z"/></svg>
-        <h4>What we might talk about</h4>
-        <p>Sharing stories, exploring possibilities for collaboration or referrals, or simply a meaningful conversation, person to person.</p>
+        <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <h4>Customised plans</h4>
+        <p>A single session rarely shifts much on its own. If you are looking for something ongoing, I can build a plan around your team: a series across months, work focused on managers and how they hold their people, a combination of the above, or something built for a specific moment your organisation is moving through.</p>
       </div>
     </div>
-    <div class="community-copy reveal delay-2" style="max-width:720px;margin:3rem auto 0;">
-      <p>My intention is to get to know your work, share mine, and create a space where we can uplift each other. Over time, I hope this grows into a thoughtful, non-isolating community for us in the mental health field, and that we get to know each other outside of our professional identities.</p>
-      <p class="gentle-note">A note on fit: this space is not meant for existing, previous, or potential therapy clients or supervisees. If we are already working together in either of those ways, our sessions remain the space for that.</p>
+  </div>
+</section>
+
+<!-- ========== THEMES ========== -->
+<section id="themes" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Starting points</div>
+      <h2>Themes we can work with</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="theme-pills reveal delay-1">
+      <span class="theme-pill">Stress, burnout, and the space between the two</span>
+      <span class="theme-pill">Emotional regulation in high-pressure work</span>
+      <span class="theme-pill">Boundaries, and what makes them hard to hold at work</span>
+      <span class="theme-pill">Communication, difficult conversations, and repair</span>
+      <span class="theme-pill">Psychological safety within teams</span>
+      <span class="theme-pill">Supporting a colleague who is struggling</span>
+      <span class="theme-pill">Navigating change, uncertainty, and transitions</span>
+      <span class="theme-pill">Rest, and why it is often the first thing to go</span>
+    </div>
+    <p class="theme-note reveal delay-2">Pick one, combine a few, or bring a theme of your own.</p>
+  </div>
+</section>
+
+<!-- ========== CONFIDENTIALITY ========== -->
+<section id="confidentiality">
+  <div class="wrap">
+    <div class="confidential reveal">
+      <h3>On confidentiality</h3>
+      <p>This tends to be the question underneath all the others, so it is worth saying plainly.</p>
+      <p>What an individual shares with me stays with them. Organisations do not receive names, notes, or any account of what was discussed. Where it is useful, I can share broad themes at a group level, with nothing that could identify a person. The one exception is a risk of serious harm, which is discussed openly upfront.</p>
+      <p>This is not a technicality. People only use these spaces when they trust them, and that trust is what makes the work worth doing.</p>
     </div>
   </div>
 </section>
@@ -381,24 +378,93 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Getting started</div>
-      <h2>How Sip and Swap works</h2>
+      <h2>How it works</h2>
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
     <div class="process-grid">
       <div class="process-item reveal delay-1" data-step="1">
-        <div class="process-title">Reach out with your LinkedIn</div>
-        <div class="process-desc">Send a message by <a class="consent-link" href="mailto:feelseen@honoringstories.com">Email</a> or <a class="consent-link" href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a>, and include your LinkedIn profile so I have a bit of context before we connect.</div>
+        <div class="process-title">Reach out</div>
+        <div class="process-desc">A short message about your organisation and what has prompted this is enough to start. By <a class="consent-link" href="mailto:feelseen@honoringstories.com">Email</a> or <a class="consent-link" href="https://wa.me/919152801719" target="_blank" rel="noopener">WhatsApp</a>.</div>
       </div>
-      <div class="process-item reveal delay-2" data-step="2">
-        <div class="process-title">We find a time</div>
-        <div class="process-desc">I will share my calendar so we can pick a slot that works for both of us.</div>
+      <div class="process-item reveal delay-1" data-step="2">
+        <div class="process-title">A conversation</div>
+        <div class="process-desc">We talk through your context, your team, what has already been tried, and what you are hoping for. No obligation to go further.</div>
       </div>
-      <div class="process-item reveal delay-3" data-step="3">
-        <div class="process-title">We talk, for 40 minutes</div>
-        <div class="process-desc">A video call, one to one. Come as you are, no preparation needed.</div>
+      <div class="process-item reveal delay-2" data-step="3">
+        <div class="process-title">A proposal</div>
+        <div class="process-desc">I come back with a suggested shape: format, length, themes, and how it might run.</div>
       </div>
+      <div class="process-item reveal delay-2" data-step="4">
+        <div class="process-title">We deliver it</div>
+        <div class="process-desc">Online or in person, in English or Hindi.</div>
+      </div>
+      <div class="process-item reveal delay-3" data-step="5">
+        <div class="process-title">We look at how it went</div>
+        <div class="process-desc">What landed, what people asked for, and what might be worth doing next.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about-me">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who you would be working with</div>
+      <h2>A little about me</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="corp-prose reveal delay-1">
+      <p>I am Harshita Sarda, a psychotherapist and clinical supervisor based in Andheri West, Mumbai. I hold an MA in Clinical Psychology, a Diploma in Counseling Psychology from Xavier's College, and a Diploma in Supervision for Mental Health Practice from TISS. I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and training in complex trauma with the ISSTD.</p>
+      <p>My work is trauma-informed, queer-affirmative, intersectional, and neurodivergent inclusive. In practice that means the room is built for the people actually in it, not an average of them.</p>
+      <p style="margin-top:1.75rem;"><a class="consent-link" href="about.html">More about my background</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQS ========== -->
+<section id="faqs" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Good to know</div>
+      <h2>Questions organisations ask</h2>
+      <div class="divider">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
+      </div>
+    </div>
+    <div class="faq-list reveal delay-1">
+      <details class="faq-item">
+        <summary>How large can a group be?</summary>
+        <p>Workshops work well from small teams up to larger groups. Smaller groups allow more conversation, larger ones work better with a more structured format. Tell me your numbers and I will suggest what suits.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Online or in person?</summary>
+        <p>Both. In person in Mumbai, and online anywhere.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long does a session run?</summary>
+        <p>Usually between 60 and 120 minutes depending on the theme and the size of the group, though this is flexible.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will we be told what employees talked about?</summary>
+        <p>No. What someone shares with me stays with them, and the organisation does not receive names, notes, or any account of what was discussed. Where it is useful I can share broad themes at a group level, with nothing that could identify a person. The one exception is a risk of serious harm, which is discussed openly upfront.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can this be tailored to our industry?</summary>
+        <p>Yes, and it usually should be. The pressures in a hospital, a startup, and a law firm are not the same, and the session works better when it reflects that.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which languages do you work in?</summary>
+        <p>English and Hindi.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much notice do you need?</summary>
+        <p>The earlier the better for scheduling, but reach out whenever the thought arises and we will find something workable.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -407,8 +473,8 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="reveal">
-      <h2>If this resonates, say hello</h2>
-      <p>For Sip and Swap Stories, send a message with your LinkedIn profile and I will share my calendar. For anything else here, you are welcome to just reach out.</p>
+      <h2>Let's talk about your team</h2>
+      <p>If any of this feels relevant to where your organisation is right now, I would be glad to hear from you. A first conversation is just that, a conversation, with no commitment attached.</p>
       <div class="contact-ctas">
         <a href="mailto:feelseen@honoringstories.com" class="btn btn-primary">
           Email me
@@ -526,131 +592,6 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  /* ===================================================================
-     SHARED WAYS OF COPING: published notes
-     ===================================================================
-     Fill in these two values once the Google Form and Sheet exist. Until
-     then the page shows sample notes, clearly labelled as samples, so the
-     layout can be reviewed without pretending they are real submissions.
-
-     SHARED_NOTES_CSV
-       File > Share > Publish to web, in the responses spreadsheet.
-       Publish ONLY the "Approved" tab, as CSV.
-       Do NOT publish the raw responses tab: that would make every
-       unmoderated submission publicly readable and defeat the whole point
-       of moderating. The Approved tab should be a formula pulling just the
-       rows you have ticked, e.g.
-         =FILTER(Responses!B2:B, Responses!C2:C=TRUE)
-
-     SHARED_FORM_URL
-       The public "send" link of the Google Form. Make sure the form's
-       "Collect email addresses" setting is OFF, otherwise submissions are
-       not actually anonymous.
-     =================================================================== */
-  const SHARED_NOTES_CSV = '';
-  const SHARED_FORM_URL  = '';
-
-  // Shown only while SHARED_NOTES_CSV is empty, so the design can be judged.
-  // These are written examples, not real submissions, and the notice below
-  // says so on the page. They disappear the moment a real source is set.
-  const SAMPLE_NOTES = [
-    'Keeping a glass of water and a notebook by my bed. On the nights my thoughts race, writing one sentence down is often enough to stop it spiralling.',
-    'Going for a walk without my phone, even just ten minutes. Not to clear my head, only to be somewhere else for a while.',
-    'Telling one person the honest version of how my week went, instead of saying I am fine.'
-  ];
-
-  (function () {
-    const grid = document.getElementById('notesGrid');
-    const notice = document.getElementById('notesNotice');
-    const cta = document.getElementById('notesCta');
-    const formLink = document.getElementById('notesFormLink');
-    const pending = document.getElementById('notesFormPending');
-    if (!grid) return;
-
-    if (SHARED_FORM_URL) {
-      formLink.href = SHARED_FORM_URL;
-      cta.hidden = false;
-      pending.hidden = true;
-    }
-
-    function render(notes, isSample) {
-      grid.textContent = '';
-      notes.forEach(text => {
-        const card = document.createElement('div');
-        card.className = 'note-card';
-        const mark = document.createElement('span');
-        mark.className = 'note-mark';
-        mark.textContent = '“';
-        const p = document.createElement('p');
-        // textContent, never innerHTML: this is text submitted through a
-        // public form, so treating it as markup would be an injection hole
-        // even with a human moderating.
-        p.textContent = text;
-        card.appendChild(mark);
-        card.appendChild(p);
-        grid.appendChild(card);
-      });
-      if (isSample) {
-        notice.textContent = 'These are example notes, shown while the anonymous sharing space is being set up. Real notes will replace them once it opens.';
-        notice.hidden = false;
-      } else {
-        notice.hidden = true;
-      }
-    }
-
-    // Minimal CSV reader: handles quoted fields containing commas, newlines
-    // and escaped double quotes, which free-text answers routinely include.
-    function parseCSV(text) {
-      const rows = [];
-      let row = [], field = '', inQuotes = false;
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        if (inQuotes) {
-          if (c === '"') {
-            if (text[i + 1] === '"') { field += '"'; i++; }
-            else inQuotes = false;
-          } else field += c;
-        } else if (c === '"') inQuotes = true;
-        else if (c === ',') { row.push(field); field = ''; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
-        else if (c !== '\r') field += c;
-      }
-      if (field !== '' || row.length) { row.push(field); rows.push(row); }
-      return rows;
-    }
-
-    if (!SHARED_NOTES_CSV) {
-      render(SAMPLE_NOTES, true);
-      return;
-    }
-
-    fetch(SHARED_NOTES_CSV, { cache: 'no-store' })
-      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(text => {
-        const headerish = /^(timestamp|note|notes|response|what helped)/i;
-        // The Approved tab is a single column, so rejoin the fields rather
-        // than taking r[0]. If a note's commas ever arrive unquoted, taking
-        // the first field alone would silently truncate it mid-sentence,
-        // publishing half of what someone wrote with no visible error.
-        const notes = parseCSV(text)
-          .map(r => r.join(',').trim())
-          .filter(v => v && !headerish.test(v));
-        if (notes.length) render(notes, false);
-        else {
-          // Nothing approved yet. Say so plainly rather than showing an
-          // empty space or falling back to samples on the live site.
-          grid.textContent = '';
-          notice.textContent = 'No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.';
-          notice.hidden = false;
-        }
-      })
-      .catch(() => {
-        grid.textContent = '';
-        notice.textContent = 'The shared notes could not be loaded just now. Please try again a little later.';
-        notice.hidden = false;
-      });
-  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
