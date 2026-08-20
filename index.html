@@ -531,113 +531,68 @@
     position: relative;
     perspective: 1000px;
   }
-  /* A soft radial "safe area" instead of a hard-edged rounded rectangle, so
-     the backdrop fades into the page rather than reading as a boxed frame.
-     The fill is the page's own cream tone (not white), so the fade reads as
-     the photo dissolving into the page instead of a bright halo/spotlight
-     sitting behind her. The photo is a transparent cut-out; the radial mask
-     feathers every edge with a long, gentle taper (many stops approximating
-     an ease curve, since a short taper leaves a visible ring where dark hair
-     meets the page). The background gradient's stops mirror the mask's
-     exactly so the fill and the alpha falloff coincide instead of drawing
-     two edges. */
+  /* The feather belongs BEHIND her, not across her. Previously the radial mask
+     sat on the frame, and the frame contains the photo, so the fade was washing
+     over the subject herself. The soft cream bloom is now its own layer
+     underneath, and the photo sitting above it stays fully opaque. */
   .hero-photo-frame {
     position: relative;
-    max-width: 690px;
+    max-width: 459px;
     margin: 0 auto;
-    overflow: hidden;
-    /* The gradient must finish INSIDE the element or the element edge clips it
-       mid-fade and draws a hard line. The previous values (ellipse 55% 78% at
-       50% 36%) reached 42% of the height above the top edge, so at the top the
-       mask was still ~94% opaque when it got cut off, which is exactly the
-       visible boundary this replaces. Padding cannot fix that, since the
-       percentages resolve against the box and the ratio stays the same however
-       tall it gets.
-       Centre 50% with radius 50% makes the ellipse touch each edge midpoint at
-       precisely zero alpha, and corners fall beyond 100%, so no edge can be
-       clipped. Top padding gives the fade runway above her hair. */
-    padding: 9% 16% 0;
-    box-sizing: border-box;
-    background: radial-gradient(ellipse 50% 50% at 50% 50%,
-      var(--cream-warm) 0%,
-      var(--cream-warm) 46%,
-      rgba(253, 250, 242, 0.97) 56%,
-      rgba(253, 250, 242, 0.9) 64%,
-      rgba(251, 246, 236, 0.78) 71%,
-      rgba(248, 241, 228, 0.6) 78%,
-      rgba(248, 241, 228, 0.4) 85%,
-      rgba(248, 241, 228, 0.22) 91%,
-      rgba(248, 241, 228, 0.09) 96%,
-      rgba(248, 241, 228, 0) 100%);
-    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
-      #000 0%,
-      #000 46%,
-      rgba(0, 0, 0, 0.97) 56%,
-      rgba(0, 0, 0, 0.9) 64%,
-      rgba(0, 0, 0, 0.78) 71%,
-      rgba(0, 0, 0, 0.6) 78%,
-      rgba(0, 0, 0, 0.4) 85%,
-      rgba(0, 0, 0, 0.22) 91%,
-      rgba(0, 0, 0, 0.09) 96%,
-      rgba(0, 0, 0, 0) 100%);
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
-      #000 0%,
-      #000 46%,
-      rgba(0, 0, 0, 0.97) 56%,
-      rgba(0, 0, 0, 0.9) 64%,
-      rgba(0, 0, 0, 0.78) 71%,
-      rgba(0, 0, 0, 0.6) 78%,
-      rgba(0, 0, 0, 0.4) 85%,
-      rgba(0, 0, 0, 0.22) 91%,
-      rgba(0, 0, 0, 0.09) 96%,
-      rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
     transform-style: preserve-3d;
     transition: transform 0.4s var(--ease-gentle);
     will-change: transform;
   }
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 4%;
+    width: 168%;
+    height: 94%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    /* Inscribed ellipse (centre 50%, radius 50%) so the wash reaches zero alpha
+       exactly at its own edges and cannot be clipped into a hard line. */
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+      var(--cream-warm) 0%,
+      var(--cream-warm) 38%,
+      rgba(253, 250, 242, 0.92) 52%,
+      rgba(251, 246, 236, 0.75) 63%,
+      rgba(248, 241, 228, 0.55) 73%,
+      rgba(248, 241, 228, 0.34) 82%,
+      rgba(248, 241, 228, 0.16) 90%,
+      rgba(248, 241, 228, 0.05) 96%,
+      rgba(248, 241, 228, 0) 100%);
+  }
   .hero-photo-frame img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: block;
-    /* The subject sits right-of-centre in the source photo (17.5% empty margin
-       on the left, 0.5% on the right), which left her visibly shoved to one
-       side of the frame. Nudge left so the margins either side of her are even.
-       The strip this exposes on the right is the frame's own fill, so nothing
-       shows through. There's also ~12% dead transparent space above her hair
-       in the source file; scaling up and shifting up crops that out so her
-       head sits at the top of the frame instead of floating mid-way down it.
-       The overflow this creates on the other edges is caught by the frame's
-       overflow:hidden, which is safe here because the mask has already faded
-       those edges to near-zero opacity. */
-    transform: translateX(-8.5%) translateY(-4%) scale(1.16);
+    /* She sits right-of-centre in the source file: 17.5% empty margin on the
+       left against 0.5% on the right. Nudging left evens the margins. */
+    transform: translateX(-8.5%);
+    /* The ONLY mask on the photo, and only along the bottom, because the source
+       crops her at the chest and would otherwise end on a hard horizontal cut.
+       Her face and hair stay fully opaque. Do not put a radial mask back on the
+       frame: that is what was fading the subject. */
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
-  /* On desktop the portrait was reading small: the frame's own feathering
-     padding eats ~36% of its width, and the grid column capped it further, so
-     she floated in the middle of the hero with dead cream below her. Widen the
-     frame past its column (the overspill is fully-faded glow, not content) and
-     cancel the hero's bottom padding so she reaches the section's base edge.
-     A small top margin lines her hairline up with the top of the "A space to
-     feel seen," heading rather than the eyebrow line above it. */
-  .hero-photo {
-    margin-bottom: -4rem;
-  }
-  .hero-photo-frame {
-    max-width: none;
-    margin: 0 -8%;
-  }
+  /* Sized so her visible height matches the text column: hairline level with the
+     eyebrow at the top, lower edge finishing level with the bottom of the
+     buttons. The source carries ~10.6% dead transparent space above her hair,
+     so the image box has to start higher than the text does for her hair, not
+     the box, to line up. That empty strip is transparent, so nothing shows in it. */
   @media (min-width: 900px) {
-    .hero-photo {
-      margin-bottom: -5rem;
-      margin-top: 2.75rem;
-    }
-    .hero-photo-frame {
-      margin: 0 -20%;
-    }
-  }
-  @keyframes fadeIn {
+    .hero-photo { margin-top: -55px; }
+  }  @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
