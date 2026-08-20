@@ -129,9 +129,29 @@
   @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
   .concern-card { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden; }
-  .concern-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose-soft), var(--rose)); transition: left 0.8s var(--ease-gentle); }
-  .concern-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }
-  .concern-card:hover::before { left: 0; }
+  /* A soft purple wash that blooms from the top edge on hover. Replaces a pink
+     bar that used to slide across the top: nothing here has a hard edge, so it
+     reads as the card quietly warming rather than a UI element sliding in. */
+  .concern-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(115% 80% at 50% 0%, rgba(178, 149, 196, 0.22) 0%, rgba(178, 149, 196, 0.07) 45%, rgba(178, 149, 196, 0) 72%);
+    opacity: 0;
+    transition: opacity 0.7s var(--ease-gentle);
+  }
+  /* Keeps text and icon above the wash so neither gets tinted by it. */
+  .concern-card > * { position: relative; z-index: 1; }
+  .concern-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(122, 77, 143, 0.3);
+    box-shadow: 0 18px 38px -26px rgba(91, 46, 107, 0.3);
+  }
+  .concern-card:hover::before { opacity: 1; }
+  .concern-icon { transition: color 0.6s var(--ease-gentle); }
+  .concern-card:hover .concern-icon { color: var(--purple); }
   .concern-icon { width: 32px; height: 32px; margin-bottom: 0.85rem; color: var(--rose); opacity: 0.85; }
   .concern-card h4 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--charcoal); }
   .concern-card p { color: var(--charcoal-soft); font-size: 0.92rem; line-height: 1.65; margin: 0; }
