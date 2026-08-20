@@ -546,35 +546,50 @@
     max-width: 690px;
     margin: 0 auto;
     overflow: hidden;
-    /* Padding gives the gradient room to reach full transparency *inside* the
-       element. Without it a radius wider than 50% gets clipped by the element
-       edge partway through the fade, which is exactly what draws a visible
-       vertical boundary. */
-    padding: 0 18% 2%;
+    /* The gradient must finish INSIDE the element or the element edge clips it
+       mid-fade and draws a hard line. The previous values (ellipse 55% 78% at
+       50% 36%) reached 42% of the height above the top edge, so at the top the
+       mask was still ~94% opaque when it got cut off, which is exactly the
+       visible boundary this replaces. Padding cannot fix that, since the
+       percentages resolve against the box and the ratio stays the same however
+       tall it gets.
+       Centre 50% with radius 50% makes the ellipse touch each edge midpoint at
+       precisely zero alpha, and corners fall beyond 100%, so no edge can be
+       clipped. Top padding gives the fade runway above her hair. */
+    padding: 9% 16% 0;
     box-sizing: border-box;
-    background: radial-gradient(ellipse 55% 78% at 50% 36%,
-      var(--cream-warm) 34%,
-      rgba(253, 250, 242, 0.94) 46%,
-      rgba(253, 250, 242, 0.78) 57%,
-      rgba(248, 241, 228, 0.5) 68%,
-      rgba(248, 241, 228, 0.24) 78%,
-      rgba(248, 241, 228, 0.08) 89%,
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+      var(--cream-warm) 0%,
+      var(--cream-warm) 46%,
+      rgba(253, 250, 242, 0.97) 56%,
+      rgba(253, 250, 242, 0.9) 64%,
+      rgba(251, 246, 236, 0.78) 71%,
+      rgba(248, 241, 228, 0.6) 78%,
+      rgba(248, 241, 228, 0.4) 85%,
+      rgba(248, 241, 228, 0.22) 91%,
+      rgba(248, 241, 228, 0.09) 96%,
       rgba(248, 241, 228, 0) 100%);
-    -webkit-mask-image: radial-gradient(ellipse 55% 78% at 50% 36%,
-      #000 34%,
-      rgba(0, 0, 0, 0.94) 46%,
-      rgba(0, 0, 0, 0.78) 57%,
-      rgba(0, 0, 0, 0.5) 68%,
-      rgba(0, 0, 0, 0.24) 78%,
-      rgba(0, 0, 0, 0.08) 89%,
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+      #000 0%,
+      #000 46%,
+      rgba(0, 0, 0, 0.97) 56%,
+      rgba(0, 0, 0, 0.9) 64%,
+      rgba(0, 0, 0, 0.78) 71%,
+      rgba(0, 0, 0, 0.6) 78%,
+      rgba(0, 0, 0, 0.4) 85%,
+      rgba(0, 0, 0, 0.22) 91%,
+      rgba(0, 0, 0, 0.09) 96%,
       rgba(0, 0, 0, 0) 100%);
-    mask-image: radial-gradient(ellipse 55% 78% at 50% 36%,
-      #000 34%,
-      rgba(0, 0, 0, 0.94) 46%,
-      rgba(0, 0, 0, 0.78) 57%,
-      rgba(0, 0, 0, 0.5) 68%,
-      rgba(0, 0, 0, 0.24) 78%,
-      rgba(0, 0, 0, 0.08) 89%,
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+      #000 0%,
+      #000 46%,
+      rgba(0, 0, 0, 0.97) 56%,
+      rgba(0, 0, 0, 0.9) 64%,
+      rgba(0, 0, 0, 0.78) 71%,
+      rgba(0, 0, 0, 0.6) 78%,
+      rgba(0, 0, 0, 0.4) 85%,
+      rgba(0, 0, 0, 0.22) 91%,
+      rgba(0, 0, 0, 0.09) 96%,
       rgba(0, 0, 0, 0) 100%);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
@@ -666,10 +681,13 @@
   @media (min-width: 640px) {
     .title-oneline { white-space: nowrap; font-size: clamp(1.6rem, 3.4vw, 2.5rem); }
   }
+  /* balance evens out the line lengths so a short last word does not get
+     stranded alone on its own line. */
   .section-head p {
     color: var(--charcoal-soft);
     font-size: 1.02rem;
     line-height: 1.7;
+    text-wrap: balance;
   }
 
   /* Decorative divider (feather-inspired) */
@@ -693,10 +711,10 @@
   }
 
   /* ========== VALUES ========== */
+  /* No border-top/bottom here. Full-bleed hairlines at section seams were
+     removed sitewide; the background colour change alone marks the section. */
   .values {
     background: var(--cream-warm);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
   .values-grid {
     display: grid;
@@ -722,8 +740,12 @@
     transition: transform 0.6s var(--ease-gentle);
     animation: iconGlow 7s ease-in-out infinite;
   }
-  .value-card:nth-child(2) .value-icon { animation-delay: -2.3s; }
-  .value-card:nth-child(3) .value-icon { animation-delay: -4.6s; }
+  /* Sweeps left to right. A negative delay starts the animation partway in, so
+     a larger negative value puts a card AHEAD in the cycle, not behind. Running
+     -2.3s then -4.6s therefore made the wave travel right to left. Thirds of
+     the 7s loop, ordered so each card peaks after the one to its left. */
+  .value-card:nth-child(2) .value-icon { animation-delay: -4.667s; }
+  .value-card:nth-child(3) .value-icon { animation-delay: -2.333s; }
   @keyframes iconGlow {
     0%, 100% { box-shadow: 0 0 0 rgba(217, 106, 156, 0); }
     50% { box-shadow: 0 0 26px 8px rgba(217, 106, 156, 0.3); }
@@ -1063,37 +1085,55 @@
      700 and 999 it stays two up and the third wraps, which reads better than
      three cramped columns at tablet width. */
   @media (min-width: 1000px) { .glimpse-links { grid-template-columns: repeat(3, 1fr); max-width: 1140px; } }
+  /* Centred cards with a small round icon holder, replacing the large filled
+     gradient panel that used to sit across the top of each card. */
   .glimpse-link {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     background: var(--cream-warm);
     border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.5s var(--ease-gentle);
+    border-radius: 18px;
+    padding: 2.25rem 1.75rem 2rem;
+    transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle);
   }
   .glimpse-link:hover {
     transform: translateY(-4px);
-    border-color: var(--rose-soft);
-    box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2);
+    border-color: rgba(122, 77, 143, 0.3);
+    box-shadow: 0 18px 38px -26px rgba(91, 46, 107, 0.3);
   }
   .glimpse-link-icon {
-    aspect-ratio: 16 / 10;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
     background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft));
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1.35rem;
+    /* Same slow ambient halo as the Values icons, so the two icon treatments
+       on this page read as one family. Staggered so they do not pulse together. */
+    animation: iconGlow 7s ease-in-out infinite;
+    transition: transform 0.6s var(--ease-gentle);
   }
+  .glimpse-link:nth-child(2) .glimpse-link-icon { animation-delay: -4.667s; }
+  .glimpse-link:nth-child(3) .glimpse-link-icon { animation-delay: -2.333s; }
   .glimpse-link-icon svg {
-    width: 34px;
-    height: 34px;
+    width: 27px;
+    height: 27px;
     color: var(--deep-purple);
-    opacity: 0.85;
+    opacity: 0.9;
+    transition: transform 0.6s var(--ease-gentle);
   }
+  .glimpse-link:hover .glimpse-link-icon { transform: scale(1.06); }
+  .glimpse-link:hover .glimpse-link-icon svg { transform: scale(1.12) rotate(-6deg); }
   .glimpse-link-body {
-    padding: 1.5rem;
+    padding: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex: 1;
   }
   .glimpse-link-label {
@@ -1125,7 +1165,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    align-self: flex-start;
+    align-self: center;
     background: var(--deep-purple);
     color: var(--cream-warm);
     font-size: 0.82rem;

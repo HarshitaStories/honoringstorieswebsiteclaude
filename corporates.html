@@ -114,7 +114,9 @@
   .section-head { text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); }
   .section-head .eyebrow { font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--rose); letter-spacing: 0.05em; margin-bottom: 0.75rem; display: inline-block; }
   .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1rem; }
-  .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; }
+  /* balance evens out the line lengths so a short last word does not get
+     stranded alone on its own line. */
+  .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; text-wrap: balance; }
   .divider { display: flex; align-items: center; justify-content: center; margin: 1.25rem auto 1.75rem; max-width: 140px; }
   .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
   .divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; }
@@ -124,7 +126,7 @@
   .lang-note svg { width: 16px; height: 16px; color: var(--rose); flex-shrink: 0; }
 
   /* ========== CONCERNS RECAP ========== */
-  .who-for { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .who-for { background: var(--cream-warm); }
   .concerns-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
   @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -216,11 +218,23 @@
   .visual-placeholder { aspect-ratio: 4 / 5; border: 1.5px dashed var(--purple-soft); border-radius: 18px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
   .visual-placeholder svg { width: 32px; height: 32px; opacity: 0.6; }
   .visual-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; }
+  /* About block: circular portrait slot on the left, centred copy beside it. */
+  .about-split { display: grid; gap: 2.5rem; justify-items: center; align-items: center; max-width: 980px; margin: 0 auto; }
+  @media (min-width: 820px) { .about-split { grid-template-columns: 240px 1fr; gap: 3.5rem; } }
+  .dp-placeholder { width: 220px; height: 220px; flex-shrink: 0; border-radius: 50%; border: 1.5px dashed var(--purple-soft); background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--purple-soft); text-align: center; padding: 1.25rem; }
+  .dp-placeholder svg { width: 28px; height: 28px; opacity: 0.6; }
+  .dp-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.88rem; line-height: 1.4; }
+  .about-split .corp-prose { max-width: none; text-align: center; }
+  .about-cta { margin-top: 1.75rem; }
   .corp-prose { max-width: 720px; margin: 0 auto; }
   .corp-prose p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.8; }
   .corp-prose p:last-child { margin-bottom: 0; }
-  .theme-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; max-width: 880px; margin: 0 auto; }
-  .theme-pill { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.65rem 1.15rem; font-size: 0.92rem; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle); }
+  /* A grid rather than a wrapping flex row. Flex sized each pill to its own
+     text, so rows ended up ragged and the column edges never lined up. Equal
+     grid tracks give a symmetric left-to-right block. */
+  .theme-pills { display: grid; grid-template-columns: 1fr; gap: 0.8rem; max-width: 880px; margin: 0 auto; }
+  @media (min-width: 640px) { .theme-pills { grid-template-columns: repeat(2, 1fr); } }
+  .theme-pill { display: flex; align-items: center; justify-content: center; text-align: center; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.75rem 1.2rem; font-size: 0.92rem; line-height: 1.45; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle); }
   .theme-pill:hover { transform: translateY(-2px); border-color: var(--rose-soft); color: var(--deep-purple); }
   .theme-note { text-align: center; font-size: 0.9rem; color: var(--muted); font-style: italic; margin: 1.5rem auto 0; }
   /* Confidentiality gets its own block rather than a line in the copy: for an
@@ -373,7 +387,7 @@
 </section>
 
 <!-- ========== THEMES ========== -->
-<section id="themes" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<section id="themes" style="background:var(--cream-warm);">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Starting points</div>
@@ -409,7 +423,7 @@
 </section>
 
 <!-- ========== HOW IT WORKS ========== -->
-<section id="how" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<section id="how" style="background:var(--cream-warm);">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Getting started</div>
@@ -453,16 +467,24 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="corp-prose reveal delay-1">
-      <p>I am Harshita Sarda, a psychotherapist and clinical supervisor based in Andheri West, Mumbai. I hold an MA in Clinical Psychology, a Diploma in Counseling Psychology from Xavier's College, and a Diploma in Supervision for Mental Health Practice from TISS. I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and training in complex trauma with the ISSTD.</p>
-      <p>My work is trauma-informed, queer-affirmative, intersectional, and neurodivergent inclusive. In practice that means the room is built for the people actually in it, not an average of them.</p>
-      <p style="margin-top:1.75rem;"><a class="consent-link" href="about.html">More about my background</a></p>
+    <div class="about-split">
+      <div class="reveal">
+        <div class="dp-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Photo to be added</span>
+        </div>
+      </div>
+      <div class="corp-prose reveal delay-1">
+        <p>I am Harshita Sarda, a psychotherapist and clinical supervisor based in Andheri West, Mumbai. I hold an MA in Clinical Psychology, a Diploma in Counseling Psychology from Xavier's College, and a Diploma in Supervision for Mental Health Practice from TISS. I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and training in complex trauma with the ISSTD.</p>
+        <p>My work is trauma-informed, queer-affirmative, intersectional, and neurodivergent inclusive. In practice that means the room is built for the people actually in it, not an average of them.</p>
+        <p class="about-cta"><a class="consent-link" href="about.html">More about my background</a></p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ========== FAQS ========== -->
-<section id="faqs" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<section id="faqs" style="background:var(--cream-warm);">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Good to know</div>

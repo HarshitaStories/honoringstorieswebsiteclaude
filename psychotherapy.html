@@ -114,7 +114,9 @@
   .section-head { text-align: center; max-width: 640px; margin: 0 auto var(--space-lg); }
   .section-head .eyebrow { font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--rose); letter-spacing: 0.05em; margin-bottom: 0.75rem; display: inline-block; }
   .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1rem; }
-  .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; }
+  /* balance evens out the line lengths so a short last word does not get
+     stranded alone on its own line. */
+  .section-head p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.7; text-wrap: balance; }
   .divider { display: flex; align-items: center; justify-content: center; margin: 1.25rem auto 1.75rem; max-width: 140px; }
   .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
   .divider svg { margin: 0 0.75rem; color: var(--rose); opacity: 0.7; }
@@ -124,7 +126,7 @@
   .lang-note svg { width: 16px; height: 16px; color: var(--rose); flex-shrink: 0; }
 
   /* ========== CONCERNS RECAP ========== */
-  .who-for { background: var(--cream-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .who-for { background: var(--cream-warm); }
   .concerns-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
   @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -405,7 +407,7 @@
 </section>
 
 <!-- ========== PRICING ========== -->
-<section id="pricing" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<section id="pricing" style="background:var(--cream-warm);">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Investment</div>
@@ -474,7 +476,7 @@
 </section>
 
 <!-- ========== FAQS ========== -->
-<section id="faqs" style="background:var(--cream-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<section id="faqs" style="background:var(--cream-warm);">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Good to know</div>
