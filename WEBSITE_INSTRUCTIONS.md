@@ -543,6 +543,25 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   - Rs 2,100, 50-min video session via Google Meet or WhatsApp, India-based clients
   - Rs 2,500, 50-min video session via Google Meet or WhatsApp, clients based outside India
   - Rs 3,000, in-person/offline sessions, Andheri West, Mumbai
+- **The two online prices are never shown together.** The page displays two cards, "Online session"
+  and "In person". The online figure is chosen from the visitor's own timezone: `Asia/Kolkata` or
+  its legacy alias `Asia/Calcutta` shows Rs 2,100, anything else shows Rs 2,500. In-person is
+  Rs 3,000 for everyone. This was an explicit request: visitors should not see that two online
+  rates exist.
+  - Implemented with **timezone, not a geo-IP service**. Timezone is read locally and sends nothing
+    anywhere, so it adds no network request, no third-party dependency, no rate limit, and keeps
+    the Privacy Policy's "no tracking, no third-party calls beyond Google Fonts" statement true. A
+    geo-IP lookup would have transmitted every visitor's IP to another company and made that
+    statement false.
+  - **Both figures are in the markup**, with one hidden by CSS via a `geo-intl` class the head
+    script sets. The script runs in `<head>`, before the body paints, so the correct price is the
+    first thing drawn. Swapping the text after load would let the wrong price paint and visibly
+    flip. Do not move this script to the bottom of the page.
+  - The HTML default is the **India** price, so a visitor with JavaScript disabled sees Rs 2,100.
+    That deliberately errs toward under-quoting a rare international edge case rather than
+    over-quoting a local client, and the exploratory call happens before any payment anyway.
+  - Known limitation: a VPN, or a client travelling, shows the price for where their device thinks
+    it is. Low stakes, since billing is by UPI or bank transfer after a conversation.
 - Flow: reach out, basic details shared, free 20-min exploratory call, **fill the consent form**,
   book via link/payment, confirmed via UPI or bank transfer. The consent-form step was added after
   the therapy consent form link was supplied (previously only supervision had this step); use the
