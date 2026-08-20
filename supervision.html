@@ -150,10 +150,17 @@
   @media (min-width: 700px) { .logistics-grid::before, .logistics-grid::after { display: block; } }
   .logistic-card { --prox: 0; position: relative; text-align: center; background: none; border: none; padding: 0; }
   /* The first shadow is a ring in the section's own background colour, punching a gap in the thread so each icon reads as a bead on it. */
-  .logistic-icon { position: relative; z-index: 1; width: 52px; height: 52px; margin: 0 auto 1.15rem; border-radius: 50%; background: linear-gradient(135deg, var(--rose-soft), var(--purple-soft)); display: flex; align-items: center; justify-content: center; color: var(--deep-purple); box-shadow: 0 0 0 7px var(--cream), 0 8px calc(14px + var(--prox) * 22px) rgba(91, 46, 107, calc(0.1 + var(--prox) * 0.22)); transform: translateY(calc(var(--prox) * -6px)) scale(calc(1 + var(--prox) * 0.14)); }
+  /* Calm container rather than a saturated gradient fill: the section background, a hairline ring that warms as the cursor nears, and a purple glyph. The first shadow is a ring in the section colour, punching a gap in the thread so each icon reads as a bead on it. */
+  .logistic-icon { position: relative; z-index: 1; width: 54px; height: 54px; margin: 0 auto 1.1rem; border-radius: 50%; background: var(--cream-warm); border: 1px solid rgba(122, 77, 143, calc(0.16 + var(--prox) * 0.26)); display: flex; align-items: center; justify-content: center; color: var(--purple); box-shadow: 0 0 0 7px var(--cream), 0 6px calc(10px + var(--prox) * 16px) rgba(91, 46, 107, calc(0.05 + var(--prox) * 0.14)); transform: translateY(calc(var(--prox) * -6px)) scale(calc(1 + var(--prox) * 0.1)); }
   .logistic-icon svg { width: 24px; height: 24px; }
-  .logistic-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.45rem; transform: translateY(calc(var(--prox) * -3px)); }
-  .logistic-value { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--deep-purple); line-height: 1.35; transform: translateY(calc(var(--prox) * -3px)); }
+  .logistic-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.13em; margin-bottom: 0.5rem; transform: translateY(calc(var(--prox) * -3px)); }
+  /* Each point now carries exactly one headline value and one supporting line,
+     so the four columns share a shape instead of running to one, two or three
+     ragged lines each. min-height keeps the row aligned even if a supporting
+     line wraps at a narrow width. */
+  .logistic-text { min-height: 3.5rem; }
+  .logistic-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); line-height: 1.3; transform: translateY(calc(var(--prox) * -3px)); }
+  .logistic-sub { margin-top: 0.32rem; font-size: 0.84rem; line-height: 1.5; color: var(--muted); transform: translateY(calc(var(--prox) * -3px)); }
 
   /* ========== PRICING ========== */
   .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 640px; margin: 0 auto; }
@@ -353,22 +360,22 @@
       <div class="logistic-card reveal delay-1">
         <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
         <div class="logistic-label">Days</div>
-        <div class="logistic-value">Tue&ndash;Fri<br/>8am&ndash;6pm IST</div>
+        <div class="logistic-text"><div class="logistic-value">Tue to Fri</div><div class="logistic-sub">8am to 6pm IST</div></div>
       </div>
       <div class="logistic-card reveal delay-2">
         <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
         <div class="logistic-label">Duration</div>
-        <div class="logistic-value">60 minutes</div>
+        <div class="logistic-text"><div class="logistic-value">60 minutes</div><div class="logistic-sub">per session</div></div>
       </div>
       <div class="logistic-card reveal delay-3">
         <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M22 8l-5 4 5 4V8z"/></svg></div>
         <div class="logistic-label">Format</div>
-        <div class="logistic-value">Video call<br/>via Google Meet</div>
+        <div class="logistic-text"><div class="logistic-value">Video call</div><div class="logistic-sub">via Google Meet</div></div>
       </div>
       <div class="logistic-card reveal delay-1">
         <div class="logistic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="logistic-label">Where</div>
-        <div class="logistic-value">Worldwide, online<br/>or in person, Andheri West</div>
+        <div class="logistic-text"><div class="logistic-value">Online worldwide</div><div class="logistic-sub">or Andheri West, Mumbai</div></div>
       </div>
     </div>
   </div>
