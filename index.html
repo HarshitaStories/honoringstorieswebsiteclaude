@@ -877,25 +877,21 @@
     color: var(--charcoal-soft);
     font-weight: 400;
   }
+  /* The real photo is portrait (4:5). The container matches that ratio rather
+     than the old 4:3 placeholder, so nothing is cropped, and max-width keeps it
+     from towering over the paragraph beside it. */
   .glimpse-visual {
-    aspect-ratio: 4 / 3;
-    border: 1.5px dashed var(--purple-soft);
-    border-radius: 16px;
-    background: var(--cream-warm);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    color: var(--muted);
-    text-align: center;
-    padding: 1.5rem;
+    max-width: 440px;
+    margin: 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 26px 50px -34px rgba(91, 46, 107, 0.35);
   }
-  .glimpse-visual svg { width: 32px; height: 32px; opacity: 0.6; }
-  .glimpse-visual span {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 0.95rem;
+  .glimpse-visual img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
   }
   .testimonial-card {
     background: var(--cream-warm);
@@ -1459,8 +1455,7 @@
     </div>
     <div class="glimpse-inner">
       <div class="glimpse-visual reveal delay-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo to be added</span>
+        <img src="assets/harshita-chair.jpg" alt="Harshita seated in an armchair in her therapy room, smiling, with a plant and a warm lamp beside her." />
       </div>
       <div class="glimpse-trust reveal delay-2">
         <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe that therapy is not a one-size-fits-all process and thoughtfully adapt my approach to each client's pace, needs, and lived experiences. Guided by a sensitivity to the ways in which personal experiences are shaped by relational, cultural, and social contexts, I strive to create a therapeutic space that is responsive to each individual's unique story.</p>
