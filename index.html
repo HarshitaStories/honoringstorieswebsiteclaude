@@ -883,15 +883,32 @@
   .glimpse-visual {
     max-width: 440px;
     margin: 0 auto;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 26px 50px -34px rgba(91, 46, 107, 0.35);
   }
+  /* Feathered on all four edges so the photo dissolves into the page rather than
+     ending on a hard rectangle. Two linear masks, one horizontal and one
+     vertical, combined with intersect: each fades its own pair of edges, and
+     where they overlap at the corners both are already falling off, which is
+     what stops the corners reading as sharp. A radial mask would vignette the
+     middle of the picture instead of only softening its boundary.
+     No radius or shadow here: both would outline an edge that is deliberately
+     no longer there. */
   .glimpse-visual img {
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     display: block;
+    -webkit-mask-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 6%, #000 17%, #000 83%, rgba(0, 0, 0, 0.45) 94%, rgba(0, 0, 0, 0) 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 5%, #000 14%, #000 86%, rgba(0, 0, 0, 0.45) 95%, rgba(0, 0, 0, 0) 100%);
+    mask-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 6%, #000 17%, #000 83%, rgba(0, 0, 0, 0.45) 94%, rgba(0, 0, 0, 0) 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 5%, #000 14%, #000 86%, rgba(0, 0, 0, 0.45) 95%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
   .testimonial-card {
     background: var(--cream-warm);
