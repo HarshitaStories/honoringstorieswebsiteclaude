@@ -640,6 +640,21 @@ page is built later.
 - Location: Andheri West, Mumbai (not just "Mumbai, India")
 - Instagram: deliberately **not** linked in the footer (removed per request)
 
+**Every call-to-action must resolve to one of those three destinations, never to an in-page
+anchor.** The rule, by button:
+- Anything labelled **"Book a Consultation Call"** or **"Book a free exploratory call"**, including
+  the nav button in the header and the mobile drawer on every page, opens the **cal.com booking
+  link** in a new tab. The nav button used to point at `#contact`, which merely scrolled down the
+  page, and on the three legal pages was dead outright because they have no contact section.
+- **"Start a conversation"** and **"Email me"** open **mailto:feelseen@honoringstories.com**,
+  same tab (a mailto must not open a blank tab).
+- **"Reach out"** and **"Message on WhatsApp"**, plus the floating `.wa-float` bubble, open
+  **https://wa.me/919152801719** in a new tab.
+
+The only `href="#contact"` links that may remain are the `.rail-dot` scroll-rail markers, which are
+in-page navigation by design. If a booking CTA ever points at `#contact` again, that is a
+regression. There are currently 33 such CTAs across the nine pages.
+
 ### Pending visual asset
 A photo was referenced by screenshot earlier in the project for a "why this fits" style visual,
 but never successfully uploaded. The homepage's glimpse section currently has a dashed-border
