@@ -207,23 +207,24 @@
   .footer-helplines a { color: rgba(253, 250, 242, 0.75); font-size: 0.8rem; }
   .footer-helplines a:hover { color: var(--rose-soft); }
   /* ========== ORGANISATIONS ========== */
-  /* Two-column hero like the Psychotherapy and Supervision pages, with the
-     picture on the left here rather than the right. Column ratio mirrors
-     .page-hero-inner so the text column stays the wider of the two. */
-  @media (min-width: 900px) { .corp-hero-split { grid-template-columns: 0.95fr 1.05fr; } }
-  .corp-hero h1 { margin-bottom: 1.25rem; }
-  .corp-hero .lang-note { margin-top: 0.5rem; }
+  /* The hero uses .page-hero-inner unchanged, so this page's banner is the same
+     two-column arrangement, column ratio, type scale and spacing as the
+     Psychotherapy and Supervision banners: copy on the left, visual on the right.
+     Nothing is overridden here on purpose. */
   /* Standing pattern for a promised-but-unsupplied asset: reserve the slot
-     rather than designing around its absence. */
-  .visual-placeholder { aspect-ratio: 4 / 5; border: 1.5px dashed var(--purple-soft); border-radius: 18px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
+     rather than designing around its absence. A square keeps the banner the
+     same height as the other two service pages, whose art is 1.12:1 and 1:1. */
+  .visual-placeholder { aspect-ratio: 1 / 1; border: 1.5px dashed var(--purple-soft); border-radius: 18px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
   .visual-placeholder svg { width: 32px; height: 32px; opacity: 0.6; }
   .visual-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; }
   /* About block: circular portrait slot on the left, centred copy beside it. */
   .about-split { display: grid; gap: 2.5rem; justify-items: center; align-items: center; max-width: 980px; margin: 0 auto; }
   @media (min-width: 820px) { .about-split { grid-template-columns: 240px 1fr; gap: 3.5rem; } }
-  .dp-placeholder { width: 220px; height: 220px; flex-shrink: 0; border-radius: 50%; border: 1.5px dashed var(--purple-soft); background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--purple-soft); text-align: center; padding: 1.25rem; }
-  .dp-placeholder svg { width: 28px; height: 28px; opacity: 0.6; }
-  .dp-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.88rem; line-height: 1.4; }
+  /* object-position is tuned to the source: her eyes sit about 31% down the
+     original, and a square cover-crop only shows the middle two thirds of a
+     2:3 portrait, so pulling the window up to 14% lands her face slightly
+     above centre in the circle, which is where a portrait wants to sit. */
+  .dp-photo { width: 220px; height: 220px; flex-shrink: 0; border-radius: 50%; object-fit: cover; object-position: 50% 14%; display: block; box-shadow: 0 16px 32px -22px rgba(91, 46, 107, 0.35); }
   .about-split .corp-prose { max-width: none; text-align: left; }
   .about-cta { margin-top: 1.75rem; }
   .corp-prose { max-width: 720px; margin: 0 auto; }
@@ -312,14 +313,8 @@
 <!-- ========== HERO ========== -->
 <header class="page-hero">
   <div class="wrap">
-    <div class="page-hero-inner corp-hero-split">
-      <div class="reveal">
-        <div class="visual-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Image to be added</span>
-        </div>
-      </div>
-      <div class="corp-hero reveal delay-1">
+    <div class="page-hero-inner">
+      <div class="corp-hero reveal">
         <span class="eyebrow">For organisations and teams</span>
         <h1>Workplace Wellbeing</h1>
         <p class="page-hero-note">Most workplaces do not have a mental health problem to solve. They have people carrying a lot, often quietly, alongside deadlines and change and each other. I work with organisations to create spaces where that can be spoken about honestly, and where support feels genuinely available rather than announced once a year.</p>
@@ -332,6 +327,12 @@
             Start a conversation
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
+        </div>
+      </div>
+      <div class="reveal delay-1">
+        <div class="visual-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Image to be added</span>
         </div>
       </div>
     </div>
@@ -469,10 +470,7 @@
     </div>
     <div class="about-split">
       <div class="reveal">
-        <div class="dp-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <span>Photo to be added</span>
-        </div>
+        <img class="dp-photo" src="assets/harshita-organisations.jpg" alt="Harshita Sarda, psychotherapist and clinical supervisor." />
       </div>
       <div class="corp-prose reveal delay-1">
         <p>I am Harshita Sarda, a psychotherapist and clinical supervisor based in Andheri West, Mumbai. I hold an MA in Clinical Psychology, a Diploma in Counseling Psychology from Xavier's College, and a Diploma in Supervision for Mental Health Practice from TISS. I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and training in complex trauma with the ISSTD.</p>

@@ -351,10 +351,23 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     the template was stripped out rather than left dead, so it cannot creep back in. The "A
     conversation" step in the process is what handles the pricing question instead. Do not add a
     price table, a "from" figure, or a package tier here without being asked.
-  - Sections: hero (centred, single column, no artwork yet), Why this matters, What I offer
+  - Sections: hero, Why this matters, What I offer
     (three `.concern-card`s: Workshops, One-on-one mini sessions, Customised plans), Themes
     (`.theme-pill` list of 8, plus a note inviting their own), Confidentiality, How it works
     (5-step process), a short About block linking to `about.html`, 7 FAQs, and a contact CTA.
+  - **The hero deliberately uses `.page-hero-inner` with no overrides**, so its two-column
+    arrangement, column ratio, gap, type scale and spacing match the Psychotherapy and Supervision
+    banners exactly: copy on the left, visual on the right. An earlier version put the picture on
+    the left and flipped the column ratio, and the user asked for it to match Psychotherapy
+    instead. If a `.corp-hero-split` style override reappears, that is a regression. The reserved
+    image slot is square (1/1), because the therapy art is 1.12:1 and the supervision art is 1:1,
+    which keeps the three banners a similar height.
+  - **Her portrait sits in the About block, not the hero**: `assets/harshita-organisations.jpg`
+    (560x840, 62 KB), cropped to a 220px circle at `object-position: 50% 14%`. The source
+    `Harshitafororganizations.jpg` had a navy background, flood-filled from the image borders to
+    white at tolerance 45, which isolates the navy without touching her blazer, hair or skin. Two
+    small teal artifacts remain at the left edge of the source and fall outside the circular crop,
+    so do not widen that crop without re-checking them.
   - **Confidentiality has its own block** (`.confidential`) rather than being a line in the copy.
     For the organisation it is usually the deciding question, and for the employee it is what makes
     the space usable at all. It states plainly that the employer receives no names, notes, or
