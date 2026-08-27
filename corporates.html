@@ -97,7 +97,6 @@
   .page-hero .eyebrow { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 1.05rem; letter-spacing: 0.04em; margin-bottom: 1rem; display: block; }
   .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 500; line-height: 1.1; color: var(--deep-purple); margin-bottom: 1.25rem; }
   .page-hero-note { font-size: 1.05rem; color: var(--charcoal-soft); max-width: 520px; line-height: 1.75; margin-bottom: 1.5rem; }
-  .hero-art { border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(91, 46, 107, 0.3); }
 
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
@@ -215,12 +214,10 @@
      two-column arrangement, column ratio, type scale and spacing as the
      Psychotherapy and Supervision banners: copy on the left, visual on the right.
      Nothing is overridden here on purpose. */
-  /* Standing pattern for a promised-but-unsupplied asset: reserve the slot
-     rather than designing around its absence. A square keeps the banner the
-     same height as the other two service pages, whose art is 1.12:1 and 1:1. */
-  .visual-placeholder { aspect-ratio: 1 / 1; border: 1.5px dashed var(--purple-soft); border-radius: 18px; background: var(--cream-warm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--purple-soft); text-align: center; padding: 1.5rem; }
-  .visual-placeholder svg { width: 32px; height: 32px; opacity: 0.6; }
-  .visual-placeholder span { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; }
+  /* The illustration is a transparent cut-out, so it sits directly on the
+     banner. No radius or shadow: both would draw the edges of a card that is
+     not there. Matches the therapy and supervision pages. */
+  .hero-art { display: block; }
   /* About block: circular portrait slot on the left, centred copy beside it. */
   .about-split { display: grid; gap: 2.5rem; justify-items: center; align-items: center; max-width: 980px; margin: 0 auto; }
   @media (min-width: 820px) { .about-split { grid-template-columns: 240px 1fr; gap: 3.5rem; } }
@@ -283,7 +280,7 @@
         <div class="nav-dropdown-menu">
           <a href="psychotherapy.html">Psychotherapy sessions</a>
           <a href="supervision.html">Supervision sessions</a>
-          <a href="corporates.html">For organisations</a>
+          <a href="corporates.html">Workplace Wellbeing</a>
         </div>
       </div>
       <a href="community.html">Community</a>
@@ -298,7 +295,7 @@
     <span class="nav-drawer-label">Work With Me</span>
     <a href="psychotherapy.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Psychotherapy sessions</a>
     <a href="supervision.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Supervision sessions</a>
-    <a href="corporates.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">For organisations</a>
+    <a href="corporates.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Workplace Wellbeing</a>
     <a href="community.html" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
     <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation Call</a>
   </div>
@@ -334,10 +331,7 @@
         </div>
       </div>
       <div class="reveal delay-1">
-        <div class="visual-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Image to be added</span>
-        </div>
+        <img class="hero-art" src="assets/workplace-wellbeing.png" alt="An illustration of four people sitting together around a round table with a laptop, mugs and a small plant, under a soft arc, with a calendar, papers and an envelope drifting to one side." />
       </div>
     </div>
   </div>
