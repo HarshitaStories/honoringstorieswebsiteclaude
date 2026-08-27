@@ -884,31 +884,17 @@
     max-width: 440px;
     margin: 0 auto;
   }
-  /* Feathered on all four edges so the photo dissolves into the page rather than
-     ending on a hard rectangle. Two linear masks, one horizontal and one
-     vertical, combined with intersect: each fades its own pair of edges, and
-     where they overlap at the corners both are already falling off, which is
-     what stops the corners reading as sharp. A radial mask would vignette the
-     middle of the picture instead of only softening its boundary.
-     No radius or shadow here: both would outline an edge that is deliberately
-     no longer there. */
+  /* No edge feathering here, and no crop. The artwork is a cut-out on a
+     transparent background with its own soft illustrated backdrop, so it
+     already dissolves into the page on its own. The mask this rule used to
+     carry was for a rectangular photo that ended on a hard edge; applied to
+     this one it would fade the leaves and the top of her head instead.
+     Its ratio is 548:728, so height:auto lets it keep its own proportions
+     rather than being cover-cropped to a ratio it does not have. */
   .glimpse-visual img {
     width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+    height: auto;
     display: block;
-    -webkit-mask-image:
-      linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 6%, #000 17%, #000 83%, rgba(0, 0, 0, 0.45) 94%, rgba(0, 0, 0, 0) 100%),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 5%, #000 14%, #000 86%, rgba(0, 0, 0, 0.45) 95%, rgba(0, 0, 0, 0) 100%);
-    mask-image:
-      linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 6%, #000 17%, #000 83%, rgba(0, 0, 0, 0.45) 94%, rgba(0, 0, 0, 0) 100%),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 5%, #000 14%, #000 86%, rgba(0, 0, 0, 0.45) 95%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
   }
   .testimonial-card {
     background: var(--cream-warm);
@@ -1472,7 +1458,7 @@
     </div>
     <div class="glimpse-inner">
       <div class="glimpse-visual reveal delay-1">
-        <img src="assets/harshita-chair.jpg" alt="Harshita seated in an armchair in her therapy room, smiling, with a plant and a warm lamp beside her." />
+        <img src="assets/harshita-glimpse.png" alt="Harshita seated in an armchair, smiling, cut out against a soft illustrated backdrop of leaves and blush coloured shapes." />
       </div>
       <div class="glimpse-trust reveal delay-2">
         <p>My work is rooted in an eclectic, trauma-informed, queer-affirmative, and integrative approach. I believe that therapy is not a one-size-fits-all process and thoughtfully adapt my approach to each client's pace, needs, and lived experiences. Guided by a sensitivity to the ways in which personal experiences are shaped by relational, cultural, and social contexts, I strive to create a therapeutic space that is responsive to each individual's unique story.</p>
