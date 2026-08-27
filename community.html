@@ -234,11 +234,28 @@
   .note-card p { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.75; color: var(--charcoal-soft); margin: 0; }
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
   .notes-cta { text-align: center; margin-top: 2.5rem; }
+  /* ---- Inline sharing box ---- */
+  .share-box { max-width: 620px; margin: 0 auto; text-align: center; }
+  .share-prompt { display: block; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.4; color: var(--deep-purple); margin-bottom: 1.1rem; cursor: text; }
+  @media (min-width: 640px) { .share-prompt { font-size: 1.45rem; } }
+  .share-field { position: relative; }
+  /* Bottom padding leaves room for the counter, which is absolutely positioned
+     inside the box so it cannot be pushed around as the text grows. */
+  #shareInput { width: 100%; min-height: 128px; resize: vertical; display: block; font-family: var(--font-body); font-size: 0.97rem; line-height: 1.75; color: var(--charcoal); background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px; padding: 1.05rem 1.15rem 2.5rem; transition: border-color 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle); }
+  #shareInput::placeholder { color: var(--muted); opacity: 1; font-style: italic; }
+  #shareInput:focus { outline: none; border-color: var(--purple-soft); box-shadow: 0 0 0 4px rgba(122, 77, 143, 0.09); }
+  .share-count { position: absolute; right: 1rem; bottom: 0.8rem; font-size: 0.76rem; font-variant-numeric: tabular-nums; color: var(--muted); pointer-events: none; transition: color 0.35s var(--ease-gentle); }
+  .share-count.is-low { color: var(--purple); }
+  .share-count.is-over { color: var(--rose); font-weight: 600; }
+  .share-consent { display: flex; align-items: flex-start; gap: 0.6rem; margin: 1rem 0 1.35rem; text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--charcoal-soft); cursor: pointer; }
+  .share-consent input { margin: 0.25rem 0 0; width: 15px; height: 15px; accent-color: var(--deep-purple); flex-shrink: 0; cursor: pointer; }
+  .share-submit:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+  .share-status { max-width: 520px; margin: 1.1rem auto 0; font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.6; color: var(--deep-purple); }
+  .share-status.is-error { color: var(--rose); }
+  /* The POST target. It must exist in the layout to receive the response, so it
+     is collapsed rather than display:none, which some browsers refuse to post to. */
+  #shareSink { position: absolute; width: 0; height: 0; border: 0; opacity: 0; pointer-events: none; }
   .safety-note { max-width: 640px; margin: 1.25rem auto 0; text-align: center; font-size: 0.84rem; line-height: 1.7; color: var(--muted); }
-  .reserved-block { max-width: 720px; margin: 2.5rem auto 0; border: 1.5px dashed var(--purple-soft); border-radius: 16px; background: var(--cream-warm); padding: 2rem 1.75rem; text-align: center; }
-  .reserved-block .tag { display: inline-block; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: var(--rose); margin-bottom: 0.5rem; }
-  .reserved-block h4 { font-size: 1.2rem; font-weight: 500; color: var(--deep-purple); margin-bottom: 0.5rem; }
-  .reserved-block p { font-size: 0.92rem; color: var(--charcoal-soft); line-height: 1.7; margin: 0; }
 
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
@@ -352,18 +369,35 @@
     <div class="notes-grid reveal delay-3" id="notesGrid"></div>
     <p class="notes-notice" id="notesNotice" hidden></p>
 
-    <div class="notes-cta reveal delay-3" id="notesCta" hidden>
-      <a class="btn btn-primary" id="notesFormLink" href="#" target="_blank" rel="noopener">
-        Share what helped you
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+    <div class="notes-cta reveal delay-3" id="notesCta">
+      <!-- A real form element, so it still submits with JS disabled and so the
+           markup transplants into WordPress as-is. The action is set in JS from
+           one constant, which is the only line that changes if the destination
+           ever moves off Google Forms. -->
+      <form class="share-box" id="shareForm" method="POST" target="shareSink" novalidate>
+        <label class="share-prompt" for="shareInput">When things are heavy, what is the one thing that helps you?</label>
+        <div class="share-field">
+          <textarea id="shareInput" name="note" rows="4" maxlength="1200"
+                    placeholder="Up to 100 words. It does not have to be profound or well phrased."></textarea>
+          <!-- aria-live announces the count to screen readers as it changes,
+               but politely, so it does not interrupt every keystroke. -->
+          <span class="share-count" id="shareCount" aria-live="polite">100</span>
+        </div>
+        <label class="share-consent">
+          <input type="checkbox" id="shareConsent" />
+          <span>I am happy for this to be published anonymously on this website.</span>
+        </label>
+        <button type="submit" class="btn btn-primary share-submit" id="shareSubmit" disabled>
+          Share this
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="share-status" id="shareStatus" role="status" hidden></p>
+      </form>
+      <!-- The POST target. Without this the browser would navigate away to
+           Google's confirmation page, which would throw the visitor off the
+           site mid-thought. -->
+      <iframe name="shareSink" id="shareSink" title="Submission target" aria-hidden="true" tabindex="-1"></iframe>
       <p class="safety-note">Sharing is anonymous and entirely optional, and everything is read before it goes up. Please note this space is not monitored, so it is not a way to reach me. If you need to talk to someone now, the helplines at the bottom of this page are there for you.</p>
-    </div>
-
-    <div class="reserved-block reveal delay-3" id="notesFormPending">
-      <span class="tag">Coming soon</span>
-      <h4>A place to share what helped</h4>
-      <p>The anonymous sharing form will live here. Everything shared is read before it is published, so this space stays gentle for whoever finds it next.</p>
     </div>
   </div>
 </section>
@@ -592,16 +626,89 @@
   (function () {
     const grid = document.getElementById('notesGrid');
     const notice = document.getElementById('notesNotice');
-    const cta = document.getElementById('notesCta');
-    const formLink = document.getElementById('notesFormLink');
-    const pending = document.getElementById('notesFormPending');
     if (!grid) return;
 
-    if (SHARED_FORM_URL) {
-      formLink.href = SHARED_FORM_URL;
-      cta.hidden = false;
-      pending.hidden = true;
+    /* =================================================================
+       The sharing box.
+
+       Submissions go straight to the Google Form that already backs this
+       section, so there is one place to moderate rather than two. Posting a
+       plain form at a hidden iframe, rather than fetch(), is deliberate: it
+       needs no CORS permission from Google, and it still works if scripting
+       is unavailable, in which case the visitor simply lands on Google's own
+       confirmation page instead of seeing the thank-you in place.
+
+       WORD_LIMIT is enforced here for the counter and the submit button. It
+       is a courtesy, not a security control. The real limit is whatever
+       Harshita approves by hand.
+       ================================================================= */
+    const SHARE_ACTION = SHARED_FORM_URL.replace(/\/viewform.*$/, '/formResponse');
+    const FIELD_NOTE    = 'entry.725693056';
+    const FIELD_CONSENT = 'entry.1145237366';
+    const CONSENT_VALUE = 'Yes';
+    const WORD_LIMIT = 100;
+
+    function countWords(s) {
+      const t = s.trim();
+      return t ? t.split(/\s+/).length : 0;
     }
+
+    function shareBox() {
+      const form = document.getElementById('shareForm');
+      const input = document.getElementById('shareInput');
+      const count = document.getElementById('shareCount');
+      const consent = document.getElementById('shareConsent');
+      const submit = document.getElementById('shareSubmit');
+      const status = document.getElementById('shareStatus');
+      const sink = document.getElementById('shareSink');
+      if (!form || !input) return;
+
+      form.action = SHARE_ACTION;
+      input.name = FIELD_NOTE;
+
+      // Google needs the consent answer as a normal field, but the visitor
+      // ticks a checkbox. An unchecked box submits nothing at all, so the
+      // value is carried on a hidden input that only gets a value once the
+      // box is ticked, and submission is blocked until then anyway.
+      const consentField = document.createElement('input');
+      consentField.type = 'hidden';
+      consentField.name = FIELD_CONSENT;
+      form.appendChild(consentField);
+
+      function update() {
+        const words = countWords(input.value);
+        const left = WORD_LIMIT - words;
+        count.textContent = left < 0 ? '0' : String(left);
+        count.classList.toggle('is-low', left <= 20 && left >= 0);
+        count.classList.toggle('is-over', left < 0);
+        submit.disabled = words === 0 || left < 0 || !consent.checked;
+        consentField.value = consent.checked ? CONSENT_VALUE : '';
+      }
+
+      input.addEventListener('input', update);
+      consent.addEventListener('change', update);
+      update();
+
+      form.addEventListener('submit', function (e) {
+        if (submit.disabled) { e.preventDefault(); return; }
+        // The iframe load event is the only signal available: the response is
+        // cross-origin, so its contents cannot be read. A load means Google
+        // accepted the POST.
+        sink.addEventListener('load', function () {
+          form.querySelector('.share-field').hidden = true;
+          form.querySelector('.share-consent').hidden = true;
+          form.querySelector('.share-prompt').hidden = true;
+          submit.hidden = true;
+          status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
+          status.classList.remove('is-error');
+          status.hidden = false;
+        }, { once: true });
+        submit.disabled = true;
+        submit.textContent = 'Sending';
+      });
+    }
+
+    shareBox();
 
     function render(notes, isSample) {
       grid.textContent = '';
