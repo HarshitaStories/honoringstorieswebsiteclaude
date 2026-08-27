@@ -575,7 +575,7 @@
        "Collect email addresses" setting is OFF, otherwise submissions are
        not actually anonymous.
      =================================================================== */
-  const SHARED_NOTES_CSV = '';
+  const SHARED_NOTES_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCs-RBpm80E4fu_ZnqkiM-_ZA602J2MDJskHGmdgbUInJZj1sgPkZyUV2hO5xSQHDzofK7cyEoP9s6/pub?gid=893799866&single=true&output=csv';
   // The share link with the ?usp=sharing&ouid=... query stripped. Those params
   // carry Harshita's own Google account id, so they must not be published.
   const SHARED_FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSf9-1m2jrECnUgiMaEp-8UCyQ8KTF9XAyNFbaUP_cwQFbDiDw/viewform';
@@ -658,12 +658,21 @@
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(text => {
         const headerish = /^(timestamp|note|notes|response|what helped)/i;
+        // A formula that breaks on the sheet arrives here as a cell value
+        // like #REF!, and would otherwise be rendered as though a person had
+        // written it. Drop any row containing one.
+        const sheetError = /^#(REF|N\/A|VALUE|DIV\/0|NAME|NULL|NUM|ERROR)[!?]?$/i;
+        // Unused tick-box columns publish as bare TRUE/FALSE. They are sheet
+        // mechanics, never part of what someone wrote.
+        const boolCell = /^(TRUE|FALSE)$/i;
         // The Approved tab is a single column, so rejoin the fields rather
         // than taking r[0]. If a note's commas ever arrive unquoted, taking
         // the first field alone would silently truncate it mid-sentence,
         // publishing half of what someone wrote with no visible error.
         const notes = parseCSV(text)
-          .map(r => r.join(',').trim())
+          .filter(r => !r.some(f => sheetError.test(f.trim())))
+          .map(r => r.filter(f => !boolCell.test(f.trim()))
+                     .join(',').replace(/^,+|,+$/g, '').trim())
           .filter(v => v && !headerish.test(v));
         if (notes.length) render(notes, false);
         else {
