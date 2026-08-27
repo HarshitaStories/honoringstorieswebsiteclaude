@@ -576,7 +576,9 @@
        not actually anonymous.
      =================================================================== */
   const SHARED_NOTES_CSV = '';
-  const SHARED_FORM_URL  = '';
+  // The share link with the ?usp=sharing&ouid=... query stripped. Those params
+  // carry Harshita's own Google account id, so they must not be published.
+  const SHARED_FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSf9-1m2jrECnUgiMaEp-8UCyQ8KTF9XAyNFbaUP_cwQFbDiDw/viewform';
 
   // Shown only while SHARED_NOTES_CSV is empty, so the design can be judged.
   // These are written examples, not real submissions, and the notice below
