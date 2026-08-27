@@ -121,6 +121,23 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - Reserved image placeholders (dashed border, "Photo to be added" label) are an acceptable
   standing pattern when content is promised but not yet supplied; replace with the real asset
   when it arrives instead of redesigning around its absence.
+- **How illustrations are prepared.** Every illustration Harshita supplies arrives on its own
+  off-cream backdrop, close enough to the page colour to look like a mistake rather than a choice.
+  Two treatments, both done offline with PowerShell and System.Drawing:
+  - **Recolour to the page cream** (`248,241,228`) where the backdrop is near-uniform. Cheap, and
+    the resulting JPEG is small.
+  - **Flood fill from the image borders to transparency** where a cut-out is wanted. This is the
+    only method that works on these files: a plain colour threshold cannot separate artwork from
+    backdrop, because their own light tones sit within 2 to 12 of it, so any tolerance wide enough
+    to lift the background also erases the peach figures, tables and mugs. The flood fill spreads
+    through the background but **stops at the drawn outlines even where the colours match**.
+  - Always composite the result over the page cream and look at it before installing.
+  - The flood fill must be **compiled** (`Add-Type` C#), not an interpreted PowerShell loop. On
+    1.5 million pixels the interpreted version does not finish inside two minutes.
+  - **Transparency is expensive.** A cut-out PNG of one of these runs 860 to 920 KB against roughly
+    88 KB for the same picture flattened to cream as a JPEG, and on a flat-cream page they look
+    identical. Harshita has been told and currently prefers the PNG. Only keep transparency where
+    the background behind it could actually change.
 - A **floating WhatsApp button** (`.wa-float`) is fixed to the bottom right of every page. Styled in
   the site palette (rose-soft to purple-soft gradient, deep-purple glyph) rather than WhatsApp
   green, which would clash with the cream/purple scheme. It carries a slow 6s `waGlow` halo pulse,
@@ -128,9 +145,23 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   still visible". Keep it that way, do not raise the opacity or speed it up. An italic glass pill
   tooltip ("Reach out on WhatsApp", same treatment as the section-rail labels) appears on hover and
   is hidden below 600px. The existing reduced-motion rule already flattens the pulse.
-- The footer logo is now the real brand logo image (`assets/logo-full.png`, feather, cupped hands,
-  wordmark, tagline), shown at full color, not the earlier hand-drawn inline SVG approximation or
-  an inverted/white-filtered version. Keep it in its original colors against the dark footer.
+- The footer logo is the real brand logo image (`assets/Whitelogo.png`, feather, cupped hands,
+  wordmark, tagline), not the earlier hand-drawn inline SVG approximation. It is **45px tall and
+  centred in its column**, both horizontally and vertically. It was 64px and pinned to the top
+  left, which left it in the corner of a large empty area, since the brand column holds nothing
+  else. The other footer columns stay top-aligned, so the logo sits level with the middle of the
+  Explore list by design.
+- **Nav hover is a purple glow, not an underline.** Two text shadows: a tight one at 10px that
+  keeps the letterforms defined, and a wider fainter one at 22px for the halo, both
+  `rgba(122, 77, 143, ...)`. The `.nav-links a::after` underline that used to do this is gone
+  site-wide; if it reappears, that is a regression.
+  - The Work With Me dropdown toggle carries the same glow, so the whole bar behaves alike, and
+    its `transition` must name `text-shadow` or the glow snaps on instead of fading.
+  - **`.nav-cta` is excluded** via `:not(.nav-cta)`. It is a filled purple button and a bloom
+    behind its white text reads as a smudge.
+- The same purple bloom appears as a `box-shadow` on hover elsewhere, for example `.theme-pill` on
+  the organisations page. Reach for that pairing (tight halo plus a softer drop) when something new
+  needs a hover state, rather than inventing a third treatment.
 
 ---
 
@@ -187,10 +218,20 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       eye whites are white too, so a plain "remove all white" pass punches holes through them.
       Any future re-cut must preserve that border-connected constraint.
     - `assets/harshita-home 2.png` is the older grey-studio-backdrop photo, now unused.
+  - **The glimpse photo is `assets/harshita-glimpse.png`, a transparent cut-out.** `.glimpse-visual
+    img` therefore carries **no edge feathering and no crop**, only `width: 100%; height: auto`.
+    Both were removed deliberately when the photo changed:
+    - The old four-edge mask suited a rectangular photo ending on a hard boundary. A cut-out
+      already dissolves into the page, so the mask would fade the artwork itself rather than an
+      edge that is no longer there.
+    - The old `aspect-ratio: 4/5; object-fit: cover` cropped to a ratio the current file does not
+      have, taking slices off it for nothing.
+    If a future photo is a plain rectangle again, put both back; if it is a cut-out, leave them off.
+    `assets/harshita-chair.jpg` is the previous rectangular photo, kept but unused.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
     a section head ("A little more to help you decide" / "Grounded in experience, held with
-    care"), then a two-column row of an image placeholder (reserved for a future photo) and a
+    care"), then a two-column row of a photo of Harshita and a
     right-hand column (`.glimpse-trust`) holding the short approach paragraph (see About Harshita
     / approach paragraph in section 5) followed immediately by a "More about my approach" link
     (`.approach-link`), both stacked in that column. This link used to be the third of three
@@ -362,17 +403,43 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     instead. If a `.corp-hero-split` style override reappears, that is a regression. The reserved
     image slot is square (1/1), because the therapy art is 1.12:1 and the supervision art is 1:1,
     which keeps the three banners a similar height.
+  - **The banner art is `assets/workplace-wellbeing.png`, a transparent cut-out**, so `.hero-art`
+    is `display: block` and nothing else. The inherited `border-radius: 20px` plus drop shadow was
+    removed: around a cut-out it outlines a card that is not there. It was also dead on the three
+    legal pages, which carried the rule and no such image.
+  - **In the nav dropdown and mobile drawer this page is labelled "Workplace Wellbeing"**, matching
+    its own headline. The footer link and the homepage Work With Me card still say "For
+    organisations", and the browser tab title is still "For Organisations · Honoring Stories".
+    That split is deliberate as of the last request, not an oversight.
+  - `.corp-prose` is **centred**, so the "Beyond awareness" copy sits under its centred heading.
+    The About block opts back out via `.about-split .corp-prose { text-align: left }`, because it
+    runs beside her circular portrait and needs a straight left edge against it. Keep that override
+    if either rule is touched.
+  - `.theme-pill` borders are `rgba(91, 46, 107, 0.3)`, **not `var(--line)`**. At 0.14 alpha they
+    were all but invisible against the cream these sit on. Hover adds the site's purple bloom as a
+    box-shadow.
   - **Her portrait sits in the About block, not the hero**: `assets/harshita-organisations.jpg`
     (560x840, 62 KB), cropped to a 220px circle at `object-position: 50% 14%`. The source
     `Harshitafororganizations.jpg` had a navy background, flood-filled from the image borders to
     white at tolerance 45, which isolates the navy without touching her blazer, hair or skin. Two
     small teal artifacts remain at the left edge of the source and fall outside the circular crop,
     so do not widen that crop without re-checking them.
-  - **Confidentiality has its own block** (`.confidential`) rather than being a line in the copy.
-    For the organisation it is usually the deciding question, and for the employee it is what makes
-    the space usable at all. It states plainly that the employer receives no names, notes, or
-    account of what was discussed, only broad non-identifying themes, with the risk-of-harm
-    exception. Keep this prominent; it is also repeated as an FAQ because people look in both places.
+  - **Confidentiality is a collapsible panel inside "What I offer"**, centred beneath the three
+    cards, opened by an `.info-btn` reading "ⓘ On confidentiality". It states plainly that the
+    employer receives no names, notes, or account of what was discussed, only broad
+    non-identifying themes, with the risk-of-harm exception. It is also repeated as an FAQ,
+    because people look in both places, and that repetition matters more now that the panel starts
+    closed.
+    - It went through three forms: an always-visible `.confidential` card in its own section, then
+      a modal `<dialog>`, then this. Each move was requested. Do not move it again unasked.
+    - The trigger keeps **the words next to the icon**, not a bare "ⓘ". A lone icon is easy to
+      scroll past, and for an employer weighing this up it is usually the deciding question.
+    - The panel animates with `grid-template-rows: 0fr → 1fr`, not a `max-height` guess, so it
+      eases to the text's real height rather than clipping it or easing against a height that is
+      not there. `aria-expanded` on the button is the **single source of truth** for open state, so
+      the chevron rotation, the grid row and assistive technology cannot disagree.
+    - Panel text stays **left aligned** even though the block is centred. Three centred paragraphs
+      are hard to read.
   - **Written in "I", like every other page. This was decided after trying the alternative.** The
     page was briefly rewritten in a corporate "we" voice and then reverted, so do not switch it
     again. The reasons it went back:
@@ -420,23 +487,47 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   `psychotherapy.html` template so nav, footer, CSS and scripts stay identical. Copy is taken from
   the source docs `About - Shared ways of coping.docx` and `About - Sip and Swap stories.docx` in
   `InstructionsWebsite.zip`, lightly edited only to remove contractions and em dashes.
-  - Hero is deliberately **single-column and centred**, unlike the two-column inner-page heroes,
-    because there is no artwork for this page yet and a dashed placeholder in the most prominent
-    slot would look unfinished.
+  - Hero is **single-column and centred**, unlike the two-column inner-page heroes, and now opens
+    with a full-bleed illustrated band (`assets/community-hero.jpg`) between the nav and the
+    "Community" eyebrow. Its motifs are cut at both left and right edges because it is drawn as a
+    repeating pattern, so it runs to the window edges: contained in a centred box those cut motifs
+    read as a crop mistake. `.page-hero` already has `overflow: hidden`, so the 100vw breakout
+    cannot cause sideways scrolling.
   - **Shared Ways of Coping** (`#shared-ways`): intro copy beside a reserved
     `.visual-placeholder` (the source doc explicitly says "add relevant image"), three
     `.note-pill`s (anonymous / optional / read before publishing), then the published notes and
-    the sharing call to action.
+    the sharing box.
+  - **The sharing box takes the note on the page itself** rather than sending people to Google.
+    It is the question as a prompt, a textarea, a live counter that counts 100 words down to 0, a
+    consent tick, and a submit button that stays disabled until there is both text and consent.
+    Past the limit the counter turns rose and submit disables again.
+    - It posts a plain `<form>` at a hidden iframe rather than using `fetch()`. That needs no CORS
+      permission from Google, and it degrades correctly without scripting: the visitor lands on
+      Google's own confirmation page instead of seeing the thank-you in place. **Do not "modernise"
+      this to `fetch()`**, it will start failing on CORS.
+    - Field names are Google's own question ids, `entry.725693056` for the note and
+      `entry.1145237366` for consent. If the form's questions are edited these can change and
+      submissions will silently stop arriving. Re-read them from the live form if that happens.
   - **Published notes system** (chosen deliberately over the alternatives, see below). Notes are
     rendered by JS from a **Google Sheet**, so new ones appear without editing this repo:
     - Two constants at the top of the page script drive everything: `SHARED_NOTES_CSV` and
-      `SHARED_FORM_URL`. Both are currently **empty**, which is what makes the page show three
-      clearly-labelled sample notes plus a "Coming soon" block. Filling them in switches the page
-      to live data automatically; nothing else needs changing.
+      `SHARED_FORM_URL`. **Both are now set.** The form link had its `?usp=sharing&ouid=...` query
+      stripped before going in, because `ouid` is Harshita's own Google account id and this is a
+      public page. Never paste a Google share link in without checking for it.
     - **Publish only the "Approved" tab** of the responses sheet as CSV, never the raw responses
       tab. Publishing the raw tab would make every unmoderated submission publicly readable and
-      defeat the point of moderating. The Approved tab should be a formula pulling only ticked
-      rows, e.g. `=FILTER(Responses!B2:B, Responses!C2:C=TRUE)`.
+      defeat the point of moderating.
+    - The responses tab is named **`Original response`** and the Approved tab pulls from it. Live
+      formula, in `A1` of the Approved tab:
+      `=FILTER('Original response'!B2:B, 'Original response'!D2:D=TRUE, ARRAYFORMULA(REGEXMATCH(LOWER('Original response'!C2:C&""), "^yes")))`
+      Column B is the note, C is the consent answer, D is the moderation tick box. **Both
+      conditions matter**: consent alone is not enough, and a tick alone must not publish
+      something the person did not consent to.
+      - `ARRAYFORMULA` is **required**. `REGEXMATCH` does not iterate a range on its own in Google
+        Sheets, and without the wrapper the whole filter silently matches nothing. This cost a
+        long debugging detour once already.
+      - Google caches the published CSV for about **five minutes**, so a newly ticked note does not
+        appear on the site instantly. That is normal, not a fault.
     - The form's **"Collect email addresses" setting must be OFF**, otherwise the space is not
       actually anonymous despite saying so.
     - Note text is inserted with **`textContent`, never `innerHTML`**. This is text arriving from
@@ -447,6 +538,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       mid-sentence if its commas ever arrive unquoted, publishing half of what someone wrote with
       no visible error. Verified against quoted commas, embedded newlines, escaped quotes,
       unquoted commas, a header row, and an empty sheet.
+    - **Rows carrying a spreadsheet error are dropped, and bare `TRUE`/`FALSE` cells stripped.**
+      A broken formula publishes as `#REF!` or `#N/A`, which would otherwise be rendered as though
+      a person had written it, and unused tick-box columns publish as bare booleans. A note that
+      merely contains the word FALSE in a sentence is untouched; only a cell that is exactly
+      TRUE or FALSE counts as sheet mechanics.
     - Cards are **quote only, with no name, credentials or years**, unlike the homepage
       testimonial cards they are visually modelled on. The anonymity is the point.
     - Empty and failed states both say something gentle rather than showing a blank area, and the
@@ -690,17 +786,32 @@ absence.
 
 ## 7. Open items / not yet built
 
-- Peer Testimonials page (full 8 testimonials)
-- **Google Form and Sheet for Shared Ways of Coping.** The display and the fetch/moderation
-  plumbing are built and tested; only the two URLs are missing. To go live: create the anonymous
-  form (email collection OFF), link its responses sheet, add an "Approved" tab filtered to ticked
-  rows, publish **that tab only** as CSV, then set `SHARED_NOTES_CSV` and `SHARED_FORM_URL` in
-  `community.html`. The sample notes and the "Coming soon" block disappear on their own once both
-  are set. Until then the samples are labelled as samples on the page so nothing reads as a real
-  submission.
-- Artwork for the Community page: the hero (currently text-only by design) and the reserved
-  `.visual-placeholder` in Shared Ways of Coping, which the source doc asks for.
+- Peer Testimonials page (full 8 testimonials). The 8 already run in the homepage carousel, and
+  Harshita has not decided whether a separate page is wanted.
 - **Legal review of the three policy pages.** They are written and live, and the footer links are
   wired, but a lawyer has not yet been through them. Do this before the site is public.
-- Real photo for the homepage glimpse section's image placeholder
+- **A `community/copingresponse` admin page listing raw submissions, password protected.**
+  Requested and **deliberately not built on the static site**, for two reasons that are worth
+  keeping written down, because the request will come back:
+  1. A static site has no server, so nothing running in a visitor's browser can write to it. Notes
+     must go to something external. That is what the Google Form is.
+  2. A password in static JavaScript is readable by anyone who opens the page source. Over what
+     people disclose here, a fake lock is worse than none, because it invites treating the page as
+     private when it is not.
+  The right home for this is the WordPress migration, where accounts and access control are real
+  and server-side. Meanwhile the responses sheet **is** the admin view, behind actual Google
+  authentication on Harshita's own account. Supabase was evaluated as a genuine middle option
+  (row-level security makes the lock real, free tier is ample) and set aside because free projects
+  pause after a week of inactivity, and she wants something that holds without being watched.
+- Artwork for the reserved `.visual-placeholder` in Shared Ways of Coping, which the source doc
+  asks for. The Community hero art is now in place.
+- The organisations page hero **image slot** still shows "Image to be added"; her portrait is in
+  the About block lower down, not the banner.
 - Real Instagram/blog content, if ever reintroduced
+- **A `.gitattributes` file.** The repo and working tree disagree on line endings, and every commit
+  emits CRLF warnings. Two machines work on this, so this will cause real conflicts eventually. Do
+  it at a moment when neither machine has work in progress.
+- Unused assets that could be cleared once nobody wants them back: `assets/harshita-chair.jpg`,
+  `assets/Harshitahomepagechair.png` (6.5 MB, untracked), and the untracked originals Harshita
+  uploads (`workplacewellbeing*.png`, `newhomepagehs.png`, `testimageblack.png`, `waysofcoping*.png`).
+  Her originals are deliberately left untracked; only the processed versions are committed.
