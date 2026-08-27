@@ -290,7 +290,11 @@
   footer { background: var(--charcoal); color: var(--cream-warm); padding: var(--space-lg) 0 var(--space-md); }
   .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(253, 250, 242, 0.12); }
   @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; } }
-  .footer-brand img { height: 64px; width: auto; margin-bottom: 1rem; }
+  /* Centred in its column rather than pinned to the top left, and at 700f
+     its previous 64px. The brand column holds nothing but the logo, so left
+     aligned it sat in a large empty area; centring gives it the column. */
+  .footer-brand { display: flex; align-items: center; justify-content: center; }
+  .footer-brand img { height: 45px; width: auto; }
   .footer-col h5 { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose-soft); margin-bottom: 1.25rem; font-weight: 500; }
   .footer-col ul { list-style: none; padding: 0; margin: 0; }
   .footer-col li { margin-bottom: 0.6rem; }
