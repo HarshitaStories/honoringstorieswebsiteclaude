@@ -242,10 +242,20 @@
   /* Confidentiality gets its own block rather than a line in the copy: for an
      organisation it is usually the deciding question, and for the employee it
      is what makes the space usable at all. */
-  .confidential { max-width: 720px; margin: 0 auto; background: var(--cream-warm); border: 1px solid var(--line); border-left: 3px solid var(--rose-soft); border-radius: 14px; padding: 1.85rem 1.9rem; }
-  .confidential h3 { font-size: 1.3rem; font-weight: 500; color: var(--deep-purple); font-style: italic; margin-bottom: 0.85rem; }
-  .confidential p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.8; }
-  .confidential p:last-child { margin-bottom: 0; }
+  /* ---- Confidentiality info button and dialog ---- */
+  .info-trigger-wrap { text-align: center; }
+  .info-btn { display: inline-flex; align-items: center; gap: 0.65rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.7rem 1.4rem 0.7rem 0.75rem; cursor: pointer; font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--deep-purple); transition: border-color 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle), transform 0.35s var(--ease-out); }
+  .info-btn:hover, .info-btn:focus-visible { border-color: var(--rose-soft); box-shadow: 0 14px 30px -18px rgba(91, 46, 107, 0.35); transform: translateY(-2px); }
+  .info-mark { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--deep-purple); color: var(--cream-warm); font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1; }
+  /* Keeps the card look the panel had before it moved behind the button. */
+  .info-dialog { max-width: 720px; width: calc(100% - 2.5rem); border: 1px solid var(--line); border-left: 3px solid var(--rose-soft); border-radius: 14px; background: var(--cream-warm); color: var(--charcoal-soft); padding: 2.25rem 1.9rem 1.9rem; box-shadow: 0 40px 80px -40px rgba(91, 46, 107, 0.5); position: relative; }
+  .info-dialog::backdrop { background: rgba(43, 30, 47, 0.45); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+  .info-dialog h3 { font-size: 1.3rem; font-weight: 500; color: var(--deep-purple); font-style: italic; margin-bottom: 0.85rem; }
+  .info-dialog p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.8; }
+  .info-dialog p:last-child { margin-bottom: 0; }
+  .info-close { position: absolute; top: 0.85rem; right: 0.85rem; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; transition: background 0.35s var(--ease-gentle), color 0.35s var(--ease-gentle); }
+  .info-close svg { width: 17px; height: 17px; }
+  .info-close:hover, .info-close:focus-visible { background: rgba(91, 46, 107, 0.08); color: var(--deep-purple); }
 
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
@@ -412,14 +422,29 @@
 <!-- ========== CONFIDENTIALITY ========== -->
 <section id="confidentiality">
   <div class="wrap">
-    <div class="confidential reveal">
-      <h3>On confidentiality</h3>
-      <p>This tends to be the question underneath all the others, so it is worth saying plainly.</p>
-      <p>What an individual shares with me stays with them. Organisations do not receive names, notes, or any account of what was discussed. Where it is useful, I can share broad themes at a group level, with nothing that could identify a person. The one exception is a risk of serious harm, which is discussed openly upfront.</p>
-      <p>This is not a technicality. People only use these spaces when they trust them, and that trust is what makes the work worth doing.</p>
+    <!-- The trigger keeps the words "On confidentiality" beside the icon. A bare
+         "i" is easy to scroll past, and for an employer deciding whether to
+         bring this in, confidentiality is usually the deciding question. -->
+    <div class="info-trigger-wrap reveal">
+      <button type="button" class="info-btn" id="confidentialityBtn" aria-haspopup="dialog">
+        <span class="info-mark" aria-hidden="true">i</span>
+        On confidentiality
+      </button>
     </div>
   </div>
 </section>
+
+<!-- A native <dialog>, so Escape closes it, focus is trapped while it is open
+     and returned to the button afterwards, all without extra script. -->
+<dialog class="info-dialog" id="confidentialityDialog" aria-labelledby="confidentialityTitle">
+  <button type="button" class="info-close" id="confidentialityClose" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <h3 id="confidentialityTitle">On confidentiality</h3>
+  <p>This tends to be the question underneath all the others, so it is worth saying plainly.</p>
+  <p>What an individual shares with me stays with them. Organisations do not receive names, notes, or any account of what was discussed. Where it is useful, I can share broad themes at a group level, with nothing that could identify a person. The one exception is a risk of serious harm, which is discussed openly upfront.</p>
+  <p>This is not a technicality. People only use these spaces when they trust them, and that trust is what makes the work worth doing.</p>
+</dialog>
 
 <!-- ========== HOW IT WORKS ========== -->
 <section id="how" style="background:var(--cream-warm);">
@@ -645,6 +670,31 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* Confidentiality dialog. showModal() gives Escape-to-close, the backdrop and
+     focus trapping for free, so the only things left to wire are opening it,
+     the close button, and clicking the backdrop. */
+  (function () {
+    const btn = document.getElementById('confidentialityBtn');
+    const dlg = document.getElementById('confidentialityDialog');
+    const close = document.getElementById('confidentialityClose');
+    if (!btn || !dlg) return;
+
+    btn.addEventListener('click', function () {
+      // showModal is missing on some older browsers. Falling back to a plain
+      // open keeps the text reachable rather than leaving a dead button.
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+      else dlg.setAttribute('open', '');
+    });
+
+    close.addEventListener('click', function () { dlg.close(); });
+
+    // A click landing on the dialog element itself, rather than on anything
+    // inside it, is a click on the backdrop.
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg) dlg.close();
+    });
+  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
