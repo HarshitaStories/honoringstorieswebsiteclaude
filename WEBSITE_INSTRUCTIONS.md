@@ -5,7 +5,99 @@ instructions, content, or decisions come in during a session, including reversal
 decisions. If something here conflicts with an older memory or an earlier commit message, this
 file wins.
 
-Last updated: 2026-08-01
+Last updated: **2026-08-27, 23:29 IST**
+
+---
+
+## 0. START HERE: frozen snapshot, 2026-08-27
+
+**Read this section before touching anything.**
+
+### 0.1 What this snapshot is
+
+As of **2026-08-27, 23:29 IST**, at commit **`202b42c`**, Harshita reviewed the site running on her
+local machine and **approved it as the final version**. Every page, every asset, every behaviour
+described in this file is the state she signed off.
+
+Her instruction, verbatim in substance: *do not overwrite any functionality, design, or any kind of
+change that is not in this current version.*
+
+That means, for whoever picks this up next, human or AI:
+
+- **Change only what you are explicitly asked to change.** Do not tidy, refactor, modernise,
+  reformat, or "improve" anything you were not asked about, however wrong it looks. Several things
+  in this codebase look wrong and are deliberate; they are flagged throughout with the reason.
+- **Do not revert anything to an earlier form** because an older commit, an older memory, or your
+  own instinct suggests it. Many details here are the third or fourth attempt after explicit
+  rejections. The reversal history is recorded in section 0.5 so you can see what has already been
+  tried and turned down.
+- **If a change you are asked to make would break something described here, say so before doing
+  it**, rather than doing it and mentioning it after.
+- Where this file and any other source disagree, **this file wins.**
+
+### 0.2 Verified state at the moment of the snapshot
+
+Checked, not assumed, at the time of writing:
+
+| Check | Result |
+| --- | --- |
+| Tracked files vs last commit | clean, nothing uncommitted |
+| Local `master` vs `origin/master` | in sync |
+| Assets referenced by the HTML | 10, **all tracked and present on disk** |
+| Total commits on `master` | 107 |
+| Em dashes anywhere in the repo | 0 |
+| Pages | 9 HTML files, all serving HTTP 200 locally |
+
+A fresh `git clone` of this repository renders byte-identically to what she approved. Nothing the
+site loads at runtime lives outside the repo except the Google Fonts stylesheet and the two Google
+endpoints listed in section 0.4.
+
+### 0.3 How to run it
+
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File serve.ps1
+```
+
+Then open `http://localhost:8080/index.html`.
+
+`serve.ps1` is a small .NET `HttpListener` static file server committed at the repo root. It exists
+because **this machine has no Node, Python or PHP installed**, so the usual one-line dev server is
+not available. It sends no-cache headers, so edits appear on an ordinary refresh. It refuses to
+serve outside the repo folder.
+
+Opening the HTML files directly as `file:///...` mostly works, since all links are relative, **but
+the Shared Ways of Coping notes will fail to load**, because the browser blocks the cross-origin
+fetch to Google from a `file://` page. Use the server when testing that section.
+
+### 0.4 The only external dependencies
+
+| What | Where | Breaks if it goes away |
+| --- | --- | --- |
+| Google Fonts | Cormorant Garamond + Inter | Type falls back to Georgia and system sans |
+| Google Form | `SHARED_FORM_URL` in `community.html` | The coping submission box stops accepting notes |
+| Google Sheet CSV | `SHARED_NOTES_CSV` in `community.html` | Published notes stop appearing; page shows its own graceful empty state |
+| cal.com | booking link, section 6 contact details | Every "Book a Consultation Call" button dead-ends |
+
+There is **no build step, no framework, no package manager, no backend, and no database.** Every
+page is a single self-contained `.html` file carrying its own `<style>` and `<script>`. This is
+deliberate and is explained in section 2.
+
+### 0.5 Things already tried and explicitly rejected
+
+Do not reintroduce any of these. Each was built, shown, and turned down.
+
+| Tried | Outcome |
+| --- | --- |
+| Animated wavy section dividers | Rejected, reverted same session |
+| "We" voice on the organisations page | Rejected, reverted to "I" |
+| Decorative doodles down the Work With Me section | Rejected, removed |
+| Two earlier stat-row designs | Rejected twice before the frameless count-up was accepted |
+| Pink sliding-bar hover on cards | Replaced with the purple treatment |
+| Full-bleed section divider lines | Removed globally |
+| Second (paler) Workplace Wellbeing illustration | Installed, then reverted; the third is in place |
+| Confidentiality as a modal `<dialog>` | Replaced by the inline collapsible |
+| Pricing anywhere on the homepage | Removed; lives only on the two service pages |
+| Instagram link in the footer | Removed |
 
 ---
 
@@ -781,6 +873,20 @@ absence.
    (see `.gitignore`); only their approved, ready-to-publish text belongs in HTML or in this file.
 9. Do not build or implement anything until explicitly told to create. Gathering, confirming, and
    logging instructions is fine and expected in the meantime.
+10. **The 2026-08-27 version is approved and frozen. Change only what you are explicitly asked to
+    change.** Do not overwrite, revert, refactor, reformat or "improve" any functionality, design
+    or content that is not part of the change you were asked for. If something looks wrong, check
+    section 0.5 and the surrounding code comments first: most oddities here are the third or fourth
+    attempt after an explicit rejection. If a requested change would break something documented in
+    this file, say so before making it, not after.
+11. When changing anything in the nav, footer, WhatsApp button or scroll-rail, **apply it to all
+    nine pages**, and verify all nine afterwards. There is no shared template. `index.html` writes
+    its CSS across multiple lines while the other eight use single lines, so a find-and-replace
+    tuned to the eight will silently skip it.
+12. Verify by measuring, not by assuming. This preview environment does not reliably produce
+    screenshots or advance CSS transitions, so a visual check may show a change as failing when it
+    has worked. Read computed styles with transitions disabled, measure geometry, and check
+    element order in the DOM instead.
 
 ---
 
@@ -815,3 +921,146 @@ absence.
   `assets/Harshitahomepagechair.png` (6.5 MB, untracked), and the untracked originals Harshita
   uploads (`workplacewellbeing*.png`, `newhomepagehs.png`, `testimageblack.png`, `waysofcoping*.png`).
   Her originals are deliberately left untracked; only the processed versions are committed.
+
+---
+
+## 8. File manifest (state at 2026-08-27)
+
+Every file tracked in the repository, what it is, and whether the site actually loads it. Sizes are
+approximate and only there to flag the heavy ones.
+
+### 8.1 Pages
+
+| File | Size | What it is |
+| --- | --- | --- |
+| `index.html` | 79 KB | Homepage. Hero, values, concerns, glimpse section (photo + approach + animated stats), Work With Me cards, testimonials carousel, contact strip. |
+| `about.html` | 46 KB | About Harshita. Bio behind a Read more / Read less toggle, values icon-cards, qualifications timeline. |
+| `psychotherapy.html` | 58 KB | Psychotherapy sessions. Who it is for, session logistics infographic, geo-aware pricing, FAQs. |
+| `supervision.html` | 54 KB | Supervision sessions. Same structure as psychotherapy, different copy and pricing. |
+| `corporates.html` | 55 KB | Workplace Wellbeing, for organisations. No pricing anywhere, by explicit instruction. |
+| `community.html` | 60 KB | Community. Shared Ways of Coping (submission box + published notes) and Sip and Swap Stories. |
+| `disclaimer.html` | 38 KB | Legal. Effective 1 September 2026. |
+| `privacy-policy.html` | 41 KB | Legal. Effective 1 September 2026. |
+| `terms-and-conditions.html` | 40 KB | Legal. Effective 1 September 2026. |
+
+All nine carry an identical nav, footer, floating WhatsApp button and scroll-rail. **A change to any
+of those must be applied to all nine**, because there is no shared stylesheet or template. This is
+the single biggest maintenance hazard in the repo and the cause of most bugs found so far: a rule
+fixed on eight pages and missed on the ninth.
+
+`index.html` formats its CSS across multiple lines where the other eight use single lines. Any
+find-and-replace across all pages will silently skip `index.html` unless you check. This has
+already caused one missed change.
+
+### 8.2 Assets the site loads
+
+| File | Size | Used by | Notes |
+| --- | --- | --- | --- |
+| `assets/logo.png` | 26 KB | all 9 | Favicon and nav logo. |
+| `assets/Whitelogo.png` | 16 KB | all 9 | Footer logo. 45px tall, centred in its column. |
+| `assets/harshita-home.png` | 979 KB | `index.html` | Hero cut-out, transparent. Must stay PNG. Heaviest asset on the site. |
+| `assets/harshita-glimpse.png` | 166 KB | `index.html` | Glimpse-section portrait, transparent cut-out, 340x319. Low resolution for its slot; a larger original would improve it. |
+| `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
+| `assets/supervision-hero.jpg` | 159 KB | `supervision.html` | Illustration, backdrop flattened to page cream. |
+| `assets/workplace-wellbeing.png` | 893 KB | `corporates.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
+| `assets/harshita-organisations.jpg` | 62 KB | `corporates.html` | Portrait in the About block, 220px circle at `object-position: 50% 14%`. |
+| `assets/community-hero.jpg` | 77 KB | `community.html` | Full-bleed repeating band at the top of the page. |
+| `assets/sharedwaysofcoping.jpg` | 100 KB | `community.html` | Section illustration, backdrop flattened to cream-warm. |
+
+### 8.3 Assets tracked but no longer loaded
+
+Kept deliberately, not dead weight to be tidied away. Do not delete without asking.
+
+| File | Size | Why it is still here |
+| --- | --- | --- |
+| `assets/harshita-chair.jpg` | 169 KB | Previous glimpse photo, a plain rectangle. If the glimpse photo ever goes back to a rectangle, this is the one, and the feathering CSS described in section 4 goes back with it. |
+| `assets/harshita-home-source.png` | 575 KB | Original of the hero cut-out, before background removal. |
+| `assets/harshita-home 2.png` | 560 KB | Older grey-studio-backdrop hero photo. Note the space in the filename. |
+| `assets/logo-full.png` | 29 KB | Full-colour logo, superseded by `Whitelogo.png` in the footer. |
+
+### 8.4 Other tracked files
+
+| File | What it is |
+| --- | --- |
+| `serve.ps1` | Local static file server. See section 0.3. |
+| `.gitignore` | Excludes the personal-data source files. See below. |
+| `WEBSITE_INSTRUCTIONS.md` | This file. |
+
+### 8.5 Untracked files in the working folder
+
+These sit in `assets/` on Harshita's machine and are **deliberately not committed**. They are the
+raw originals she uploads; only the processed versions go into the repo.
+
+`Harshitafororganizations.jpg`, `Harshitahomepagechair.png`, `newhomepagehs.png`,
+`testimageblack.png`, `waysofcoping1.png`, `waysofcoping2.png`, `workplacewellbeing.png`,
+`workplacewellbeing3.png`, `workplacewellbring2.png` (note the "wellbring" typo in that filename),
+and `hello.html` (a scratch file that was once committed by accident and removed again).
+
+**Do not commit these.** They are large, superseded by the processed versions, and committing one
+of them was already undone once.
+
+Separately, `InstructionsWebsite.zip` and `Peer Testimonials (Responses).xlsx` are kept out of git
+by `.gitignore` because they carry personal data. Keep it that way.
+
+---
+
+## 9. Change history
+
+Every commit on `master`, newest first, as the record of how the approved version was reached.
+Reversals are included on purpose: they show what has already been rejected.
+
+### 2026-08-27
+
+| Commit | Change |
+| --- | --- |
+| `202b42c` | Brought this file back in step with the previous 17 commits. |
+| `e3e72e1` | Folded confidentiality into "What I offer" as a centred collapsible; theme pill borders raised from 0.14 to 0.3 alpha and given the purple hover bloom; themes note shortened to "Or bring a theme of your own." |
+| `013784b` | Centred the "Beyond awareness" copy under its centred heading. |
+| `0350201` | Swapped the Workplace Wellbeing banner for the third illustration. |
+| `777037e` | Replaced the nav underline hover with a purple glow, on all nine pages. |
+| `0eb4069` | Moved the confidentiality panel behind an info button. Superseded later the same day by `e3e72e1`. |
+| `c38e47f` | Reverted the second Workplace Wellbeing illustration. |
+| `bff7b93` | Swapped in the second, paler Workplace Wellbeing illustration. Reverted above. |
+| `a24dc55` | Put the meeting illustration on the Workplace Wellbeing banner; renamed the nav item from "For organisations" to "Workplace Wellbeing"; removed the stale `.hero-art` card styling. |
+| `b1c28a4` | Footer logo centred in its column at 45px, down from 64px, on all nine pages. |
+| `af202ba` | Swapped the homepage glimpse photo for the trimmed test cut-out. |
+| `ddbc252` | Used the illustrated cut-out for the glimpse photo; removed the edge feathering and the 4:5 crop that suited the old rectangular photo. |
+| `90d37d3` | Swapped the Community banner for the repeating band and ran it full bleed. |
+| `f50f558` | Added the coping illustration at the top of the Community page. |
+| `b7da0f1` | Replaced the "Share what helped you" button with an on-page submission box: prompt, textarea, 100-word countdown, consent tick. |
+| `68d0156` | Wired the published Approved sheet; added the guard that stops a broken sheet formula being published as if it were a person's note. |
+| `034310b` | Wired the Shared Ways of Coping form link, with the `ouid` account id stripped. |
+| `3f5550f` | Removed a stray em dash from a code comment. |
+
+### 2026-08-26 and earlier
+
+| Commit | Change |
+| --- | --- |
+| `cb66673` | Made the header "Book a Consultation Call" button open the calendar. It pointed at `#contact`, which merely scrolled, and was dead entirely on the three legal pages. |
+| `91743a5` | Added Harshita's photo to the organisations page and matched that banner's layout to Psychotherapy. |
+| `180ed08` | Blended the coping illustration into its section; retitled the corporates hero to "Workplace Wellbeing". |
+| `4f4ba6d` | Replaced the footer logo with the white version. |
+| `447beba`, `3e4da2c` | Added the chair portrait to the glimpse section and feathered its edges. |
+| `b9db0a8` | Matched the two pricing cards; stopped the logistics thread showing through the milestone dots. |
+| `4e3d043`, `a74e6f0` | Sat the supervision and therapy illustrations directly on their banners. |
+| `6e3c0ae` | Geo-aware pricing by timezone; logistics markers became milestone dots. |
+| `158d428` | Evened out the session logistics so all four points share one shape. |
+| `c3c4f67` | Moved "Read less" to the end of the expanded bio; purple hover on value cards. |
+| `8ce3527` | Left-aligned the About copy on the organisations page. |
+| `dd8b555` | Moved the hero feather behind the subject and aligned her to the text block. |
+| `ff1cd7d` | Reworded the testimonials eyebrow to lead into the heading. |
+| `04d7a67` | Symmetric theme pills, centred cards, section lines removed, glow direction fixed. |
+| `dea4ed7` | Removed `hello.html` from the repo after a wildcard swept it in. |
+| `d036b0f` | Purple hover on concern cards; image slot in the corporates hero. |
+| `274f959` | Added "For organisations" as a third card in the homepage Work With Me row. |
+| `c4dc6ca` | Added the Disclaimer, Privacy Policy and Terms pages and wired the footer links. |
+| `56423f4` | Reverted the organisations page to an "I" voice. |
+| `0313f91` | Switched the organisations page to a "we" voice. Reverted above. |
+| `ec5ea94` | Added the For Organisations page as a third Work With Me offering. |
+| `6c9a1f6` | Hero photo as a soft radial safe area; collapsed the About bio behind Read more. |
+| `098500a` | Optimised the two heaviest illustrations, 3.7 MB down to 263 KB. |
+| `acf4a37` | Added the Shared Ways of Coping illustration. |
+| `9a7a0da` | Added the anonymous shared-notes system to the Community page. |
+
+Earlier commits cover the initial build of the homepage, About, Psychotherapy, Supervision and
+Community pages, and are described in sections 3 to 5 rather than listed here.
