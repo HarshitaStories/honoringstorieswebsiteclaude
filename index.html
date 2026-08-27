@@ -167,15 +167,11 @@
     letter-spacing: 0.02em;
     position: relative;
   }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--rose);
-    transition: width 0.4s var(--ease-gentle);
-  }
-  .nav-links a:hover::after { width: 100%; }
+  /* Glow rather than an underline. Two shadows: a tight one that gives the
+     letterforms definition, and a wider, fainter one for the halo. Excludes
+     .nav-cta, which is a filled button and needs no bloom behind its text. */
+  .nav-links a:not(.nav-cta) { transition: color 0.4s var(--ease-gentle), text-shadow 0.45s var(--ease-gentle); }
+  .nav-links a:not(.nav-cta):hover, .nav-links a:not(.nav-cta):focus-visible { color: var(--deep-purple); text-shadow: 0 0 10px rgba(122, 77, 143, 0.5), 0 0 22px rgba(122, 77, 143, 0.26); }
 
   .nav-cta {
     background: var(--deep-purple);
@@ -269,14 +265,14 @@
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--charcoal-soft);
-    transition: color 0.3s var(--ease-gentle);
+    transition: color 0.4s var(--ease-gentle), text-shadow 0.45s var(--ease-gentle);
   }
   .nav-dropdown-toggle svg {
     width: 9px; height: 9px;
     transition: transform 0.4s var(--ease-gentle);
   }
   .nav-dropdown:hover .nav-dropdown-toggle,
-  .nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--rose); }
+  .nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--deep-purple); text-shadow: 0 0 10px rgba(122, 77, 143, 0.5), 0 0 22px rgba(122, 77, 143, 0.26); }
   .nav-dropdown:hover .nav-dropdown-toggle svg,
   .nav-dropdown:focus-within .nav-dropdown-toggle svg { transform: rotate(180deg); }
   .nav-dropdown-menu {
