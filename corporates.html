@@ -231,7 +231,10 @@
   .dp-photo { width: 220px; height: 220px; flex-shrink: 0; border-radius: 50%; object-fit: cover; object-position: 50% 14%; display: block; box-shadow: 0 16px 32px -22px rgba(91, 46, 107, 0.35); }
   .about-split .corp-prose { max-width: none; text-align: left; }
   .about-cta { margin-top: 1.75rem; }
-  .corp-prose { max-width: 720px; margin: 0 auto; }
+  /* Centred to sit under the centred heading above it. The About block opts
+     back out via .about-split .corp-prose, since it runs beside a portrait and
+     needs a straight left edge against it. */
+  .corp-prose { max-width: 720px; margin: 0 auto; text-align: center; }
   .corp-prose p { color: var(--charcoal-soft); font-size: 1.02rem; line-height: 1.8; }
   .corp-prose p:last-child { margin-bottom: 0; }
   /* A grid rather than a wrapping flex row. Flex sized each pill to its own
