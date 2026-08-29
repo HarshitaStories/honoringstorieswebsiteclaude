@@ -3,3 +3,10 @@ Peer Testimonials (Responses).xlsx
 Logo.png
 Supervision home page.png
 Therapy home page.jpg
+
+# Runtime data for the coping notes. Real submissions and the admin password
+# hash live here on the server; they are not source and must never be committed.
+data/notes.json
+data/config.json
+data/notes.lock
+data/*.tmp

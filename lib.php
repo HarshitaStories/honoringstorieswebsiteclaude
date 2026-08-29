@@ -14,6 +14,7 @@
 const DATA_DIR    = __DIR__ . '/data';
 const NOTES_FILE  = DATA_DIR . '/notes.json';
 const CONFIG_FILE = DATA_DIR . '/config.json';
+const LOCK_FILE   = DATA_DIR . '/notes.lock';
 const WORD_LIMIT  = 100;
 const MAX_CHARS   = 2000;   // hard stop, well above the word limit
 const MAX_NOTES   = 5000;   // refuse to grow without bound
@@ -22,16 +23,16 @@ const MAX_NOTES   = 5000;   // refuse to grow without bound
 function hs_ensure_storage(): void
 {
     if (!is_dir(DATA_DIR)) {
-        mkdir(DATA_DIR, 0755, true);
+        @mkdir(DATA_DIR, 0755, true);
     }
     // If the folder was created fresh, or .htaccess was lost in an upload,
     // put it back. Without it, unapproved submissions become publicly readable.
     $htaccess = DATA_DIR . '/.htaccess';
     if (!file_exists($htaccess)) {
-        file_put_contents($htaccess, "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\n    Order deny,allow\n    Deny from all\n</IfModule>\n");
+        @file_put_contents($htaccess, "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\n    Order deny,allow\n    Deny from all\n</IfModule>\n");
     }
     if (!file_exists(NOTES_FILE)) {
-        file_put_contents(NOTES_FILE, "[]");
+        @file_put_contents(NOTES_FILE, "[]");
     }
 }
 
@@ -74,7 +75,12 @@ function hs_save_notes(array $notes): bool
 {
     hs_ensure_storage();
 
-    $lock = @fopen(NOTES_FILE, 'c+');
+    /* The lock is taken on a separate file, never on notes.json itself.
+       Windows refuses to rename over a file that has an open handle, so
+       locking the data file and then renaming onto it fails with "Access is
+       denied". Linux allows it, which is worse: the bug would hide in
+       production and only appear on a Windows machine. */
+    $lock = @fopen(LOCK_FILE, 'c');
     if ($lock === false) {
         return false;
     }
@@ -88,11 +94,15 @@ function hs_save_notes(array $notes): bool
         JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
     );
 
+    /* Every file call is silenced. These endpoints answer in JSON, and a PHP
+       warning printed mid-response both corrupts the JSON and sends headers
+       early, which stops the error status being set at all. Failures are
+       reported through the return value instead. */
     $ok = false;
     if ($json !== false) {
         $tmp = NOTES_FILE . '.tmp';
-        if (file_put_contents($tmp, $json) !== false) {
-            $ok = rename($tmp, NOTES_FILE);
+        if (@file_put_contents($tmp, $json) !== false) {
+            $ok = @rename($tmp, NOTES_FILE);
             if (!$ok) {
                 @unlink($tmp);
             }
@@ -164,7 +174,7 @@ function hs_set_password(string $plain): bool
     $config = hs_config();
     $config['password_hash'] = password_hash($plain, PASSWORD_DEFAULT);
     $config['set_at'] = hs_now();
-    return file_put_contents(
+    return @file_put_contents(
         CONFIG_FILE,
         json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
     ) !== false;
