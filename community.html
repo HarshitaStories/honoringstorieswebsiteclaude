@@ -281,6 +281,20 @@
      carousel on the homepage. No name panel here: these are anonymous, so the
      quote takes the full width rather than leaving an empty column where the
      testimonials show who is speaking. */
+  /* The one line telling a reader where these came from. Sits above the pad,
+     centred with it, and is shown and hidden alongside it: with no notes to
+     introduce it would be a caption over an empty space. */
+  .notes-lead {
+    max-width: 34rem;
+    margin: 2.75rem auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--purple);
+  }
+
   /* ---- Shared notes: the notepad ----
      A spiral pad whose pages turn, one note per page.
 
@@ -635,6 +649,11 @@
         </div>
       </div>
     </div>
+    <!-- Sits with the pad rather than above it as its own thing, and is hidden
+         alongside it: with no notes to introduce it would be a caption over an
+         empty space. -->
+    <p class="notes-lead" id="notesLead" hidden>Notes from people who have had hard days too</p>
+
     <!-- A spiral pad, one note per page. Built in JS from whatever notes.php
          returns, so the number of pages follows the data. -->
     <div class="notepad reveal" id="notepad" hidden>
@@ -1198,10 +1217,12 @@
       const prevBtn  = document.getElementById('padPrev');
       const nextBtn  = document.getElementById('padNext');
       const relateMsg = document.getElementById('padRelateMsg');
+      const lead      = document.getElementById('notesLead');
       const hint     = document.getElementById('padHint');
       const relate   = document.getElementById('padRelate');
       if (!pad) return;
 
+      lead.hidden = false;
       pad.hidden = false;
       /* Revealed the moment the notes arrive, rather than waiting for the scroll
          animation to notice it. While the pad was hidden it had no size, so the
@@ -1426,6 +1447,8 @@
     }
 
     function showEmpty(message) {
+      const lead = document.getElementById('notesLead');
+      if (lead) lead.hidden = true;
       pad.hidden = true;
       notice.textContent = message;
       notice.hidden = false;
