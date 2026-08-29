@@ -1,4 +1,4 @@
-# Honoring Stories: server configuration for Hostinger.
+﻿# Honoring Stories: server configuration for Hostinger.
 #
 # The site is deployed straight from this Git repository into public_html, so
 # everything in the repo lands on the live server. The repo holds project files
@@ -23,16 +23,30 @@ DirectoryIndex index.html
   Require all denied
 </FilesMatch>
 
+# lib.php only defines functions and is included by the other three scripts.
+# Loading it directly does nothing, but there is no reason for it to be a URL.
+<Files "lib.php">
+  Require all denied
+</Files>
+
 # Dotfiles: .gitignore, .gitattributes and anything similar.
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
 
-# The Sveltia CMS admin screen. It was started and never finished: the GitHub
-# login side is not set up, so it currently loads and then cannot do anything.
-# A visitor finding a broken admin page is worse than finding no page at all.
-# Delete these three lines to switch it on once the login is configured.
-RedirectMatch 404 /admin
+# The Sveltia CMS folder. It was started and never finished, and has since been
+# superseded by admin.php, which does the same job with a password checked on
+# the server. Blocked so a visitor cannot find a half built admin screen.
+#
+# The pattern is anchored to the FOLDER. Written unanchored as "/admin" it also
+# matches "/admin.php", which would 404 the real moderation page.
+RedirectMatch 404 ^/admin/
+
+# The store for the coping notes. It holds submissions that have not been
+# approved and the admin password hash. data/.htaccess denies the folder as
+# well; this is the same rule stated at the root, so the folder stays shut even
+# if that file is lost during an upload.
+RedirectMatch 404 ^/data/
 
 # A .git directory inside the web root would expose the entire repository
 # history to anyone who guessed the path. Deploy tools sometimes leave one.
