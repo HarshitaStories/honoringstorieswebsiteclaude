@@ -1,0 +1,72 @@
+# Honoring Stories: server configuration for Hostinger.
+#
+# The site is deployed straight from this Git repository into public_html, so
+# everything in the repo lands on the live server. The repo holds project files
+# as well as the website itself, and the rules below make sure only the website
+# is reachable from the web.
+
+DirectoryIndex index.html
+
+# ---------------------------------------------------------------------------
+# Block the project files that are not part of the website
+# ---------------------------------------------------------------------------
+# WEBSITE_INSTRUCTIONS.md, the Word exports, the packaged zips and the local
+# server script. None contain passwords, but they are internal working
+# documents and have no business being downloadable from the live domain.
+<FilesMatch "\.(md|docx|zip|ps1)$">
+  Require all denied
+</FilesMatch>
+
+# Scratch pages built to prototype the submit-then-moderate flow, plus an old
+# throwaway file. They are marked as test pages and are not part of the site.
+<FilesMatch "^(userresponse|usersubmission|hello)\.html$">
+  Require all denied
+</FilesMatch>
+
+# Dotfiles: .gitignore, .gitattributes and anything similar.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# The Sveltia CMS admin screen. It was started and never finished: the GitHub
+# login side is not set up, so it currently loads and then cannot do anything.
+# A visitor finding a broken admin page is worse than finding no page at all.
+# Delete these three lines to switch it on once the login is configured.
+RedirectMatch 404 /admin
+
+# A .git directory inside the web root would expose the entire repository
+# history to anyone who guessed the path. Deploy tools sometimes leave one.
+RedirectMatch 404 /\.git
+
+# ---------------------------------------------------------------------------
+# Caching
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images are the heavy part of this site and change rarely, so let browsers
+  # hold on to them. If one is replaced, its filename usually changes too.
+  ExpiresByType image/png  "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+
+  # HTML must not be cached. Every page carries its own CSS and JavaScript
+  # inline, so a stale HTML file is a stale website, not just stale text.
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # notes.json is the published coping notes. Caching it would mean a newly
+  # approved note not appearing until the visitor's cache expired.
+  ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Compression
+# ---------------------------------------------------------------------------
+# The pages run 38 to 79 KB each because the styling is inline, so this makes a
+# real difference on a slow connection.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
