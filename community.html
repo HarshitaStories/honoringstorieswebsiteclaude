@@ -607,7 +607,7 @@
     </div>
     <!-- A spiral pad, one note per page. Built in JS from whatever notes.php
          returns, so the number of pages follows the data. -->
-    <div class="notepad reveal delay-3" id="notepad" hidden>
+    <div class="notepad reveal" id="notepad" hidden>
       <!-- Rings drawn one at a time rather than repeated, so each is a slightly
            different shape and the binding does not look stamped out. -->
       <svg class="pad-rings" viewBox="0 0 460 30" fill="none" aria-hidden="true">
@@ -931,6 +931,33 @@
       const label   = document.getElementById('shareSubmitLabel');
       if (!form || !input) return;
 
+      /* ---- how many notes this browser has already sent ----
+         Three per person, kept in their own browser, so clearing site data
+         resets it. As with the relate button, there is no login here, so this
+         is a courtesy rather than a control: it stops one enthusiastic evening
+         filling the moderation queue, and it is not claimed to do more. The
+         real limit is that nothing appears until Harshita approves it. */
+      const SHARE_LIMIT = 3;
+      const SHARED_KEY  = 'hs_shared_count';
+
+      function sharedCount() {
+        try { return parseInt(localStorage.getItem(SHARED_KEY) || '0', 10) || 0; }
+        catch (e) { return 0; }   // private browsing, or storage switched off
+      }
+      function recordShared() {
+        try { localStorage.setItem(SHARED_KEY, String(sharedCount() + 1)); } catch (e) {}
+      }
+
+      // Puts the form away and leaves a message in its place.
+      function closeForm(message) {
+        label.textContent = 'Share this';
+        field.hidden = true;
+        consentRow.hidden = true;
+        form.querySelector('.share-prompt').hidden = true;
+        submit.hidden = true;
+        say(message, false);
+      }
+
       /* The button stays enabled even when the form is not ready to send.
 
          A greyed out button is the worst of both worlds: it refuses to do
@@ -968,6 +995,13 @@
 
       // Any correction clears the complaint, so a message can never linger over
       // something the person has already put right.
+      // Already at the limit when the page loads, so the form is put away before
+      // anyone types into a box that will not accept it.
+      if (sharedCount() >= SHARE_LIMIT) {
+        closeForm('You have shared three notes from this browser, which is as many as this space takes from one person. Thank you for them.');
+        return;
+      }
+
       input.addEventListener('input', () => { update(); clearInvalid(); say(''); });
       consent.addEventListener('change', () => { clearInvalid(); say(''); });
       update();
@@ -996,6 +1030,11 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        if (sharedCount() >= SHARE_LIMIT) {
+          closeForm('You have shared three notes from this browser, which is as many as this space takes from one person. Thank you for them.');
+          return;
+        }
 
         const problem = firstProblem();
         if (problem) {
@@ -1040,12 +1079,10 @@
             if (res && res.ok) {
               // Label reset before hiding, so nothing in the document is left
               // reading "Sending", including to a screen reader.
-              label.textContent = 'Share this';
-              field.hidden = true;
-              consentRow.hidden = true;
-              form.querySelector('.share-prompt').hidden = true;
-              submit.hidden = true;
-              say('Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.', false);
+              recordShared();
+              closeForm(sharedCount() >= SHARE_LIMIT
+                ? 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up. That is the third note from this browser, which is as many as this space takes from one person.'
+                : 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.');
               return;
             }
             /* The server checks the same things the browser does, so its
@@ -1136,6 +1173,12 @@
       if (!pad) return;
 
       pad.hidden = false;
+      /* Revealed the moment the notes arrive, rather than waiting for the scroll
+         animation to notice it. While the pad was hidden it had no size, so the
+         observer that drives .reveal could not see it, and the fade only began
+         once the data had already landed. That read as the notepad and its
+         button arriving late. */
+      pad.classList.add('in');
       notice.hidden = true;
 
       let i = 0;
