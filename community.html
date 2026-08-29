@@ -354,6 +354,56 @@
   .notepad:hover .pad-corner { transform: translate(-3px, -3px) rotate(-7deg); color: var(--rose); }
   .pad-corner:focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; border-radius: 6px; }
 
+
+  /* The relate button. Same lopsided radii as the paper, so it reads as drawn
+     on the page rather than placed on top of it. */
+  .pad-relate {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.4rem;
+    padding: 0.4rem 0.95rem 0.42rem 0.8rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--purple);
+    background: none;
+    border: 1.4px solid rgba(122, 77, 143, 0.3);
+    border-radius: 130px 12px 120px 14px / 14px 115px 12px 125px;
+    cursor: pointer;
+    transition: color 0.4s var(--ease-gentle), border-color 0.4s var(--ease-gentle), background 0.4s var(--ease-gentle);
+  }
+  .pad-relate svg { width: 15px; height: 15px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; transition: fill 0.5s var(--ease-gentle); }
+  .pad-relate em { font-style: normal; font-family: var(--font-body); font-size: 0.78rem; color: var(--muted); }
+  .pad-relate em:empty { display: none; }
+
+  .pad-relate:hover, .pad-relate:focus-visible {
+    color: var(--rose);
+    border-color: var(--rose-soft);
+    background: rgba(242, 197, 213, 0.16);
+    outline: none;
+  }
+
+  /* Already ticked. The heart fills and the button stops responding, but it is
+     not greyed out: this is a thing the person did, not a thing denied them. */
+  .pad-relate.is-related { color: var(--rose); border-color: var(--rose-soft); cursor: default; }
+  .pad-relate.is-related svg { fill: var(--rose-soft); }
+  .pad-relate.is-related:hover { background: none; }
+
+  /* The heart gives one small beat as it is ticked. */
+  .pad-relate.just-related svg { animation: relateBeat 0.75s var(--ease-gentle); }
+  @keyframes relateBeat {
+    0%, 100% { transform: scale(1); }
+    30%      { transform: scale(1.32); }
+    60%      { transform: scale(0.96); }
+  }
+
+  /* The copy on the sheet below is never pressed. */
+  .pad-relate.is-echo { cursor: default; pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pad-relate.just-related svg { animation: none; }
+  }
   .pad-hint {
     margin: 1.35rem 0 0;
     text-align: center;
@@ -527,11 +577,23 @@
 
       <div class="pad-stack">
         <!-- The sheet below, holding the note the turn is about to reveal. -->
-        <div class="pad-page pad-page-under" aria-hidden="true"><p id="padUnder"></p></div>
+        <div class="pad-page pad-page-under" aria-hidden="true">
+          <p id="padUnder"></p>
+          <!-- A visual copy only. It is briefly on screen mid turn, so it has to
+               look right, but it is never the one being pressed. -->
+          <span class="pad-relate is-echo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4C6.6 16.7 3.4 13.6 3.4 10.1 3.4 7.4 5.5 5.4 8 5.4c1.6 0 3.1.8 4 2.1.9-1.3 2.4-2.1 4-2.1 2.5 0 4.6 2 4.6 4.7 0 3.5-3.2 6.6-8.6 10.3z"/></svg><span>I can relate</span><em id="padUnderCount"></em></span>
+        </div>
         <!-- The sheet on top, which turns. aria-live announces each new note to
              a screen reader as it arrives, politely so it does not interrupt. -->
         <div class="pad-page pad-page-top" id="padTop">
           <p id="padTopText" aria-live="polite"></p>
+          <!-- One tick per note per browser. There is no login, so this is a
+               courtesy rather than a control: see relate.php. -->
+          <button type="button" class="pad-relate" id="padRelate">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4C6.6 16.7 3.4 13.6 3.4 10.1 3.4 7.4 5.5 5.4 8 5.4c1.6 0 3.1.8 4 2.1.9-1.3 2.4-2.1 4-2.1 2.5 0 4.6 2 4.6 4.7 0 3.5-3.2 6.6-8.6 10.3z"/></svg>
+            <span>I can relate</span>
+            <em id="padRelateCount"></em>
+          </button>
         </div>
       </div>
 
@@ -559,10 +621,10 @@
         <label class="share-prompt" for="shareInput">When things are heavy, what is the one thing that helps you?</label>
         <div class="share-field">
           <textarea id="shareInput" name="note" rows="4" maxlength="1200"
-                    placeholder="Up to 100 words. It does not have to be profound or well phrased."></textarea>
+                    placeholder="Up to 50 words. It does not have to be profound or well phrased."></textarea>
           <!-- aria-live announces the count to screen readers as it changes,
                but politely, so it does not interrupt every keystroke. -->
-          <span class="share-count" id="shareCount" aria-live="polite">100</span>
+          <span class="share-count" id="shareCount" aria-live="polite">50</span>
         </div>
         <label class="share-consent">
           <input type="checkbox" id="shareConsent" name="consent" value="1" />
@@ -788,7 +850,7 @@
     if (!pad) return;
 
     /* ---------------- the sharing box ---------------- */
-    const WORD_LIMIT = 100;
+    const WORD_LIMIT = 50;
 
     function countWords(s) {
       const t = s.trim();
@@ -872,13 +934,46 @@
       return text.trim().replace(/\s*\.\s*$/, '');
     }
 
-    function buildPad(notes) {
-      const pad     = document.getElementById('notepad');
-      const top     = document.getElementById('padTop');
-      const topText = document.getElementById('padTopText');
-      const under   = document.getElementById('padUnder');
-      const corner  = document.getElementById('padCorner');
-      const hint    = document.getElementById('padHint');
+    /* ---------------- "I can relate" ----------------
+       The tally lives on the server so it adds up across everyone. Which notes
+       this particular person has already ticked lives in their own browser,
+       under one key, so clearing site data resets it. That is exactly what was
+       asked for, and it is also the only honest place to keep it: with no login
+       there is nothing to tie a tick to a person. */
+    const RELATED_KEY = 'hs_related_notes';
+
+    function relatedIds() {
+      try {
+        const raw = localStorage.getItem(RELATED_KEY);
+        const list = raw ? JSON.parse(raw) : [];
+        return Array.isArray(list) ? list : [];
+      } catch (e) {
+        // Private browsing, or storage switched off. The button still works,
+        // it simply will not remember between visits.
+        return [];
+      }
+    }
+
+    function rememberRelated(id) {
+      try {
+        const list = relatedIds();
+        if (!list.includes(id)) {
+          list.push(id);
+          localStorage.setItem(RELATED_KEY, JSON.stringify(list));
+        }
+      } catch (e) {}
+    }
+
+    function buildPad(entries) {
+      const pad      = document.getElementById('notepad');
+      const top      = document.getElementById('padTop');
+      const topText  = document.getElementById('padTopText');
+      const under    = document.getElementById('padUnder');
+      const corner   = document.getElementById('padCorner');
+      const hint     = document.getElementById('padHint');
+      const relate   = document.getElementById('padRelate');
+      const relateN  = document.getElementById('padRelateCount');
+      const underN   = document.getElementById('padUnderCount');
       if (!pad) return;
 
       pad.hidden = false;
@@ -888,18 +983,77 @@
       let turning = false;
       let timer = null;
       let paused = false;
+      let sending = false;
 
-      const at = n => tidy(notes[((n % notes.length) + notes.length) % notes.length]);
+      const at = n => entries[((n % entries.length) + entries.length) % entries.length];
 
-      topText.textContent = at(0);
-      under.textContent   = at(1);
-      hint.textContent = notes.length > 1
+      function countLabel(n) {
+        if (!n) return '';
+        return n === 1 ? '1 person' : n + ' people';
+      }
+
+      /* Paints the button for whichever note is on top. Called on every turn,
+         so the count and the ticked state always belong to the note showing. */
+      function paintRelate() {
+        const entry = at(i);
+        const done = relatedIds().includes(entry.id);
+        relateN.textContent = countLabel(entry.relates);
+        relate.classList.toggle('is-related', done);
+        relate.classList.remove('just-related');
+        relate.setAttribute('aria-pressed', done ? 'true' : 'false');
+        relate.setAttribute('aria-label', done
+          ? 'You have said you relate to this note'
+          : 'Say that you relate to this note');
+      }
+
+      function paintPages() {
+        topText.textContent = tidy(at(i).note);
+        under.textContent   = tidy(at(i + 1).note);
+        underN.textContent  = countLabel(at(i + 1).relates);
+        paintRelate();
+      }
+
+      paintPages();
+      hint.textContent = entries.length > 1
         ? 'One note at a time. Turn the corner to read the next.'
         : '';
 
-      // A single note has nothing to turn to, so the corner and the timer would
-      // both be pretending.
-      if (notes.length < 2) { corner.hidden = true; return; }
+      relate.addEventListener('click', () => {
+        const entry = at(i);
+        if (sending || relatedIds().includes(entry.id)) return;
+        sending = true;
+
+        /* The count moves the moment it is pressed, rather than after the
+           server answers. This is a small warm gesture, not a transaction, and
+           a button that hesitates makes it feel like one. If the request fails
+           the number is put back. */
+        const before = entry.relates;
+        entry.relates = before + 1;
+        rememberRelated(entry.id);
+        paintRelate();
+        relate.classList.add('just-related');
+
+        const body = new FormData();
+        body.append('id', entry.id);
+        fetch('relate.php', { method: 'POST', body: body })
+          .then(r => r.json().catch(() => ({ ok: false })))
+          .then(res => {
+            if (res && res.ok && typeof res.relates === 'number') {
+              entry.relates = res.relates;
+            } else {
+              entry.relates = before;
+            }
+            paintRelate();
+            relate.classList.add('just-related');
+          })
+          .catch(() => {
+            entry.relates = before;
+            paintRelate();
+          })
+          .finally(() => { sending = false; });
+      });
+
+      if (entries.length < 2) { corner.hidden = true; return; }
 
       function schedule() {
         clearTimeout(timer);
@@ -911,10 +1065,8 @@
         turning = true;
 
         if (stillMode) {
-          // No animation: the words simply change.
           i += 1;
-          topText.textContent = at(i);
-          under.textContent   = at(i + 1);
+          paintPages();
           turning = false;
           schedule();
           return;
@@ -929,7 +1081,8 @@
              transition switched off, then load the next note underneath. Done
              in this order the swap is invisible: nothing is ever on screen
              mid-flip showing the wrong words. */
-          topText.textContent = at(i);
+          topText.textContent = tidy(at(i).note);
+          paintRelate();
           top.classList.remove('is-turning');
           top.style.transition = 'none';
           // Reading offsetHeight forces the browser to apply the reset before
@@ -937,7 +1090,8 @@
           // backwards into place.
           void top.offsetHeight;
           top.style.transition = '';
-          under.textContent = at(i + 1);
+          under.textContent  = tidy(at(i + 1).note);
+          underN.textContent = countLabel(at(i + 1).relates);
           turning = false;
           schedule();
         }, TURN_MS);
@@ -968,9 +1122,9 @@
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(data => {
         const entries = Array.isArray(data) ? data : (data && Array.isArray(data.notes) ? data.notes : []);
-        const notes = entries
-          .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
-          .filter(Boolean);
+        /* Entries are kept whole rather than reduced to strings: the pad needs
+           each note's id to record a tick against it, and its running count. */
+        const notes = entries.filter(e => e && typeof e.note === 'string' && e.note.trim());
         if (notes.length) buildPad(notes);
         else showEmpty('No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.');
       })

@@ -15,7 +15,7 @@ const DATA_DIR    = __DIR__ . '/data';
 const NOTES_FILE  = DATA_DIR . '/notes.json';
 const CONFIG_FILE = DATA_DIR . '/config.json';
 const LOCK_FILE   = DATA_DIR . '/notes.lock';
-const WORD_LIMIT  = 100;
+const WORD_LIMIT  = 50;
 const MAX_CHARS   = 2000;   // hard stop, well above the word limit
 const MAX_NOTES   = 5000;   // refuse to grow without bound
 
@@ -187,4 +187,53 @@ function hs_check_password(string $plain): bool
         return false;
     }
     return password_verify($plain, $c['password_hash']);
+}
+
+/* ---------------------------------------------------------------------------
+   "I can relate" counts
+   ---------------------------------------------------------------------------
+   The tally lives on the server, in the same notes.json, because it has to add
+   up across everyone who visits. Whether a particular person has already
+   ticked a note is a different question and is kept in their own browser: it
+   is a courtesy to them, not a control, and there is no way to enforce it
+   without asking people to identify themselves, which this space refuses to
+   do on purpose.
+   --------------------------------------------------------------------------- */
+
+/** Adds one to a note's tally. Approved notes only: an unpublished note is not
+ *  visible to anyone, so a vote on it could only be forged. */
+function hs_add_relate(string $id): ?int
+{
+    $notes = hs_load_notes();
+    foreach ($notes as $i => $entry) {
+        if (($entry['id'] ?? '') !== $id) {
+            continue;
+        }
+        if (($entry['status'] ?? '') !== 'approved') {
+            return null;
+        }
+        $count = (int) ($entry['relates'] ?? 0) + 1;
+        $notes[$i]['relates'] = $count;
+        return hs_save_notes($notes) ? $count : null;
+    }
+    return null;
+}
+
+/** Approved notes, most related to least. Notes nobody has ticked yet are
+ *  shuffled rather than left in submission order, so an unticked note is not
+ *  permanently buried at the bottom by the accident of when it arrived. */
+function hs_ranked_notes(): array
+{
+    $approved = array_filter(hs_load_notes(), static fn($e) => ($e['status'] ?? '') === 'approved');
+
+    $rated = [];
+    $unrated = [];
+    foreach ($approved as $e) {
+        if ((int) ($e['relates'] ?? 0) > 0) { $rated[] = $e; } else { $unrated[] = $e; }
+    }
+
+    usort($rated, static fn($a, $b) => ((int) $b['relates']) <=> ((int) $a['relates']));
+    shuffle($unrated);
+
+    return array_merge($rated, $unrated);
 }
