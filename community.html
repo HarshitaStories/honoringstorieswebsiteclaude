@@ -457,6 +457,13 @@
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
   .notes-cta { text-align: center; margin-top: 2.5rem; }
   /* ---- Inline sharing box ---- */
+  /* The browser's own rule for the hidden attribute is [hidden] { display: none },
+     which any class setting display beats on specificity. .btn is inline-flex,
+     .share-consent is flex and .share-prompt is block, so hiding the form after
+     a note is sent left the button on screen still reading "Sending", with the
+     consent line and the question under it. This makes hidden mean hidden. */
+  [hidden] { display: none !important; }
+
   .share-box { max-width: 620px; margin: 0 auto; text-align: center; }
   .share-prompt { display: block; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.4; color: var(--deep-purple); margin-bottom: 1.1rem; cursor: text; }
   @media (min-width: 640px) { .share-prompt { font-size: 1.45rem; } }
@@ -682,8 +689,11 @@
           <input type="checkbox" id="shareConsent" name="consent" value="1" />
           <span>I am happy for this to be published anonymously on this website.</span>
         </label>
+        <!-- The label is its own element so the script can change the wording
+             without wiping out the arrow beside it, which is what happens if
+             you assign to the button's textContent. -->
         <button type="submit" class="btn btn-primary share-submit" id="shareSubmit">
-          Share this
+          <span id="shareSubmitLabel">Share this</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
         <!-- Hidden from people, filled in by bots. submit.php discards anything
@@ -918,6 +928,7 @@
       const consentRow = form ? form.querySelector('.share-consent') : null;
       const submit  = document.getElementById('shareSubmit');
       const status  = document.getElementById('shareStatus');
+      const label   = document.getElementById('shareSubmitLabel');
       if (!form || !input) return;
 
       /* The button stays enabled even when the form is not ready to send.
@@ -1012,13 +1023,13 @@
         body.append('website', '');
 
         submit.disabled = true;
-        submit.textContent = 'Sending';
+        label.textContent = 'Sending';
         say('');
 
         function recover(message) {
           say(message, true);
           submit.disabled = false;
-          submit.textContent = 'Share this';
+          label.textContent = 'Share this';
         }
 
         fetch(SUBMIT_ENDPOINT, { method: 'POST', body: body })
@@ -1027,6 +1038,9 @@
             .then(j => { j.status = r.status; return j; }))
           .then(res => {
             if (res && res.ok) {
+              // Label reset before hiding, so nothing in the document is left
+              // reading "Sending", including to a screen reader.
+              label.textContent = 'Share this';
               field.hidden = true;
               consentRow.hidden = true;
               form.querySelector('.share-prompt').hidden = true;
