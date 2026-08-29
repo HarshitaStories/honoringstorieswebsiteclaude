@@ -241,75 +241,106 @@
      carousel on the homepage. No name panel here: these are anonymous, so the
      quote takes the full width rather than leaving an empty column where the
      testimonials show who is speaking. */
-  /* ---- Shared notes: the packed wall ----
-     A six column grid on a fine row unit, with grid-auto-flow: dense so a
-     block that cannot fit the current row is backfilled into an earlier gap.
-     That is what produces the interlocking look rather than tidy rows.
+  /* ---- Shared notes: the drifting wall ----
+     Blocks are laid out with flex wrap and sized with width: max-content, so a
+     block is exactly as wide as its own words and no wider. The previous
+     version spanned fixed grid columns, which left a short note sitting in a
+     box with dead space to the right of it.
 
-     Blocks span either 2 or 4 of the six columns. Those are the only two
-     widths that tile six cleanly (2+4, 4+2, 2+2+2), so the wall stays
-     irregular without leaving orphan columns down the right hand edge.
-
-     Height is not set here. JS measures each block once it has its text and
-     sets a row span to match, so a block is exactly as tall as its words and
-     no taller. */
+     max-width caps a long note so it wraps to two or three lines rather than
+     becoming one very long strip, and that mix of short pills and wider blocks
+     is what makes the rows pack unevenly. */
   .notes-wall {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 8px;
-    grid-auto-flow: row dense;
-    column-gap: 1rem;
-    row-gap: 0;               /* the vertical gap is padding on the slot */
-    max-width: 980px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.85rem 0.9rem;
+    max-width: 1000px;
     margin: 3rem auto 0;
-    align-items: start;
   }
-  @media (min-width: 620px) { .notes-wall { grid-template-columns: repeat(4, 1fr); } }
-  @media (min-width: 900px) { .notes-wall { grid-template-columns: repeat(6, 1fr); column-gap: 1.1rem; } }
-
-  /* The slot occupies the grid cell. Its bottom padding is the row gap, which
-     has to live here rather than on the grid so the measured height and the
-     row span stay in step. */
-  .note-slot { position: relative; padding-bottom: 1rem; }
+  .note-slot { flex: 0 0 auto; max-width: 100%; }
+  @media (min-width: 620px) { .note-slot { max-width: 420px; } }
 
   .note-card {
-    background: var(--cream-warm);
+    position: relative;
+    width: max-content;
+    max-width: 100%;
+    background: linear-gradient(160deg, var(--cream-warm) 0%, rgba(253, 250, 242, 0.72) 100%);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 0.85rem 1rem;
+    border-radius: 999px;
+    padding: 0.7rem 1.35rem;
     opacity: 0;
     transform: scale(0.94);
-    transition: opacity 0.9s var(--ease-gentle), transform 0.9s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle);
+    transition: opacity 0.9s var(--ease-gentle), transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle);
   }
-  /* The twinkle. A brief purple bloom that settles as the block lands, which
-     is what gives it the star-like quality without anything flashing. */
-  .note-card.is-in { opacity: 1; transform: scale(1); animation: noteTwinkle 1.6s var(--ease-gentle); }
-  @keyframes noteTwinkle {
-    0%   { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
-    35%  { box-shadow: 0 0 26px 2px rgba(122, 77, 143, 0.22); }
-    100% { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
-  }
-  /* No clamp and no minimum height: the block is the text plus its padding,
-     and nothing else. */
+  /* Anything long enough to wrap gets square corners instead. A pill shape
+     only reads well on a single line; on three lines it looks like a lozenge
+     with the words rattling around inside it. JS adds this class after
+     measuring, since whether a note wraps depends on where the words fall. */
+  .note-card.is-block { border-radius: 18px; padding: 0.85rem 1.15rem; }
+
   .note-card p {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.97rem;
+    line-height: 1.55;
     color: var(--charcoal-soft);
     margin: 0;
   }
-  .note-card:hover, .note-card:focus-visible {
-    border-color: var(--rose-soft);
-    box-shadow: 0 16px 34px -20px rgba(91, 46, 107, 0.35);
-    outline: none;
+
+  /* The twinkle as a block arrives: a purple bloom that swells and settles. */
+  .note-card.is-in { opacity: 1; transform: scale(1); animation: noteTwinkle 1.7s var(--ease-gentle); }
+  @keyframes noteTwinkle {
+    0%   { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
+    35%  { box-shadow: 0 0 30px 3px rgba(122, 77, 143, 0.26); }
+    100% { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
   }
 
-  /* Anyone who has asked their device for less motion gets a still wall.
-     Every block is there, nothing fades and nothing cycles. */
+  /* A single small star that flares once as a block lands and then is gone.
+     Drawn as a pseudo element so it costs no markup, and pointer-events none
+     so it can never intercept a click. */
+  .note-card::after {
+    content: '';
+    position: absolute;
+    top: -6px; right: 12px;
+    width: 14px; height: 14px;
+    pointer-events: none;
+    opacity: 0;
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0c.6 7 4.4 10.8 12 12-7.6 1.2-11.4 5-12 12-.6-7-4.4-10.8-12-12C7.6 10.8 11.4 7 12 0z' fill='%23B295C4'/></svg>");
+  }
+  .note-card.is-in::after { animation: noteSpark 1.9s var(--ease-gentle); }
+  @keyframes noteSpark {
+    0%   { opacity: 0; transform: scale(0.2) rotate(0deg); }
+    40%  { opacity: 0.75; transform: scale(1) rotate(45deg); }
+    100% { opacity: 0; transform: scale(0.7) rotate(90deg); }
+  }
+
+  /* The drift. Each block rises and falls a few pixels on its own slow cycle,
+     with the period and delay set per block in JS so the wall never pulses in
+     unison. This is what stops it reading as a static grid. It lives on the
+     slot rather than the card so it cannot fight the card's own scale. */
+  @keyframes noteDrift {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .note-slot.drifting { animation: noteDrift 9s ease-in-out infinite; }
+
+  .note-card:hover, .note-card:focus-visible {
+    transform: scale(1.03);
+    border-color: var(--rose-soft);
+    box-shadow: 0 18px 38px -20px rgba(91, 46, 107, 0.4), 0 0 24px -6px rgba(217, 106, 156, 0.28);
+    outline: none;
+    z-index: 3;
+  }
+
+  /* Anyone who has asked their device for less motion gets a still wall: no
+     drift, no twinkle, no star, and JS does not cycle the blocks either. */
   @media (prefers-reduced-motion: reduce) {
     .note-card { transition: none; opacity: 1; transform: none; }
     .note-card.is-in { animation: none; }
+    .note-card.is-in::after { animation: none; }
+    .note-slot.drifting { animation: none; }
   }
 
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
@@ -768,41 +799,30 @@
     const SWAP_EVERY = 5200;   // long enough to read a card before it changes
     const FADE       = 900;    // matches the CSS transition
     const stillMode  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const ROW_UNIT   = 8;    // must match grid-auto-rows in the CSS
 
     function slotCount() {
       const w = window.innerWidth;
-      if (w >= 900) return 9;
-      if (w >= 620) return 6;
+      if (w >= 900) return 10;
+      if (w >= 620) return 7;
       return 4;
     }
 
-    /* How many of the six columns a block takes. Only 2 and 4 are used because
-       they are the pairs that tile six exactly (2+4, 4+2, 2+2+2), so the wall
-       stays irregular without leaving an unusable single column at the end of
-       a row. Longer notes get the wider block so they do not become very tall
-       and thin. Below 620px there is one column and everything is full width. */
-    function colSpan(text) {
-      const w = window.innerWidth;
-      if (w < 620) return 1;
-      return text.length > 78 ? 4 : 2;
+    /* Notes are shown without a closing full stop. On a wall of fragments a
+       trailing dot reads as clutter, and people punctuate inconsistently, so
+       trimming it makes a set of submissions look considered rather than
+       collected. Anything ending in a question or exclamation mark is left
+       alone: those carry meaning a full stop does not. */
+    function tidy(text) {
+      return text.trim().replace(/\s*\.\s*$/, '');
     }
 
-    /* The block is laid out at its natural height first, then measured, and the
-       row span set from that measurement. This is what makes a block exactly as
-       tall as its own words: nothing is estimated from character counts, which
-       would be wrong the moment a word wraps differently. */
-    function setRowSpan(slot) {
-      /* Measure the card, not the slot. The slot is a grid item pinned to a
-         single 8px row until this runs, and on an element with visible overflow
-         scrollHeight reports its own box rather than the content spilling out
-         of it, so reading the slot returns 8 and every block collapses. The
-         card is in normal flow and reports its true height. */
-      const card = slot.firstElementChild;
-      if (!card) return;
-      const spacing = parseFloat(getComputedStyle(slot).paddingBottom) || 0;
-      const total = card.getBoundingClientRect().height + spacing;
-      slot.style.gridRowEnd = "span " + Math.ceil(total / ROW_UNIT);
+    /* A block that wrapped past one line gets square corners. The pill shape
+       only reads well on a single line. This has to be measured rather than
+       guessed from length, because where the words break depends on the font. */
+    function setShape(card) {
+      const p = card.querySelector('p');
+      const lineHeight = parseFloat(getComputedStyle(p).lineHeight) || 20;
+      card.classList.toggle('is-block', p.getBoundingClientRect().height > lineHeight * 1.6);
     }
 
     function buildWall(notes) {
@@ -815,7 +835,6 @@
       for (let i = 0; i < count; i++) {
         const slot = document.createElement('div');
         slot.className = 'note-slot';
-        slot.style.gridColumnEnd = 'span ' + colSpan(notes[i]);
 
         const card = document.createElement('div');
         card.className = 'note-card';
@@ -824,34 +843,51 @@
         const p = document.createElement('p');
         // textContent, never innerHTML: this is text a stranger typed, and a
         // moderator reading it first does not make markup safe to run.
-        p.textContent = notes[i];
+        p.textContent = tidy(notes[i]);
         card.appendChild(p);
         slot.appendChild(card);
         wall.appendChild(slot);
         slots.push({ slot: slot, card: card, p: p });
       }
 
-      /* Measured synchronously rather than inside requestAnimationFrame.
-         Reading getBoundingClientRect forces the browser to lay out first, so
-         the numbers are correct without waiting for a frame. rAF is suspended
-         in background tabs and in windows that are not compositing, and a wall
-         built in either case would never size itself and would render as a
-         heap of overlapping blocks. */
-      slots.forEach(s => setRowSpan(s.slot));
+      /* Measured synchronously rather than in requestAnimationFrame. Reading
+         layout forces the browser to compute it first, so the numbers are right
+         without waiting for a frame. rAF is suspended in background tabs and in
+         windows that are not compositing, and a wall built in either case would
+         never shape itself. */
+      /* Each block gets a different width to wrap at. Without this, every note
+         longer than a few words hits the same cap and the wall comes out a
+         column of near identical widths. Cycling the caps means one note wraps
+         at 260px and becomes narrow and tall while its neighbour runs to 440px
+         and stays short, which is where the uneven stacking comes from. Short
+         notes ignore the cap entirely and stay as small pills. */
+      const CAPS = [440, 260, 360, 300, 400];
       slots.forEach((s, i) => {
-        setTimeout(() => s.card.classList.add('is-in'), stillMode ? 0 : i * 110);
+        if (window.innerWidth >= 620) s.slot.style.maxWidth = CAPS[i % CAPS.length] + 'px';
+      });
+      slots.forEach(s => setShape(s.card));
+
+      slots.forEach((s, i) => {
+        setTimeout(() => s.card.classList.add('is-in'), stillMode ? 0 : i * 120);
+        if (stillMode) return;
+        /* Drift period and start point are derived from the index rather than
+           random, so a block keeps the same rhythm for as long as the page is
+           open and the wall never resynchronises into a pulse. */
+        s.slot.style.animationDuration = (7.5 + (i % 5) * 0.9).toFixed(1) + 's';
+        s.slot.style.animationDelay = (-(i * 1.7) % 9).toFixed(1) + 's';
+        s.slot.classList.add('drifting');
       });
 
-      // Column widths change at the breakpoints, so the packing has to be
-      // recalculated. Debounced, since a drag of a window edge fires constantly.
+      // Column widths change with the viewport, so shapes are re-measured.
+      // Debounced, since dragging a window edge fires this constantly.
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-          slots.forEach(s => {
-            s.slot.style.gridColumnEnd = 'span ' + colSpan(s.p.textContent);
+          slots.forEach((s, i) => {
+            s.slot.style.maxWidth = window.innerWidth >= 620 ? CAPS[i % CAPS.length] + 'px' : '';
           });
-          slots.forEach(s => setRowSpan(s.slot));
+          slots.forEach(s => setShape(s.card));
         }, 180);
       });
 
@@ -866,18 +902,15 @@
       wall.addEventListener('focusout', () => { paused = false; });
       document.addEventListener('visibilitychange', () => { paused = document.hidden; });
 
-      /* Pulls the queued note closest in length to the one leaving. Because
-         width and height both follow the text, swapping a short note for a long
-         one would resize the block and shove its neighbours around. Matching on
-         length keeps the block roughly the same shape, so the wall holds still
-         and only the words change. */
+      /* Takes the queued note closest in length to the one leaving. Width now
+         follows the text, so swapping a short note for a long one would resize
+         the block and reflow the whole row. Matching on length keeps each block
+         roughly its own size, so the wall holds still and only the words change. */
       function takeSimilar(outgoing) {
         if (!queue.length) return null;
-        let best = 0;
-        let bestDiff = Infinity;
+        let best = 0, bestDiff = Infinity;
         for (let i = 0; i < queue.length; i++) {
-          const sameWidth = colSpan(queue[i]) === colSpan(outgoing);
-          const diff = Math.abs(queue[i].length - outgoing.length) + (sameWidth ? 0 : 400);
+          const diff = Math.abs(tidy(queue[i]).length - outgoing.length);
           if (diff < bestDiff) { bestDiff = diff; best = i; }
         }
         return queue.splice(best, 1)[0];
@@ -910,9 +943,8 @@
               const incoming = takeSimilar(outgoing);
               if (incoming === null) return;
               queue.push(outgoing);
-              s.p.textContent = incoming;
-              s.slot.style.gridColumnEnd = 'span ' + colSpan(incoming);
-              setRowSpan(s.slot);
+              s.p.textContent = tidy(incoming);
+              setShape(s.card);
               s.card.classList.add('is-in');
             }, FADE);
           }, n * 260);
