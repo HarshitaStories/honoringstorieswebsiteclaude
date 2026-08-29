@@ -10,3 +10,27 @@ data/notes.json
 data/config.json
 data/notes.lock
 data/*.tmp
+
+# Harshita's raw uploads. Only the processed versions belong in the repo: the
+# originals are large, superseded, and have been committed by accident twice by
+# a wildcard. Listed by name rather than by pattern so a future asset is not
+# silently excluded.
+UPLOAD_TO_HOSTINGER.zip
+assets/Blacktophome.png
+assets/Finalblackhome.png
+assets/Harshitafororganizations.jpg
+assets/Harshitahomepagechair.png
+assets/aboutfinal.png
+assets/aboutpage.png
+assets/aboutpagefinal.png
+assets/backtophome2.png
+assets/harshita-about.png
+assets/harshita-home.png
+assets/homeblack.png
+assets/newhomepagehs.png
+assets/testimageblack.png
+assets/waysofcoping1.png
+assets/waysofcoping2.png
+assets/workplacewellbeing.png
+assets/workplacewellbeing3.png
+assets/workplacewellbring2.png
