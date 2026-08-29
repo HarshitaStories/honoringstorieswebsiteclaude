@@ -96,9 +96,13 @@
 </script>
 <!-- The feather alone, cropped clear of the wordmark. The full logo is 909x404
      and becomes an illegible smudge at 16px. -->
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<!-- ?v=2 forces a re-fetch. A browser keeps favicons in a cache of their own
+     that an ordinary reload, and usually a hard reload too, does not clear, so
+     without this the previous icon can persist for days. -->
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png?v=2" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=2" />
 
 <!-- Fonts: Cormorant Garamond (display serif) + Inter (body). Regular/medium/semibold only, no thin weights. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
