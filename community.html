@@ -241,106 +241,134 @@
      carousel on the homepage. No name panel here: these are anonymous, so the
      quote takes the full width rather than leaving an empty column where the
      testimonials show who is speaking. */
-  /* ---- Shared notes: the drifting wall ----
-     Blocks are laid out with flex wrap and sized with width: max-content, so a
-     block is exactly as wide as its own words and no wider. The previous
-     version spanned fixed grid columns, which left a short note sitting in a
-     box with dead space to the right of it.
+  /* ---- Shared notes: the notepad ----
+     A spiral pad whose pages turn, one note per page.
 
-     max-width caps a long note so it wraps to two or three lines rather than
-     becoming one very long strip, and that mix of short pills and wider blocks
-     is what makes the rows pack unevenly. */
-  .notes-wall {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.85rem 0.9rem;
-    max-width: 1000px;
-    margin: 3rem auto 0;
-  }
-  .note-slot { flex: 0 0 auto; max-width: 100%; }
-  @media (min-width: 620px) { .note-slot { max-width: 420px; } }
-
-  .note-card {
+     Nothing here is a plain rectangle. The paper uses the lopsided
+     border-radius trick, four different horizontal radii over four different
+     vertical ones, which is what makes an edge read as drawn by hand rather
+     than set by a ruler. The pad sits very slightly off square, the rings are
+     drawn as irregular ellipses, and the ruled lines are wavy paths rather
+     than straight strokes. */
+  .notepad {
     position: relative;
-    width: max-content;
-    max-width: 100%;
-    background: linear-gradient(160deg, var(--cream-warm) 0%, rgba(253, 250, 242, 0.72) 100%);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.7rem 1.35rem;
-    opacity: 0;
-    transform: scale(0.94);
-    transition: opacity 0.9s var(--ease-gentle), transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle);
+    width: 100%;
+    max-width: 540px;
+    margin: 3.25rem auto 0;
+    transform: rotate(-0.7deg);
   }
-  /* Anything long enough to wrap gets square corners instead. A pill shape
-     only reads well on a single line; on three lines it looks like a lozenge
-     with the words rattling around inside it. JS adds this class after
-     measuring, since whether a note wraps depends on where the words fall. */
-  .note-card.is-block { border-radius: 18px; padding: 0.85rem 1.15rem; }
 
-  .note-card p {
+  /* The rings that bind the pad, drawn as an inline SVG so each one can be a
+     slightly different shape. */
+  .pad-rings {
+    position: relative;
+    z-index: 4;
+    display: block;
+    width: 86%;
+    margin: 0 auto -14px;
+    color: var(--purple-soft);
+    pointer-events: none;
+  }
+
+  /* perspective is what makes a turning page recede rather than simply
+     squashing flat. It belongs on the container, not on the page itself. */
+  .pad-stack {
+    position: relative;
+    perspective: 1500px;
+    perspective-origin: 50% 0%;
+  }
+
+  .pad-page {
+    position: relative;
+    min-height: 210px;
+    padding: 2.4rem 2.1rem 2.6rem;
+    background-color: var(--cream-warm);
+    /* Wavy ruled lines. Drawn as curves so they wander a little, the way lines
+       on cheap paper do, instead of sitting perfectly level. */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='114'><g fill='none' stroke='rgba(122,77,143,0.13)' stroke-width='1' stroke-linecap='round'><path d='M14,30 Q110,26.5 205,30 T388,28.5'/><path d='M14,68 Q108,71 202,67.5 T388,69'/><path d='M14,106 Q112,102.5 206,106 T388,104'/></g></svg>");
+    background-repeat: repeat-y;
+    background-position: 0 2.1rem;
+    background-size: 100% 114px;
+    border: 1.5px solid rgba(91, 46, 107, 0.22);
+    /* The hand-drawn edge. */
+    border-radius: 240px 16px 220px 18px / 18px 210px 16px 235px;
+    box-shadow: 0 14px 30px -22px rgba(91, 46, 107, 0.5);
+  }
+
+  /* The page underneath, which the turning page reveals. */
+  .pad-page-under {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    /* Mirrored radii, so the sheet below is a different shape from the one on
+       top and the stack does not look like one rectangle traced twice. */
+    border-radius: 18px 230px 16px 215px / 225px 16px 240px 18px;
+    transform: rotate(0.5deg);
+  }
+
+  .pad-page-top {
+    z-index: 3;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  /* The turn itself. The easing is weighted so the page lifts slowly, falls
+     away quickly, which is how paper actually behaves. */
+  .pad-page-top.is-turning {
+    transition: transform 1.15s cubic-bezier(0.42, 0.02, 0.28, 1), box-shadow 1.15s ease;
+    transform: rotateX(-162deg);
+    box-shadow: 0 26px 40px -26px rgba(91, 46, 107, 0.55);
+  }
+
+  .pad-page p {
+    position: relative;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 0.97rem;
-    line-height: 1.55;
+    font-size: 1.16rem;
+    line-height: 2.03rem;   /* sits the text on the ruled lines */
     color: var(--charcoal-soft);
     margin: 0;
+    text-align: left;
+  }
+  @media (max-width: 560px) {
+    .pad-page { padding: 2rem 1.5rem 2.2rem; min-height: 190px; }
+    .pad-page p { font-size: 1.06rem; }
   }
 
-  /* The twinkle as a block arrives: a purple bloom that swells and settles. */
-  .note-card.is-in { opacity: 1; transform: scale(1); animation: noteTwinkle 1.7s var(--ease-gentle); }
-  @keyframes noteTwinkle {
-    0%   { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
-    35%  { box-shadow: 0 0 30px 3px rgba(122, 77, 143, 0.26); }
-    100% { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
-  }
-
-  /* A single small star that flares once as a block lands and then is gone.
-     Drawn as a pseudo element so it costs no markup, and pointer-events none
-     so it can never intercept a click. */
-  .note-card::after {
-    content: '';
+  /* The corner someone would actually take hold of to turn a page. It lifts
+     when the pointer is near, which is the whole affordance: no button, no
+     instruction. */
+  .pad-corner {
     position: absolute;
-    top: -6px; right: 12px;
-    width: 14px; height: 14px;
-    pointer-events: none;
-    opacity: 0;
-    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0c.6 7 4.4 10.8 12 12-7.6 1.2-11.4 5-12 12-.6-7-4.4-10.8-12-12C7.6 10.8 11.4 7 12 0z' fill='%23B295C4'/></svg>");
+    right: 4px; bottom: 2px;
+    width: 46px; height: 46px;
+    z-index: 5;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--purple-soft);
+    transition: transform 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle);
   }
-  .note-card.is-in::after { animation: noteSpark 1.9s var(--ease-gentle); }
-  @keyframes noteSpark {
-    0%   { opacity: 0; transform: scale(0.2) rotate(0deg); }
-    40%  { opacity: 0.75; transform: scale(1) rotate(45deg); }
-    100% { opacity: 0; transform: scale(0.7) rotate(90deg); }
+  .notepad:hover .pad-corner { transform: translate(-3px, -3px) rotate(-7deg); color: var(--rose); }
+  .pad-corner:focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; border-radius: 6px; }
+
+  .pad-hint {
+    margin: 1.35rem 0 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+    transform: rotate(0.7deg);   /* cancels the pad's tilt so the words sit level */
   }
 
-  /* The drift. Each block rises and falls a few pixels on its own slow cycle,
-     with the period and delay set per block in JS so the wall never pulses in
-     unison. This is what stops it reading as a static grid. It lives on the
-     slot rather than the card so it cannot fight the card's own scale. */
-  @keyframes noteDrift {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-6px); }
-  }
-  .note-slot.drifting { animation: noteDrift 9s ease-in-out infinite; }
-
-  .note-card:hover, .note-card:focus-visible {
-    transform: scale(1.03);
-    border-color: var(--rose-soft);
-    box-shadow: 0 18px 38px -20px rgba(91, 46, 107, 0.4), 0 0 24px -6px rgba(217, 106, 156, 0.28);
-    outline: none;
-    z-index: 3;
-  }
-
-  /* Anyone who has asked their device for less motion gets a still wall: no
-     drift, no twinkle, no star, and JS does not cycle the blocks either. */
+  /* Everything holds still for anyone who has asked their device for less
+     motion: no turning, and JS advances the text without animating. */
   @media (prefers-reduced-motion: reduce) {
-    .note-card { transition: none; opacity: 1; transform: none; }
-    .note-card.is-in { animation: none; }
-    .note-card.is-in::after { animation: none; }
-    .note-slot.drifting { animation: none; }
+    .pad-page-top.is-turning { transition: none; transform: none; }
+    .notepad:hover .pad-corner { transform: none; }
   }
 
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
@@ -478,9 +506,48 @@
         </div>
       </div>
     </div>
-    <!-- Slots are built in JS so the number of them follows the screen size and
-         the amount of data, rather than being fixed here. -->
-    <div class="notes-wall reveal delay-3" id="notesWall" hidden></div>
+    <!-- A spiral pad, one note per page. Built in JS from whatever notes.php
+         returns, so the number of pages follows the data. -->
+    <div class="notepad reveal delay-3" id="notepad" hidden>
+      <!-- Rings drawn one at a time rather than repeated, so each is a slightly
+           different shape and the binding does not look stamped out. -->
+      <svg class="pad-rings" viewBox="0 0 460 30" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M18 24c-5.4-1.2-8-6-6.4-11.2C13 8 18.4 5.4 23.6 6.6c4.6 1 7.4 4.8 6.6 9.4" />
+          <path d="M67 23.4c-5.6-1-8.4-5.6-7-10.8 1.4-5 6.6-7.8 11.8-6.8 4.8 1 7.6 4.6 7 9.2" />
+          <path d="M116 24.2c-5.2-1.4-7.8-6.2-6-11.2 1.6-4.8 7-7.2 12-5.8 4.6 1.2 7.2 5 6.4 9.6" />
+          <path d="M165 23.2c-5.6-1.2-8.2-6-6.6-11 1.6-4.9 6.9-7.4 11.9-6.2 4.7 1.1 7.3 4.9 6.5 9.4" />
+          <path d="M214 24c-5.3-1.3-7.9-6.1-6.2-11.1 1.7-4.9 7-7.3 11.9-6 4.6 1.2 7.2 5 6.3 9.5" />
+          <path d="M263 23.6c-5.5-1.1-8.1-5.9-6.5-10.9 1.6-4.9 6.9-7.4 11.8-6.3 4.7 1.1 7.3 4.9 6.4 9.4" />
+          <path d="M312 24.3c-5.2-1.4-7.8-6.2-6.1-11.2 1.7-4.9 7-7.3 12-5.9 4.6 1.3 7.2 5.1 6.3 9.6" />
+          <path d="M361 23.3c-5.6-1.2-8.2-6-6.6-11 1.6-4.9 6.9-7.4 11.9-6.2 4.7 1.1 7.3 4.9 6.5 9.4" />
+          <path d="M410 24.1c-5.3-1.3-7.9-6.1-6.2-11.1 1.7-4.9 7-7.3 11.9-6 4.6 1.2 7.2 5 6.3 9.5" />
+        </g>
+      </svg>
+
+      <div class="pad-stack">
+        <!-- The sheet below, holding the note the turn is about to reveal. -->
+        <div class="pad-page pad-page-under" aria-hidden="true"><p id="padUnder"></p></div>
+        <!-- The sheet on top, which turns. aria-live announces each new note to
+             a screen reader as it arrives, politely so it does not interrupt. -->
+        <div class="pad-page pad-page-top" id="padTop">
+          <p id="padTopText" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- The corner of the page, which is the control. A real button, so it is
+           reachable by keyboard and announced properly. -->
+      <button type="button" class="pad-corner" id="padCorner" aria-label="Turn to the next note">
+        <svg viewBox="0 0 46 46" fill="none" aria-hidden="true">
+          <!-- A curled corner, drawn with a wobble rather than a clean arc. -->
+          <path d="M44 12c-1.6 9.8-5.4 18.4-11.4 24.8C26.8 42.8 18.6 45.4 9 44.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          <path d="M44 12c-8.2 1.4-14.6 4.6-19.2 9.4C20.2 26.2 17 32.6 15.6 41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.75" />
+          <path d="M15.6 41c-2.2-.4-4.4-.2-6.6.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.55" />
+        </svg>
+      </button>
+
+      <p class="pad-hint" id="padHint"></p>
+    </div>
     <p class="notes-notice" id="notesNotice" hidden></p>
 
     <div class="notes-cta reveal delay-3" id="notesCta">
@@ -715,11 +782,10 @@
      =================================================================== */
   const NOTES_ENDPOINT  = 'notes.php';
   const SUBMIT_ENDPOINT = 'submit.php';
-
   (function () {
-    const wall   = document.getElementById('notesWall');
+    const pad    = document.getElementById('notepad');
     const notice = document.getElementById('notesNotice');
-    if (!wall) return;
+    if (!pad) return;
 
     /* ---------------- the sharing box ---------------- */
     const WORD_LIMIT = 100;
@@ -791,172 +857,109 @@
       });
     })();
 
-    /* ---------------- the wall ----------------
-       Notes arrive newest first. The wall shows as many as the screen has
-       room for, then swaps a couple at a time so older ones get their turn.
-       Cycling only happens when there are more notes than slots; with six
-       notes and six slots there is nothing to rotate to, so it sits still. */
-    const SWAP_EVERY = 5200;   // long enough to read a card before it changes
-    const FADE       = 900;    // matches the CSS transition
-    const stillMode  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* ---------------- the notepad ----------------
+       Notes arrive newest first, one per page. The page on top holds the note
+       being read; the sheet under it already holds the next, which is what the
+       turn reveals. */
+    const stillMode = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const TURN_MS   = 1150;   // must match the CSS transition on .is-turning
+    const HOLD_MS   = 5000;   // time a note stays up before the page turns
 
-    function slotCount() {
-      const w = window.innerWidth;
-      if (w >= 900) return 10;
-      if (w >= 620) return 7;
-      return 4;
-    }
-
-    /* Notes are shown without a closing full stop. On a wall of fragments a
-       trailing dot reads as clutter, and people punctuate inconsistently, so
-       trimming it makes a set of submissions look considered rather than
-       collected. Anything ending in a question or exclamation mark is left
-       alone: those carry meaning a full stop does not. */
+    /* Notes are shown without a closing full stop. On a page of fragments a
+       trailing dot reads as clutter, and people punctuate inconsistently.
+       Question and exclamation marks are kept: those carry meaning. */
     function tidy(text) {
       return text.trim().replace(/\s*\.\s*$/, '');
     }
 
-    /* A block that wrapped past one line gets square corners. The pill shape
-       only reads well on a single line. This has to be measured rather than
-       guessed from length, because where the words break depends on the font. */
-    function setShape(card) {
-      const p = card.querySelector('p');
-      const lineHeight = parseFloat(getComputedStyle(p).lineHeight) || 20;
-      card.classList.toggle('is-block', p.getBoundingClientRect().height > lineHeight * 1.6);
-    }
+    function buildPad(notes) {
+      const pad     = document.getElementById('notepad');
+      const top     = document.getElementById('padTop');
+      const topText = document.getElementById('padTopText');
+      const under   = document.getElementById('padUnder');
+      const corner  = document.getElementById('padCorner');
+      const hint    = document.getElementById('padHint');
+      if (!pad) return;
 
-    function buildWall(notes) {
-      const count = Math.min(slotCount(), notes.length);
-      wall.textContent = '';
-      wall.hidden = false;
+      pad.hidden = false;
       notice.hidden = true;
 
-      const slots = [];
-      for (let i = 0; i < count; i++) {
-        const slot = document.createElement('div');
-        slot.className = 'note-slot';
-
-        const card = document.createElement('div');
-        card.className = 'note-card';
-        card.tabIndex = 0;
-
-        const p = document.createElement('p');
-        // textContent, never innerHTML: this is text a stranger typed, and a
-        // moderator reading it first does not make markup safe to run.
-        p.textContent = tidy(notes[i]);
-        card.appendChild(p);
-        slot.appendChild(card);
-        wall.appendChild(slot);
-        slots.push({ slot: slot, card: card, p: p });
-      }
-
-      /* Measured synchronously rather than in requestAnimationFrame. Reading
-         layout forces the browser to compute it first, so the numbers are right
-         without waiting for a frame. rAF is suspended in background tabs and in
-         windows that are not compositing, and a wall built in either case would
-         never shape itself. */
-      /* Each block gets a different width to wrap at. Without this, every note
-         longer than a few words hits the same cap and the wall comes out a
-         column of near identical widths. Cycling the caps means one note wraps
-         at 260px and becomes narrow and tall while its neighbour runs to 440px
-         and stays short, which is where the uneven stacking comes from. Short
-         notes ignore the cap entirely and stay as small pills. */
-      const CAPS = [440, 260, 360, 300, 400];
-      slots.forEach((s, i) => {
-        if (window.innerWidth >= 620) s.slot.style.maxWidth = CAPS[i % CAPS.length] + 'px';
-      });
-      slots.forEach(s => setShape(s.card));
-
-      slots.forEach((s, i) => {
-        setTimeout(() => s.card.classList.add('is-in'), stillMode ? 0 : i * 120);
-        if (stillMode) return;
-        /* Drift period and start point are derived from the index rather than
-           random, so a block keeps the same rhythm for as long as the page is
-           open and the wall never resynchronises into a pulse. */
-        s.slot.style.animationDuration = (7.5 + (i % 5) * 0.9).toFixed(1) + 's';
-        s.slot.style.animationDelay = (-(i * 1.7) % 9).toFixed(1) + 's';
-        s.slot.classList.add('drifting');
-      });
-
-      // Column widths change with the viewport, so shapes are re-measured.
-      // Debounced, since dragging a window edge fires this constantly.
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          slots.forEach((s, i) => {
-            s.slot.style.maxWidth = window.innerWidth >= 620 ? CAPS[i % CAPS.length] + 'px' : '';
-          });
-          slots.forEach(s => setShape(s.card));
-        }, 180);
-      });
-
-      if (stillMode || notes.length <= count) return;
-
-      let queue = notes.slice(count);
+      let i = 0;
+      let turning = false;
+      let timer = null;
       let paused = false;
 
-      wall.addEventListener('mouseenter', () => { paused = true; }, true);
-      wall.addEventListener('mouseleave', () => { paused = false; }, true);
-      wall.addEventListener('focusin',  () => { paused = true; });
-      wall.addEventListener('focusout', () => { paused = false; });
-      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+      const at = n => tidy(notes[((n % notes.length) + notes.length) % notes.length]);
 
-      /* Takes the queued note closest in length to the one leaving. Width now
-         follows the text, so swapping a short note for a long one would resize
-         the block and reflow the whole row. Matching on length keeps each block
-         roughly its own size, so the wall holds still and only the words change. */
-      function takeSimilar(outgoing) {
-        if (!queue.length) return null;
-        let best = 0, bestDiff = Infinity;
-        for (let i = 0; i < queue.length; i++) {
-          const diff = Math.abs(tidy(queue[i]).length - outgoing.length);
-          if (diff < bestDiff) { bestDiff = diff; best = i; }
-        }
-        return queue.splice(best, 1)[0];
+      topText.textContent = at(0);
+      under.textContent   = at(1);
+      hint.textContent = notes.length > 1
+        ? 'One note at a time. Turn the corner to read the next.'
+        : '';
+
+      // A single note has nothing to turn to, so the corner and the timer would
+      // both be pretending.
+      if (notes.length < 2) { corner.hidden = true; return; }
+
+      function schedule() {
+        clearTimeout(timer);
+        if (!paused) timer = setTimeout(turn, HOLD_MS);
       }
 
-      function swap() {
-        // activeElement is checked as well as the focus flag: a browser does not
-        // always dispatch focus events while its window is in the background,
-        // and a keyboard reader must never lose the block they are on.
-        if (paused || !queue.length || wall.contains(document.activeElement)) return;
+      function turn() {
+        if (turning) return;
+        turning = true;
 
-        const howMany = Math.random() < 0.3 ? 3 : 2;
-        const chosen = [];
-        const order = slots.map((_, i) => i).sort(() => Math.random() - 0.5);
-        for (const i of order) {
-          if (chosen.length >= howMany) break;
-          // Never two neighbours at once, which would open a visible hole.
-          if (chosen.some(c => Math.abs(c - i) === 1)) continue;
-          if (slots[i].card.matches(':hover')) continue;
-          chosen.push(i);
+        if (stillMode) {
+          // No animation: the words simply change.
+          i += 1;
+          topText.textContent = at(i);
+          under.textContent   = at(i + 1);
+          turning = false;
+          schedule();
+          return;
         }
 
-        chosen.forEach((i, n) => {
-          setTimeout(() => {
-            const s = slots[i];
-            if (s.card.matches(':hover')) return;
-            s.card.classList.remove('is-in');
-            setTimeout(() => {
-              const outgoing = s.p.textContent;
-              const incoming = takeSimilar(outgoing);
-              if (incoming === null) return;
-              queue.push(outgoing);
-              s.p.textContent = tidy(incoming);
-              setShape(s.card);
-              s.card.classList.add('is-in');
-            }, FADE);
-          }, n * 260);
-        });
+        top.classList.add('is-turning');
+
+        setTimeout(() => {
+          i += 1;
+          /* The page has fallen away and the sheet below is what the eye is on.
+             Put that note onto the top sheet, drop it back into place with the
+             transition switched off, then load the next note underneath. Done
+             in this order the swap is invisible: nothing is ever on screen
+             mid-flip showing the wrong words. */
+          topText.textContent = at(i);
+          top.classList.remove('is-turning');
+          top.style.transition = 'none';
+          // Reading offsetHeight forces the browser to apply the reset before
+          // the transition is restored, which is what prevents it animating
+          // backwards into place.
+          void top.offsetHeight;
+          top.style.transition = '';
+          under.textContent = at(i + 1);
+          turning = false;
+          schedule();
+        }, TURN_MS);
       }
 
-      setInterval(swap, SWAP_EVERY);
+      corner.addEventListener('click', () => { turn(); schedule(); });
+
+      // Reading pauses the turning. Nothing should vanish mid-sentence.
+      pad.addEventListener('mouseenter', () => { paused = true; clearTimeout(timer); });
+      pad.addEventListener('mouseleave', () => { paused = false; schedule(); });
+      pad.addEventListener('focusin',    () => { paused = true; clearTimeout(timer); });
+      pad.addEventListener('focusout',   () => { paused = false; schedule(); });
+      document.addEventListener('visibilitychange', () => {
+        paused = document.hidden;
+        if (paused) clearTimeout(timer); else schedule();
+      });
+
+      schedule();
     }
 
     function showEmpty(message) {
-      wall.hidden = true;
-      wall.textContent = '';
+      pad.hidden = true;
       notice.textContent = message;
       notice.hidden = false;
     }
@@ -968,7 +971,7 @@
         const notes = entries
           .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
           .filter(Boolean);
-        if (notes.length) buildWall(notes);
+        if (notes.length) buildPad(notes);
         else showEmpty('No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.');
       })
       .catch(() => {
