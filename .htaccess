@@ -8,6 +8,18 @@
 DirectoryIndex index.html
 
 # ---------------------------------------------------------------------------
+# Renamed pages
+# ---------------------------------------------------------------------------
+# The organisations page used to live at /corporates.html. Anyone holding that
+# address, from a saved link, an email, or a search result, still reaches the
+# page. 301 means "moved for good", which is what tells a search engine to
+# carry the old address's standing over to the new one rather than treating it
+# as a page that vanished.
+#
+# Do not remove this. There is no expiry on somebody having bookmarked a link.
+Redirect 301 /corporates.html /workplace-wellbeing.html
+
+# ---------------------------------------------------------------------------
 # Error pages
 # ---------------------------------------------------------------------------
 # Without these, a mistyped address shows Hostinger's own error page, which is

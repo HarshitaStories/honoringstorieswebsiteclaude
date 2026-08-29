@@ -478,7 +478,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   (and the word "cadence" was flagged as not simple enough, replaced with "schedule" in the
   supervision "how often will we meet" answer).
 - **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
-- **Work With Me, For Organisations** (`corporates.html`, built): the third entry in the Work With
+- **Work With Me, For Organisations** (`workplace-wellbeing.html`, built): the third entry in the Work With
   Me dropdown, aimed at companies and teams. Built from the `psychotherapy.html` template so nav,
   footer and styling stay identical. Copy was drafted and approved by the user before any building.
   - **No pricing anywhere on this page, by explicit instruction.** The pricing CSS inherited from
@@ -973,7 +973,7 @@ approximate and only there to flag the heavy ones.
 | `about.html` | 46 KB | About Harshita. Bio behind a Read more / Read less toggle, values icon-cards, qualifications timeline. |
 | `psychotherapy.html` | 58 KB | Psychotherapy sessions. Who it is for, session logistics infographic, geo-aware pricing, FAQs. |
 | `supervision.html` | 54 KB | Supervision sessions. Same structure as psychotherapy, different copy and pricing. |
-| `corporates.html` | 55 KB | Workplace Wellbeing, for organisations. No pricing anywhere, by explicit instruction. |
+| `workplace-wellbeing.html` | 55 KB | Workplace Wellbeing, for organisations. No pricing anywhere, by explicit instruction. |
 | `community.html` | 60 KB | Community. Shared Ways of Coping (submission box + published notes) and Sip and Swap Stories. |
 | `disclaimer.html` | 38 KB | Legal. Effective 1 September 2026. |
 | `privacy-policy.html` | 41 KB | Legal. Effective 1 September 2026. |
@@ -998,8 +998,8 @@ already caused one missed change.
 | `assets/harshita-glimpse.png` | 166 KB | `index.html` | Glimpse-section portrait, transparent cut-out, 340x319. Low resolution for its slot; a larger original would improve it. |
 | `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
 | `assets/supervision-hero.jpg` | 159 KB | `supervision.html` | Illustration, backdrop flattened to page cream. |
-| `assets/workplace-wellbeing.png` | 893 KB | `corporates.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
-| `assets/harshita-organisations.jpg` | 62 KB | `corporates.html` | Portrait in the About block, 220px circle at `object-position: 50% 14%`. |
+| `assets/workplace-wellbeing.png` | 893 KB | `workplace-wellbeing.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
+| `assets/harshita-organisations.jpg` | 62 KB | `workplace-wellbeing.html` | Portrait in the About block, 220px circle at `object-position: 50% 14%`. |
 | `assets/community-hero.jpg` | 77 KB | `community.html` | Full-bleed repeating band at the top of the page. |
 | `assets/sharedwaysofcoping.jpg` | 100 KB | `community.html` | Section illustration, backdrop flattened to cream-warm. |
 

@@ -13,7 +13,7 @@ website/                                  <-- publish the CONTENTS of this folde
 â”œâ”€â”€ about.html                            About Harshita
 â”œâ”€â”€ psychotherapy.html                    Psychotherapy sessions
 â”œâ”€â”€ supervision.html                      Supervision sessions
-â”œâ”€â”€ corporates.html                       Workplace Wellbeing, for organisations
+â”œâ”€â”€ workplace-wellbeing.html                       Workplace Wellbeing, for organisations
 â”œâ”€â”€ community.html                        Community
 â”œâ”€â”€ disclaimer.html                       Legal
 â”œâ”€â”€ privacy-policy.html                   Legal
@@ -57,7 +57,7 @@ index.html  (Home)
 â”œâ”€â”€ Work With Me      (a menu heading only, not a page of its own)
 â”‚   â”œâ”€â”€ psychotherapy.html                      "Psychotherapy sessions"
 â”‚   â”œâ”€â”€ supervision.html                        "Supervision sessions"
-â”‚   â””â”€â”€ corporates.html                         "Workplace Wellbeing"
+â”‚   â””â”€â”€ workplace-wellbeing.html                         "Workplace Wellbeing"
 â”‚
 â”œâ”€â”€ community.html                              "Community" in the menu
 â”‚
@@ -123,7 +123,7 @@ These names are the anchors used by the little dots down the right-hand edge of 
 | `about.html` | bio, values, qualifications, experience, contact |
 | `psychotherapy.html` | who, logistics, pricing, process, faqs, contact |
 | `supervision.html` | who, logistics, pricing, process, faqs, contact |
-| `corporates.html` | why, offer, themes, how, about-me, faqs, contact |
+| `workplace-wellbeing.html` | why, offer, themes, how, about-me, faqs, contact |
 | `community.html` | shared-ways, sip-and-swap, how, contact |
 | The three legal pages | Plain text, no sections and no dots |
 
@@ -162,7 +162,7 @@ Use this before changing anything, to see what else you will have to touch.
 | Testimonials sliding | `index.html` | 8 real testimonials, used with permission |
 | FAQ questions opening | psychotherapy, supervision, corporates | |
 | Price changing by country | psychotherapy, supervision | Explained below |
-| Confidentiality panel expanding | `corporates.html` | |
+| Confidentiality panel expanding | `workplace-wellbeing.html` | |
 | Word counter counting down from 100 | `community.html` | |
 | Sending a coping note | `community.html` | |
 | Reading approved notes | `community.html` | The only thing that fetches from outside while a visitor is on the page |
@@ -206,7 +206,7 @@ trackers, and no cookie banner, because there is nothing that would need one.
 | `index.html` | 79 KB | The homepage. The largest file, because it holds the testimonials and the counting numbers |
 | `community.html` | 60 KB | Community. Second largest, because of the note submission and reading code |
 | `psychotherapy.html` | 58 KB | Psychotherapy sessions |
-| `corporates.html` | 55 KB | Workplace Wellbeing |
+| `workplace-wellbeing.html` | 55 KB | Workplace Wellbeing |
 | `supervision.html` | 54 KB | Supervision sessions |
 | `about.html` | 46 KB | About Harshita |
 | `privacy-policy.html` | 41 KB | Legal |
