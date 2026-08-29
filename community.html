@@ -608,37 +608,33 @@
   /* ===================================================================
      SHARED WAYS OF COPING: published notes
      ===================================================================
-     Fill in these two values once the Google Form and Sheet exist. Until
-     then the page shows sample notes, clearly labelled as samples, so the
-     layout can be reviewed without pretending they are real submissions.
+     Approved notes are read from notes.json, in this same folder, not from
+     Google. Its shape is { "notes": [ { "note": "..." }, ... ] }, which is
+     the object Sveltia CMS's "files" collection writes for a single "list"
+     field: a CMS file collection always saves an object keyed by field
+     name, never a bare top-level array, so the wrapping "notes" key must
+     stay even though it looks redundant next to the filename. It ships
+     with an empty list; the page's own empty-state message covers that.
 
-     SHARED_NOTES_CSV
-       File > Share > Publish to web, in the responses spreadsheet.
-       Publish ONLY the "Approved" tab, as CSV.
-       Do NOT publish the raw responses tab: that would make every
-       unmoderated submission publicly readable and defeat the whole point
-       of moderating. The Approved tab should be a formula pulling just the
-       rows you have ticked, e.g.
-         =FILTER(Responses!B2:B, Responses!C2:C=TRUE)
+     How a note gets in there:
+       1. A visitor still submits through SHARED_FORM_URL below, exactly as
+          before. It lands in the Google Form's private responses sheet.
+       2. Harshita reads it there and decides whether to publish it.
+       3. To publish, she adds an entry to notes.json and commits it, either
+          by editing the file directly on GitHub, or through the Sveltia CMS
+          admin screen at /admin, which writes the same file for her without
+          her having to touch any punctuation.
+       4. The site picks it up automatically once that commit lands.
 
      SHARED_FORM_URL
        The public "send" link of the Google Form. Make sure the form's
        "Collect email addresses" setting is OFF, otherwise submissions are
        not actually anonymous.
      =================================================================== */
-  const SHARED_NOTES_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCs-RBpm80E4fu_ZnqkiM-_ZA602J2MDJskHGmdgbUInJZj1sgPkZyUV2hO5xSQHDzofK7cyEoP9s6/pub?gid=893799866&single=true&output=csv';
+  const SHARED_NOTES_JSON = 'notes.json';
   // The share link with the ?usp=sharing&ouid=... query stripped. Those params
   // carry Harshita's own Google account id, so they must not be published.
   const SHARED_FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSf9-1m2jrECnUgiMaEp-8UCyQ8KTF9XAyNFbaUP_cwQFbDiDw/viewform';
-
-  // Shown only while SHARED_NOTES_CSV is empty, so the design can be judged.
-  // These are written examples, not real submissions, and the notice below
-  // says so on the page. They disappear the moment a real source is set.
-  const SAMPLE_NOTES = [
-    'Keeping a glass of water and a notebook by my bed. On the nights my thoughts race, writing one sentence down is often enough to stop it spiralling.',
-    'Going for a walk without my phone, even just ten minutes. Not to clear my head, only to be somewhere else for a while.',
-    'Telling one person the honest version of how my week went, instead of saying I am fine.'
-  ];
 
   (function () {
     const grid = document.getElementById('notesGrid');
@@ -727,7 +723,7 @@
 
     shareBox();
 
-    function render(notes, isSample) {
+    function render(notes) {
       grid.textContent = '';
       notes.forEach(text => {
         const card = document.createElement('div');
@@ -736,72 +732,30 @@
         mark.className = 'note-mark';
         mark.textContent = '“';
         const p = document.createElement('p');
-        // textContent, never innerHTML: this is text submitted through a
-        // public form, so treating it as markup would be an injection hole
-        // even with a human moderating.
+        // textContent, never innerHTML: this is text a moderator has copied
+        // in from a public form submission, so treating it as markup would
+        // be an injection hole even with a human in the loop.
         p.textContent = text;
         card.appendChild(mark);
         card.appendChild(p);
         grid.appendChild(card);
       });
-      if (isSample) {
-        notice.textContent = 'These are example notes, shown while the anonymous sharing space is being set up. Real notes will replace them once it opens.';
-        notice.hidden = false;
-      } else {
-        notice.hidden = true;
-      }
+      notice.hidden = true;
     }
 
-    // Minimal CSV reader: handles quoted fields containing commas, newlines
-    // and escaped double quotes, which free-text answers routinely include.
-    function parseCSV(text) {
-      const rows = [];
-      let row = [], field = '', inQuotes = false;
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        if (inQuotes) {
-          if (c === '"') {
-            if (text[i + 1] === '"') { field += '"'; i++; }
-            else inQuotes = false;
-          } else field += c;
-        } else if (c === '"') inQuotes = true;
-        else if (c === ',') { row.push(field); field = ''; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
-        else if (c !== '\r') field += c;
-      }
-      if (field !== '' || row.length) { row.push(field); rows.push(row); }
-      return rows;
-    }
-
-    if (!SHARED_NOTES_CSV) {
-      render(SAMPLE_NOTES, true);
-      return;
-    }
-
-    fetch(SHARED_NOTES_CSV, { cache: 'no-store' })
-      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(text => {
-        const headerish = /^(timestamp|note|notes|response|what helped)/i;
-        // A formula that breaks on the sheet arrives here as a cell value
-        // like #REF!, and would otherwise be rendered as though a person had
-        // written it. Drop any row containing one.
-        const sheetError = /^#(REF|N\/A|VALUE|DIV\/0|NAME|NULL|NUM|ERROR)[!?]?$/i;
-        // Unused tick-box columns publish as bare TRUE/FALSE. They are sheet
-        // mechanics, never part of what someone wrote.
-        const boolCell = /^(TRUE|FALSE)$/i;
-        // The Approved tab is a single column, so rejoin the fields rather
-        // than taking r[0]. If a note's commas ever arrive unquoted, taking
-        // the first field alone would silently truncate it mid-sentence,
-        // publishing half of what someone wrote with no visible error.
-        const notes = parseCSV(text)
-          .filter(r => !r.some(f => sheetError.test(f.trim())))
-          .map(r => r.filter(f => !boolCell.test(f.trim()))
-                     .join(',').replace(/^,+|,+$/g, '').trim())
-          .filter(v => v && !headerish.test(v));
-        if (notes.length) render(notes, false);
+    fetch(SHARED_NOTES_JSON, { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        // { "notes": [ { "note": "..." }, ... ] }. Anything malformed is
+        // skipped rather than allowed to throw and blank the whole section.
+        const entries = (data && Array.isArray(data.notes)) ? data.notes : [];
+        const notes = entries
+          .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
+          .filter(Boolean);
+        if (notes.length) render(notes);
         else {
           // Nothing approved yet. Say so plainly rather than showing an
-          // empty space or falling back to samples on the live site.
+          // empty space.
           grid.textContent = '';
           notice.textContent = 'No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.';
           notice.hidden = false;

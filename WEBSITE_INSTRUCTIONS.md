@@ -75,7 +75,8 @@ fetch to Google from a `file://` page. Use the server when testing that section.
 | --- | --- | --- |
 | Google Fonts | Cormorant Garamond + Inter | Type falls back to Georgia and system sans |
 | Google Form | `SHARED_FORM_URL` in `community.html` | The coping submission box stops accepting notes |
-| Google Sheet CSV | `SHARED_NOTES_CSV` in `community.html` | Published notes stop appearing; page shows its own graceful empty state |
+| `notes.json` (in this repo, not external) | `SHARED_NOTES_JSON` in `community.html` | Published notes stop appearing; page shows its own graceful empty state. As of 2026-08-27 this replaced a live Google Sheet CSV read; see section 4. |
+| Sveltia CMS, at `/admin` | `unpkg.com` CDN script in `admin/index.html` | The admin editing screen stops loading. `notes.json` can still be edited directly on GitHub; nothing about the public site depends on Sveltia at all |
 | cal.com | booking link, section 6 contact details | Every "Book a Consultation Call" button dead-ends |
 
 There is **no build step, no framework, no package manager, no backend, and no database.** Every
@@ -600,45 +601,58 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     - Field names are Google's own question ids, `entry.725693056` for the note and
       `entry.1145237366` for consent. If the form's questions are edited these can change and
       submissions will silently stop arriving. Re-read them from the live form if that happens.
-  - **Published notes system** (chosen deliberately over the alternatives, see below). Notes are
-    rendered by JS from a **Google Sheet**, so new ones appear without editing this repo:
-    - Two constants at the top of the page script drive everything: `SHARED_NOTES_CSV` and
-      `SHARED_FORM_URL`. **Both are now set.** The form link had its `?usp=sharing&ouid=...` query
-      stripped before going in, because `ouid` is Harshita's own Google account id and this is a
-      public page. Never paste a Google share link in without checking for it.
-    - **Publish only the "Approved" tab** of the responses sheet as CSV, never the raw responses
-      tab. Publishing the raw tab would make every unmoderated submission publicly readable and
-      defeat the point of moderating.
-    - The responses tab is named **`Original response`** and the Approved tab pulls from it. Live
-      formula, in `A1` of the Approved tab:
-      `=FILTER('Original response'!B2:B, 'Original response'!D2:D=TRUE, ARRAYFORMULA(REGEXMATCH(LOWER('Original response'!C2:C&""), "^yes")))`
-      Column B is the note, C is the consent answer, D is the moderation tick box. **Both
-      conditions matter**: consent alone is not enough, and a tick alone must not publish
-      something the person did not consent to.
-      - `ARRAYFORMULA` is **required**. `REGEXMATCH` does not iterate a range on its own in Google
-        Sheets, and without the wrapper the whole filter silently matches nothing. This cost a
-        long debugging detour once already.
-      - Google caches the published CSV for about **five minutes**, so a newly ticked note does not
-        appear on the site instantly. That is normal, not a fault.
-    - The form's **"Collect email addresses" setting must be OFF**, otherwise the space is not
-      actually anonymous despite saying so.
-    - Note text is inserted with **`textContent`, never `innerHTML`**. This is text arriving from
-      a public form, so treating it as markup would be an injection hole even with a human
-      moderating. Do not "improve" this to innerHTML to allow formatting.
-    - The CSV reader rejoins fields (`r.join(',')`) rather than taking `r[0]`, because the
-      Approved tab is a single column. Taking the first field alone silently truncates a note
-      mid-sentence if its commas ever arrive unquoted, publishing half of what someone wrote with
-      no visible error. Verified against quoted commas, embedded newlines, escaped quotes,
-      unquoted commas, a header row, and an empty sheet.
-    - **Rows carrying a spreadsheet error are dropped, and bare `TRUE`/`FALSE` cells stripped.**
-      A broken formula publishes as `#REF!` or `#N/A`, which would otherwise be rendered as though
-      a person had written it, and unused tick-box columns publish as bare booleans. A note that
-      merely contains the word FALSE in a sentence is untouched; only a cell that is exactly
-      TRUE or FALSE counts as sheet mechanics.
+  - **Published notes system, second design (2026-08-27 onward): Sveltia CMS writing to
+    `notes.json`, replacing the earlier live Google Sheet CSV read.** The Google Form is still
+    where a visitor's submission arrives and is still the private moderation inbox; only the
+    *publishing* step changed.
+    - **The flow now:** a visitor submits through `SHARED_FORM_URL`, unchanged, and it lands in
+      the Google Form's own responses sheet, unchanged. Harshita reads it there. To publish it she
+      adds an entry to **`notes.json`** at the repo root and commits it, either by editing the
+      file directly on GitHub, or through the **Sveltia CMS** admin screen at `/admin`, which
+      writes the same file without her handling any punctuation. The page reads that file, not
+      Google, for what it displays.
+    - `notes.json`'s shape is `{ "notes": [ { "note": "..." }, ... ] }`. **Keep the wrapping
+      `"notes"` key.** A Sveltia/Decap "files" collection always saves an object keyed by field
+      name; it does not write a bare top-level array. `community.html` reads `data.notes`, so the
+      two must agree, and this was verified before either side was written.
+    - The page constant is `SHARED_NOTES_JSON = 'notes.json'` (`community.html`). `SHARED_FORM_URL`
+      is unchanged from before, `?usp=sharing&ouid=...` still stripped, still Harshita's Google
+      account id, still must never be pasted back in raw.
+    - Malformed entries in `notes.json` (not a string, blank after trimming, not even an object)
+      are silently skipped rather than thrown, so one bad entry cannot blank the whole section.
+    - Note text is inserted with **`textContent`, never `innerHTML`**. This is text a human has
+      copied in from a public form submission, so treating it as markup would be an injection hole
+      even with a moderator in the loop. Do not "improve" this to innerHTML to allow formatting.
     - Cards are **quote only, with no name, credentials or years**, unlike the homepage
       testimonial cards they are visually modelled on. The anonymity is the point.
-    - Empty and failed states both say something gentle rather than showing a blank area, and the
-      sample notes never appear once a real source is configured.
+    - Empty and failed states both say something gentle rather than showing a blank area.
+    - **The admin screen, `admin/index.html` and `admin/config.yml`, is not yet functional.**
+      Sveltia needs an OAuth connection to GitHub before login works, and that requires creating
+      something (a small OAuth proxy, or moving hosting to a provider like Netlify that supplies
+      one) which only Harshita can authorise, since it means a new account or a new service
+      attached to her GitHub. Until that piece exists, publishing a note means editing
+      `notes.json` directly on GitHub, which works today with no setup at all. See open items.
+    - **First design (2026-08-14 through 2026-08-27, superseded): live Google Sheet CSV read.**
+      Kept here because the reasoning inside it is still relevant if the site ever needs a
+      moderation step with no human editing files by hand.
+      - Two constants drove it: `SHARED_NOTES_CSV` and `SHARED_FORM_URL`. The CSV was the
+        "Approved" tab of the sheet published to the web, never the raw responses tab, which
+        would have made every unmoderated submission publicly readable.
+      - The publishing formula, in the Approved tab:
+        `=FILTER('Original response'!B2:B, 'Original response'!D2:D=TRUE, ARRAYFORMULA(REGEXMATCH(LOWER('Original response'!C2:C&""), "^yes")))`
+        Two conditions, consent and a moderation tick, both required. `ARRAYFORMULA` was load
+        bearing: without it `REGEXMATCH` does not iterate a range in Google Sheets and the whole
+        filter silently matches nothing, which cost a long debugging detour.
+      - Google cached the published CSV for about five minutes, so a newly ticked note did not
+        appear instantly. A CSV parser handled quoted commas, embedded newlines and escaped
+        quotes, rejoining fields rather than taking the first one, since the Approved tab was a
+        single column and taking `r[0]` alone would silently truncate a note at an unquoted comma.
+        Rows carrying a spreadsheet error (`#REF!`, `#N/A`, and the rest) were dropped, and bare
+        `TRUE`/`FALSE` cells from the tick-box column stripped, so neither could be rendered as
+        though a person had written it.
+      - **Why it was replaced:** the formula broke more than once in ways that were not obvious
+        from the sheet, and every fix depended on someone who understood spreadsheet formulas and
+        regular expressions. Editing a small JSON file, or filling in a form, does not.
     - Alternatives considered and why not: a custom backend (Supabase/Firebase) is ruled out by
       the project's no-backend rule and is heavy for a page of short notes; a WordPress form
       plugin is the natural long-term home but needs the migration first; Airtable adds another
@@ -892,6 +906,14 @@ absence.
 
 ## 7. Open items / not yet built
 
+- **Sveltia CMS authentication.** `admin/index.html` and `admin/config.yml` exist and are correctly
+  configured, but login does not work yet: Sveltia needs an OAuth connection to GitHub, and setting
+  that up means either standing up a small OAuth proxy or moving hosting to a provider that
+  supplies one (Netlify is the natural fit, and it is free). Either path means creating a new
+  account or authorising a new service against Harshita's GitHub, which is not something to do on
+  her behalf without asking. Until this is done, publishing a note means editing `notes.json`
+  directly on GitHub's own web editor, which works today with no setup required. Once the
+  connection exists, add its `base_url` to the commented line in `admin/config.yml`.
 - Peer Testimonials page (full 8 testimonials). The 8 already run in the homepage carousel, and
   Harshita has not decided whether a separate page is wanted.
 - **Legal review of the three policy pages.** They are written and live, and the footer links are

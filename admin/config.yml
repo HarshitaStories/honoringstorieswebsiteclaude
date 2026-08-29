@@ -1,0 +1,42 @@
+# Sveltia CMS configuration for the Shared Ways of Coping notes.
+#
+# This file controls only the admin screen at /admin. It has no effect on
+# how the public pages look; that stays entirely in the nine .html files.
+#
+# AUTHENTICATION: the "backend" section below needs an OAuth connection to
+# GitHub before login will work. That piece is not set up yet. See the
+# instructions after this file for exactly what is needed and why it could
+# not be finished without an account only Harshita can create.
+
+backend:
+  name: github
+  repo: HarshitaStories/honoringstorieswebsiteclaude
+  branch: master
+  # Filled in once the OAuth connection exists. Points login requests at
+  # whichever service is handling the GitHub handshake (see the setup notes).
+  # base_url: https://REPLACE-ME
+
+# Pictures added through this screen would land here. Not currently used,
+# since this admin only manages notes.json, but required by the CMS.
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "coping_notes"
+    label: "Shared Ways of Coping"
+    # A "files" collection edits one specific file, rather than a folder of
+    # many files, which matches notes.json being a single file holding a list.
+    files:
+      - name: "notes"
+        label: "Published notes"
+        file: "notes.json"
+        fields:
+          - label: "Notes"
+            name: "notes"
+            widget: "list"
+            summary: "{{fields.note}}"
+            fields:
+              - label: "Note text"
+                name: "note"
+                widget: "text"
+                hint: "Paste or type the note exactly as it should appear on the site. No need to worry about punctuation breaking anything here; just write it as you would anywhere else."
