@@ -901,6 +901,20 @@ absence.
     screenshots or advance CSS transitions, so a visual check may show a change as failing when it
     has worked. Read computed styles with transitions disabled, measure geometry, and check
     element order in the DOM instead.
+13. **A change is not finished until four things are done**, and the last three are the ones
+    forgotten: the code change itself, verified; `WEBSITE_INSTRUCTIONS.md` updated if the change
+    touches behaviour or a decision; `spoonfed/*.md` updated if it touches how the site is run,
+    deployed or maintained; and a commit pushed with a message saying what changed and why.
+    Record reversals especially. "We tried X and rejected it" is the most valuable and most
+    easily lost information in this project, and it is the thing that otherwise gets rebuilt by
+    accident six months later.
+14. `spoonfed/*.md` are the source for the spoonfed guides. `spoonfed_copy.zip` and the Word file
+    are built from them. **Never edit the copies inside the zip**, they are overwritten on every
+    rebuild. When the guides change, say that the zip is now stale and offer to rebuild it, per
+    `spoonfed/HOW_TO_UPDATE.md`.
+15. `AGENTS.md` in the repository root is the short version of these rules, written so that a
+    coding assistant picks them up on its own. If a rule here changes in a way that affects how
+    someone works on the repo, change it there too.
 
 ---
 
