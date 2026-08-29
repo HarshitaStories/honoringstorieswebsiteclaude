@@ -222,12 +222,10 @@
   .community-hero { text-align: center; max-width: 720px; margin: 0 auto; }
   .community-hero h1 { margin-bottom: 1.25rem; }
   .community-hero .page-hero-note { margin-left: auto; margin-right: auto; }
-  /* Full bleed. The artwork is a repeating band whose motifs are cut at both
-     edges, so running it to the window edges reads as a pattern continuing.
-     Contained in a centred box the cut motifs would look like a crop mistake.
-     .page-hero already has overflow:hidden, so this cannot cause sideways
-     scrolling. */
-  .community-banner { display: block; width: 100vw; max-width: none; margin-left: 50%; transform: translateX(-50%); margin-bottom: 2.25rem; }
+  /* Centred, not full bleed. This artwork is a single composition with its own
+     clear edges, unlike the repeating band it replaced, so running it to the
+     window edges would pull it away from the text it belongs with. */
+  .community-banner { display: block; width: 100%; max-width: 960px; margin: 0 auto 2rem; }
   .split { display: grid; gap: 2.5rem; align-items: center; }
   @media (min-width: 900px) { .split { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
   .community-copy p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.75; }
@@ -239,12 +237,30 @@
   .gentle-note { border-left: 2px solid var(--rose-soft); padding: 0.3rem 0 0.3rem 1rem; margin: 1.75rem 0 0; font-size: 0.9rem; color: var(--charcoal-soft); line-height: 1.65; }
   /* Published notes. Quote only, deliberately no name, credentials or any other
      attribution: the whole point of this space is that it stays anonymous. */
-  .notes-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; max-width: 980px; margin: 3rem auto 0; }
-  @media (min-width: 760px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
-  .note-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 18px; padding: 1.75rem; transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
-  .note-card:hover { transform: translateY(-4px); border-color: var(--rose-soft); box-shadow: 0 16px 32px -20px rgba(91, 46, 107, 0.2); }
-  .note-mark { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--rose-soft); margin-bottom: 0.35rem; }
-  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1.75; color: var(--charcoal-soft); margin: 0; }
+  /* Notes are shown one at a time in a carousel, matching the testimonials
+     carousel on the homepage. No name panel here: these are anonymous, so the
+     quote takes the full width rather than leaving an empty column where the
+     testimonials show who is speaking. */
+  .note-carousel { max-width: 920px; margin: 3rem auto 0; }
+  .note-carousel-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 20px; padding: 2.75rem; }
+  @media (max-width: 768px) { .note-carousel-card { padding: 1.75rem; } }
+  .note-quote-mark { font-family: var(--font-display); font-size: 2.5rem; line-height: 0.8; color: var(--rose); opacity: 0.55; margin-bottom: 0.75rem; font-style: italic; display: block; }
+  /* min-height stops the card resizing as notes of different lengths come
+     round, which would otherwise make the page jump every five seconds. */
+  .note-slides { position: relative; min-height: 7.5rem; }
+  .note-slide { display: none; }
+  .note-slide.active { display: block; animation: noteIn 0.7s var(--ease-out); }
+  @keyframes noteIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .note-slide blockquote { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.75; font-style: italic; color: var(--charcoal-soft); margin: 0; max-height: 260px; overflow-y: auto; padding-right: 0.5rem; }
+  .note-slide blockquote::-webkit-scrollbar { width: 4px; }
+  .note-slide blockquote::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+  .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: 2rem; }
+  .carousel-arrow { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--cream-warm); border: 1px solid var(--line); color: var(--deep-purple); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.4s var(--ease-gentle); }
+  .carousel-arrow:hover { background: var(--deep-purple); color: var(--cream-warm); border-color: var(--deep-purple); }
+  .carousel-arrow svg { width: 16px; height: 16px; }
+  .carousel-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 220px; }
+  .carousel-dots button { width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--purple-soft); opacity: 0.5; cursor: pointer; padding: 0; transition: all 0.4s var(--ease-gentle); }
+  .carousel-dots button.active { background: var(--rose); opacity: 1; width: 20px; border-radius: 4px; }
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
   .notes-cta { text-align: center; margin-top: 2.5rem; }
   /* ---- Inline sharing box ---- */
@@ -339,7 +355,7 @@
       <!-- The illustration's own backdrop has been recoloured to the page
            cream, so it sits directly on the banner with no card, border or
            edge of any kind. Same treatment as the therapy and supervision art. -->
-      <img class="community-banner" src="assets/community-hero.jpg" alt="A repeating illustrated band alternating between three people sitting together over cups of tea and a wall of pinned notes reading Breathe, You helped and Keep going, linked along its length by a looping thread that forms hearts." />
+      <img class="community-banner" src="assets/community-hero.jpg" alt="An illustration of the two spaces on this page side by side: a wall of pinned notes reading Breathe, You helped and Keep going, and three people sitting together over cups of tea, joined by a looping thread that forms a heart." />
       <span class="eyebrow">Community</span>
       <h1>Spaces to share and connect</h1>
       <p class="page-hero-note">Two gentle spaces that sit alongside the therapy and supervision work: one for anonymous notes on what has helped people through hard times, and one for gathering with fellow mental health professionals over a conversation.</p>
@@ -383,7 +399,29 @@
     </div>
     <!-- Notes render here. Cards are built in JS so approved entries can be
          pulled from the responses sheet without editing this file. -->
-    <div class="notes-grid reveal delay-3" id="notesGrid"></div>
+    <!-- Slides and dots are built in JS from the loaded notes, so the number of
+         them follows the data rather than being fixed here. -->
+    <div class="note-carousel reveal delay-3" id="noteCarousel" hidden>
+      <div class="note-carousel-card">
+        <span class="note-quote-mark" aria-hidden="true">&ldquo;</span>
+        <div class="note-slides" id="noteSlides"></div>
+      </div>
+      <!-- Hidden when there is only one note, since there is nothing to move
+           between and a paused slideshow control would be meaningless. -->
+      <div class="carousel-nav" id="noteNav" hidden>
+        <button type="button" class="carousel-arrow" id="notePrev" aria-label="Previous note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-dots" id="noteDots"></div>
+        <button type="button" class="carousel-arrow" id="noteNext" aria-label="Next note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow" id="notePlayPause" aria-label="Pause slideshow">
+          <svg id="notePauseIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg id="notePlayIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M7 5l12 7-12 7V5z"/></svg>
+        </button>
+      </div>
+    </div>
     <p class="notes-notice" id="notesNotice" hidden></p>
 
     <div class="notes-cta reveal delay-3" id="notesCta">
@@ -636,10 +674,23 @@
   // carry Harshita's own Google account id, so they must not be published.
   const SHARED_FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSf9-1m2jrECnUgiMaEp-8UCyQ8KTF9XAyNFbaUP_cwQFbDiDw/viewform';
 
+  /* Placeholder notes so the carousel can be judged before real ones exist.
+     They are written examples, not submissions. Emptying this array returns
+     the section to its own "nothing shared yet" message. */
+  const DEMO_NOTES = [
+    'Keeping a glass of water and a notebook by my bed. On the nights my thoughts race, writing one sentence down is often enough to stop it spiralling.',
+    'Going for a walk without my phone, even just ten minutes. Not to clear my head, only to be somewhere else for a while.',
+    'Telling one person the honest version of how my week went, instead of saying I am fine.',
+    'Making the bed. It is small and it takes two minutes, but on the days when nothing else gets done, one thing did.',
+    'Putting on the same album I have listened to for years. I know every note, so there is nothing to brace for.',
+    'Sitting outside for a few minutes before anyone else in the house is awake.'
+  ];
+
   (function () {
-    const grid = document.getElementById('notesGrid');
+    const carousel = document.getElementById('noteCarousel');
+    const slidesWrap = document.getElementById('noteSlides');
     const notice = document.getElementById('notesNotice');
-    if (!grid) return;
+    if (!carousel || !slidesWrap) return;
 
     /* =================================================================
        The sharing box.
@@ -723,24 +774,80 @@
 
     shareBox();
 
+    /* Builds the carousel. Behaviour is deliberately identical to the
+       testimonials carousel on the homepage: five second auto-advance,
+       arrows either side, a dot per note, and a play/pause control, with a
+       manual move restarting the timer rather than fighting it. */
     function render(notes) {
-      grid.textContent = '';
-      notes.forEach(text => {
-        const card = document.createElement('div');
-        card.className = 'note-card';
-        const mark = document.createElement('span');
-        mark.className = 'note-mark';
-        mark.textContent = '“';
-        const p = document.createElement('p');
+      slidesWrap.textContent = '';
+      const dotsWrap = document.getElementById('noteDots');
+      dotsWrap.textContent = '';
+
+      notes.forEach((text, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'note-slide' + (i === 0 ? ' active' : '');
+        const quote = document.createElement('blockquote');
         // textContent, never innerHTML: this is text a moderator has copied
         // in from a public form submission, so treating it as markup would
         // be an injection hole even with a human in the loop.
-        p.textContent = text;
-        card.appendChild(mark);
-        card.appendChild(p);
-        grid.appendChild(card);
+        quote.textContent = text;
+        slide.appendChild(quote);
+        slidesWrap.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Note ' + (i + 1));
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(dot);
       });
+
+      carousel.hidden = false;
       notice.hidden = true;
+
+      const slides = slidesWrap.querySelectorAll('.note-slide');
+      const dots = dotsWrap.querySelectorAll('button');
+      const nav = document.getElementById('noteNav');
+
+      // One note has nothing to move between, so the controls would be
+      // decorative. The card still shows.
+      if (slides.length < 2) { nav.hidden = true; return; }
+      nav.hidden = false;
+
+      let idx = 0;
+      let timer;
+      let paused = false;
+
+      function goTo(i, manual) {
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = (i + slides.length) % slides.length;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+        if (manual) restart();
+      }
+      function next() { goTo(idx + 1); }
+      function restart() {
+        clearInterval(timer);
+        if (!paused) timer = setInterval(next, 5000);
+      }
+
+      document.getElementById('noteNext').addEventListener('click', () => goTo(idx + 1, true));
+      document.getElementById('notePrev').addEventListener('click', () => goTo(idx - 1, true));
+
+      const playPause = document.getElementById('notePlayPause');
+      const pauseIcon = document.getElementById('notePauseIcon');
+      const playIcon  = document.getElementById('notePlayIcon');
+      playPause.addEventListener('click', () => {
+        paused = !paused;
+        pauseIcon.style.display = paused ? 'none' : 'block';
+        playIcon.style.display  = paused ? 'block' : 'none';
+        playPause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+        if (paused) clearInterval(timer);
+        else restart();
+      });
+
+      restart();
     }
 
     fetch(SHARED_NOTES_JSON, { cache: 'no-store' })
@@ -753,16 +860,20 @@
           .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
           .filter(Boolean);
         if (notes.length) render(notes);
+        else if (DEMO_NOTES.length) render(DEMO_NOTES);
         else {
-          // Nothing approved yet. Say so plainly rather than showing an
-          // empty space.
-          grid.textContent = '';
+          // Nothing approved yet and no demo notes left. Say so plainly
+          // rather than showing an empty space.
+          carousel.hidden = true;
           notice.textContent = 'No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.';
           notice.hidden = false;
         }
       })
       .catch(() => {
-        grid.textContent = '';
+        // notes.json unreachable, which is what happens when the page is
+        // opened straight from a folder rather than served.
+        if (DEMO_NOTES.length) { render(DEMO_NOTES); return; }
+        carousel.hidden = true;
         notice.textContent = 'The shared notes could not be loaded just now. Please try again a little later.';
         notice.hidden = false;
       });
