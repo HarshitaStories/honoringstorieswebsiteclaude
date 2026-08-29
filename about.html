@@ -157,19 +157,20 @@
     opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle);
   }
   .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
+  /* A photograph with its own background, not a cut-out, so it gets a radius
+     the way the cards on this site do. The previous image here was a 232:610
+     transparent standing shot that needed neither.
 
-  /* A transparent cut-out, so no dashed border, no card background and no
-     crop: all three were for an empty slot.
-     max-width is set against the bio text beside it rather than against the
-     column. This is a standing full-length photo, 232:610, so it is far
-     narrower than the seated one it replaced. At 320px it would run 840px
-     tall against 425px of text. 175px brings it to about 460px, just over the
-     text, which keeps the row balanced. */
+     max-width is set against the bio text beside it. This one is 761:795, all
+     but square, so the 175px that suited a tall narrow cut-out would render it
+     postage stamp sized. 340px gives it roughly 355px of height against the
+     bio text's greater length, with align-items:start keeping the row tidy. */
   .full-photo {
     display: block;
     width: 100%;
     height: auto;
-    max-width: 175px;
+    max-width: 340px;
+    border-radius: 18px;
     margin: 0 auto;
   }
 
@@ -393,7 +394,7 @@
     </div>
     <div class="bio-inner">
       <div class="reveal">
-        <img class="full-photo" src="assets/harshita-about.png" alt="Harshita standing, smiling, in a white floral shirt and jeans, cut out against the page background." />
+        <img class="full-photo" src="assets/harshita-about.jpg" alt="Harshita seated at a marble table, smiling, arms folded, with a large leafed plant behind her." />
       </div>
       <div class="bio-text reveal delay-1" id="bioText">
         <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>
