@@ -1,0 +1,11 @@
+# Everything in this folder is private. It holds submissions that have not
+# been approved, and the admin password hash. Without this file, anyone
+# could read data/notes.json straight from the browser and see every
+# unapproved submission, which is the exact thing moderation prevents.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

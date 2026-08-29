@@ -71,7 +71,7 @@
 
 <div class="test-banner">
   TEST PAGE &middot; not part of the live site &middot; moderation queue is at
-  <a href="usersubmission.html">/usersubmission</a>
+  <a href="admin.php">/admin.php</a>
 </div>
 
 <header class="page-head">
@@ -112,34 +112,18 @@
 
 <script>
 /* ===================================================================
-   TEST PAGES: userresponse + usersubmission
+   TEST PAGE: userresponse
    ===================================================================
-   These two pages demonstrate the submit-then-moderate flow end to end.
+   Submissions go to submit.php and are stored in data/notes.json, inside
+   the website's own folder on the server. Approved notes come back from
+   notes.php. Nothing is kept in the browser, and no outside service is
+   involved at any point.
 
-   Storage is the browser's own localStorage, which means everything here
-   is visible only in THIS browser on THIS computer. That is the right
-   choice for proving the mechanics, and the wrong choice for a real site,
-   where a submission must reach Harshita rather than staying with the
-   person who wrote it. Swapping localStorage for a host that receives
-   submissions is the only part that changes for real use.
+   notes.php returns approved entries only, so an unapproved submission
+   has no route to this page even if someone requested it directly.
    =================================================================== */
-const PENDING_KEY  = 'hs_test_pending';
-const APPROVED_KEY = 'hs_test_approved';
 const WORD_LIMIT = 100;
 
-function readStore(key) {
-  try {
-    const raw = localStorage.getItem(key);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (e) {
-    // A corrupted or unavailable store must not blank the page.
-    return [];
-  }
-}
-function writeStore(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
-}
 function countWords(s) {
   const t = s.trim();
   return t ? t.split(/\s+/).length : 0;
@@ -167,18 +151,39 @@ function countWords(s) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (submit.disabled) return;
-    const pending = readStore(PENDING_KEY);
-    pending.push({
-      id: String(Date.now()) + Math.random().toString(36).slice(2, 8),
-      note: input.value.trim(),
-      submitted: new Date().toISOString()
-    });
-    writeStore(PENDING_KEY, pending);
 
-    input.value = '';
-    update();
-    status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
-    status.hidden = false;
+    const body = new FormData();
+    body.append('note', input.value.trim());
+    body.append('consent', '1');
+    // The honeypot. Left empty by people, filled in by bots.
+    body.append('website', '');
+
+    submit.disabled = true;
+    const original = submit.textContent;
+    submit.textContent = 'Sending';
+
+    fetch('submit.php', { method: 'POST', body: body })
+      .then(r => r.json().catch(() => ({ ok: false })))
+      .then(res => {
+        if (res && res.ok) {
+          input.value = '';
+          update();
+          status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
+        } else {
+          status.textContent = (res && res.error)
+            ? res.error
+            : 'That could not be sent just now. Please try again in a moment.';
+          submit.disabled = false;
+        }
+        status.hidden = false;
+        submit.textContent = original;
+      })
+      .catch(() => {
+        status.textContent = 'That could not be sent just now. Please try again in a moment.';
+        status.hidden = false;
+        submit.disabled = false;
+        submit.textContent = original;
+      });
   });
 })();
 
@@ -186,31 +191,37 @@ function countWords(s) {
 function renderApproved() {
   const grid  = document.getElementById('approvedGrid');
   const empty = document.getElementById('approvedEmpty');
-  const notes = readStore(APPROVED_KEY);
-  grid.textContent = '';
-  if (!notes.length) { empty.hidden = false; return; }
-  empty.hidden = true;
-  notes.forEach(entry => {
-    const card = document.createElement('div');
-    card.className = 'note-card';
-    const mark = document.createElement('span');
-    mark.className = 'note-mark';
-    mark.textContent = '“';
-    const p = document.createElement('p');
-    // textContent, never innerHTML: this is text typed by a stranger.
-    p.textContent = entry.note;
-    card.appendChild(mark);
-    card.appendChild(p);
-    grid.appendChild(card);
-  });
+
+  fetch('notes.php', { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(entries => {
+      const notes = (Array.isArray(entries) ? entries : [])
+        .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
+        .filter(Boolean);
+      grid.textContent = '';
+      if (!notes.length) { empty.hidden = false; return; }
+      empty.hidden = true;
+      notes.forEach(text => {
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        const mark = document.createElement('span');
+        mark.className = 'note-mark';
+        mark.textContent = '“';
+        const p = document.createElement('p');
+        // textContent, never innerHTML: this is text typed by a stranger.
+        p.textContent = text;
+        card.appendChild(mark);
+        card.appendChild(p);
+        grid.appendChild(card);
+      });
+    })
+    .catch(() => {
+      grid.textContent = '';
+      empty.textContent = 'The shared notes could not be loaded just now. Please try again a little later.';
+      empty.hidden = false;
+    });
 }
 renderApproved();
-
-// Approving on the other page fires a storage event here, so if both pages
-// are open in two tabs this list updates without a manual refresh.
-window.addEventListener('storage', function (e) {
-  if (e.key === APPROVED_KEY) renderApproved();
-});
 </script>
 
 </body>
