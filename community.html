@@ -475,6 +475,11 @@
      as the Share button, which pushed both off centre. */
   .share-consent { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 1rem auto 1.35rem; text-align: center; font-size: 0.85rem; line-height: 1.6; color: var(--charcoal-soft); cursor: pointer; }
   .share-consent input { margin: 0; width: 15px; height: 15px; accent-color: var(--deep-purple); flex-shrink: 0; cursor: pointer; }
+  /* Marks the one field that needs attention when a message is showing, so the
+     words and the place to act point at each other. */
+  .share-field.is-invalid #shareInput { border-color: var(--rose); box-shadow: 0 0 0 4px rgba(217, 106, 156, 0.12); }
+  .share-consent.is-invalid { color: var(--rose); }
+  .share-consent.is-invalid input { outline: 2px solid var(--rose-soft); outline-offset: 2px; }
   .share-submit:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
   .share-status { max-width: 520px; margin: 1.1rem auto 0; font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.6; color: var(--deep-purple); }
   .share-status.is-error { color: var(--rose); }
@@ -677,7 +682,7 @@
           <input type="checkbox" id="shareConsent" name="consent" value="1" />
           <span>I am happy for this to be published anonymously on this website.</span>
         </label>
-        <button type="submit" class="btn btn-primary share-submit" id="shareSubmit" disabled>
+        <button type="submit" class="btn btn-primary share-submit" id="shareSubmit">
           Share this
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
@@ -907,27 +912,98 @@
     (function shareBox() {
       const form    = document.getElementById('shareForm');
       const input   = document.getElementById('shareInput');
+      const field   = form ? form.querySelector('.share-field') : null;
       const count   = document.getElementById('shareCount');
       const consent = document.getElementById('shareConsent');
+      const consentRow = form ? form.querySelector('.share-consent') : null;
       const submit  = document.getElementById('shareSubmit');
       const status  = document.getElementById('shareStatus');
       if (!form || !input) return;
 
+      /* The button stays enabled even when the form is not ready to send.
+
+         A greyed out button is the worst of both worlds: it refuses to do
+         anything and it will not say why, so the person is left hunting for
+         what they got wrong. Pressing it now always produces an answer, and
+         the answer names the one thing to fix. */
+
+      function say(message, isError) {
+        status.textContent = message;
+        status.classList.toggle('is-error', !!isError);
+        status.hidden = !message;
+      }
+
+      function markInvalid(which) {
+        if (field) field.classList.toggle('is-invalid', which === 'note');
+        if (consentRow) consentRow.classList.toggle('is-invalid', which === 'consent');
+      }
+
+      function clearInvalid() {
+        markInvalid(null);
+      }
+
       function update() {
         const words = countWords(input.value);
-        const left = WORD_LIMIT - words;
-        count.textContent = left < 0 ? '0' : String(left);
-        count.classList.toggle('is-low', left <= 20 && left >= 0);
-        count.classList.toggle('is-over', left < 0);
-        submit.disabled = words === 0 || left < 0 || !consent.checked;
+        const over = words - WORD_LIMIT;
+        // Over the limit the counter says by how much, rather than sitting at
+        // zero, which tells someone nothing about how much to cut.
+        count.textContent = over > 0 ? ('+' + over) : String(WORD_LIMIT - words);
+        count.classList.toggle('is-low', over <= 0 && over >= -10);
+        count.classList.toggle('is-over', over > 0);
+        count.setAttribute('title', over > 0
+          ? over + (over === 1 ? ' word over the limit' : ' words over the limit')
+          : (WORD_LIMIT - words) + ' words left');
       }
-      input.addEventListener('input', update);
-      consent.addEventListener('change', update);
+
+      // Any correction clears the complaint, so a message can never linger over
+      // something the person has already put right.
+      input.addEventListener('input', () => { update(); clearInvalid(); say(''); });
+      consent.addEventListener('change', () => { clearInvalid(); say(''); });
       update();
+
+      /* Returns the first thing wrong, in the order someone would meet it, so
+         they are never told about the last problem before the first. */
+      function firstProblem() {
+        const words = countWords(input.value);
+        if (words === 0) {
+          return { field: 'note', message: 'There is nothing written yet. Add a line or two above, then press Share this.' };
+        }
+        const over = words - WORD_LIMIT;
+        if (over > 0) {
+          return {
+            field: 'note',
+            message: over === 1
+              ? 'That is one word over the limit. Please remove a word, then press Share this.'
+              : 'That is ' + over + ' words over the limit of ' + WORD_LIMIT + '. Please shorten it, then press Share this.'
+          };
+        }
+        if (!consent.checked) {
+          return { field: 'consent', message: 'Please tick the box above to say you are happy for this to appear on the site, then press Share this.' };
+        }
+        return null;
+      }
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (submit.disabled) return;
+
+        const problem = firstProblem();
+        if (problem) {
+          markInvalid(problem.field);
+          say(problem.message, true);
+          // Put the cursor where the fix has to happen.
+          if (problem.field === 'note') input.focus();
+          else consent.focus();
+          return;
+        }
+
+        clearInvalid();
+
+        // Caught before sending, because a request made with no connection
+        // fails in a way that is easy to mistake for the site being broken.
+        if (navigator.onLine === false) {
+          say('You appear to be offline. Check your connection, then press Share this again. Your words are still here.', true);
+          return;
+        }
 
         const body = new FormData();
         body.append('note', input.value.trim());
@@ -937,31 +1013,47 @@
 
         submit.disabled = true;
         submit.textContent = 'Sending';
+        say('');
+
+        function recover(message) {
+          say(message, true);
+          submit.disabled = false;
+          submit.textContent = 'Share this';
+        }
 
         fetch(SUBMIT_ENDPOINT, { method: 'POST', body: body })
-          .then(r => r.json().catch(() => ({ ok: false })))
+          .then(r => r.json()
+            .catch(() => ({ ok: false, status: r.status }))
+            .then(j => { j.status = r.status; return j; }))
           .then(res => {
             if (res && res.ok) {
-              form.querySelector('.share-field').hidden = true;
-              form.querySelector('.share-consent').hidden = true;
+              field.hidden = true;
+              consentRow.hidden = true;
               form.querySelector('.share-prompt').hidden = true;
               submit.hidden = true;
-              status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
-              status.classList.remove('is-error');
-            } else {
-              status.textContent = (res && res.error) ? res.error : 'That could not be sent just now. Please try again in a moment.';
-              status.classList.add('is-error');
-              submit.disabled = false;
-              submit.textContent = 'Share this';
+              say('Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.', false);
+              return;
             }
-            status.hidden = false;
+            /* The server checks the same things the browser does, so its
+               message is the accurate one and is shown as given. The fallbacks
+               below only cover the cases it cannot describe. */
+            if (res && res.error) {
+              markInvalid(/word|write|shorten|nothing/i.test(res.error) ? 'note' : 'consent');
+              recover(res.error);
+            } else if (res && res.status === 503) {
+              recover('This space is not taking new notes at the moment. Please try again later, and do keep what you wrote.');
+            } else if (res && res.status >= 500) {
+              recover('Something went wrong at our end, not yours. Your words are still here, so please press Share this again in a moment.');
+            } else {
+              recover('That did not send. Your words are still here, so please press Share this again.');
+            }
           })
           .catch(() => {
-            status.textContent = 'That could not be sent just now. Please try again in a moment.';
-            status.classList.add('is-error');
-            status.hidden = false;
-            submit.disabled = false;
-            submit.textContent = 'Share this';
+            // A network failure rather than a refusal, so the advice is
+            // different: nothing is wrong with what they wrote.
+            recover(navigator.onLine === false
+              ? 'You have gone offline. Check your connection, then press Share this again. Your words are still here.'
+              : 'That did not send, which usually means the connection dropped. Your words are still here, so please press Share this again.');
           });
       });
     })();
@@ -1082,6 +1174,14 @@
           return;
         }
         if (sending) return;
+
+        // Caught before sending: a request made with no connection fails in a
+        // way that is easy to mistake for the button being broken.
+        if (navigator.onLine === false) {
+          relateMessage('You appear to be offline. Check your connection, then press it again');
+          return;
+        }
+
         sending = true;
         relateMessage('');
 
@@ -1097,7 +1197,12 @@
         body.append('id', entry.id);
 
         fetch('relate.php', { method: 'POST', body: body })
-          .then(r => r.json().catch(() => ({ ok: false, status: r.status })))
+          // The status is attached explicitly. Reading it only in the catch
+          // misses the case where the server does return JSON with an error,
+          // which is exactly when the status matters most.
+          .then(r => r.json()
+            .catch(() => ({ ok: false }))
+            .then(j => { j.status = r.status; return j; }))
           .then(res => {
             if (res && res.ok) return;
             forgetRelated(entry.id);
@@ -1111,7 +1216,9 @@
           .catch(() => {
             forgetRelated(entry.id);
             paintRelate();
-            relateMessage('That did not save, which usually means the connection dropped. Check you are online and press it again');
+            relateMessage(navigator.onLine === false
+              ? 'You have gone offline. Check your connection, then press it again'
+              : 'That did not save, which usually means the connection dropped. Please press it once more');
           })
           .finally(() => { sending = false; });
       });
