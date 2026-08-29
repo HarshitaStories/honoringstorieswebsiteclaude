@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>This part is private · Honoring Stories</title>
+<!-- An error page has no business in search results. -->
+<meta name="robots" content="noindex, nofollow" />
+<!-- Absolute paths throughout. This page is served at whatever address the
+     visitor asked for, so a relative path would resolve against a folder that
+     may not exist and the logo would quietly vanish. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --deep-purple: #5B2E6B; --purple: #7A4D8F; --purple-soft: #B295C4;
+    --rose: #D96A9C; --rose-soft: #F2C5D5; --cream: #F8F1E4; --cream-warm: #FDFAF2;
+    --charcoal: #2B1E2F; --charcoal-soft: #4A3C50; --muted: #8A7E90;
+    --line: rgba(91, 46, 107, 0.14);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2.5rem 1.5rem;
+    font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+    color: var(--charcoal); background: var(--cream);
+    -webkit-font-smoothing: antialiased; text-align: center;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--deep-purple); text-decoration: none; transition: color 0.3s var(--ease-gentle); }
+  a:hover { color: var(--rose); }
+
+  .logo { width: 210px; margin: 0 auto 2.75rem; }
+  .code {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1rem; letter-spacing: 0.06em; color: var(--rose);
+    margin: 0 0 0.6rem;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.15;
+    color: var(--deep-purple); margin: 0 0 1.1rem;
+  }
+  .lede { max-width: 30rem; margin: 0 auto 2.25rem; color: var(--charcoal-soft); font-size: 1.02rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.8rem; border-radius: 999px;
+    background: var(--deep-purple); color: var(--cream-warm);
+    font-size: 0.95rem; font-weight: 500;
+    transition: background 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle);
+  }
+  .btn:hover { background: var(--rose); color: var(--cream-warm); box-shadow: 0 12px 28px -14px rgba(217, 106, 156, 0.6); }
+  .btn svg { width: 16px; height: 16px; }
+
+  .elsewhere { margin: 2.5rem auto 0; padding-top: 1.75rem; border-top: 1px solid var(--line); max-width: 34rem; }
+  .elsewhere p { font-family: var(--font-display); font-style: italic; font-size: 0.92rem; color: var(--muted); margin: 0 0 0.9rem; }
+  .elsewhere ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
+  .elsewhere a { font-size: 0.92rem; }
+
+  /* The one thing worth saying to somebody who has landed here by accident and
+     is not in a good way. Quiet, and pointing at the helplines rather than
+     repeating them, so there is only one place to keep them current. */
+  .support { margin-top: 2.25rem; font-size: 0.84rem; line-height: 1.65; color: var(--muted); max-width: 30rem; }
+</style>
+</head>
+<body>
+
+  <img class="logo" src="/assets/logo.png" alt="Honoring Stories" />
+
+  <p class="code">403</p>
+  <h1>This part is private</h1>
+  <p class="lede">This address is not open to visitors. If you were looking for something on the site, the pages below will take you there.</p>
+
+  <a class="btn" href="/">
+    Back to the homepage
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
+
+  <nav class="elsewhere">
+    <p>Or somewhere else on the site</p>
+    <ul>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/psychotherapy.html">Psychotherapy</a></li>
+      <li><a href="/supervision.html">Supervision</a></li>
+      <li><a href="/corporates.html">Workplace Wellbeing</a></li>
+      <li><a href="/community.html">Community</a></li>
+    </ul>
+  </nav>
+
+  <p class="support">
+    This is not a crisis service. If you need to talk to someone now, the
+    helplines are at the bottom of <a href="/">any page on this site</a>.
+  </p>
+
+</body>
+</html>

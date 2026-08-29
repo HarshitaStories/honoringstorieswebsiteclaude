@@ -8,6 +8,18 @@
 DirectoryIndex index.html
 
 # ---------------------------------------------------------------------------
+# Error pages
+# ---------------------------------------------------------------------------
+# Without these, a mistyped address shows Hostinger's own error page, which is
+# a jarring thing to meet on a therapist's site. Paths are absolute from the
+# web root, which is what Apache expects here.
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+ErrorDocument 500 /500.html
+ErrorDocument 502 /500.html
+ErrorDocument 503 /500.html
+
+# ---------------------------------------------------------------------------
 # Block the project files that are not part of the website
 # ---------------------------------------------------------------------------
 # WEBSITE_INSTRUCTIONS.md, the Word exports, the packaged zips and the local
