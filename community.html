@@ -222,10 +222,20 @@
   .community-hero { text-align: center; max-width: 720px; margin: 0 auto; }
   .community-hero h1 { margin-bottom: 1.25rem; }
   .community-hero .page-hero-note { margin-left: auto; margin-right: auto; }
-  /* Centred, not full bleed. This artwork is a single composition with its own
-     clear edges, unlike the repeating band it replaced, so running it to the
-     window edges would pull it away from the text it belongs with. */
-  .community-banner { display: block; width: 100%; max-width: 960px; margin: 0 auto 2rem; }
+  /* Runs to the full width of the page rather than the text column, and past
+     the wrap padding, so the illustration reads as a banner across the top
+     instead of a small picture floating above the heading. Its own backdrop is
+     the page cream, so the edges are invisible and the wider it goes the better
+     it sits. .page-hero already has overflow:hidden, so the breakout cannot
+     cause sideways scrolling. */
+  .community-banner {
+    display: block;
+    width: 100vw;
+    max-width: 1500px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 2.25rem;
+  }
   .split { display: grid; gap: 2.5rem; align-items: center; }
   @media (min-width: 900px) { .split { grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; } }
   .community-copy p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.75; }
@@ -309,6 +319,10 @@
   .pad-page-top {
     z-index: 3;
     transform-origin: top center;
+    /* The transition sits here rather than on .is-turning so the page animates
+       in both directions: adding the class lifts it away for the next note,
+       removing it lets the previous note fall back down. */
+    transition: transform 1.15s cubic-bezier(0.42, 0.02, 0.28, 1), box-shadow 1.15s ease;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     will-change: transform;
@@ -316,7 +330,6 @@
   /* The turn itself. The easing is weighted so the page lifts slowly, falls
      away quickly, which is how paper actually behaves. */
   .pad-page-top.is-turning {
-    transition: transform 1.15s cubic-bezier(0.42, 0.02, 0.28, 1), box-shadow 1.15s ease;
     transform: rotateX(-162deg);
     box-shadow: 0 26px 40px -26px rgba(91, 46, 107, 0.55);
   }
@@ -336,23 +349,34 @@
     .pad-page p { font-size: 1.06rem; }
   }
 
-  /* The corner someone would actually take hold of to turn a page. It lifts
-     when the pointer is near, which is the whole affordance: no button, no
-     instruction. */
-  .pad-corner {
-    position: absolute;
-    right: 4px; bottom: 2px;
-    width: 46px; height: 46px;
-    z-index: 5;
+  /* Back and forward, sitting either side of the caption under the pad. */
+  .pad-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+    transform: rotate(0.7deg);   /* cancels the pad's tilt so the row sits level */
+  }
+  .pad-arrow {
+    flex-shrink: 0;
+    width: 34px; height: 26px;
+    padding: 0;
     border: none;
     background: none;
-    padding: 0;
     cursor: pointer;
     color: var(--purple-soft);
-    transition: transform 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle);
+    transition: color 0.4s var(--ease-gentle), transform 0.4s var(--ease-out), opacity 0.4s var(--ease-gentle);
   }
-  .notepad:hover .pad-corner { transform: translate(-3px, -3px) rotate(-7deg); color: var(--rose); }
-  .pad-corner:focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; border-radius: 6px; }
+  .pad-arrow svg { width: 100%; height: 100%; display: block; }
+  .pad-arrow:hover { color: var(--rose); }
+  #padPrev:hover { transform: translateX(-3px); }
+  #padNext:hover { transform: translateX(3px); }
+  .pad-arrow:focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 4px; border-radius: 8px; }
+  /* Dimmed rather than hidden while a page is mid turn, so the row does not
+     jump about as the buttons come and go. */
+  .pad-arrow[disabled] { opacity: 0.35; cursor: default; }
+  .pad-arrow[disabled]:hover { color: var(--purple-soft); transform: none; }
 
 
   /* The relate button. Same lopsided radii as the paper, so it reads as drawn
@@ -396,6 +420,18 @@
     60%      { transform: scale(0.96); }
   }
 
+  /* Shown only when a tick did not reach the server. Rose rather than red: it
+     is a nudge to try again, not an alarm. */
+  .pad-relate-msg {
+    margin: 0.6rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--rose);
+    max-width: 34ch;
+  }
+
   /* The copy on the sheet below is never pressed. */
   .pad-relate.is-echo { cursor: default; pointer-events: none; }
 
@@ -403,20 +439,19 @@
     .pad-relate.just-related svg { animation: none; }
   }
   .pad-hint {
-    margin: 1.35rem 0 0;
+    margin: 0;
     text-align: center;
     font-family: var(--font-display);
     font-style: italic;
     font-size: 0.85rem;
     color: var(--muted);
-    transform: rotate(0.7deg);   /* cancels the pad's tilt so the words sit level */
   }
 
   /* Everything holds still for anyone who has asked their device for less
      motion: no turning, and JS advances the text without animating. */
   @media (prefers-reduced-motion: reduce) {
     .pad-page-top.is-turning { transition: none; transform: none; }
-    .notepad:hover .pad-corner { transform: none; }
+    .pad-arrow:hover { transform: none; }
   }
 
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
@@ -428,14 +463,18 @@
   .share-field { position: relative; }
   /* Bottom padding leaves room for the counter, which is absolutely positioned
      inside the box so it cannot be pushed around as the text grows. */
-  #shareInput { width: 100%; min-height: 128px; resize: vertical; display: block; font-family: var(--font-body); font-size: 0.97rem; line-height: 1.75; color: var(--charcoal); background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px; padding: 1.05rem 1.15rem 2.5rem; transition: border-color 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle); }
+  /* Centred, like everything else in this block. The counter moves off the
+     right corner to sit centred under the text for the same reason. */
+  #shareInput { width: 100%; min-height: 128px; resize: vertical; display: block; text-align: center; font-family: var(--font-body); font-size: 0.97rem; line-height: 1.75; color: var(--charcoal); background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px; padding: 1.05rem 1.15rem 2.5rem; transition: border-color 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle); }
   #shareInput::placeholder { color: var(--muted); opacity: 1; font-style: italic; }
   #shareInput:focus { outline: none; border-color: var(--purple-soft); box-shadow: 0 0 0 4px rgba(122, 77, 143, 0.09); }
-  .share-count { position: absolute; right: 1rem; bottom: 0.8rem; font-size: 0.76rem; font-variant-numeric: tabular-nums; color: var(--muted); pointer-events: none; transition: color 0.35s var(--ease-gentle); }
+  .share-count { position: absolute; left: 50%; transform: translateX(-50%); bottom: 0.8rem; font-size: 0.76rem; font-variant-numeric: tabular-nums; color: var(--muted); pointer-events: none; transition: color 0.35s var(--ease-gentle); }
   .share-count.is-low { color: var(--purple); }
   .share-count.is-over { color: var(--rose); font-weight: 600; }
-  .share-consent { display: flex; align-items: flex-start; gap: 0.6rem; margin: 1rem 0 1.35rem; text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--charcoal-soft); cursor: pointer; }
-  .share-consent input { margin: 0.25rem 0 0; width: 15px; height: 15px; accent-color: var(--deep-purple); flex-shrink: 0; cursor: pointer; }
+  /* Block level flex, not inline: as an inline element it sat on the same line
+     as the Share button, which pushed both off centre. */
+  .share-consent { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 1rem auto 1.35rem; text-align: center; font-size: 0.85rem; line-height: 1.6; color: var(--charcoal-soft); cursor: pointer; }
+  .share-consent input { margin: 0; width: 15px; height: 15px; accent-color: var(--deep-purple); flex-shrink: 0; cursor: pointer; }
   .share-submit:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
   .share-status { max-width: 520px; margin: 1.1rem auto 0; font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.6; color: var(--deep-purple); }
   .share-status.is-error { color: var(--rose); }
@@ -591,21 +630,32 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4C6.6 16.7 3.4 13.6 3.4 10.1 3.4 7.4 5.5 5.4 8 5.4c1.6 0 3.1.8 4 2.1.9-1.3 2.4-2.1 4-2.1 2.5 0 4.6 2 4.6 4.7 0 3.5-3.2 6.6-8.6 10.3z"/></svg>
             <span>I can relate</span>
           </button>
+          <!-- Only ever holds a message when something went wrong, and says what
+               to do about it rather than reporting a failure. -->
+          <p class="pad-relate-msg" id="padRelateMsg" role="status" hidden></p>
         </div>
       </div>
-
-      <!-- The corner of the page, which is the control. A real button, so it is
-           reachable by keyboard and announced properly. -->
-      <button type="button" class="pad-corner" id="padCorner" aria-label="Turn to the next note">
-        <svg viewBox="0 0 46 46" fill="none" aria-hidden="true">
-          <!-- A curled corner, drawn with a wobble rather than a clean arc. -->
-          <path d="M44 12c-1.6 9.8-5.4 18.4-11.4 24.8C26.8 42.8 18.6 45.4 9 44.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-          <path d="M44 12c-8.2 1.4-14.6 4.6-19.2 9.4C20.2 26.2 17 32.6 15.6 41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.75" />
-          <path d="M15.6 41c-2.2-.4-4.4-.2-6.6.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.55" />
-        </svg>
-      </button>
-
-      <p class="pad-hint" id="padHint"></p>
+      <!-- Back and forward. Sketched rather than drawn with a compass: the
+           shaft has a slight bow and the two barbs are uneven, which is what
+           keeps them in the same hand as the rest of the pad. Real buttons, so
+           both are reachable by keyboard and announced properly. -->
+      <div class="pad-nav">
+        <button type="button" class="pad-arrow" id="padPrev" aria-label="Previous note">
+          <svg viewBox="0 0 30 22" fill="none" aria-hidden="true">
+            <path d="M26.5 11.2c-6.4-.5-13.7-.7-22.6-.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M11 4.4C8.2 6.2 5.8 8.2 3.9 10.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M10.4 17.6C8 15.4 5.8 13.2 3.9 10.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+        </button>
+        <p class="pad-hint" id="padHint"></p>
+        <button type="button" class="pad-arrow" id="padNext" aria-label="Next note">
+          <svg viewBox="0 0 30 22" fill="none" aria-hidden="true">
+            <path d="M3.5 10.8c6.4-.5 13.7-.7 22.6-.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M19 4.4c2.8 1.8 5.2 3.8 7.1 6.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M19.6 17.6c2.4-2.2 4.6-4.4 6.5-6.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
     </div>
     <p class="notes-notice" id="notesNotice" hidden></p>
 
@@ -972,7 +1022,9 @@
       const top      = document.getElementById('padTop');
       const topText  = document.getElementById('padTopText');
       const under    = document.getElementById('padUnder');
-      const corner   = document.getElementById('padCorner');
+      const prevBtn  = document.getElementById('padPrev');
+      const nextBtn  = document.getElementById('padNext');
+      const relateMsg = document.getElementById('padRelateMsg');
       const hint     = document.getElementById('padHint');
       const relate   = document.getElementById('padRelate');
       if (!pad) return;
@@ -991,6 +1043,7 @@
       /* Paints the button for whichever note is on top. Called on every turn,
          so the count and the ticked state always belong to the note showing. */
       function paintRelate() {
+        if (typeof relateMessage === 'function') relateMessage('');
         const entry = at(i);
         const done = relatedIds().includes(entry.id);
         relate.classList.toggle('is-related', done);
@@ -1008,78 +1061,162 @@
       }
 
       paintPages();
-      hint.textContent = entries.length > 1
-        ? 'One note at a time. Turn the corner to read the next.'
-        : '';
+      hint.textContent = entries.length > 1 ? 'One note at a time' : '';
+
+      /* Anything that goes wrong here is said in plain words, with the action to
+         take, rather than being swallowed. A tick that silently failed would
+         leave someone believing they had said something they had not. */
+      function relateMessage(text) {
+        if (!text) { relateMsg.hidden = true; relateMsg.textContent = ''; return; }
+        relateMsg.textContent = text;
+        relateMsg.hidden = false;
+      }
 
       relate.addEventListener('click', () => {
         const entry = at(i);
-        if (sending || relatedIds().includes(entry.id)) return;
+
+        // Pressing again after it has already registered.
+        if (relatedIds().includes(entry.id)) {
+          relateMessage('You have already said this one speaks to you');
+          setTimeout(() => relateMessage(''), 3200);
+          return;
+        }
+        if (sending) return;
         sending = true;
+        relateMessage('');
 
         /* The button changes the moment it is pressed rather than after the
            server answers. This is a small warm gesture, not a transaction, and
-           a button that hesitates makes it feel like one. There is no number to
-           put back if the request fails, so the tick is only un-remembered.
-           Getting it wrong that way round is the kinder failure: the person
-           can simply press again. */
+           a button that hesitates makes it feel like one. If the request does
+           not land the tick is undone, so pressing again works. */
         rememberRelated(entry.id);
         paintRelate();
         relate.classList.add('just-related');
 
         const body = new FormData();
         body.append('id', entry.id);
+
         fetch('relate.php', { method: 'POST', body: body })
-          .then(r => r.json().catch(() => ({ ok: false })))
-          .then(res => { if (!res || !res.ok) forgetRelated(entry.id); })
-          .catch(() => forgetRelated(entry.id))
+          .then(r => r.json().catch(() => ({ ok: false, status: r.status })))
+          .then(res => {
+            if (res && res.ok) return;
+            forgetRelated(entry.id);
+            paintRelate();
+            // A note that the server does not recognise has almost always been
+            // taken down since the page was opened, so a retry will not help.
+            relateMessage(res && res.status === 404
+              ? 'This note is no longer on the site. Refresh the page to see the current ones'
+              : 'That did not save. Please press it once more');
+          })
+          .catch(() => {
+            forgetRelated(entry.id);
+            paintRelate();
+            relateMessage('That did not save, which usually means the connection dropped. Check you are online and press it again');
+          })
           .finally(() => { sending = false; });
       });
 
-      if (entries.length < 2) { corner.hidden = true; return; }
+      // One note has nothing to turn to, so the arrows would be pretending.
+      if (entries.length < 2) { prevBtn.hidden = true; nextBtn.hidden = true; return; }
 
       function schedule() {
         clearTimeout(timer);
         if (!paused) timer = setTimeout(turn, HOLD_MS);
       }
 
-      function turn() {
+      /* Turning, either way.
+
+         Forward, the top sheet lifts away and the one below is revealed, then
+         the text is swapped while the sheet is face down and it is dropped back
+         flat with the transition off.
+
+         Backward is the same move played in reverse: the sheet is placed lifted
+         with the transition off, given the previous note, and then allowed to
+         fall. Both directions therefore use one class, and the transition lives
+         on the page rather than on the class so removing it animates too. */
+      function turn(dir) {
         if (turning) return;
+        dir = dir === -1 ? -1 : 1;
         turning = true;
+        setArrows(false);
 
         if (stillMode) {
-          i += 1;
+          i += dir;
           paintPages();
-          turning = false;
-          schedule();
+          finishTurn();
           return;
         }
 
-        top.classList.add('is-turning');
-
-        setTimeout(() => {
-          i += 1;
-          /* The page has fallen away and the sheet below is what the eye is on.
-             Put that note onto the top sheet, drop it back into place with the
-             transition switched off, then load the next note underneath. Done
-             in this order the swap is invisible: nothing is ever on screen
-             mid-flip showing the wrong words. */
+        if (dir === 1) {
+          top.classList.add('is-turning');
+          setTimeout(() => {
+            i += 1;
+            topText.textContent = tidy(at(i).note);
+            paintRelate();
+            top.classList.remove('is-turning');
+            snapFlat();
+            under.textContent = tidy(at(i + 1).note);
+            finishTurn();
+          }, TURN_MS);
+        } else {
+          // The sheet below has to show the note being covered, not the one
+          // after it, or the wrong words are visible as the page comes down.
+          under.textContent = tidy(at(i).note);
+          i -= 1;
           topText.textContent = tidy(at(i).note);
           paintRelate();
-          top.classList.remove('is-turning');
+
+          /* Placed lifted with the transition off, then released. Done with an
+             inline transform rather than by adding and removing the class,
+             because a class added and removed inside one task can be collapsed
+             into no change at all by the style engine, which leaves the page
+             stuck in mid air. An inline value cannot be optimised away. */
           top.style.transition = 'none';
-          // Reading offsetHeight forces the browser to apply the reset before
-          // the transition is restored, which is what prevents it animating
-          // backwards into place.
-          void top.offsetHeight;
+          top.style.transform = 'rotateX(-162deg)';
+          void top.offsetHeight;          // commit the lifted position first
           top.style.transition = '';
-          under.textContent  = tidy(at(i + 1).note);
-          turning = false;
-          schedule();
-        }, TURN_MS);
+          top.style.transform = '';       // now let it fall
+
+          setTimeout(() => {
+            /* Settle the page explicitly rather than trusting the transition to
+               have arrived. A dropped or interrupted animation would otherwise
+               leave the sheet face down and the note unreadable, and an
+               animation is never a guarantee: browsers suspend them in
+               background tabs and drop them under load. */
+            top.style.transition = 'none';
+            top.style.transform = '';
+            void top.offsetHeight;
+            top.style.transition = '';
+            under.textContent = tidy(at(i + 1).note);
+            finishTurn();
+          }, TURN_MS);
+        }
       }
 
-      corner.addEventListener('click', () => { turn(); schedule(); });
+      /* Drops the sheet back to flat without animating, used after a forward
+         turn so it does not visibly swing back up into place. */
+      function snapFlat() {
+        top.style.transition = 'none';
+        void top.offsetHeight;
+        top.style.transition = '';
+      }
+
+      function finishTurn() {
+        turning = false;
+        setArrows(true);
+        schedule();
+      }
+
+      /* Both arrows are dimmed while a page is in motion. Without this a second
+         press mid turn is simply swallowed, which reads as the button being
+         broken rather than busy. */
+      function setArrows(enabled) {
+        prevBtn.disabled = !enabled;
+        nextBtn.disabled = !enabled;
+      }
+
+      prevBtn.addEventListener('click', () => { turn(-1); schedule(); });
+      nextBtn.addEventListener('click', () => { turn(1); schedule(); });
 
       // Reading pauses the turning. Nothing should vanish mid-sentence.
       pad.addEventListener('mouseenter', () => { paused = true; clearTimeout(timer); });
