@@ -787,7 +787,9 @@
     margin-bottom: 2.5rem;
   }
   @media (min-width: 900px) {
-    .glimpse-inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    /* align-items: center so the two columns sit level with each other now
+       that the photo is no longer tall enough to fill the row on its own. */
+    .glimpse-inner { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
   }
   .glimpse-trust {
     display: flex;
@@ -876,8 +878,14 @@
   /* The real photo is portrait (4:5). The container matches that ratio rather
      than the old 4:3 placeholder, so nothing is cropped, and max-width keeps it
      from towering over the paragraph beside it. */
+  /* Sized against the paragraph beside it, not against the column. At 440px
+     the photo stood 454px tall next to a 244px block of text, nearly twice its
+     height, which read as the picture dominating the words. 320px brings it to
+     about 330px, slightly taller than the text, which is the balance this
+     two-column row wants. It also renders the 460px original at 1.4x rather
+     than 1.05x, so it looks sharper as well as better proportioned. */
   .glimpse-visual {
-    max-width: 440px;
+    max-width: 320px;
     margin: 0 auto;
   }
   /* No edge feathering here, and no crop. The artwork is a cut-out on a
