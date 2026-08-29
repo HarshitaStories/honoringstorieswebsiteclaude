@@ -241,26 +241,71 @@
      carousel on the homepage. No name panel here: these are anonymous, so the
      quote takes the full width rather than leaving an empty column where the
      testimonials show who is speaking. */
-  .note-carousel { max-width: 920px; margin: 3rem auto 0; }
-  .note-carousel-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 20px; padding: 2.75rem; }
-  @media (max-width: 768px) { .note-carousel-card { padding: 1.75rem; } }
-  .note-quote-mark { font-family: var(--font-display); font-size: 2.5rem; line-height: 0.8; color: var(--rose); opacity: 0.55; margin-bottom: 0.75rem; font-style: italic; display: block; }
-  /* min-height stops the card resizing as notes of different lengths come
-     round, which would otherwise make the page jump every five seconds. */
-  .note-slides { position: relative; min-height: 7.5rem; }
-  .note-slide { display: none; }
-  .note-slide.active { display: block; animation: noteIn 0.7s var(--ease-out); }
-  @keyframes noteIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  .note-slide blockquote { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.75; font-style: italic; color: var(--charcoal-soft); margin: 0; max-height: 260px; overflow-y: auto; padding-right: 0.5rem; }
-  .note-slide blockquote::-webkit-scrollbar { width: 4px; }
-  .note-slide blockquote::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-  .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: 2rem; }
-  .carousel-arrow { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--cream-warm); border: 1px solid var(--line); color: var(--deep-purple); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.4s var(--ease-gentle); }
-  .carousel-arrow:hover { background: var(--deep-purple); color: var(--cream-warm); border-color: var(--deep-purple); }
-  .carousel-arrow svg { width: 16px; height: 16px; }
-  .carousel-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 220px; }
-  .carousel-dots button { width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--purple-soft); opacity: 0.5; cursor: pointer; padding: 0; transition: all 0.4s var(--ease-gentle); }
-  .carousel-dots button.active { background: var(--rose); opacity: 1; width: 20px; border-radius: 4px; }
+  /* ---- Shared notes: the scattered wall ----
+     Cards sit in a normal grid, then each column is nudged vertically by a
+     different amount. That reads as scattered while staying orderly and never
+     overlapping, which a randomly positioned layout cannot promise. The nudges
+     are fixed values rather than random, so the wall looks the same on every
+     visit and nothing jumps around between renders. */
+  .notes-wall { display: grid; grid-template-columns: 1fr; gap: 1.1rem; max-width: 980px; margin: 3rem auto 0; }
+  @media (min-width: 620px) { .notes-wall { grid-template-columns: repeat(2, 1fr); gap: 1.15rem 1.4rem; } }
+  @media (min-width: 900px) { .notes-wall { grid-template-columns: repeat(3, 1fr); gap: 1.25rem 1.5rem; } }
+  /* The scatter. Only applied once there is more than one column, since a
+     single column of offset cards just looks like a mistake. */
+  @media (min-width: 620px) {
+    .notes-wall > *:nth-child(2n)   { transform: translateY(26px); }
+  }
+  @media (min-width: 900px) {
+    .notes-wall > *:nth-child(3n+1) { transform: translateY(0); }
+    .notes-wall > *:nth-child(3n+2) { transform: translateY(34px); }
+    .notes-wall > *:nth-child(3n+3) { transform: translateY(14px); }
+  }
+
+  /* Every slot is the same fixed height, so a card fading out and a longer one
+     fading in cannot make the wall reflow underneath someone's eyes. */
+  .note-slot { position: relative; height: 172px; }
+  @media (min-width: 900px) { .note-slot { height: 164px; } }
+
+  .note-card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px;
+    padding: 1.15rem 1.25rem 1.2rem;
+    opacity: 0; transform: scale(0.94);
+    transition: opacity 0.9s var(--ease-gentle), transform 0.9s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle);
+  }
+  /* The twinkle. Fading in carries a brief purple bloom that settles as the
+     card lands, which is what gives it the star-like quality without anything
+     flashing or moving quickly. */
+  .note-card.is-in { opacity: 1; transform: scale(1); animation: noteTwinkle 1.6s var(--ease-gentle); }
+  @keyframes noteTwinkle {
+    0%   { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
+    35%  { box-shadow: 0 0 26px 2px rgba(122, 77, 143, 0.22); }
+    100% { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
+  }
+  .note-card .note-mark { display: block; font-family: var(--font-display); font-style: italic; font-size: 1.9rem; line-height: 0.7; color: var(--rose); opacity: 0.5; margin-bottom: 0.5rem; }
+  /* Clamped rather than scrolled: a scrollbar inside a card this size looks
+     like a fault. The full text is one hover away. */
+  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 0.99rem; line-height: 1.62; color: var(--charcoal-soft); margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+
+  /* Hovering lifts the card clear of its neighbours and shows the whole note.
+     It also pauses the wall, handled in JS, so nothing disappears mid-sentence. */
+  .note-card:hover, .note-card:focus-visible {
+    z-index: 5; height: auto; min-height: 100%;
+    border-color: var(--rose-soft);
+    box-shadow: 0 20px 44px -22px rgba(91, 46, 107, 0.4);
+    outline: none;
+  }
+  .note-card:hover p, .note-card:focus-visible p { -webkit-line-clamp: unset; }
+
+  /* Anyone who has asked their device for less motion gets a still wall.
+     The cards are all there, nothing fades, nothing cycles. */
+  @media (prefers-reduced-motion: reduce) {
+    .note-card { transition: none; opacity: 1; transform: none; }
+    .note-card.is-in { animation: none; }
+    .notes-wall > * { transform: none !important; }
+  }
+
   .notes-notice { max-width: 720px; margin: 1.5rem auto 0; text-align: center; font-size: 0.86rem; color: var(--muted); font-style: italic; }
   .notes-cta { text-align: center; margin-top: 2.5rem; }
   /* ---- Inline sharing box ---- */
@@ -283,7 +328,6 @@
   .share-status.is-error { color: var(--rose); }
   /* The POST target. It must exist in the layout to receive the response, so it
      is collapsed rather than display:none, which some browsers refuse to post to. */
-  #shareSink { position: absolute; width: 0; height: 0; border: 0; opacity: 0; pointer-events: none; }
   .safety-note { max-width: 640px; margin: 1.25rem auto 0; text-align: center; font-size: 0.84rem; line-height: 1.7; color: var(--muted); }
 
   /* ========== WHATSAPP FLOAT ========== */
@@ -397,39 +441,17 @@
         </div>
       </div>
     </div>
-    <!-- Notes render here. Cards are built in JS so approved entries can be
-         pulled from the responses sheet without editing this file. -->
-    <!-- Slides and dots are built in JS from the loaded notes, so the number of
-         them follows the data rather than being fixed here. -->
-    <div class="note-carousel reveal delay-3" id="noteCarousel" hidden>
-      <div class="note-carousel-card">
-        <span class="note-quote-mark" aria-hidden="true">&ldquo;</span>
-        <div class="note-slides" id="noteSlides"></div>
-      </div>
-      <!-- Hidden when there is only one note, since there is nothing to move
-           between and a paused slideshow control would be meaningless. -->
-      <div class="carousel-nav" id="noteNav" hidden>
-        <button type="button" class="carousel-arrow" id="notePrev" aria-label="Previous note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="carousel-dots" id="noteDots"></div>
-        <button type="button" class="carousel-arrow" id="noteNext" aria-label="Next note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-        <button type="button" class="carousel-arrow" id="notePlayPause" aria-label="Pause slideshow">
-          <svg id="notePauseIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-          <svg id="notePlayIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M7 5l12 7-12 7V5z"/></svg>
-        </button>
-      </div>
-    </div>
+    <!-- Slots are built in JS so the number of them follows the screen size and
+         the amount of data, rather than being fixed here. -->
+    <div class="notes-wall reveal delay-3" id="notesWall" hidden></div>
     <p class="notes-notice" id="notesNotice" hidden></p>
 
     <div class="notes-cta reveal delay-3" id="notesCta">
-      <!-- A real form element, so it still submits with JS disabled and so the
-           markup transplants into WordPress as-is. The action is set in JS from
-           one constant, which is the only line that changes if the destination
-           ever moves off Google Forms. -->
-      <form class="share-box" id="shareForm" method="POST" target="shareSink" novalidate>
+      <!-- A real form element with a real action, so it still submits with
+           scripting unavailable: the visitor lands on submit.php own JSON
+           reply rather than nothing happening. With scripting, JS intercepts
+           it and shows the thank-you in place. -->
+      <form class="share-box" id="shareForm" method="POST" action="submit.php" novalidate>
         <label class="share-prompt" for="shareInput">When things are heavy, what is the one thing that helps you?</label>
         <div class="share-field">
           <textarea id="shareInput" name="note" rows="4" maxlength="1200"
@@ -439,19 +461,18 @@
           <span class="share-count" id="shareCount" aria-live="polite">100</span>
         </div>
         <label class="share-consent">
-          <input type="checkbox" id="shareConsent" />
+          <input type="checkbox" id="shareConsent" name="consent" value="1" />
           <span>I am happy for this to be published anonymously on this website.</span>
         </label>
         <button type="submit" class="btn btn-primary share-submit" id="shareSubmit" disabled>
           Share this
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
+        <!-- Hidden from people, filled in by bots. submit.php discards anything
+             that arrives with this set. -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
         <p class="share-status" id="shareStatus" role="status" hidden></p>
       </form>
-      <!-- The POST target. Without this the browser would navigate away to
-           Google's confirmation page, which would throw the visitor off the
-           site mid-thought. -->
-      <iframe name="shareSink" id="shareSink" title="Submission target" aria-hidden="true" tabindex="-1"></iframe>
       <p class="safety-note">Sharing is anonymous and entirely optional, and everything is read before it goes up. Please note this space is not monitored, so it is not a way to reach me. If you need to talk to someone now, the helplines at the bottom of this page are there for you.</p>
     </div>
   </div>
@@ -642,74 +663,28 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
   /* ===================================================================
-     SHARED WAYS OF COPING: published notes
+     SHARED WAYS OF COPING
      ===================================================================
-     Approved notes are read from notes.json, in this same folder, not from
-     Google. Its shape is { "notes": [ { "note": "..." }, ... ] }, which is
-     the object Sveltia CMS's "files" collection writes for a single "list"
-     field: a CMS file collection always saves an object keyed by field
-     name, never a bare top-level array, so the wrapping "notes" key must
-     stay even though it looks redundant next to the filename. It ships
-     with an empty list; the page's own empty-state message covers that.
+     Submissions go to submit.php and are stored in data/notes.json, inside
+     this website's own folder on the server. Approved notes come back from
+     notes.php, which returns approved entries only, so an unapproved
+     submission has no route to this page even if someone asked for it
+     directly. Nothing is kept in the browser and no outside service is
+     involved at any point.
 
-     How a note gets in there:
-       1. A visitor still submits through SHARED_FORM_URL below, exactly as
-          before. It lands in the Google Form's private responses sheet.
-       2. Harshita reads it there and decides whether to publish it.
-       3. To publish, she adds an entry to notes.json and commits it, either
-          by editing the file directly on GitHub, or through the Sveltia CMS
-          admin screen at /admin, which writes the same file for her without
-          her having to touch any punctuation.
-       4. The site picks it up automatically once that commit lands.
-
-     SHARED_FORM_URL
-       The public "send" link of the Google Form. Make sure the form's
-       "Collect email addresses" setting is OFF, otherwise submissions are
-       not actually anonymous.
+     Moderation happens at /admin.php, behind a password checked on the
+     server.
      =================================================================== */
-  const SHARED_NOTES_JSON = 'notes.json';
-  // The share link with the ?usp=sharing&ouid=... query stripped. Those params
-  // carry Harshita's own Google account id, so they must not be published.
-  const SHARED_FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSf9-1m2jrECnUgiMaEp-8UCyQ8KTF9XAyNFbaUP_cwQFbDiDw/viewform';
-
-  /* Placeholder notes so the carousel can be judged before real ones exist.
-     They are written examples, not submissions. Emptying this array returns
-     the section to its own "nothing shared yet" message. */
-  const DEMO_NOTES = [
-    'Keeping a glass of water and a notebook by my bed. On the nights my thoughts race, writing one sentence down is often enough to stop it spiralling.',
-    'Going for a walk without my phone, even just ten minutes. Not to clear my head, only to be somewhere else for a while.',
-    'Telling one person the honest version of how my week went, instead of saying I am fine.',
-    'Making the bed. It is small and it takes two minutes, but on the days when nothing else gets done, one thing did.',
-    'Putting on the same album I have listened to for years. I know every note, so there is nothing to brace for.',
-    'Sitting outside for a few minutes before anyone else in the house is awake.'
-  ];
+  const NOTES_ENDPOINT  = 'notes.php';
+  const SUBMIT_ENDPOINT = 'submit.php';
 
   (function () {
-    const carousel = document.getElementById('noteCarousel');
-    const slidesWrap = document.getElementById('noteSlides');
+    const wall   = document.getElementById('notesWall');
     const notice = document.getElementById('notesNotice');
-    if (!carousel || !slidesWrap) return;
+    if (!wall) return;
 
-    /* =================================================================
-       The sharing box.
-
-       Submissions go straight to the Google Form that already backs this
-       section, so there is one place to moderate rather than two. Posting a
-       plain form at a hidden iframe, rather than fetch(), is deliberate: it
-       needs no CORS permission from Google, and it still works if scripting
-       is unavailable, in which case the visitor simply lands on Google's own
-       confirmation page instead of seeing the thank-you in place.
-
-       WORD_LIMIT is enforced here for the counter and the submit button. It
-       is a courtesy, not a security control. The real limit is whatever
-       Harshita approves by hand.
-       ================================================================= */
-    const SHARE_ACTION = SHARED_FORM_URL.replace(/\/viewform.*$/, '/formResponse');
-    const FIELD_NOTE    = 'entry.725693056';
-    const FIELD_CONSENT = 'entry.1145237366';
-    const CONSENT_VALUE = 'Yes';
+    /* ---------------- the sharing box ---------------- */
     const WORD_LIMIT = 100;
 
     function countWords(s) {
@@ -717,27 +692,14 @@
       return t ? t.split(/\s+/).length : 0;
     }
 
-    function shareBox() {
-      const form = document.getElementById('shareForm');
-      const input = document.getElementById('shareInput');
-      const count = document.getElementById('shareCount');
+    (function shareBox() {
+      const form    = document.getElementById('shareForm');
+      const input   = document.getElementById('shareInput');
+      const count   = document.getElementById('shareCount');
       const consent = document.getElementById('shareConsent');
-      const submit = document.getElementById('shareSubmit');
-      const status = document.getElementById('shareStatus');
-      const sink = document.getElementById('shareSink');
+      const submit  = document.getElementById('shareSubmit');
+      const status  = document.getElementById('shareStatus');
       if (!form || !input) return;
-
-      form.action = SHARE_ACTION;
-      input.name = FIELD_NOTE;
-
-      // Google needs the consent answer as a normal field, but the visitor
-      // ticks a checkbox. An unchecked box submits nothing at all, so the
-      // value is carried on a hidden input that only gets a value once the
-      // box is ticked, and submission is blocked until then anyway.
-      const consentField = document.createElement('input');
-      consentField.type = 'hidden';
-      consentField.name = FIELD_CONSENT;
-      form.appendChild(consentField);
 
       function update() {
         const words = countWords(input.value);
@@ -746,136 +708,172 @@
         count.classList.toggle('is-low', left <= 20 && left >= 0);
         count.classList.toggle('is-over', left < 0);
         submit.disabled = words === 0 || left < 0 || !consent.checked;
-        consentField.value = consent.checked ? CONSENT_VALUE : '';
       }
-
       input.addEventListener('input', update);
       consent.addEventListener('change', update);
       update();
 
       form.addEventListener('submit', function (e) {
-        if (submit.disabled) { e.preventDefault(); return; }
-        // The iframe load event is the only signal available: the response is
-        // cross-origin, so its contents cannot be read. A load means Google
-        // accepted the POST.
-        sink.addEventListener('load', function () {
-          form.querySelector('.share-field').hidden = true;
-          form.querySelector('.share-consent').hidden = true;
-          form.querySelector('.share-prompt').hidden = true;
-          submit.hidden = true;
-          status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
-          status.classList.remove('is-error');
-          status.hidden = false;
-        }, { once: true });
+        e.preventDefault();
+        if (submit.disabled) return;
+
+        const body = new FormData();
+        body.append('note', input.value.trim());
+        body.append('consent', '1');
+        // The honeypot. People leave it empty, bots fill in every field.
+        body.append('website', '');
+
         submit.disabled = true;
         submit.textContent = 'Sending';
+
+        fetch(SUBMIT_ENDPOINT, { method: 'POST', body: body })
+          .then(r => r.json().catch(() => ({ ok: false })))
+          .then(res => {
+            if (res && res.ok) {
+              form.querySelector('.share-field').hidden = true;
+              form.querySelector('.share-consent').hidden = true;
+              form.querySelector('.share-prompt').hidden = true;
+              submit.hidden = true;
+              status.textContent = 'Thank you for sharing that. It will be read before it appears here, so it may take a little while to show up.';
+              status.classList.remove('is-error');
+            } else {
+              status.textContent = (res && res.error) ? res.error : 'That could not be sent just now. Please try again in a moment.';
+              status.classList.add('is-error');
+              submit.disabled = false;
+              submit.textContent = 'Share this';
+            }
+            status.hidden = false;
+          })
+          .catch(() => {
+            status.textContent = 'That could not be sent just now. Please try again in a moment.';
+            status.classList.add('is-error');
+            status.hidden = false;
+            submit.disabled = false;
+            submit.textContent = 'Share this';
+          });
       });
+    })();
+
+    /* ---------------- the wall ----------------
+       Notes arrive newest first. The wall shows as many as the screen has
+       room for, then swaps a couple at a time so older ones get their turn.
+       Cycling only happens when there are more notes than slots; with six
+       notes and six slots there is nothing to rotate to, so it sits still. */
+    const SWAP_EVERY = 5200;   // long enough to read a card before it changes
+    const FADE       = 900;    // matches the CSS transition
+    const stillMode  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function slotCount() {
+      const w = window.innerWidth;
+      if (w >= 900) return 9;
+      if (w >= 620) return 6;
+      return 4;
     }
 
-    shareBox();
-
-    /* Builds the carousel. Behaviour is deliberately identical to the
-       testimonials carousel on the homepage: five second auto-advance,
-       arrows either side, a dot per note, and a play/pause control, with a
-       manual move restarting the timer rather than fighting it. */
-    function render(notes) {
-      slidesWrap.textContent = '';
-      const dotsWrap = document.getElementById('noteDots');
-      dotsWrap.textContent = '';
-
-      notes.forEach((text, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'note-slide' + (i === 0 ? ' active' : '');
-        const quote = document.createElement('blockquote');
-        // textContent, never innerHTML: this is text a moderator has copied
-        // in from a public form submission, so treating it as markup would
-        // be an injection hole even with a human in the loop.
-        quote.textContent = text;
-        slide.appendChild(quote);
-        slidesWrap.appendChild(slide);
-
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.setAttribute('aria-label', 'Note ' + (i + 1));
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goTo(i, true));
-        dotsWrap.appendChild(dot);
-      });
-
-      carousel.hidden = false;
+    function buildWall(notes) {
+      const count = Math.min(slotCount(), notes.length);
+      wall.textContent = '';
+      wall.hidden = false;
       notice.hidden = true;
 
-      const slides = slidesWrap.querySelectorAll('.note-slide');
-      const dots = dotsWrap.querySelectorAll('button');
-      const nav = document.getElementById('noteNav');
-
-      // One note has nothing to move between, so the controls would be
-      // decorative. The card still shows.
-      if (slides.length < 2) { nav.hidden = true; return; }
-      nav.hidden = false;
-
-      let idx = 0;
-      let timer;
-      let paused = false;
-
-      function goTo(i, manual) {
-        slides[idx].classList.remove('active');
-        dots[idx].classList.remove('active');
-        idx = (i + slides.length) % slides.length;
-        slides[idx].classList.add('active');
-        dots[idx].classList.add('active');
-        if (manual) restart();
-      }
-      function next() { goTo(idx + 1); }
-      function restart() {
-        clearInterval(timer);
-        if (!paused) timer = setInterval(next, 5000);
+      const slots = [];
+      for (let i = 0; i < count; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'note-slot';
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        card.tabIndex = 0;
+        const mark = document.createElement('span');
+        mark.className = 'note-mark';
+        mark.textContent = '“';
+        const p = document.createElement('p');
+        // textContent, never innerHTML: this is text a stranger typed, and a
+        // moderator reading it first does not make markup safe to run.
+        p.textContent = notes[i];
+        card.appendChild(mark);
+        card.appendChild(p);
+        slot.appendChild(card);
+        wall.appendChild(slot);
+        slots.push({ card: card, p: p, showing: i });
       }
 
-      document.getElementById('noteNext').addEventListener('click', () => goTo(idx + 1, true));
-      document.getElementById('notePrev').addEventListener('click', () => goTo(idx - 1, true));
-
-      const playPause = document.getElementById('notePlayPause');
-      const pauseIcon = document.getElementById('notePauseIcon');
-      const playIcon  = document.getElementById('notePlayIcon');
-      playPause.addEventListener('click', () => {
-        paused = !paused;
-        pauseIcon.style.display = paused ? 'none' : 'block';
-        playIcon.style.display  = paused ? 'block' : 'none';
-        playPause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
-        if (paused) clearInterval(timer);
-        else restart();
+      // Fade the first set in one after another rather than all at once, so
+      // the wall assembles itself instead of appearing in a block.
+      slots.forEach((s, i) => {
+        setTimeout(() => s.card.classList.add('is-in'), stillMode ? 0 : i * 110);
       });
 
-      restart();
+      if (stillMode || notes.length <= count) return;
+
+      /* Which notes are not on the wall right now. Cycling pulls from here so
+         the same note never appears in two places at once. */
+      let queue = notes.slice(count);
+      let paused = false;
+
+      wall.addEventListener('mouseenter', () => { paused = true; }, true);
+      wall.addEventListener('mouseleave', () => { paused = false; }, true);
+      wall.addEventListener('focusin',  () => { paused = true; });
+      wall.addEventListener('focusout', () => { paused = false; });
+      // Nothing should be cycling while the section is off screen.
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+
+      function swap() {
+        // Checking activeElement as well as the focusin flag: a browser does not
+        // always dispatch focus events while its window is in the background, and
+        // a keyboard reader must never lose the card they are on.
+        if (paused || !queue.length || wall.contains(document.activeElement)) return;
+
+        // Two at a time, occasionally three, and never two neighbours at once,
+        // which would leave a visible hole in the wall.
+        const howMany = Math.random() < 0.3 ? 3 : 2;
+        const chosen = [];
+        const order = slots.map((_, i) => i).sort(() => Math.random() - 0.5);
+        for (const i of order) {
+          if (chosen.length >= howMany) break;
+          if (chosen.some(c => Math.abs(c - i) === 1)) continue;
+          if (slots[i].card.matches(':hover')) continue;
+          chosen.push(i);
+        }
+
+        chosen.forEach((i, n) => {
+          // A small stagger so the group does not blink in unison.
+          setTimeout(() => {
+            const slot = slots[i];
+            if (slot.card.matches(':hover')) return;
+            slot.card.classList.remove('is-in');
+            setTimeout(() => {
+              const incoming = queue.shift();
+              if (incoming === undefined) return;
+              queue.push(slot.p.textContent);
+              slot.p.textContent = incoming;
+              slot.card.classList.add('is-in');
+            }, FADE);
+          }, n * 260);
+        });
+      }
+
+      setInterval(swap, SWAP_EVERY);
     }
 
-    fetch(SHARED_NOTES_JSON, { cache: 'no-store' })
+    function showEmpty(message) {
+      wall.hidden = true;
+      wall.textContent = '';
+      notice.textContent = message;
+      notice.hidden = false;
+    }
+
+    fetch(NOTES_ENDPOINT, { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(data => {
-        // { "notes": [ { "note": "..." }, ... ] }. Anything malformed is
-        // skipped rather than allowed to throw and blank the whole section.
-        const entries = (data && Array.isArray(data.notes)) ? data.notes : [];
+        const entries = Array.isArray(data) ? data : (data && Array.isArray(data.notes) ? data.notes : []);
         const notes = entries
           .map(e => (e && typeof e.note === 'string') ? e.note.trim() : '')
           .filter(Boolean);
-        if (notes.length) render(notes);
-        else if (DEMO_NOTES.length) render(DEMO_NOTES);
-        else {
-          // Nothing approved yet and no demo notes left. Say so plainly
-          // rather than showing an empty space.
-          carousel.hidden = true;
-          notice.textContent = 'No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.';
-          notice.hidden = false;
-        }
+        if (notes.length) buildWall(notes);
+        else showEmpty('No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.');
       })
       .catch(() => {
-        // notes.json unreachable, which is what happens when the page is
-        // opened straight from a folder rather than served.
-        if (DEMO_NOTES.length) { render(DEMO_NOTES); return; }
-        carousel.hidden = true;
-        notice.textContent = 'The shared notes could not be loaded just now. Please try again a little later.';
-        notice.hidden = false;
+        showEmpty('The shared notes could not be loaded just now. Please try again a little later.');
       });
   })();
 
