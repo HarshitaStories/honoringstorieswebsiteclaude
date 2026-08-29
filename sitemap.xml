@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The nine pages of the site, so a search engine does not have to discover
+     them by following links. The three legal pages are listed at a lower
+     priority: they should be findable, but they are not what anyone is
+     looking for. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://honoringstories.com/</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://honoringstories.com/psychotherapy.html</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://honoringstories.com/supervision.html</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://honoringstories.com/corporates.html</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://honoringstories.com/about.html</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://honoringstories.com/community.html</loc><lastmod>2026-08-30</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://honoringstories.com/disclaimer.html</loc><lastmod>2026-08-30</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://honoringstories.com/privacy-policy.html</loc><lastmod>2026-08-30</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://honoringstories.com/terms-and-conditions.html</loc><lastmod>2026-08-30</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

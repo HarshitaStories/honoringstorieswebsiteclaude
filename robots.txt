@@ -1,0 +1,17 @@
+# Honoring Stories
+
+User-agent: *
+Allow: /
+
+# The moderation screen and the note store. Neither is linked from the site,
+# and both are blocked by .htaccess as well. Listed here so a search engine
+# does not keep asking for them.
+Disallow: /admin.php
+Disallow: /admin/
+Disallow: /data/
+
+# Scratch pages used to prototype the coping notes. Not part of the site.
+Disallow: /userresponse.html
+Disallow: /usersubmission.html
+
+Sitemap: https://honoringstories.com/sitemap.xml
