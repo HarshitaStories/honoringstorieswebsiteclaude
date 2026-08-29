@@ -249,7 +249,7 @@
      visit and nothing jumps around between renders. */
   .notes-wall { display: grid; grid-template-columns: 1fr; gap: 1.1rem; max-width: 980px; margin: 3rem auto 0; }
   @media (min-width: 620px) { .notes-wall { grid-template-columns: repeat(2, 1fr); gap: 1.15rem 1.4rem; } }
-  @media (min-width: 900px) { .notes-wall { grid-template-columns: repeat(3, 1fr); gap: 1.25rem 1.5rem; } }
+  @media (min-width: 900px) { .notes-wall { grid-template-columns: repeat(3, 1fr); gap: 1rem 1.3rem; } }
   /* The scatter. Only applied once there is more than one column, since a
      single column of offset cards just looks like a mistake. */
   @media (min-width: 620px) {
@@ -262,15 +262,18 @@
   }
 
   /* Every slot is the same fixed height, so a card fading out and a longer one
-     fading in cannot make the wall reflow underneath someone's eyes. */
-  .note-slot { position: relative; height: 172px; }
-  @media (min-width: 900px) { .note-slot { height: 164px; } }
+     fading in cannot make the wall reflow underneath someone's eyes. Kept as
+     tight as three lines of text allows, so the cards read as strips rather
+     than as boxes with a void under the words. */
+  .note-slot { position: relative; height: 118px; }
+  @media (min-width: 900px) { .note-slot { height: 112px; } }
 
   .note-card {
     position: absolute; inset: 0;
     display: flex; flex-direction: column;
     background: var(--cream-warm); border: 1px solid var(--line); border-radius: 16px;
-    padding: 1.15rem 1.25rem 1.2rem;
+    padding: 0.9rem 1.1rem;
+    justify-content: center;
     opacity: 0; transform: scale(0.94);
     transition: opacity 0.9s var(--ease-gentle), transform 0.9s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle);
   }
@@ -283,10 +286,10 @@
     35%  { box-shadow: 0 0 26px 2px rgba(122, 77, 143, 0.22); }
     100% { box-shadow: 0 0 0 0 rgba(122, 77, 143, 0); }
   }
-  .note-card .note-mark { display: block; font-family: var(--font-display); font-style: italic; font-size: 1.9rem; line-height: 0.7; color: var(--rose); opacity: 0.5; margin-bottom: 0.5rem; }
+  .note-card .note-mark { display: block; font-family: var(--font-display); font-style: italic; font-size: 1.35rem; line-height: 0.6; color: var(--rose); opacity: 0.5; margin-bottom: 0.4rem; }
   /* Clamped rather than scrolled: a scrollbar inside a card this size looks
      like a fault. The full text is one hover away. */
-  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 0.99rem; line-height: 1.62; color: var(--charcoal-soft); margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+  .note-card p { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; line-height: 1.52; color: var(--charcoal-soft); margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 
   /* Hovering lifts the card clear of its neighbours and shows the whole note.
      It also pauses the wall, handled in JS, so nothing disappears mid-sentence. */
