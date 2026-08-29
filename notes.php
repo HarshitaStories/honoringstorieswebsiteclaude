@@ -14,15 +14,24 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, must-revalidate');
 
 $notes = array_map(static function ($e) {
-    /* Deliberately narrow. The id is needed so a visitor's browser can remember
-       which notes they have already ticked, and it is a random string that says
-       nothing about who wrote the note or when. The submission time is not sent
-       at all: on an anonymous wall, knowing exactly when something was written
-       is a small identifying detail and serves no purpose here. */
+    /* Deliberately narrow.
+
+       The id is sent because a visitor's browser needs it to remember which
+       notes they have already ticked. It is a random string and says nothing
+       about who wrote the note or when.
+
+       The relate count is NOT sent. It decides the order these arrive in, and
+       that ordering is done here, on the server. Sending the number as well
+       would put a running tally of other people's agreement beside something
+       somebody wrote about a hard day, which turns a quiet gesture into a
+       score. It also keeps the tallies from being read straight off the page.
+
+       The submission time is withheld for the reason it always was: on an
+       anonymous wall, knowing exactly when something was written is a small
+       identifying detail that serves no purpose. */
     return [
-        'id'      => $e['id'] ?? '',
-        'note'    => $e['note'],
-        'relates' => (int) ($e['relates'] ?? 0),
+        'id'   => $e['id'] ?? '',
+        'note' => $e['note'],
     ];
 }, hs_ranked_notes());
 
