@@ -1,4 +1,4 @@
-# Putting the site live on Hostinger
+﻿# Putting the site live on Hostinger
 
 Follow this top to bottom. It assumes you have a Hostinger account with a
 hosting plan, and nothing else.
@@ -28,7 +28,7 @@ there. Step 2 below is the check.
 ## Step 1: Upload the files
 
 1. Sign in to Hostinger and open **hPanel**.
-2. Go to **Files → File Manager**.
+2. Go to **Files â†’ File Manager**.
 3. Open the folder called **`public_html`**. This is the folder the internet
    sees. If there is a default `index.html` or a Hostinger welcome page inside,
    delete it.
@@ -52,7 +52,7 @@ there. Step 2 below is the check.
 
 ## Step 2: Check PHP is on, and recent
 
-1. In hPanel, go to **Advanced → PHP Configuration**.
+1. In hPanel, go to **Advanced â†’ PHP Configuration**.
 2. Make sure the version is **8.0 or newer**. 8.1, 8.2 and 8.3 are all fine.
 3. If it is set to 7.4 or older, change it and save.
 
@@ -84,6 +84,8 @@ Type the address into your browser and see what comes back.
 | `yoursite.com/data/notes.json` | **Forbidden**, or a 404 | **Stop.** Unapproved submissions are public. See below. |
 | `yoursite.com/admin.php` in a private window | The password screen, nothing more | Stop. |
 | `yoursite.com/WEBSITE_INSTRUCTIONS.md` | 404 or Forbidden | Not urgent, but the `.htaccess` did not upload |
+| `yoursite.com/corporates.html` | Sends you to `/workplace-wellbeing.html` | The redirect did not upload |
+| `yoursite.com/nonsense-page` | A cream page reading "This page is not here" | You are seeing the host's page, so .htaccess is not being read |
 
 **If the first one shows you a file instead of an error**, the `.htaccess` inside
 `data` did not upload, or Hostinger is not reading it. Upload it again with

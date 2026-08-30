@@ -263,3 +263,67 @@ a bug that only appeared on one machine.
 
 **Writes go to a temporary file and are renamed into place.** A rename is
 atomic, so a visitor reading the file mid-write can never catch it half written.
+
+---
+
+## 10. Search, social and error handling
+
+Added after the site was otherwise finished. None of it changes a page's
+appearance; the only thing a visitor sees is the browser tab.
+
+### Metadata, in every page's `<head>`
+
+| Tag | What it does |
+| --- | --- |
+| `<title>` | The browser tab, and the blue headline in a search result |
+| `description` | The grey sentence under that headline |
+| `canonical` | Names the real address, so the same page reached with a trailing slash is not counted twice |
+| `og:` and `twitter:` | What shows when the link is pasted into WhatsApp or LinkedIn |
+
+`assets/share-card.png` is the picture those use, built from the logo on the
+page cream. Titles run 29 to 63 characters and descriptions stay under 160,
+which is roughly what Google shows before cutting.
+
+The homepage alone carries a block of structured data. Everything in it is
+already written in plain words elsewhere on the site, so it restates rather
+than discloses. Locality only, no street address.
+
+`robots.txt` and `sitemap.xml` sit at the root. Both exclude the moderation
+screen, the note store and the scratch pages.
+
+### The error pages
+
+Four files, `404.html`, `403.html`, `500.html` and `error.html`, covering
+fifteen status codes mapped in `.htaccess` by meaning:
+
+| Meaning | Codes |
+| --- | --- |
+| Not here | 404, 410 |
+| Not yours to see | 401, 403 |
+| Our fault | 500, 502, 503, 504, 408 |
+| Neither side clearly at fault | 400, 405, 406, 413, 414, 429 |
+
+Two things about them are deliberate. **Every path inside them is absolute**,
+because an error page is served at whatever address the visitor typed, so a
+relative path would resolve against a folder that may not exist. And **each
+stands alone**, with its styling inline and no script: whatever is broken must
+not be able to break the page explaining it.
+
+What they cannot cover: if the site is down, the account suspended, or the
+domain not resolving, the visitor never reaches the server and the host's own
+page is what they see.
+
+### The icons
+
+`favicon.ico` at the root, plus 16px and 32px PNGs and an Apple touch icon in
+`assets/`. The root `.ico` matters because browsers request that address
+whether or not a page declares an icon, and bookmark bars look only there.
+
+The icon is the feather alone. The full logo is 909x404 and illegible at 16
+pixels, and the crop stops at x=232 because the wordmark starts at x=240.
+
+### The renamed page
+
+The organisations page was `/corporates.html` and is now
+`/workplace-wellbeing.html`. A `Redirect 301` in `.htaccess` keeps the old
+address working for anyone holding it. **That line must never be removed.**

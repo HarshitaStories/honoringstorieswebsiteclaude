@@ -1045,6 +1045,25 @@ by `.gitignore` because they carry personal data. Keep it that way.
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
 
+
+### 2026-08-30
+
+| Change | Why |
+| --- | --- |
+| Organisations page renamed `/corporates.html` to `/workplace-wellbeing.html`, with a `Redirect 301` | The address was the one place a visitor still met the word "corporates", which is not the language the page uses. The redirect must never be removed. |
+| Search and social metadata on all nine pages | Titles, descriptions, canonical, Open Graph, Twitter. Verified that on every page the only altered line is inside `<head>`. |
+| Structured data, homepage only | Restates what the site already says in plain words. Locality only, deliberately no street address. |
+| `robots.txt`, `sitemap.xml`, `share-card.png` | The card is built from the logo on the page cream, so no new artwork. |
+| Four error pages, fifteen status codes | Grouped by meaning, not number. `error.html` covers the codes where blaming either side would be wrong. Cannot cover the site being down entirely. |
+| Favicon rebuilt as the feather alone | The full logo is 909x404 and illegible at 16px. The crop stops at x=232 because the wordmark begins at x=240, found by scanning for purple ink rather than by eye. |
+| `favicon.ico` at the web root, and `?v=` on the PNG links | Browsers request the root address regardless of what a page declares, and keep icons in a cache a hard reload does not clear. |
+| Three notes per browser | Counted in the visitor's own storage. A courtesy, not a control: there is no login to tie it to. |
+| Error messages on both forms | The Share button is no longer disabled. A disabled button refuses to act and will not say why. |
+| Caption above the notepad | Hidden along with the pad, so it never introduces an empty space. |
+| Homepage logo linked to `#` | Fixed. Every other page linked home properly. |
+| Subject lines on the three enquiry buttons | So an arriving email says what it is about. |
+| "cadence" replaced with "timings" | Industry wording the rest of the site does not use. |
+| Raw uploads named in `.gitignore` | A wildcard swept 20 MB of originals into the repo three times. |
 ### 2026-08-27
 
 | Commit | Change |

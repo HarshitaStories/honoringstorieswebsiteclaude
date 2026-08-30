@@ -82,3 +82,35 @@ serves plain files only, so the notes will not work under it.
 - `.htaccess` at the root: server rules for Hostinger, including which files
   are not reachable from the web.
 - `assets/`: images. All prepared, not raw. See `WEBSITE_INSTRUCTIONS.md`.
+
+## Things that will look wrong and are not
+
+- **`.htaccess` holds a permanent redirect from `/corporates.html` to
+  `/workplace-wellbeing.html`.** The page was renamed. Never delete that line:
+  there is no expiry on somebody having bookmarked the old address.
+- **Four error pages** (`404`, `403`, `500`, `error.html`) cover fifteen status
+  codes between them, mapped in `.htaccess` by meaning rather than by number.
+  `error.html` exists for the codes where blaming either side would be wrong.
+  They are built from one another, so change one and change the rest.
+- **Icon files are duplicated on purpose.** `favicon.ico` sits at the web root
+  because browsers ask for that address whether or not a page declares an icon,
+  and bookmark bars look only there. The PNG links carry `?v=` because a
+  browser keeps favicons in a cache that a hard reload does not clear.
+- **The favicon is the feather only, not the whole logo.** The logo is 909x404
+  and unreadable at 16 pixels. The crop stops at x=232 because the capital H of
+  the wordmark begins at x=240.
+- **Page titles are metadata and visible.** A `<title>` is both the browser tab
+  and the blue headline in a search result. Changing one changes both, so treat
+  it as a content change and ask first.
+
+## When adding or renaming a page
+
+1. The nav dropdown and the mobile drawer, on **all nine** pages.
+2. The footer link list, on all nine.
+3. The three error pages, which link to the main five.
+4. `sitemap.xml`.
+5. Its own `canonical` and `og:url`, which must name its real address.
+6. If renaming, a `Redirect 301` in `.htaccess` from the old address.
+
+Verify afterwards by loading every page and following every internal link, not
+by trusting the find and replace.

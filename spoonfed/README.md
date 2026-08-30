@@ -2,7 +2,9 @@
 
 **Everything needed to rebuild and run this website, explained from zero.**
 
-Updated 2026-08-30. Supersedes the 2026-08-27 package: the coping notes have
+Updated 2026-08-30, revised later the same day with the search metadata, the
+error pages, the favicon and the renamed organisations page. Supersedes the
+2026-08-27 package: the coping notes have
 moved off Google Forms onto the site's own server, so the moving parts are
 different now.
 
@@ -33,6 +35,8 @@ spoonfed_copy/
 │
 ├── website/             THE SITE. Upload the contents of this folder.
 │   ├── index.html … terms-and-conditions.html      the nine pages
+│   ├── 404 / 403 / 500 / error.html                error pages, in your theme
+│   ├── favicon.ico, robots.txt, sitemap.xml        icon and search files
 │   ├── lib.php, notes.php, submit.php, relate.php  the coping notes
 │   ├── admin.php                                   where you moderate them
 │   ├── .htaccess                                   server rules. Easy to miss.
@@ -144,6 +148,13 @@ letters. Do not change these to anything that renders HTML, even for formatting.
 either recoloured to the exact page cream or removed. Drop in a raw file and you
 will see a faint rectangle, because its cream will be very slightly the wrong
 shade.
+
+**5a. A page title is both the browser tab and the blue headline Google shows.**
+Changing one changes both, so it is a content change, not a technical detail.
+
+**5b. Never remove the redirect in `.htaccess`** from `/corporates.html`. That
+page was renamed, and there is no expiry on somebody having bookmarked the old
+address.
 
 **5. No prices on the homepage.** They belong only on the Psychotherapy and
 Supervision pages. The organisations page has none at all, by instruction.
