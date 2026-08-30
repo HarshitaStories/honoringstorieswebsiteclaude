@@ -1,4 +1,4 @@
-# Honoring Stories · Website Instructions
+﻿# Honoring Stories Â· Website Instructions
 
 This file is the living source of truth for building this site. It is updated every time new
 instructions, content, or decisions come in during a session, including reversals of earlier
@@ -114,7 +114,7 @@ professionally credible for all of them, not just warm for one:
 - Existing and prospective supervisees
 - Colleagues and peers in the mental health field
 
-Site name: **Honoring Stories**. Tagline system: *Express · Embrace · Empower*.
+Site name: **Honoring Stories**. Tagline system: *Express Â· Embrace Â· Empower*.
 
 ---
 
@@ -176,7 +176,7 @@ fixed as a "generic template" problem.
 
 **Content style rule (standing rule, absolute): never use an em dash anywhere on this site,**
 including copy, code comments, alt text, and this instructions file itself. Rewrite with natural
-punctuation (commas, colons, periods, restructured sentences) or a middle dot (`·`) for
+punctuation (commas, colons, periods, restructured sentences) or a middle dot (`Â·`) for
 label/separator use, matching the qualifications and testimonial-attribution style already in
 use. This was explicitly requested and must be treated as permanent, not a one-time cleanup.
 
@@ -272,7 +272,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       `10rem 0 5rem`) with one intentional exception: it is `align-items: flex-start` rather than
       `center`. The inner pages centre because illustration and text are near equal height; the
       home portrait is much taller, and centring pushed the eyebrow far down the page. Top-aligning
-      puts "Express · Embrace · Empower" at the same level as "For individuals" (160px vs 166px).
+      puts "Express Â· Embrace Â· Empower" at the same level as "For individuals" (160px vs 166px).
     - `assets/harshita-home.png` is a **transparent PNG cut-out**. Its framing went through three
       treatments; only the third is current. (1) Free-floating with a `drop-shadow()` following her
       silhouette. (2) A white rounded rectangle matching `.hero-art`, with the bottom edge masked
@@ -502,7 +502,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     legal pages, which carried the rule and no such image.
   - **In the nav dropdown and mobile drawer this page is labelled "Workplace Wellbeing"**, matching
     its own headline. The footer link and the homepage Work With Me card still say "For
-    organisations", and the browser tab title is still "For Organisations · Honoring Stories".
+    organisations", and the browser tab title is still "For Organisations Â· Honoring Stories".
     That split is deliberate as of the last request, not an oversight.
   - `.corp-prose` is **centred**, so the "Beyond awareness" copy sits under its centred heading.
     The About block opts back out via `.about-split .corp-prose { text-align: left }`, because it
@@ -518,16 +518,16 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     small teal artifacts remain at the left edge of the source and fall outside the circular crop,
     so do not widen that crop without re-checking them.
   - **Confidentiality is a collapsible panel inside "What I offer"**, centred beneath the three
-    cards, opened by an `.info-btn` reading "ⓘ On confidentiality". It states plainly that the
+    cards, opened by an `.info-btn` reading "â“˜ On confidentiality". It states plainly that the
     employer receives no names, notes, or account of what was discussed, only broad
     non-identifying themes, with the risk-of-harm exception. It is also repeated as an FAQ,
     because people look in both places, and that repetition matters more now that the panel starts
     closed.
     - It went through three forms: an always-visible `.confidential` card in its own section, then
       a modal `<dialog>`, then this. Each move was requested. Do not move it again unasked.
-    - The trigger keeps **the words next to the icon**, not a bare "ⓘ". A lone icon is easy to
+    - The trigger keeps **the words next to the icon**, not a bare "â“˜". A lone icon is easy to
       scroll past, and for an employer weighing this up it is usually the deciding question.
-    - The panel animates with `grid-template-rows: 0fr → 1fr`, not a `max-height` guess, so it
+    - The panel animates with `grid-template-rows: 0fr â†’ 1fr`, not a `max-height` guess, so it
       eases to the text's real height rather than clipping it or easing against a height that is
       not there. `aria-expanded` on the button is the **single source of truth** for open state, so
       the chevron rotation, the grid row and assistive technology cannot disagree.
@@ -703,9 +703,9 @@ Displayed in the glimpse section as three large animated numbers that count up f
 scrolled into view, replacing the earlier trust-line paragraph:
 - 7+, Years
 - 400+, Clients served
-- 2,000+, Sessions completed
+- 3,000+, Sessions completed
 
-Style convention: keep this pairing (7 / 400 / 2,000) unless the user supplies updated figures.
+Style convention: keep this pairing (7 / 400 / 3,000) unless the user supplies updated figures.
 Went through four passes: (1) heavy bold sans-serif numbers above a flat full-width rule, rejected
 as "very corporate for a safe psychotherapist's website"; (2) upright serif numbers on the same
 flat layout, rejected as well ("I don't like the stats UI... improve the design to suit the page's
@@ -1064,6 +1064,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Subject lines on the three enquiry buttons | So an arriving email says what it is about. |
 | "cadence" replaced with "timings" | Industry wording the rest of the site does not use. |
 | Raw uploads named in `.gitignore` | A wildcard swept 20 MB of originals into the repo three times. |
+| Sessions completed raised from 2,000 to 3,000 | Figure supplied by Harshita. Held in one place, the ``data-target`` attribute on the third ``.stat-num`` in ``index.html``. |
 ### 2026-08-27
 
 | Commit | Change |

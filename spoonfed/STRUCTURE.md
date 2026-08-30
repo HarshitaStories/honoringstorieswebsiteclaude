@@ -327,3 +327,18 @@ pixels, and the crop stops at x=232 because the wordmark starts at x=240.
 The organisations page was `/corporates.html` and is now
 `/workplace-wellbeing.html`. A `Redirect 301` in `.htaccess` keeps the old
 address working for anyone holding it. **That line must never be removed.**
+
+## Figures on the homepage
+
+The three counters, years, clients served and sessions completed, are real
+figures Harshita supplies. They live in one place only, the `data-target`
+attribute on each `.stat-num` in `index.html`, and the counter animates up to
+whatever is there.
+
+**Never adjust one to look better.** They are claims about a practice, and the
+current pairing is 7, 400 and 3,000. If a figure changes, change the attribute
+and the record in `WEBSITE_INSTRUCTIONS.md`, nothing else.
+
+The formatting uses `en-IN`, so 3000 renders as 3,000. That matters above ten
+thousand, where Indian grouping differs from Western: 100000 renders as
+1,00,000, not 100,000. That is intended.

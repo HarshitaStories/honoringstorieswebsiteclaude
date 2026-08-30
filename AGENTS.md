@@ -83,6 +83,10 @@ serves plain files only, so the notes will not work under it.
   are not reachable from the web.
 - `assets/`: images. All prepared, not raw. See `WEBSITE_INSTRUCTIONS.md`.
 
+The three homepage counters are real figures about a practice, held in the
+`data-target` attributes in `index.html`. Never round one up or adjust it to
+look better.
+
 ## Things that will look wrong and are not
 
 - **`.htaccess` holds a permanent redirect from `/corporates.html` to
