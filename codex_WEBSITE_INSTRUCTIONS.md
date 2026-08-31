@@ -5,6 +5,18 @@ instructions, content, or decisions come in during a session, including reversal
 decisions. If something here conflicts with an older memory or an earlier commit message, this
 file wins.
 
+## Codex-maintained standalone record
+
+This file was created on 2026-08-31 as a complete copy of the website history from the first
+recorded decisions through the current frontend and backend. From this point onward, every change
+that affects the real website, including a tiny visible copy change, must be recorded here with
+its context. The practical setup copies live in `codex_spoonfed/`, and the copied repository
+working rules live in `codex_AGENTS.md`.
+
+After Codex completes a website change, it verifies the result, updates this record and any
+relevant guides, commits and pushes to GitHub, then asks Harshita to click Deploy on the existing
+Hostinger Git deployment page.
+
 Last updated: **2026-08-27, 23:29 IST**
 
 ---

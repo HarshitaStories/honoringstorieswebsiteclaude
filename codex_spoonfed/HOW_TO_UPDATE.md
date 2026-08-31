@@ -4,10 +4,10 @@ The four documents beside this one are the **source**. `spoonfed_copy.zip` and
 the Word file in the repository root are **copies made from them**, for handing
 to somebody who does not use Git.
 
-`codex_spoonfed/` is a second, clearly labelled maintenance copy requested on
-2026-08-31. Whenever one of these practical guides changes, update its matching
-Codex copy in the same commit. Every website change must also be recorded with
-context in `codex_WEBSITE_INSTRUCTIONS.md`.
+This directory is the Codex-maintained copy requested on 2026-08-31. The
+editable practical sources remain in `spoonfed/`. Whenever a source guide
+changes, update its matching file here in the same commit. Every website change
+must also be recorded with context in `codex_WEBSITE_INSTRUCTIONS.md`.
 
 **Edit the files here. Never edit the ones inside the zip.** Anything changed
 inside the zip is lost the next time it is rebuilt.
