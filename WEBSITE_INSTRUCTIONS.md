@@ -264,7 +264,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   dedicated testimonials section, contact strip, footer.
   - **Hero**, deliberately aligned to the Psychotherapy page hero (that page is the reference the
     home page follows, per explicit instruction):
-    - Headline is "A space to feel seen, heard, and slowly *untangle* what feels heavy." The rose
+    - Headline is "A space to feel seen, heard, and slowly *untangle* what feels heavy" with no
+      full stop after "heavy". The rose
       italic `<em>` emphasis is on **untangle** (moved off "heard" on request).
     - `h1` uses the same `clamp(2.4rem, 5.5vw, 3.6rem)` as `.page-hero h1`, so both render at an
       identical size. Do not scale the home headline independently of the inner pages.
