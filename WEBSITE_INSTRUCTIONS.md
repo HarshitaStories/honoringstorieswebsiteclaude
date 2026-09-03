@@ -787,7 +787,9 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   `https://docs.google.com/forms/d/e/1FAIpQLSfmgCVHweP1bHLzMb8dAdRFE3fAfggpMXOXX3KUnOakmR02qA/viewform?usp=sharing&ouid=110517816113101014359`
 - FAQs (8): how to start; what to prepare (nothing needed, join on time, quiet private space,
   good internet, steady device, optional water/notebook/pen); confidentiality (private, exception
-  is risk of harm, discussed upfront); not knowing what to talk about (fine, can start anywhere);
+  is risk of harm to the client or someone else, the provided emergency contact may need to be
+  informed, and this will be discussed with the client first); not knowing what to talk about
+  (fine, can start anywhere);
   session frequency (usually weekly to start, revisited collaboratively); feeling worse before
   better (normal, supported, feedback taken); stopping anytime (client-led, ended thoughtfully);
   cancellation policy (free reschedule/cancel up to 3 hrs before session).
@@ -1057,6 +1059,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | --- | --- |
 | Changed the Workplace Wellbeing notice FAQ answer to require minimum 2 weeks notice | Harshita clarified the advance notice needed to deliver the best care possible. |
 | Changed the Sip and Swap LinkedIn explanation | Harshita wanted the message to say the profile helps her get to know the person better before they connect, rather than giving her a bit of context. |
+| Expanded the Psychotherapy confidentiality FAQ answer | Harshita clarified that the provided emergency contact may need to be informed if there is a risk of harm, and that this will be discussed with the client first. |
 
 ### 2026-08-31
 
