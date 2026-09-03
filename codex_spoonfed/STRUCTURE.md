@@ -169,8 +169,9 @@ Use this before changing anything, to see what else you will have to touch.
 
 ### About the price changing by country
 
-Visitors in India see one online price; visitors elsewhere see another. The two are never shown
-together.
+Visitors in India see the India online price and the in-person price. Visitors elsewhere see only
+the international online price, which is INR 2,500. The two online prices are never shown together,
+and the in-person card is not shown outside India. All displayed charges use the `INR` label.
 
 It works out where the visitor is by reading **their computer's own timezone setting**, which the
 browser already knows. It does **not** look up their internet address.

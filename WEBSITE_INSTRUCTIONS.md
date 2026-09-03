@@ -757,24 +757,25 @@ Queer Affirmative Practice course (Mariwala Health Foundation) and complex traum
   Meet or WhatsApp (no voice-only sessions offered, per explicit correction).
 - **Pricing (current, to be placed only on the Psychotherapy page, presented thoughtfully rather
   than as a bare price table):**
-  - Rs 2,100, 50-min video session via Google Meet or WhatsApp, India-based clients
-  - Rs 2,500, 50-min video session via Google Meet or WhatsApp, clients based outside India
-  - Rs 3,000, in-person/offline sessions, Andheri West, Mumbai
-- **The two online prices are never shown together.** The page displays two cards, "Online session"
-  and "In person". The online figure is chosen from the visitor's own timezone: `Asia/Kolkata` or
-  its legacy alias `Asia/Calcutta` shows Rs 2,100, anything else shows Rs 2,500. In-person is
-  Rs 3,000 for everyone. This was an explicit request: visitors should not see that two online
-  rates exist.
+  - INR 2,100, 50-min video session via Google Meet or WhatsApp, India-based clients
+  - INR 2,500, 50-min video session via Google Meet or WhatsApp, clients based outside India
+  - INR 3,000, in-person/offline sessions, Andheri West, Mumbai, shown only to India-based clients
+- **The two online prices are never shown together.** India-based visitors see two cards, "Online
+  session" at INR 2,100 and "In person" at INR 3,000. Visitors outside India see only the online
+  card at INR 2,500; the in-person card is hidden and the grid contracts to one centred column.
+  The visitor group is chosen from the device timezone: `Asia/Kolkata` or its legacy alias
+  `Asia/Calcutta` is treated as India, and anything else is treated as outside India.
   - Implemented with **timezone, not a geo-IP service**. Timezone is read locally and sends nothing
     anywhere, so it adds no network request, no third-party dependency, no rate limit, and keeps
     the Privacy Policy's "no tracking, no third-party calls beyond Google Fonts" statement true. A
     geo-IP lookup would have transmitted every visitor's IP to another company and made that
     statement false.
-  - **Both figures are in the markup**, with one hidden by CSS via a `geo-intl` class the head
-    script sets. The script runs in `<head>`, before the body paints, so the correct price is the
-    first thing drawn. Swapping the text after load would let the wrong price paint and visibly
-    flip. Do not move this script to the bottom of the page.
-  - The HTML default is the **India** price, so a visitor with JavaScript disabled sees Rs 2,100.
+  - **Both online figures and the in-person card are in the markup**, with the international
+    online figure and in-person availability controlled by CSS via a `geo-intl` class the head
+    script sets. The script runs in `<head>`, before the body paints, so the correct pricing is the
+    first thing drawn. Swapping after load would let the wrong pricing paint and visibly flip.
+    Do not move this script to the bottom of the page.
+  - The HTML default is the **India** price, so a visitor with JavaScript disabled sees INR 2,100.
     That deliberately errs toward under-quoting a rare international edge case rather than
     over-quoting a local client, and the exploratory call happens before any payment anyway.
   - Known limitation: a VPN, or a client travelling, shows the price for where their device thinks
@@ -1060,6 +1061,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Changed the Workplace Wellbeing notice FAQ answer to require minimum 2 weeks notice | Harshita clarified the advance notice needed to deliver the best care possible. |
 | Changed the Sip and Swap LinkedIn explanation | Harshita wanted the message to say the profile helps her get to know the person better before they connect, rather than giving her a bit of context. |
 | Expanded the Psychotherapy confidentiality FAQ answer | Harshita clarified that the provided emergency contact may need to be informed if there is a risk of harm, and that this will be discussed with the client first. |
+| Limited Psychotherapy in-person pricing to India-based visitors and added INR labels | India-based visitors should see online and in-person charges. Visitors outside India should see only the INR 2,500 online charge. |
 
 ### 2026-08-31
 

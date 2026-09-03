@@ -261,6 +261,8 @@
   .price-intl { display: none; }
   html.geo-intl .price-in { display: none; }
   html.geo-intl .price-intl { display: inline; }
+  html.geo-intl .price-in-person { display: none; }
+  html.geo-intl .pricing-grid { grid-template-columns: 1fr; max-width: 352px; }
   .price-card { background: var(--cream-warm); border: 1px solid var(--line); border-radius: 20px; padding: 2rem 1.75rem; text-align: center; transition: all 0.5s var(--ease-gentle); }
   .price-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.25); }
   .price-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.75rem; }
@@ -510,12 +512,12 @@
         <!-- Both figures are in the markup and one is hidden by CSS, chosen by
              the geo-intl class the head script sets. Swapping text in JS after
              load would let the wrong price paint first and then visibly flip. -->
-        <div class="price-amount"><span class="price-in">&#8377;2,100</span><span class="price-intl">&#8377;2,500</span> <span class="price-unit">/ session</span></div>
+        <div class="price-amount"><span class="price-in">INR 2,100</span><span class="price-intl">INR 2,500</span> <span class="price-unit">/ session</span></div>
         <div class="price-desc">50-minute video session via Google Meet or WhatsApp.</div>
       </div>
-      <div class="price-card reveal delay-2">
+      <div class="price-card price-in-person reveal delay-2">
         <div class="price-label">In person</div>
-        <div class="price-amount">&#8377;3,000 <span class="price-unit">/ session</span></div>
+        <div class="price-amount">INR 3,000 <span class="price-unit">/ session</span></div>
         <div class="price-desc">50-minute session at Andheri West, Mumbai.</div>
       </div>
     </div>
