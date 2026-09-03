@@ -666,7 +666,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     (a quiet left rule), deliberately not a loud warning banner. It comes straight from the
     source doc and must not be dropped.
   - **How Sip and Swap works** (`#how`): three-step process timeline. Step 1 asks for a LinkedIn
-    profile alongside the message, which is how the source doc describes it.
+    profile alongside the message so Harshita can get to know the person better before they
+    connect.
   - Unused CSS and the logistics-infographic script inherited from the psychotherapy template were
     stripped out of this file rather than left dead.
   - Before this page existed, the "Community" nav item on all four pages pointed at
@@ -1055,6 +1056,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Change | Why |
 | --- | --- |
 | Changed the Workplace Wellbeing notice FAQ answer to require minimum 2 weeks notice | Harshita clarified the advance notice needed to deliver the best care possible. |
+| Changed the Sip and Swap LinkedIn explanation | Harshita wanted the message to say the profile helps her get to know the person better before they connect, rather than giving her a bit of context. |
 
 ### 2026-08-31
 
