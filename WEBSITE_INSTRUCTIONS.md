@@ -1062,6 +1062,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Changed the Sip and Swap LinkedIn explanation | Harshita wanted the message to say the profile helps her get to know the person better before they connect, rather than giving her a bit of context. |
 | Expanded the Psychotherapy confidentiality FAQ answer | Harshita clarified that the provided emergency contact may need to be informed if there is a risk of harm, and that this will be discussed with the client first. |
 | Limited Psychotherapy in-person pricing to India-based visitors and added INR labels | India-based visitors should see online and in-person charges. Visitors outside India should see only the INR 2,500 online charge. |
+| Changed the caption above the Shared Ways of Coping notepad | The first proposed replacement, "From one person to another, for the hard days", was refined before committing. The final caption is "What helps on hard days, from one person to another", which describes the notes and keeps the person-to-person feeling. |
 
 ### 2026-08-31
 
