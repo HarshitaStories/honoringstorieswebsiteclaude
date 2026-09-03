@@ -559,9 +559,9 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
        which was a signal the voice was fighting the content.
     3. A named clinician is the **differentiator** against large impersonal EAP vendors, not a
        weakness to disguise.
-    Note that four naturally plural phrases remain and are correct: "Themes we can work with" and
-    "we will find something workable" are the collaborative you-and-me sense, and two FAQ questions
-    ("Will we be told...", "our industry") are written in the enquiring organisation's own voice.
+    Note that three naturally plural phrases remain and are correct: "Themes we can work with" is
+    the collaborative you-and-me sense, and two FAQ questions ("Will we be told...", "our
+    industry") are written in the enquiring organisation's own voice.
   - **Deliberately claims no corporate track record.** Nothing in the source material describes
     previous organisational work, so there are no client names, logos, "trusted by" lines, or
     outcome statistics. If real ones are supplied later they belong near the top. Do not invent
@@ -1061,6 +1061,12 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
+
+### 2026-09-03
+
+| Change | Why |
+| --- | --- |
+| Changed the Workplace Wellbeing notice FAQ answer to require minimum 2 weeks notice | Harshita clarified the advance notice needed to deliver the best care possible. |
 
 ### 2026-08-31
 
