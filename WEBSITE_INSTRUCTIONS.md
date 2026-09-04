@@ -255,6 +255,17 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - The same purple bloom appears as a `box-shadow` on hover elsewhere, for example `.theme-pill` on
   the organisations page. Reach for that pairing (tight halo plus a softer drop) when something new
   needs a hover state, rather than inventing a third treatment.
+- **Mobile and laptop are separate design scopes from 2026-09-04 onward.** The approved laptop
+  version stays completely unchanged unless Harshita explicitly requests a laptop change. A
+  request naming mobile applies only below 900px, and a request naming laptop applies only to the
+  laptop version. Never infer that a change belongs in both.
+- **Mobile gentle app shell, all nine pages.** Below 900px, a translucent rounded bottom bar gives
+  direct access to Home, About, Work, Community and Book. The current page group is highlighted on
+  Home, About, the three Work pages and Community. The three legal pages show the bar without a
+  false active state. The original hamburger drawer remains available for the complete navigation.
+  The top logo is reduced to 44px, each bottom target is at least 52px tall, safe-area spacing is
+  respected, and the floating WhatsApp button moves above the bottom bar. At 900px and wider the
+  bar is `display: none`, and removing the mobile-only block restores each prior page byte-for-byte.
 
 ---
 
@@ -1053,6 +1064,13 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
+
+### 2026-09-04
+
+| Change | Why |
+| --- | --- |
+| Added a mobile-only gentle app shell to all nine pages | Harshita wanted the mobile website to feel more like an app while preserving all content and leaving the approved laptop version completely unchanged. The shell adds a five-item bottom navigation, compact mobile header treatment, safe-area spacing and WhatsApp clearance below 900px only. |
+| Made mobile and laptop separate permanent scopes | Future changes apply only to the version Harshita names. Nothing should be copied between mobile and laptop without an explicit instruction. |
 
 ### 2026-09-03
 

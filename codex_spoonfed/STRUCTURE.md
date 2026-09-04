@@ -111,6 +111,11 @@ Every page has the same skeleton. Open any of them in a text editor and you will
 The four blocks marked "identical on all 9 pages" are the shared furniture. They are copied, not
 shared. That is the trade-off described in the README.
 
+On mobile, all nine pages also carry a fixed five-item bottom navigation for Home, About, Work,
+Community and Book. It is hidden at 900px and wider, so it does not alter the laptop version. The
+mobile and laptop versions are separate scopes and a change must be applied only to the version
+Harshita names.
+
 ---
 
 ## 4. The sections inside each page
@@ -141,6 +146,7 @@ Use this before changing anything, to see what else you will have to touch.
 | The top menu | All 9 page files, twice each: the desktop menu and the mobile menu |
 | The footer | All 9 page files |
 | The floating WhatsApp button | All 9 page files |
+| The mobile bottom navigation | All 9 page files, mobile rules and markup |
 | Any colour in the palette | All 9 page files, in the `:root` block at the top of each `<style>` |
 | The booking link | All 9 page files, 33 buttons in total |
 | The email or WhatsApp number | All 9 page files |

@@ -339,6 +339,9 @@
   .wa-float::after { content: 'Reach out on WhatsApp'; position: absolute; right: calc(100% + 0.65rem); top: 50%; transform: translateY(-50%); white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--deep-purple); background: rgba(253, 250, 242, 0.85); backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%); border: 1px solid rgba(255, 255, 255, 0.7); padding: 0.3rem 0.7rem; border-radius: 999px; box-shadow: 0 8px 20px -6px rgba(91, 46, 107, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle); }
   .wa-float:hover::after { opacity: 1; }
   @media (max-width: 600px) { .wa-float::after { display: none; } }
+  /* Mobile-only gentle app shell. Desktop remains governed by the existing rules. */
+  .mobile-app-nav { display: none; }
+  @media (max-width: 899px) { body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); } .nav-inner { min-height: 64px; padding-top: 0.35rem; padding-bottom: 0.35rem; } .nav-logo img { height: 44px !important; } .mobile-app-nav { position: fixed; z-index: 95; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.2rem; padding: 0.45rem; background: rgba(253, 250, 242, 0.92); border: 1px solid rgba(91, 46, 107, 0.14); border-radius: 22px; box-shadow: 0 16px 38px -18px rgba(43, 30, 47, 0.45); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); } .mobile-app-nav a { min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.22rem; padding: 0.32rem 0.1rem; border-radius: 15px; color: var(--muted); font-size: 0.62rem; font-weight: 600; line-height: 1; letter-spacing: 0.01em; } .mobile-app-nav a svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .mobile-app-nav a[aria-current="page"] { color: var(--deep-purple); background: rgba(242, 197, 213, 0.42); } .mobile-app-nav .mobile-app-book { color: var(--rose); } .wa-float { right: 1rem; bottom: calc(6rem + env(safe-area-inset-bottom)); width: 46px; height: 46px; } .wa-float svg { width: 23px; height: 23px; } }
 </style></head>
 <body>
 
@@ -377,6 +380,14 @@
     <a href="community.html" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
     <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation Call</a>
   </div>
+</nav>
+
+<nav class="mobile-app-nav" aria-label="Mobile primary navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg><span>Home</span></a>
+  <a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg><span>About</span></a>
+  <a href="index.html#work-with-me" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><span>Work</span></a>
+  <a href="community.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3.5 20c.5-4 2.4-6 5.5-6s5 2 5.5 6M14 15c3.6-.6 5.8 1.1 6.5 5"/></svg><span>Community</span></a>
+  <a class="mobile-app-book" href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2"/><path d="M8 3.5v4M16 3.5v4M4 10h16"/></svg><span>Book</span></a>
 </nav>
 
 <!-- ========== SECTION RAIL ========== -->

@@ -164,6 +164,10 @@ and are deliberate, with a comment beside them explaining why. Ten separate
 things were built, shown, rejected and removed. Check the "already tried and
 rejected" table in `reference/WEBSITE_INSTRUCTIONS.md` before you undo anything.
 
+**7. Mobile and laptop are separate scopes.** The laptop version is frozen.
+Change mobile only when mobile is requested, laptop only when laptop is
+requested, and never carry a change across both without an explicit instruction.
+
 ---
 
 ## Part 6: Working with an AI on this site

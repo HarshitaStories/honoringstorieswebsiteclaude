@@ -50,6 +50,11 @@ not asked about, however wrong it looks.
    requestAnimationFrame. Read computed styles, measure geometry, check
    element order, run the code. Most bugs in this project were invisible.
 
+6. **Mobile and laptop are separate scopes.** The laptop version is frozen and
+   must remain unchanged unless Harshita explicitly asks for a laptop change.
+   Mobile changes must stay inside mobile media queries or mobile-only markup.
+   Never apply a request to both versions unless she explicitly asks for both.
+
 ## A change is not finished until all five are done
 
 This is the part most easily forgotten. When you change the site:
