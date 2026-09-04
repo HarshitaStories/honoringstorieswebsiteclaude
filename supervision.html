@@ -165,6 +165,7 @@
   .who-for { background: var(--cream-warm); }
   .track-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 1080px; margin: 0 auto; }
   @media (min-width: 700px) { .track-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 700px) and (max-width: 899px) { .track-card:nth-child(3) { grid-column: 1 / -1; width: calc((100% - 1.5rem) / 2); justify-self: center; } }
   @media (min-width: 960px) { .track-grid { grid-template-columns: repeat(3, 1fr); } }
   .track-card { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; transition: all 0.5s var(--ease-gentle); }
   .track-card:hover { transform: translateY(-6px); border-color: var(--rose-soft); box-shadow: 0 20px 40px -24px rgba(91, 46, 107, 0.2); }

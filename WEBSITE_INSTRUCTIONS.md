@@ -1,4 +1,4 @@
-﻿# Honoring Stories Â· Website Instructions
+# Honoring Stories Â· Website Instructions
 
 This file is the living source of truth for building this site. It is updated every time new
 instructions, content, or decisions come in during a session, including reversals of earlier
@@ -266,6 +266,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   The top logo is reduced to 44px, each bottom target is at least 52px tall, safe-area spacing is
   respected, and the floating WhatsApp button moves above the bottom bar. At 900px and wider the
   bar is `display: none`, and removing the mobile-only block restores each prior page byte-for-byte.
+  In the two-column mobile/tablet bands, the unpaired third card is centred: Workplace Wellbeing
+  in the homepage Work With Me grid, Customised plans in the Workplace Wellbeing offer grid,
+  Experienced in the Supervision track grid, and What we might talk about in the Community
+  concerns grid. Each centring rule ends at 899px, so the laptop layouts are unchanged.
 
 ---
 
@@ -1071,6 +1075,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | --- | --- |
 | Added a mobile-only gentle app shell to all nine pages | Harshita wanted the mobile website to feel more like an app while preserving all content and leaving the approved laptop version completely unchanged. The shell adds a five-item bottom navigation, compact mobile header treatment, safe-area spacing and WhatsApp clearance below 900px only. |
 | Made mobile and laptop separate permanent scopes | Future changes apply only to the version Harshita names. Nothing should be copied between mobile and laptop without an explicit instruction. |
+| Centred the unpaired third cards in four mobile grids | Workplace Wellbeing on the homepage, Customised plans, Experienced, and What we might talk about now sit in the middle when their mobile/tablet grids have two columns. The rules end below the 900px laptop breakpoint. |
 
 ### 2026-09-03
 
