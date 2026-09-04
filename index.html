@@ -1136,7 +1136,7 @@
     gap: 1.5rem;
   }
   @media (min-width: 700px) { .glimpse-links { grid-template-columns: repeat(2, 1fr); max-width: 780px; margin: 0 auto; } }
-  @media (min-width: 700px) and (max-width: 899px) { .glimpse-link:nth-child(3) { grid-column: 1 / -1; width: calc((100% - 1.5rem) / 2); justify-self: center; } }
+  @media (min-width: 700px) and (max-width: 899px) { .glimpse-links { grid-template-columns: repeat(4, 1fr); } .glimpse-link { grid-column: span 2; } .glimpse-link:last-child { grid-column: 2 / span 2; } }
   /* Three offerings, so the row widens back to three across on desktop. Between
      700 and 999 it stays two up and the third wraps, which reads better than
      three cramped columns at tablet width. */

@@ -269,7 +269,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   In the two-column mobile/tablet bands, the unpaired third card is centred: Workplace Wellbeing
   in the homepage Work With Me grid, Customised plans in the Workplace Wellbeing offer grid,
   Experienced in the Supervision track grid, and What we might talk about in the Community
-  concerns grid. Each centring rule ends at 899px, so the laptop layouts are unchanged.
+  concerns grid. Each uses four equal tracks, with ordinary cards spanning two and the last card spanning the middle two. The centring rules end at 899px, so the laptop layouts are unchanged.
 
 ---
 

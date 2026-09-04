@@ -161,7 +161,7 @@
   .who-for { background: var(--cream-warm); }
   .concerns-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
   @media (min-width: 640px) { .concerns-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 640px) and (max-width: 899px) { .concern-card:nth-child(3) { grid-column: 1 / -1; width: calc((100% - 1rem) / 2); justify-self: center; } }
+  @media (min-width: 640px) and (max-width: 899px) { .concerns-grid { grid-template-columns: repeat(4, 1fr); } .concern-card { grid-column: span 2; } .concern-card:last-child { grid-column: 2 / span 2; } }
   @media (min-width: 900px) { .concerns-grid { grid-template-columns: repeat(3, 1fr); } }
   .concern-card { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; transition: all 0.6s var(--ease-gentle); position: relative; overflow: hidden; }
   /* A soft purple wash that blooms from the top edge on hover. Replaces a pink
