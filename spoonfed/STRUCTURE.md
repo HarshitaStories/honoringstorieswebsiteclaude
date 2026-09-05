@@ -112,9 +112,14 @@ The four blocks marked "identical on all 9 pages" are the shared furniture. They
 shared. That is the trade-off described in the README.
 
 On mobile, all nine pages also carry a fixed five-item bottom navigation for Home, About, Work,
-Community and Book. It is hidden at 900px and wider, so it does not alter the laptop version. The
-mobile and laptop versions are separate scopes and a change must be applied only to the version
-Harshita names.
+Community and Book. It is hidden at 900px and wider, so it does not alter the laptop version. Phone,
+tablet and laptop are separate scopes: phone rules end at 639px, tablet spans 640px through 899px,
+and laptop starts at 900px. The bottom navigation is a documented exception that covers both phone
+and tablet. A change must be applied only to the version Harshita names.
+
+On the homepage below 640px, CSS grid ordering places the portrait directly after the main heading,
+followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the
+stacked text then portrait order, and laptop retains the two-column hero.
 
 ---
 

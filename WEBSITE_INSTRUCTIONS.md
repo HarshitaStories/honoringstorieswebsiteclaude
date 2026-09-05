@@ -255,10 +255,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - The same purple bloom appears as a `box-shadow` on hover elsewhere, for example `.theme-pill` on
   the organisations page. Reach for that pairing (tight halo plus a softer drop) when something new
   needs a hover state, rather than inventing a third treatment.
-- **Mobile and laptop are separate design scopes from 2026-09-04 onward.** The approved laptop
-  version stays completely unchanged unless Harshita explicitly requests a laptop change. A
-  request naming mobile applies only below 900px, and a request naming laptop applies only to the
-  laptop version. Never infer that a change belongs in both.
+- **Phone, tablet and laptop are separate design scopes from 2026-09-04 onward.** The approved
+  laptop version stays completely unchanged unless Harshita explicitly requests a laptop change.
+  A request naming phone or mobile applies below 640px, tablet applies from 640px through 899px,
+  and laptop or desktop applies from 900px upward. The existing app shell is a documented exception
+  that spans phone and tablet below 900px. Never infer that a change belongs in another scope.
 - **Mobile gentle app shell, all nine pages.** Below 900px, a translucent rounded bottom bar gives
   direct access to Home, About, Work, Community and Book. The current page group is highlighted on
   Home, About, the three Work pages and Community. The three legal pages show the bar without a
@@ -284,6 +285,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       italic `<em>` emphasis is on **untangle** (moved off "heard" on request).
     - `h1` uses the same `clamp(2.4rem, 5.5vw, 3.6rem)` as `.page-hero h1`, so both render at an
       identical size. Do not scale the home headline independently of the inner pages.
+    - Below 640px only, the visual order is eyebrow, headline, portrait, supporting paragraph and
+      buttons. `.hero-text { display: contents; }` lets the existing single portrait and content
+      elements take explicit grid order values without duplication. Tablet keeps the stacked text
+      then portrait order, and desktop keeps the established two-column layout.
     - `.hero-inner` matches `.page-hero-inner` (`1.05fr 0.95fr`, `gap: 4rem`, padding
       `10rem 0 5rem`) with one intentional exception: it is `align-items: flex-start` rather than
       `center`. The inner pages centre because illustration and text are near equal height; the
@@ -1073,6 +1078,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Moved the homepage portrait directly after the heading on phones | Below 640px only, the portrait now appears between the main heading and the supporting paragraph. Tablet and desktop retain their previous content order and layout. |
 | Replaced the phone concern lists with per-card disclosures | On the homepage and Psychotherapy page below 640px, all six concern headings remain visible as compact, left-aligned rows with arrows, while each left-aligned description opens from its own heading. Tablet and desktop keep the established fully open cards. This supersedes the earlier two-card View more treatment. |
 | Reduced overall phone-page whitespace | Across all nine pages below 640px, section padding is reduced from 6rem to 3.5rem and heading-to-content spacing from 4rem to 2rem. Tablet and desktop spacing is unchanged. |
 | Replaced the About phone values list with per-card disclosures | Below 640px, all five value headings stay visible as compact, left-aligned rows with arrows, and each left-aligned description opens independently. This supersedes the earlier selective two-card View more treatment. Tablet and desktop keep all five cards fully open and non-interactive. |
