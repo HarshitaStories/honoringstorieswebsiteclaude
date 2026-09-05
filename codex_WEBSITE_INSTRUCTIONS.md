@@ -753,6 +753,8 @@ as one calm band. Numbers are upright serif (not italic; that read as "too cursi
 in an earlier pass). The count-up eases in and out with a gentle smoothstep (`p*p*(3-2p)`) over
 **3200ms**, progressively slowed from 1600 to 2000 to 3200 across passes as the user kept asking
 for calmer motion. If revisited, keep going simpler and slower, not back toward cards or icons.
+The three statistics remain in one horizontal row at phone, tablet and desktop widths. The
+former phone-only single-column override below 560px was removed on explicit request.
 
 ### Approach / values (Express, Embrace, Empower)
 - **Express**: a grounded, non-judgmental space to speak what feels hard to say, at your own pace.
@@ -1092,6 +1094,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Kept the homepage statistics horizontal on phones | The 7+, 400+ and 3,000+ figures now remain in one three-column row below 560px instead of stacking vertically. Tablet and desktop were already horizontal and remain unchanged. |
 | Justified the homepage approach paragraph on phones | Below 640px only, the paragraph beneath the glimpse photo now has even left and right edges, with its final line aligned left. Tablet and desktop remain unchanged. |
 | Moved the homepage portrait directly after the heading on phones | Below 640px only, the portrait now appears between the main heading and the supporting paragraph. Tablet and desktop retain their previous content order and layout. |
 | Replaced the phone concern lists with per-card disclosures | On the homepage and Psychotherapy page below 640px, all six concern headings remain visible as compact, left-aligned rows with arrows, while each left-aligned description opens from its own heading. Tablet and desktop keep the established fully open cards. This supersedes the earlier two-card View more treatment. |
