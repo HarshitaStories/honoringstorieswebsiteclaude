@@ -1075,6 +1075,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | --- | --- |
 | Collapsed the homepage concerns after the first two cards on phones | Below 640px, Anxiety & Overwhelm and Relationships & Transitions stay visible, and a View more control reveals the other four. The control becomes View less when expanded. Tablet and desktop keep all six cards visible with no disclosure control. |
 | Added the same phone disclosure to the Psychotherapy concerns | Below 640px, Anxiety & Overwhelm and Relationships & Transitions stay visible, and View more reveals the remaining four cards. Tablet and desktop continue to show all six cards. |
+| Added a selective phone disclosure to the About values | Below 640px, Trauma-informed and Queer-affirmative stay visible, and View more reveals Eclectic, Intersectional, and Neurodivergent inclusive. Tablet and desktop continue to show all five cards in their established grid. |
 
 ### 2026-09-04
 

@@ -308,6 +308,29 @@
   .avalue-card:hover .avalue-icon { color: var(--purple); }
   .avalue-card h4 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--deep-purple); font-style: italic; }
   .avalue-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+  .mobile-values-toggle { display: none; }
+  @media (max-width: 639px) {
+    .about-values-grid:not(.mobile-values-expanded) .avalue-card:not(.mobile-featured) { display: none; }
+    .mobile-values-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 1.25rem auto 0;
+      padding: 0.65rem 1rem;
+      border: 0;
+      background: transparent;
+      color: var(--deep-purple);
+      font: 600 0.9rem/1 var(--font-body);
+      cursor: pointer;
+    }
+    .mobile-values-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s var(--ease-gentle);
+    }
+    .mobile-values-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  }
 
   /* ========== TIMELINE (qualifications + experience, shared) ========== */
   .timeline-grid { max-width: 720px; margin: 0 auto; position: relative; padding-left: 1.75rem; border-left: 1px solid var(--line); }
@@ -470,13 +493,13 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="about-values-grid">
+    <div class="about-values-grid" id="aboutValuesGrid">
       <div class="avalue-card reveal delay-1">
         <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
         <h4>Eclectic</h4>
         <p>I draw from different methods and techniques of psychotherapy to tailor each session to suit your unique challenges and experiences.</p>
       </div>
-      <div class="avalue-card reveal delay-2">
+      <div class="avalue-card mobile-featured reveal delay-2">
         <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
         <h4>Trauma-informed</h4>
         <p>I work with care and awareness of how past pain may show up in the present.</p>
@@ -486,7 +509,7 @@
         <h4>Intersectional</h4>
         <p>I understand how different parts of your identity and social context shape your experiences, and I keep them in mind while working through your concerns.</p>
       </div>
-      <div class="avalue-card reveal delay-1">
+      <div class="avalue-card mobile-featured reveal delay-1">
         <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
         <h4>Queer-affirmative</h4>
         <p>I offer a space that respects and affirms diverse gender and sexual identities.</p>
@@ -497,8 +520,26 @@
         <p>I support and welcome people who experience and process the world differently, with understanding and nurturance.</p>
       </div>
     </div>
+    <button class="mobile-values-toggle" id="mobileValuesToggle" type="button" aria-expanded="false" aria-controls="aboutValuesGrid">
+      <span>View more</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
   </div>
 </section>
+
+<script>
+  (() => {
+    const button = document.getElementById('mobileValuesToggle');
+    const grid = document.getElementById('aboutValuesGrid');
+    if (!button || !grid) return;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      button.querySelector('span').textContent = expanded ? 'View more' : 'View less';
+      grid.classList.toggle('mobile-values-expanded', !expanded);
+    });
+  })();
+</script>
 
 <!-- ========== QUALIFICATIONS ========== -->
 <section id="qualifications">
