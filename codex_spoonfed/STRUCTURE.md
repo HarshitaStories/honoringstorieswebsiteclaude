@@ -303,9 +303,12 @@ appearance; the only thing a visitor sees is the browser tab.
 | `canonical` | Names the real address, so the same page reached with a trailing slash is not counted twice |
 | `og:` and `twitter:` | What shows when the link is pasted into WhatsApp or LinkedIn |
 
-`assets/share-card.png` is the picture those use, built from the logo on the
-page cream. Titles run 29 to 63 characters and descriptions stay under 160,
-which is roughly what Google shows before cutting.
+`assets/landing-page-preview.png` is the 1200 by 630 picture those use. It captures the
+laptop homepage hero with the logo, navigation, main heading, introduction, buttons and portrait.
+The different filename helps sharing services fetch the new image instead of retaining the older
+logo-only card in cache. If the approved homepage hero changes substantially, recapture this image
+at 1200 by 630 and keep its filename and metadata dimensions unchanged. Titles run 29 to 63
+characters and descriptions stay under 160, which is roughly what Google shows before cutting.
 
 The homepage alone carries a block of structured data. Everything in it is
 already written in plain words elsewhere on the site, so it restates rather

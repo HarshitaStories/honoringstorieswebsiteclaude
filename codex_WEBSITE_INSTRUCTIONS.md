@@ -1108,6 +1108,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Replaced the logo-only link preview with a laptop landing-page image | All nine public pages now use `assets/landing-page-preview.png`, a 1200 by 630 capture of the desktop homepage hero, for Open Graph and Twitter previews. The new filename prompts sharing services to fetch a fresh image instead of retaining the older logo card in cache. Visible page content and layout are unchanged. |
 | Moved the Workplace Wellbeing hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Workplace Wellbeing” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Moved the Supervision hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Supervision Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Moved the Psychotherapy hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Psychotherapy Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
