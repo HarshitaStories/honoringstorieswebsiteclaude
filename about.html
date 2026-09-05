@@ -308,28 +308,31 @@
   .avalue-card:hover .avalue-icon { color: var(--purple); }
   .avalue-card h4 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--deep-purple); font-style: italic; }
   .avalue-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
-  .mobile-values-toggle { display: none; }
+  .avalue-summary { list-style: none; }
+  .avalue-summary::-webkit-details-marker { display: none; }
+  .avalue-summary-arrow { display: none; }
+  @media (min-width: 640px) { .avalue-summary { pointer-events: none; } }
   @media (max-width: 639px) {
-    .about-values-grid:not(.mobile-values-expanded) .avalue-card:not(.mobile-featured) { display: none; }
-    .mobile-values-toggle {
-      display: inline-flex;
+    .avalue-card { padding: 1rem 1.15rem; }
+    .avalue-summary {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) 18px;
       align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      margin: 1.25rem auto 0;
-      padding: 0.65rem 1rem;
-      border: 0;
-      background: transparent;
-      color: var(--deep-purple);
-      font: 600 0.9rem/1 var(--font-body);
+      gap: 0.75rem;
       cursor: pointer;
+      text-align: left;
     }
-    .mobile-values-toggle svg {
+    .avalue-summary .avalue-icon { width: 28px; height: 28px; margin: 0; }
+    .avalue-summary h4 { margin: 0; text-align: left; }
+    .avalue-summary-arrow {
+      display: block;
       width: 18px;
       height: 18px;
+      color: var(--deep-purple);
       transition: transform 0.3s var(--ease-gentle);
     }
-    .mobile-values-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .avalue-card[open] .avalue-summary-arrow { transform: rotate(180deg); }
+    .avalue-card > p { padding-top: 0.8rem; text-align: left; }
   }
 
   /* ========== TIMELINE (qualifications + experience, shared) ========== */
@@ -496,53 +499,74 @@
       </div>
     </div>
     <div class="about-values-grid" id="aboutValuesGrid">
-      <div class="avalue-card reveal delay-1">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
-        <h4>Eclectic</h4>
+            <details class="avalue-card reveal delay-1" open>
+        <summary class="avalue-summary">
+          <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
+          <h4>Eclectic</h4>
+          <svg class="avalue-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>I draw from different methods and techniques of psychotherapy to tailor each session to suit your unique challenges and experiences.</p>
-      </div>
-      <div class="avalue-card mobile-featured reveal delay-2">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
-        <h4>Trauma-informed</h4>
+      </details>
+            <details class="avalue-card reveal delay-2" open>
+        <summary class="avalue-summary">
+          <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+          <h4>Trauma-informed</h4>
+          <svg class="avalue-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>I work with care and awareness of how past pain may show up in the present.</p>
-      </div>
-      <div class="avalue-card reveal delay-3">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg>
-        <h4>Intersectional</h4>
+      </details>
+            <details class="avalue-card reveal delay-3" open>
+        <summary class="avalue-summary">
+          <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg>
+          <h4>Intersectional</h4>
+          <svg class="avalue-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>I understand how different parts of your identity and social context shape your experiences, and I keep them in mind while working through your concerns.</p>
-      </div>
-      <div class="avalue-card mobile-featured reveal delay-1">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
-        <h4>Queer-affirmative</h4>
+      </details>
+            <details class="avalue-card reveal delay-1" open>
+        <summary class="avalue-summary">
+          <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+          <h4>Queer-affirmative</h4>
+          <svg class="avalue-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>I offer a space that respects and affirms diverse gender and sexual identities.</p>
-      </div>
-      <div class="avalue-card reveal delay-2">
-        <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 2-1 3-1 5v2H8v-2c0-2-1-3-1-5a5 5 0 015-5z"/><path d="M9 19h6M10 22h4"/></svg>
-        <h4>Neurodivergent inclusive</h4>
+      </details>
+            <details class="avalue-card reveal delay-2" open>
+        <summary class="avalue-summary">
+          <svg class="avalue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 2-1 3-1 5v2H8v-2c0-2-1-3-1-5a5 5 0 015-5z"/><path d="M9 19h6M10 22h4"/></svg>
+          <h4>Neurodivergent inclusive</h4>
+          <svg class="avalue-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>I support and welcome people who experience and process the world differently, with understanding and nurturance.</p>
-      </div>
+      </details>
     </div>
-    <button class="mobile-values-toggle" id="mobileValuesToggle" type="button" aria-expanded="false" aria-controls="aboutValuesGrid">
-      <span>View more</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
   </div>
 </section>
 
 <script>
   (() => {
-    const button = document.getElementById('mobileValuesToggle');
     const grid = document.getElementById('aboutValuesGrid');
-    if (!button || !grid) return;
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!expanded));
-      button.querySelector('span').textContent = expanded ? 'View more' : 'View less';
-      grid.classList.toggle('mobile-values-expanded', !expanded);
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.avalue-card'));
+    const summaries = cards.map(card => card.querySelector('.avalue-summary'));
+    const phone = window.matchMedia('(max-width: 639px)');
+    summaries.forEach(summary => {
+      summary.addEventListener('click', event => {
+        if (!phone.matches) event.preventDefault();
+      });
     });
+    const syncValueCards = () => {
+      cards.forEach(card => {
+        if (phone.matches) card.removeAttribute('open');
+        else card.setAttribute('open', '');
+      });
+      summaries.forEach(summary => { summary.tabIndex = phone.matches ? 0 : -1; });
+    };
+    syncValueCards();
+    if (phone.addEventListener) phone.addEventListener('change', syncValueCards);
+    else phone.addListener(syncValueCards);
   })();
 </script>
-
 <!-- ========== QUALIFICATIONS ========== -->
 <section id="qualifications">
   <div class="wrap">

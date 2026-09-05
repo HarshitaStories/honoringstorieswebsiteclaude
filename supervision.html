@@ -172,6 +172,32 @@
   .track-label { font-family: var(--font-display); font-style: italic; color: var(--rose); font-size: 0.95rem; margin-bottom: 0.5rem; }
   .track-card h4 { font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--deep-purple); }
   .track-card p { color: var(--charcoal-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+  .track-summary { list-style: none; }
+  .track-summary::-webkit-details-marker { display: none; }
+  .track-summary-arrow { display: none; }
+  @media (min-width: 640px) { .track-summary { pointer-events: none; } }
+  @media (max-width: 639px) {
+    .track-card { padding: 1rem 1.15rem; }
+    .track-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 18px;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .track-summary .track-label { margin-bottom: 0.25rem; }
+    .track-summary h4 { margin: 0; text-align: left; }
+    .track-summary-arrow {
+      display: block;
+      width: 18px;
+      height: 18px;
+      color: var(--deep-purple);
+      transition: transform 0.3s var(--ease-gentle);
+    }
+    .track-card[open] .track-summary-arrow { transform: rotate(180deg); }
+    .track-card > p { padding-top: 0.8rem; text-align: left; }
+  }
 
   /* ========== LOGISTICS ========== */
   /* Infographic, no containers: four points threaded on one line, each reacting
@@ -391,25 +417,65 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z" opacity="0.7"/></svg>
       </div>
     </div>
-    <div class="track-grid">
-      <div class="track-card reveal delay-1">
-        <div class="track-label">0 to 3 years</div>
-        <h4>Early-career</h4>
+    <div class="track-grid" id="supervisionTrackGrid">
+            <details class="track-card reveal delay-1" open>
+        <summary class="track-summary">
+          <div class="track-summary-copy">
+            <div class="track-label">0 to 3 years</div>
+            <h4>Early-career</h4>
+          </div>
+          <svg class="track-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>A space where you can feel supported as you build your practice and grow into your identity as a therapist. Bring your questions, doubts, and emotional experiences, imposter syndrome included, into a safe, non-judgmental space.</p>
-      </div>
-      <div class="track-card reveal delay-2">
-        <div class="track-label">3 to 6 years</div>
-        <h4>Mid-career</h4>
+      </details>
+            <details class="track-card reveal delay-2" open>
+        <summary class="track-summary">
+          <div class="track-summary-copy">
+            <div class="track-label">3 to 6 years</div>
+            <h4>Mid-career</h4>
+          </div>
+          <svg class="track-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>A space to pause and reflect on how you are doing as a person and a practitioner. Navigate complex cases, burnout, and stuckness, and reconnect with your intentions to deepen your work.</p>
-      </div>
-      <div class="track-card reveal delay-3">
-        <div class="track-label">6+ years</div>
-        <h4>Experienced</h4>
+      </details>
+            <details class="track-card reveal delay-3" open>
+        <summary class="track-summary">
+          <div class="track-summary-copy">
+            <div class="track-label">6+ years</div>
+            <h4>Experienced</h4>
+          </div>
+          <svg class="track-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <p>A space to further understand yourself as a professional, and explore how you continue to grow and change as you deepen into your work.</p>
-      </div>
+      </details>
     </div>
   </div>
 </section>
+
+<script>
+  (() => {
+    const grid = document.getElementById('supervisionTrackGrid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.track-card'));
+    const summaries = cards.map(card => card.querySelector('.track-summary'));
+    const phone = window.matchMedia('(max-width: 639px)');
+    summaries.forEach(summary => {
+      summary.addEventListener('click', event => {
+        if (!phone.matches) event.preventDefault();
+      });
+    });
+    const syncTrackCards = () => {
+      cards.forEach(card => {
+        if (phone.matches) card.removeAttribute('open');
+        else card.setAttribute('open', '');
+      });
+      summaries.forEach(summary => { summary.tabIndex = phone.matches ? 0 : -1; });
+    };
+    syncTrackCards();
+    if (phone.addEventListener) phone.addEventListener('change', syncTrackCards);
+    else phone.addListener(syncTrackCards);
+  })();
+</script>
 
 <!-- ========== LOGISTICS ========== -->
 <section id="logistics">

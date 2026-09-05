@@ -1075,7 +1075,9 @@ Reversals are included on purpose: they show what has already been rejected.
 | --- | --- |
 | Replaced the phone concern lists with per-card disclosures | On the homepage and Psychotherapy page below 640px, all six concern headings remain visible as compact, left-aligned rows with arrows, while each left-aligned description opens from its own heading. Tablet and desktop keep the established fully open cards. This supersedes the earlier two-card View more treatment. |
 | Reduced overall phone-page whitespace | Across all nine pages below 640px, section padding is reduced from 6rem to 3.5rem and heading-to-content spacing from 4rem to 2rem. Tablet and desktop spacing is unchanged. |
-| Added a selective phone disclosure to the About values | Below 640px, Trauma-informed and Queer-affirmative stay visible, and View more reveals Eclectic, Intersectional, and Neurodivergent inclusive. Tablet and desktop continue to show all five cards in their established grid. |
+| Replaced the About phone values list with per-card disclosures | Below 640px, all five value headings stay visible as compact, left-aligned rows with arrows, and each left-aligned description opens independently. This supersedes the earlier selective two-card View more treatment. Tablet and desktop keep all five cards fully open and non-interactive. |
+| Split the Workplace Wellbeing availability note into two boxes | Across phone, tablet, and desktop, the combined pill was replaced by separate boxes reading Sessions offered in English and Hindi and Online or in person in Mumbai. Separate language and location icons make the two details easier to scan. |
+| Made Supervision experience cards expandable on phones | Below 640px, all three years labels and headings stay visible with arrows, and each description opens independently. From 640px upward, all descriptions remain open and the headings are non-interactive. |
 
 ### 2026-09-04
 
