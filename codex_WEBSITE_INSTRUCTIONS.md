@@ -1085,7 +1085,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
-| Collapsed the homepage concerns after Anxiety & Overwhelm on phones | Below 640px, the first concern stays visible and a View more control reveals the other five. The control becomes View less when expanded. Tablet and desktop keep all six cards visible with no disclosure control. |
+| Collapsed the homepage concerns after the first two cards on phones | Below 640px, Anxiety & Overwhelm and Relationships & Transitions stay visible, and a View more control reveals the other four. The control becomes View less when expanded. Tablet and desktop keep all six cards visible with no disclosure control. |
 
 ### 2026-09-04
 
