@@ -286,7 +286,7 @@
   @media (max-width: 639px) { section { padding: 3.5rem 0; } .section-head { margin-bottom: 2rem; } }
   /* Mobile-only gentle app shell. Desktop remains governed by the existing rules. */
   .mobile-app-nav { display: none; }
-  @media (max-width: 899px) { body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); } .nav-inner { min-height: 64px; padding-top: 0.35rem; padding-bottom: 0.35rem; } .nav-logo img { height: 44px !important; } .mobile-app-nav { position: fixed; z-index: 95; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.2rem; padding: 0.45rem; background: rgba(253, 250, 242, 0.92); border: 1px solid rgba(91, 46, 107, 0.14); border-radius: 22px; box-shadow: 0 16px 38px -18px rgba(43, 30, 47, 0.45); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); } .mobile-app-nav a { min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.22rem; padding: 0.32rem 0.1rem; border-radius: 15px; color: var(--muted); font-size: 0.62rem; font-weight: 600; line-height: 1; letter-spacing: 0.01em; } .mobile-app-nav a svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .mobile-app-nav a[aria-current="page"] { color: var(--deep-purple); background: rgba(242, 197, 213, 0.42); } .mobile-app-nav .mobile-app-book { color: var(--rose); } .wa-float { right: 1rem; bottom: calc(6rem + env(safe-area-inset-bottom)); width: 46px; height: 46px; } .wa-float svg { width: 23px; height: 23px; } }
+  @media (max-width: 899px) { body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); } .nav-inner { min-height: 64px; padding-top: 0.35rem; padding-bottom: 0.35rem; } .nav-logo img { height: 44px !important; } .mobile-app-nav { position: fixed; z-index: 95; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.2rem; padding: 0.45rem; background: rgba(253, 250, 242, 0.92); border: 1px solid rgba(91, 46, 107, 0.14); border-radius: 22px; box-shadow: 0 16px 38px -18px rgba(43, 30, 47, 0.45); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); } .mobile-app-nav > a, .mobile-app-work-toggle { min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.22rem; padding: 0.32rem 0.1rem; border-radius: 15px; color: var(--muted); font-size: 0.62rem; font-weight: 600; line-height: 1; letter-spacing: 0.01em; } .mobile-app-nav > a svg, .mobile-app-work-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .mobile-app-nav > a[aria-current="page"], .mobile-app-work-toggle[aria-current="page"] { color: var(--deep-purple); background: rgba(242, 197, 213, 0.42); } .mobile-app-work { position: relative; min-width: 0; } .mobile-app-work-toggle { width: 100%; border: 0; appearance: none; -webkit-appearance: none; background: transparent; font-family: var(--font-body); cursor: pointer; } .mobile-app-work-toggle[aria-current="page"], .mobile-app-work-toggle[aria-expanded="true"] { color: var(--deep-purple); background: rgba(242, 197, 213, 0.42); } .mobile-app-work-menu[hidden] { display: none; } .mobile-app-work-menu { position: absolute; left: 50%; bottom: calc(100% + 0.85rem); transform: translateX(-50%); width: min(270px, calc(100vw - 32px)); display: grid; gap: 0.25rem; padding: 0.55rem; background: rgba(253, 250, 242, 0.97); border: 1px solid rgba(91, 46, 107, 0.16); border-radius: 16px; box-shadow: 0 18px 42px -18px rgba(43, 30, 47, 0.5); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); } .mobile-app-work-menu a { min-height: 44px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 0.7rem 0.85rem; border-radius: 11px; color: var(--charcoal-soft); font-size: 0.85rem; font-weight: 500; line-height: 1.3; text-align: left; } .mobile-app-work-menu a:hover, .mobile-app-work-menu a:focus-visible, .mobile-app-work-menu a[aria-current="page"] { color: var(--deep-purple); background: rgba(242, 197, 213, 0.42); } .mobile-app-nav .mobile-app-book { color: var(--rose); } .wa-float { right: 1rem; bottom: calc(6rem + env(safe-area-inset-bottom)); width: 46px; height: 46px; } .wa-float svg { width: 23px; height: 23px; } }
 </style></head>
 <body>
 
@@ -330,7 +330,14 @@
 <nav class="mobile-app-nav" aria-label="Mobile primary navigation">
   <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg><span>Home</span></a>
   <a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg><span>About</span></a>
-  <a href="index.html#work-with-me"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><span>Work</span></a>
+  <div class="mobile-app-work">
+    <button type="button" class="mobile-app-work-toggle" aria-expanded="false" aria-controls="mobileWorkMenu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><span>Work</span></button>
+    <div class="mobile-app-work-menu" id="mobileWorkMenu" hidden>
+      <a href="psychotherapy.html">Psychotherapy sessions</a>
+      <a href="supervision.html">Supervision sessions</a>
+      <a href="workplace-wellbeing.html">Workplace Wellbeing</a>
+    </div>
+  </div>
   <a href="community.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3.5 20c.5-4 2.4-6 5.5-6s5 2 5.5 6M14 15c3.6-.6 5.8 1.1 6.5 5"/></svg><span>Community</span></a>
   <a class="mobile-app-book" href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2"/><path d="M8 3.5v4M16 3.5v4M4 10h16"/></svg><span>Book</span></a>
 </nav>
@@ -489,4 +496,34 @@
   <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.897-1.744A11.93 11.93 0 0016.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.97 16.982c-.297.836-1.47 1.53-2.412 1.73-.642.137-1.48.246-4.302-.924-3.61-1.496-5.933-5.155-6.115-5.394-.174-.24-1.464-1.95-1.464-3.72s.914-2.64 1.24-3.003c.297-.33.65-.412.867-.412.217 0 .434.002.624.012.2.01.468-.076.732.559.297.716.99 2.472 1.076 2.65.087.18.146.39.03.63-.116.24-.174.39-.348.6-.174.21-.365.469-.522.63-.174.18-.355.375-.153.735.203.36.902 1.49 1.937 2.412 1.33 1.186 2.451 1.554 2.812 1.728.36.174.57.15.78-.09.21-.24.897-1.046 1.137-1.406.24-.36.48-.3.81-.18.33.12 2.085.984 2.443 1.163.36.18.6.27.688.42.087.15.087.867-.21 1.703z"/></svg>
 </a>
 
-</body></html>
+<script>
+  (() => {
+    const work = document.querySelector('.mobile-app-work');
+    if (!work) return;
+    const toggle = work.querySelector('.mobile-app-work-toggle');
+    const menu = work.querySelector('.mobile-app-work-menu');
+    const closeMenu = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+    };
+    toggle.addEventListener('click', () => {
+      const opening = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(opening));
+      menu.hidden = !opening;
+    });
+    menu.addEventListener('click', closeMenu);
+    document.addEventListener('click', event => {
+      if (!work.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !menu.hidden) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+    const desktop = window.matchMedia('(min-width: 900px)');
+    const closeOnDesktop = event => { if (event.matches) closeMenu(); };
+    if (desktop.addEventListener) desktop.addEventListener('change', closeOnDesktop);
+    else desktop.addListener(closeOnDesktop);
+  })();
+</script></body></html>

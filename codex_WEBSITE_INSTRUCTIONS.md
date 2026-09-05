@@ -276,6 +276,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   direct access to Home, About, Work, Community and Book. The current page group is highlighted on
   Home, About, the three Work pages and Community. The three legal pages show the bar without a
   false active state. The original hamburger drawer remains available for the complete navigation.
+  The bottom Work item is a button on phone and tablet. It opens a menu above the bar with direct
+  links to Psychotherapy sessions, Supervision sessions and Workplace Wellbeing. `aria-expanded`,
+  the native `hidden` state, outside-click closing and Escape closing keep the selector accessible.
+  The desktop Work With Me dropdown and all desktop navigation remain unchanged.
   The top logo is reduced to 44px, each bottom target is at least 52px tall, safe-area spacing is
   respected, and the floating WhatsApp button moves above the bottom bar. At 900px and wider the
   bar is `display: none`, and removing the mobile-only block restores each prior page byte-for-byte.
@@ -1094,6 +1098,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Added a Work selector to the phone and tablet bottom navigation | Below 900px on all nine pages, tapping Work now opens direct choices for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing. Desktop navigation remains unchanged. |
 | Kept the homepage statistics horizontal on phones | The 7+, 400+ and 3,000+ figures now remain in one three-column row below 560px instead of stacking vertically. Tablet and desktop were already horizontal and remain unchanged. |
 | Justified the homepage approach paragraph on phones | Below 640px only, the paragraph beneath the glimpse photo now has even left and right edges, with its final line aligned left. Tablet and desktop remain unchanged. |
 | Moved the homepage portrait directly after the heading on phones | Below 640px only, the portrait now appears between the main heading and the supporting paragraph. Tablet and desktop retain their previous content order and layout. |

@@ -117,6 +117,12 @@ tablet and laptop are separate scopes: phone rules end at 639px, tablet spans 64
 and laptop starts at 900px. The bottom navigation is a documented exception that covers both phone
 and tablet. A change must be applied only to the version Harshita names.
 
+Within that bottom navigation, Work is a button rather than a direct page link. On phone and tablet
+it opens a three-link panel for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing.
+The markup, styles and small interaction script are repeated in all nine HTML files. Any future change
+to this selector must therefore be made and tested nine times. It is hidden with the whole bottom bar
+at 900px and wider, where the existing desktop Work With Me dropdown remains unchanged.
+
 On the homepage below 640px, CSS grid ordering places the portrait directly after the main heading,
 followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the
 stacked text then portrait order, and laptop retains the two-column hero.
