@@ -873,6 +873,29 @@
     line-height: 1.7;
     margin: 0;
   }
+  .mobile-concerns-toggle { display: none; }
+  @media (max-width: 639px) {
+    .concerns-grid:not(.mobile-concerns-expanded) .concern-card:nth-child(n + 2) { display: none; }
+    .mobile-concerns-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 1.25rem auto 0;
+      padding: 0.65rem 1rem;
+      border: 0;
+      background: transparent;
+      color: var(--deep-purple);
+      font: 600 0.9rem/1 var(--font-body);
+      cursor: pointer;
+    }
+    .mobile-concerns-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s var(--ease-gentle);
+    }
+    .mobile-concerns-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  }
 
   /* ========== GLIMPSE (consolidated credibility strip) ========== */
   .glimpse {
@@ -1528,7 +1551,7 @@
       </div>
       <p>You don't have to go through it alone. Let's explore it together, with honor and care.</p>
     </div>
-    <div class="concerns-grid">
+    <div class="concerns-grid" id="concernsGrid">
       <div class="concern-card reveal delay-1">
         <svg class="concern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg>
         <h4>Anxiety & Overwhelm</h4>
@@ -1560,8 +1583,26 @@
         <p>A space that respects and affirms diverse gender and sexual identities, without explanation required.</p>
       </div>
     </div>
+    <button class="mobile-concerns-toggle" id="mobileConcernsToggle" type="button" aria-expanded="false" aria-controls="concernsGrid">
+      <span>View more</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
   </div>
 </section>
+
+<script>
+  (() => {
+    const button = document.getElementById('mobileConcernsToggle');
+    const grid = document.getElementById('concernsGrid');
+    if (!button || !grid) return;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      button.querySelector('span').textContent = expanded ? 'View more' : 'View less';
+      grid.classList.toggle('mobile-concerns-expanded', !expanded);
+    });
+  })();
+</script>
 
 <!-- ========== GLIMPSE (consolidated credibility strip) ========== -->
 <section class="glimpse" id="glimpse">

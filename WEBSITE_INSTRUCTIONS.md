@@ -1069,6 +1069,12 @@ by `.gitignore` because they carry personal data. Keep it that way.
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
 
+### 2026-09-05
+
+| Decision / change | Reason |
+| --- | --- |
+| Collapsed the homepage concerns after Anxiety & Overwhelm on phones | Below 640px, the first concern stays visible and a View more control reveals the other five. The control becomes View less when expanded. Tablet and desktop keep all six cards visible with no disclosure control. |
+
 ### 2026-09-04
 
 | Change | Why |
