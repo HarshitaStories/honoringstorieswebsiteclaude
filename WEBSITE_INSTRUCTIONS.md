@@ -360,6 +360,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     paragraph above it, not a separate component. The paragraph's font size (`0.98rem`) was also
     matched to `.value-card p` on request, "make this font similar to" the Express/Embrace/Empower
     body text.
+    Below 640px only, the approach paragraph is fully justified with its final line aligned
+    left. Tablet and desktop retain their established left alignment and ragged right edge.
     Below the two-column row sits the full-width animated **stat counter row** (see Practice stats
     in section 5), separated by a petal divider. The stats were originally squeezed into the
     half-width text column and got visually clipped by the fixed section-rail tooltip on narrower
@@ -1078,6 +1080,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Justified the homepage approach paragraph on phones | Below 640px only, the paragraph beneath the glimpse photo now has even left and right edges, with its final line aligned left. Tablet and desktop remain unchanged. |
 | Moved the homepage portrait directly after the heading on phones | Below 640px only, the portrait now appears between the main heading and the supporting paragraph. Tablet and desktop retain their previous content order and layout. |
 | Replaced the phone concern lists with per-card disclosures | On the homepage and Psychotherapy page below 640px, all six concern headings remain visible as compact, left-aligned rows with arrows, while each left-aligned description opens from its own heading. Tablet and desktop keep the established fully open cards. This supersedes the earlier two-card View more treatment. |
 | Reduced overall phone-page whitespace | Across all nine pages below 640px, section padding is reduced from 6rem to 3.5rem and heading-to-content spacing from 4rem to 2rem. Tablet and desktop spacing is unchanged. |
