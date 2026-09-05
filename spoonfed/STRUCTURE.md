@@ -127,10 +127,10 @@ On the homepage below 640px, CSS grid ordering places the portrait directly afte
 followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the
 stacked text then portrait order, and laptop retains the two-column hero.
 
-On Psychotherapy below 640px, a phone-only copy of `assets/therapy-hero.jpg` appears directly
-after the h1, while the original hero-art wrapper is hidden. From 640px upward the phone copy
-is hidden and the original is visible, preserving the established tablet and laptop layouts.
-If that image path or alt text changes, update both copies in `psychotherapy.html`.
+On Psychotherapy and Supervision below 640px, a phone-only copy of the relevant hero image
+appears directly after the h1, while the original hero-art wrapper is hidden. From 640px upward
+the phone copy is hidden and the original is visible, preserving the established tablet and laptop
+layouts. If either image path or alt text changes, update both copies in its page file.
 
 ---
 

@@ -459,12 +459,15 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   the existing paragraph, availability boxes and booking button. The original artwork remains
   the only visible copy from 640px upward, preserving the tablet stack and desktop columns.
 - **Work With Me, Supervision** (`supervision.html`, built): same pattern, using
-  `assets/supervision-hero.png`. Includes a **three-track** section ("Wherever you are in your
+  `assets/supervision-hero.jpg`. Includes a **three-track** section ("Wherever you are in your
   practice", eyebrow "Three ways in"): 0-3 years/Early-career, 3-6 years/Mid-career, 6+ years/
   Experienced (this third card and the "Mid-career" rename were added after the user approved the
   proposed write-up). Pricing is Rs 1,800/session online, Rs 2,500 per 60-min in-person session
   (corrected from an earlier equal Rs 1,800 for both); a reserved "Coming soon: Group Supervision"
   card; the consent-form step with its real link; all 6 FAQs; a languages note; a contact section.
+  Below 640px only, a phone copy of the hero artwork sits immediately after the h1, followed by
+  the existing paragraph, availability boxes and booking button. The original artwork remains
+  the only visible copy from 640px upward, preserving the tablet stack and desktop columns.
 - **Session logistics infographic** (`.logistics-grid`, on both Psychotherapy and Supervision).
   Replaced the original four bordered cards, which were explicitly rejected: "create this section in
   info graphic UI without containers with dynamic mouse interaction". Current form:
@@ -1101,6 +1104,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Moved the Supervision hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Supervision Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Moved the Psychotherapy hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Psychotherapy Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Added a Work selector to the phone and tablet bottom navigation | Below 900px on all nine pages, tapping Work now opens direct choices for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing. Desktop navigation remains unchanged. |
 | Kept the homepage statistics horizontal on phones | The 7+, 400+ and 3,000+ figures now remain in one three-column row below 560px instead of stacking vertically. Tablet and desktop were already horizontal and remain unchanged. |

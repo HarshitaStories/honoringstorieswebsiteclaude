@@ -134,6 +134,12 @@
      now sits directly on the banner. No radius or shadow here: both would draw
      the edges of a card that no longer visually exists. */
   .hero-art { display: block; }
+  .page-hero-visual-phone { display: none; }
+  @media (max-width: 639px) {
+    .page-hero-inner { gap: 0; }
+    .page-hero-visual-phone { display: block; margin-bottom: 1.5rem; }
+    .page-hero-visual-wide { display: none; }
+  }
 
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
@@ -396,6 +402,9 @@
       <div class="reveal">
         <span class="eyebrow">For mental health professionals</span>
         <h1>Supervision Sessions</h1>
+        <div class="page-hero-visual-phone">
+          <img class="hero-art" src="assets/supervision-hero.jpg" alt="An illustration of two figures shaking hands at a doorway shaped like a head, opening into a reflective space." />
+        </div>
         <p class="page-hero-note">Thoughtful, collaborative supervision for practicing therapists and counselors, whether you're early in your career or years into your practice. A space to reflect on your work, your clients, and yourself as a practitioner, and to deepen how you hold the work with care.</p>
         <div class="hero-notes">
           <div class="lang-note">
@@ -414,7 +423,7 @@
           </a>
         </div>
       </div>
-      <div class="reveal delay-1">
+      <div class="reveal delay-1 page-hero-visual-wide">
         <img class="hero-art" src="assets/supervision-hero.jpg" alt="An illustration of two figures shaking hands at a doorway shaped like a head, opening into a reflective space." />
       </div>
     </div>
