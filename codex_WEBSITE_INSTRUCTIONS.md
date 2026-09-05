@@ -545,6 +545,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     is `display: block` and nothing else. The inherited `border-radius: 20px` plus drop shadow was
     removed: around a cut-out it outlines a card that is not there. It was also dead on the three
     legal pages, which carried the rule and no such image.
+  - **Below 640px only, the Workplace Wellbeing artwork appears immediately after the h1.**
+    The introductory paragraph, availability notes and button follow it. A phone-only image copy is
+    shown while the original hero image wrapper is hidden. From 640px upward, the phone copy is
+    hidden and the original hero order and layout remain unchanged.
   - **In the nav dropdown and mobile drawer this page is labelled "Workplace Wellbeing"**, matching
     its own headline. The footer link and the homepage Work With Me card still say "For
     organisations", and the browser tab title is still "For Organisations Â· Honoring Stories".
@@ -1104,6 +1108,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Moved the Workplace Wellbeing hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Workplace Wellbeing” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Moved the Supervision hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Supervision Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Moved the Psychotherapy hero artwork after its heading on phones | Below 640px only, the artwork now appears between “Psychotherapy Sessions” and the introductory paragraph. Tablet and desktop retain their previous order and layout. |
 | Added a Work selector to the phone and tablet bottom navigation | Below 900px on all nine pages, tapping Work now opens direct choices for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing. Desktop navigation remains unchanged. |

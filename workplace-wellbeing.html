@@ -253,6 +253,12 @@
      banner. No radius or shadow: both would draw the edges of a card that is
      not there. Matches the therapy and supervision pages. */
   .hero-art { display: block; }
+  .page-hero-visual-phone { display: none; }
+  @media (max-width: 639px) {
+    .page-hero-inner { gap: 0; }
+    .page-hero-visual-phone { display: block; margin-bottom: 1.5rem; }
+    .page-hero-visual-wide { display: none; }
+  }
   /* About block: circular portrait slot on the left, centred copy beside it. */
   .about-split { display: grid; gap: 2.5rem; justify-items: center; align-items: center; max-width: 980px; margin: 0 auto; }
   @media (min-width: 820px) { .about-split { grid-template-columns: 240px 1fr; gap: 3.5rem; } }
@@ -393,6 +399,9 @@
       <div class="corp-hero reveal">
         <span class="eyebrow">For organisations and teams</span>
         <h1>Workplace Wellbeing</h1>
+        <div class="page-hero-visual-phone">
+          <img class="hero-art" src="assets/workplace-wellbeing.png" alt="An illustration of four people sitting together around a round table with a laptop, mugs and a small plant, under a soft arc, with a calendar, papers and an envelope drifting to one side." />
+        </div>
         <p class="page-hero-note">Most workplaces do not have a mental health problem to solve. They have people carrying a lot, often quietly, alongside deadlines and change and each other. I work with organisations to create spaces where that can be spoken about honestly, and where support feels genuinely available rather than announced once a year.</p>
         <div class="hero-notes">
           <div class="lang-note">
@@ -411,7 +420,7 @@
           </a>
         </div>
       </div>
-      <div class="reveal delay-1">
+      <div class="reveal delay-1 page-hero-visual-wide">
         <img class="hero-art" src="assets/workplace-wellbeing.png" alt="An illustration of four people sitting together around a round table with a laptop, mugs and a small plant, under a soft arc, with a calendar, papers and an envelope drifting to one side." />
       </div>
     </div>
