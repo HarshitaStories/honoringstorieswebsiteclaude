@@ -1078,6 +1078,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Replaced the About phone values list with per-card disclosures | Below 640px, all five value headings stay visible as compact, left-aligned rows with arrows, and each left-aligned description opens independently. This supersedes the earlier selective two-card View more treatment. Tablet and desktop keep all five cards fully open and non-interactive. |
 | Split the service-page availability notes into two boxes | Across phone, tablet, and desktop on Workplace Wellbeing, Psychotherapy, and Supervision, availability appears in separate boxes reading Sessions offered in English and Hindi and Online or in person in Mumbai. Separate language and location icons make the two details easier to scan. |
 | Made Supervision experience cards expandable on phones | Below 640px, all three years labels and headings stay visible with arrows, and each description opens independently. From 640px upward, all descriptions remain open and the headings are non-interactive. |
+| Revised the Shared Ways of Coping caption | Across phone, tablet, and desktop, "What helps on hard days, from one person to another" became "What can help on hard days, from one person to another". |
 
 ### 2026-09-04
 
@@ -1095,7 +1096,7 @@ Reversals are included on purpose: they show what has already been rejected.
 | Changed the Sip and Swap LinkedIn explanation | Harshita wanted the message to say the profile helps her get to know the person better before they connect, rather than giving her a bit of context. |
 | Expanded the Psychotherapy confidentiality FAQ answer | Harshita clarified that the provided emergency contact may need to be informed if there is a risk of harm, and that this will be discussed with the client first. |
 | Limited Psychotherapy in-person pricing to India-based visitors and added INR labels | India-based visitors should see online and in-person charges. Visitors outside India should see only the INR 2,500 online charge. |
-| Changed the caption above the Shared Ways of Coping notepad | The first proposed replacement, "From one person to another, for the hard days", was refined before committing. The final caption is "What helps on hard days, from one person to another", which describes the notes and keeps the person-to-person feeling. |
+| Changed the caption above the Shared Ways of Coping notepad | The first proposed replacement, "From one person to another, for the hard days", was refined before committing. At this stage the caption became "What helps on hard days, from one person to another". It was revised again on 2026-09-05. |
 
 ### 2026-08-31
 
