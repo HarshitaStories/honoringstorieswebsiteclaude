@@ -155,6 +155,12 @@
      so it now sits directly on the banner. No radius or shadow here: both would
      draw the edges of a card that no longer visually exists. */
   .hero-art { display: block; }
+  .page-hero-visual-phone { display: none; }
+  @media (max-width: 639px) {
+    .page-hero-inner { gap: 0; }
+    .page-hero-visual-phone { display: block; margin-bottom: 1.5rem; }
+    .page-hero-visual-wide { display: none; }
+  }
 
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: background 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle), transform 0.25s var(--ease-out); letter-spacing: 0.01em; will-change: transform; }
   .btn-primary { background: var(--deep-purple); color: var(--cream-warm); }
@@ -437,6 +443,9 @@
       <div class="reveal">
         <span class="eyebrow">For individuals</span>
         <h1>Psychotherapy Sessions</h1>
+        <div class="page-hero-visual-phone">
+          <img class="hero-art" src="assets/therapy-hero.jpg" alt="An illustrated collage representing everyday emotional weight: a forced smile, pressure to keep going, and the quiet ache of things left unsaid." />
+        </div>
         <p class="page-hero-note">Psychotherapy is a safe, supportive space where you can talk openly about what you're going through, whether it's stress, anxiety, past experiences, or feeling stuck. Together, we explore your thoughts, feelings, and patterns to help you feel less overwhelmed, and find new ways to cope and grow.</p>
         <div class="hero-notes">
           <div class="lang-note">
@@ -455,7 +464,7 @@
           </a>
         </div>
       </div>
-      <div class="reveal delay-1">
+      <div class="reveal delay-1 page-hero-visual-wide">
         <img class="hero-art" src="assets/therapy-hero.jpg" alt="An illustrated collage representing everyday emotional weight: a forced smile, pressure to keep going, and the quiet ache of things left unsaid." />
       </div>
     </div>
