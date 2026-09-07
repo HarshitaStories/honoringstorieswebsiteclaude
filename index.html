@@ -1009,6 +1009,11 @@
     color: var(--charcoal-soft);
     font-weight: 400;
   }
+  .stat-label-phone { display: none; }
+  @media (max-width: 639px) {
+    .stat-label-wide { display: none; }
+    .stat-label-phone { display: inline; }
+  }
   /* The real photo is portrait (4:5). The container matches that ratio rather
      than the old 4:3 placeholder, so nothing is cropped, and max-width keeps it
      from towering over the paragraph beside it. */
@@ -1687,7 +1692,7 @@
       </div>
       <div class="stat-card reveal delay-3">
         <div class="stat-num-wrap"><span class="stat-num" data-target="3000">0</span><span class="stat-plus">+</span></div>
-        <div class="stat-label">Sessions completed</div>
+        <div class="stat-label"><span class="stat-label-wide">Sessions completed</span><span class="stat-label-phone">Sessions</span></div>
       </div>
     </div>
   </div>

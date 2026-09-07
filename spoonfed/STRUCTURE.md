@@ -127,6 +127,10 @@ On the homepage below 640px, CSS grid ordering places the portrait directly afte
 followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the
 stacked text then portrait order, and laptop retains the two-column hero.
 
+In the homepage statistic row below 640px, the third label switches from Sessions completed to
+Sessions. Both text spans remain in index.html, with the phone media query choosing which one is
+shown. Tablet and laptop continue to show Sessions completed.
+
 On Psychotherapy, Supervision and Workplace Wellbeing below 640px, a phone-only copy of the relevant hero image
 appears directly after the h1, while the original hero-art wrapper is hidden. From 640px upward
 the phone copy is hidden and the original is visible, preserving the established tablet and laptop

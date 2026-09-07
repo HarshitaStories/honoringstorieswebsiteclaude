@@ -741,7 +741,7 @@ Displayed in the glimpse section as three large animated numbers that count up f
 scrolled into view, replacing the earlier trust-line paragraph:
 - 7+, Years
 - 400+, Clients served
-- 3,000+, Sessions completed
+- 3,000+, Sessions on phones below 640px; Sessions completed on tablet and laptop
 
 Style convention: keep this pairing (7 / 400 / 3,000) unless the user supplies updated figures.
 Went through four passes: (1) heavy bold sans-serif numbers above a flat full-width rule, rejected
@@ -755,6 +755,7 @@ as one calm band. Numbers are upright serif (not italic; that read as "too cursi
 in an earlier pass). The count-up eases in and out with a gentle smoothstep (`p*p*(3-2p)`) over
 **3200ms**, progressively slowed from 1600 to 2000 to 3200 across passes as the user kept asking
 for calmer motion. If revisited, keep going simpler and slower, not back toward cards or icons.
+The third statistic's label is Sessions below 640px and Sessions completed from 640px upward.
 The three statistics remain in one horizontal row at phone, tablet and desktop widths. The
 former phone-only single-column override below 560px was removed on explicit request.
 
@@ -1091,6 +1092,12 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
+
+### 2026-09-07
+
+| Decision / change | Reason |
+| --- | --- |
+| Shortened the third homepage statistic label on phones | Below 640px, the 3,000+ statistic reads Sessions so it stays compact in the three-column row. Tablet and laptop retain Sessions completed. The number and counter behaviour are unchanged. |
 
 ### 2026-09-05
 
