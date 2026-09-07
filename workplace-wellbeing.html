@@ -265,10 +265,9 @@
   /* About block: circular portrait slot on the left, centred copy beside it. */
   .about-split { display: grid; gap: 2.5rem; justify-items: center; align-items: center; max-width: 980px; margin: 0 auto; }
   @media (min-width: 820px) { .about-split { grid-template-columns: 240px 1fr; gap: 3.5rem; } }
-  /* object-position is tuned to the source: her eyes sit about 31% down the
-     original, and a square cover-crop only shows the middle two thirds of a
-     2:3 portrait, so pulling the window up to 14% lands her face slightly
-     above centre in the circle, which is where a portrait wants to sit. */
+  /* harshita-home is a transparent cut-out. The existing square cover crop at
+     50% 14% keeps her face slightly above centre, while the circle, soft shadow
+     and reveal wrapper preserve the approved portrait treatment. */
   .dp-photo { width: 220px; height: 220px; flex-shrink: 0; border-radius: 50%; object-fit: cover; object-position: 50% 14%; display: block; box-shadow: 0 16px 32px -22px rgba(91, 46, 107, 0.35); }
   .about-split .corp-prose { max-width: none; text-align: left; }
   .about-cta { margin-top: 1.75rem; }
@@ -574,7 +573,7 @@
     </div>
     <div class="about-split">
       <div class="reveal">
-        <img class="dp-photo" src="assets/harshita-organisations.jpg" alt="Harshita Sarda, psychotherapist and clinical supervisor." />
+        <img class="dp-photo" src="assets/harshita-home.png" alt="Harshita Sarda, psychotherapist and clinical supervisor." />
       </div>
       <div class="corp-prose reveal delay-1">
         <p>I am Harshita Sarda, a psychotherapist and clinical supervisor based in Andheri West, Mumbai. I hold an MA in Clinical Psychology, a Diploma in Counseling Psychology from Xavier's College, and a Diploma in Supervision for Mental Health Practice from TISS. I have completed a Queer Affirmative Practice course with Mariwala Health Foundation and training in complex trauma with the ISSTD.</p>

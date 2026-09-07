@@ -24,12 +24,12 @@ website/                                  <-- publish the CONTENTS of this folde
 â””â”€â”€ assets/                               Every picture
     â”œâ”€â”€ logo.png                          Nav logo and browser tab icon. Used by all 9 pages.
     â”œâ”€â”€ Whitelogo.png                     Footer logo. Used by all 9 pages.
-    â”œâ”€â”€ harshita-home.png                 Homepage main photo
+    â”œâ”€â”€ harshita-home.png                 Homepage main photo and organisations About portrait
     â”œâ”€â”€ harshita-glimpse.png              Homepage second photo
     â”œâ”€â”€ therapy-hero.jpg                  Psychotherapy page illustration
     â”œâ”€â”€ supervision-hero.jpg              Supervision page illustration
     â”œâ”€â”€ workplace-wellbeing.png           Organisations page illustration
-    â”œâ”€â”€ harshita-organisations.jpg        Organisations page round portrait
+    â”œâ”€â”€ harshita-organisations.jpg        KEPT BUT UNUSED. Previous organisations About portrait
     â”œâ”€â”€ community-hero.jpg                Community page top banner
     â”œâ”€â”€ sharedwaysofcoping.jpg            Community page section illustration
     â”‚
@@ -125,6 +125,10 @@ at 900px and wider, where the existing desktop Work With Me dropdown remains unc
 
 The About bio uses `assets/redpic.png` at phone, tablet and laptop widths. It remains inside the
 existing `.full-photo` and reveal structure, with a 400px maximum width and automatic height.
+
+The Workplace Wellbeing About block uses `assets/harshita-home.png` in the existing 220px
+circular `.dp-photo` at phone, tablet and laptop widths. Its crop, shadow, reveal animation and
+responsive grid remain unchanged.
 
 On the homepage below 640px, CSS grid ordering places the portrait directly after the main heading,
 followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the

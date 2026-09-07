@@ -554,12 +554,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   - `.theme-pill` borders are `rgba(91, 46, 107, 0.3)`, **not `var(--line)`**. At 0.14 alpha they
     were all but invisible against the cream these sit on. Hover adds the site's purple bloom as a
     box-shadow.
-  - **Her portrait sits in the About block, not the hero**: `assets/harshita-organisations.jpg`
-    (560x840, 62 KB), cropped to a 220px circle at `object-position: 50% 14%`. The source
-    `Harshitafororganizations.jpg` had a navy background, flood-filled from the image borders to
-    white at tolerance 45, which isolates the navy without touching her blazer, hair or skin. Two
-    small teal artifacts remain at the left edge of the source and fall outside the circular crop,
-    so do not widen that crop without re-checking them.
+  - **Her portrait sits in the About block, not the hero**: `assets/harshita-home.png`
+    (948x1078, transparent PNG), cropped to the existing 220px circle at
+    `object-position: 50% 14%`. The circle, soft shadow, reveal animation and responsive grid are
+    unchanged across phone, tablet and laptop. The transparent cut-out lets the section cream show
+    around her inside the circle. The previous `assets/harshita-organisations.jpg` is retained but unused.
   - **Confidentiality is a collapsible panel inside "What I offer"**, centred beneath the three
     cards, opened by an `.info-btn` reading "â“˜ On confidentiality". It states plainly that the
     employer receives no names, notes, or account of what was discussed, only broad
@@ -1048,13 +1047,12 @@ already caused one missed change.
 | --- | --- | --- | --- |
 | `assets/logo.png` | 26 KB | all 9 | Favicon and nav logo. |
 | `assets/Whitelogo.png` | 16 KB | all 9 | Footer logo. 45px tall, centred in its column. |
-| `assets/harshita-home.png` | 979 KB | `index.html` | Hero cut-out, transparent. Must stay PNG. Heaviest asset on the site. |
+| `assets/harshita-home.png` | 979 KB | `index.html`, `workplace-wellbeing.html` | Transparent hero cut-out, also used in the Workplace About circle. Must stay PNG. Heaviest asset on the site. |
 | `assets/harshita-glimpse.png` | 166 KB | `index.html` | Glimpse-section portrait, transparent cut-out, 340x319. Low resolution for its slot; a larger original would improve it. |
 | `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
 | `assets/supervision-hero.jpg` | 159 KB | `supervision.html` | Illustration, backdrop flattened to page cream. |
 | `assets/workplace-wellbeing.png` | 893 KB | `workplace-wellbeing.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
 | `assets/redpic.png` | 2.1 MB | `about.html` | About bio portrait, transparent cut-out, 1086x1448. Uses the existing 400px responsive cap. |
-| `assets/harshita-organisations.jpg` | 62 KB | `workplace-wellbeing.html` | Portrait in the About block, 220px circle at `object-position: 50% 14%`. |
 | `assets/community-hero.jpg` | 77 KB | `community.html` | Full-bleed repeating band at the top of the page. |
 | `assets/sharedwaysofcoping.jpg` | 100 KB | `community.html` | Section illustration, backdrop flattened to cream-warm. |
 
@@ -1064,6 +1062,7 @@ Kept deliberately, not dead weight to be tidied away. Do not delete without aski
 
 | File | Size | Why it is still here |
 | --- | --- | --- |
+| `assets/harshita-organisations.jpg` | 62 KB | Previous Workplace About portrait, retained so the image swap remains reversible. |
 | `assets/harshita-chair.jpg` | 169 KB | Previous glimpse photo, a plain rectangle. If the glimpse photo ever goes back to a rectangle, this is the one, and the feathering CSS described in section 4 goes back with it. |
 | `assets/harshita-home-source.png` | 575 KB | Original of the hero cut-out, before background removal. |
 | `assets/harshita-home 2.png` | 560 KB | Older grey-studio-backdrop hero photo. Note the space in the filename. |
@@ -1104,6 +1103,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Replaced the Workplace About portrait with harshita-home | Across phone, tablet and laptop, the circular portrait in “A little about me” now uses `assets/harshita-home.png`. Its 220px circle, 50% 14% crop, soft shadow, reveal animation and responsive grid remain unchanged. |
 | Replaced the About bio portrait with redpic | Across phone, tablet and laptop, the About bio now uses the transparent `assets/redpic.png` chair portrait. The existing responsive size cap, centring, grid position and reveal animation remain unchanged so the new cut-out blends into the cream section. |
 | Added phone swipe navigation to the homepage testimonials | Below 640px, swiping left on the testimonial card moves forward and swiping right moves back. A 45px horizontal threshold and direction check preserve vertical scrolling. Existing arrows, dots, pause control and autoplay remain available, and tablet and laptop behavior is unchanged. |
 | Shortened the third homepage statistic label on phones | Below 640px, the 3,000+ statistic reads Sessions so it stays compact in the three-column row. Tablet and laptop retain Sessions completed. The number and counter behaviour are unchanged. |
