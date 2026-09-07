@@ -276,6 +276,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   in the homepage Work With Me grid, Customised plans in the Workplace Wellbeing offer grid,
   Experienced in the Supervision track grid, and What we might talk about in the Community
   concerns grid. Each uses four equal tracks, with ordinary cards spanning two and the last card spanning the middle two. The centring rules end at 899px, so the laptop layouts are unchanged.
+- **Phone paragraph breathing room, all nine pages.** Below 640px, every `<p>` element uses
+  `font-size: 80% !important` and `padding-inline: 1rem !important`. This gives paragraph copy
+  16px of inner space on both sides at the 16px root size and makes it visually 20% smaller.
+  Headings, labels, buttons and other non-paragraph text are unchanged. The rule ends at 639px,
+  so tablet and laptop typography and spacing remain unchanged.
 
 ---
 
@@ -1106,6 +1111,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Reduced and inset paragraph text on phones | Below 640px on all nine pages, every `<p>` uses 80% font sizing and 1rem of inline padding. This gives long paragraph copy breathing room at both screen edges while leaving headings and other text alone. Tablet and laptop remain unchanged. |
 | Replaced the phone and tablet hamburger with a booking button | Below 900px on all nine pages, the top-right hamburger and its drawer are removed. A Book a Consultation Call pill now occupies that header position and opens the existing cal.com link in a new tab. The fixed bottom navigation continues to provide page access, including the three-choice Work selector. Laptop navigation at 900px and wider is unchanged. |
 | Added an expandable indicator above the bottom-nav Work icon | On all nine pages below 900px, a tiny chevron now sits above Work and rotates when its three-choice menu opens. It is absolutely positioned so the existing icon and label alignment do not move. Desktop navigation remains unchanged. |
 | Replaced the Workplace About portrait with harshita-home | Across phone, tablet and laptop, the circular portrait in “A little about me” now uses `assets/harshita-home.png`. Its 220px circle, 50% 14% crop, soft shadow, reveal animation and responsive grid remain unchanged. |

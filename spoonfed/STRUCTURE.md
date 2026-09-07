@@ -119,6 +119,11 @@ tablet and laptop are separate scopes: phone rules end at 639px, tablet spans 64
 and laptop starts at 900px. The bottom navigation is a documented exception that covers both phone
 and tablet. A change must be applied only to the version Harshita names.
 
+Across the nine main pages, every paragraph element has a phone-only rule below 640px that sets
+its font size to 80% and adds 1rem of inline padding. The rule is repeated in each page stylesheet
+and uses `!important` so existing component paragraph selectors cannot cancel the website-wide
+phone decision. Tablet and laptop paragraph styles remain unchanged.
+
 Within that bottom navigation, Work is a button rather than a direct page link. On phone and tablet
 it opens a three-link panel for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing.
 The markup, styles and small interaction script are repeated in all nine HTML files. A tiny CSS
