@@ -1115,6 +1115,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Added an expandable indicator above the bottom-nav Work icon | On all nine pages below 900px, a tiny chevron now sits above Work and rotates when its three-choice menu opens. It is absolutely positioned so the existing icon and label alignment do not move. Desktop navigation remains unchanged. |
 | Replaced the Workplace About portrait with harshita-home | Across phone, tablet and laptop, the circular portrait in “A little about me” now uses `assets/harshita-home.png`. Its 220px circle, 50% 14% crop, soft shadow, reveal animation and responsive grid remain unchanged. |
 | Replaced the About bio portrait with redpic | Across phone, tablet and laptop, the About bio now uses the transparent `assets/redpic.png` chair portrait. The existing responsive size cap, centring, grid position and reveal animation remain unchanged so the new cut-out blends into the cream section. |
 | Added phone swipe navigation to the homepage testimonials | Below 640px, swiping left on the testimonial card moves forward and swiping right moves back. A 45px horizontal threshold and direction check preserve vertical scrolling. Existing arrows, dots, pause control and autoplay remain available, and tablet and laptop behavior is unchanged. |

@@ -119,9 +119,11 @@ and tablet. A change must be applied only to the version Harshita names.
 
 Within that bottom navigation, Work is a button rather than a direct page link. On phone and tablet
 it opens a three-link panel for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing.
-The markup, styles and small interaction script are repeated in all nine HTML files. Any future change
-to this selector must therefore be made and tested nine times. It is hidden with the whole bottom bar
-at 900px and wider, where the existing desktop Work With Me dropdown remains unchanged.
+The markup, styles and small interaction script are repeated in all nine HTML files. A tiny CSS
+chevron sits above the Work icon and rotates when the selector opens. It is absolutely positioned so
+the icon and label do not shift. Any future change to this selector must therefore be made and tested
+nine times. It is hidden with the whole bottom bar at 900px and wider, where the existing desktop
+Work With Me dropdown remains unchanged.
 
 The About bio uses `assets/redpic.png` at phone, tablet and laptop widths. It remains inside the
 existing `.full-photo` and reveal structure, with a 400px maximum width and automatic height.
