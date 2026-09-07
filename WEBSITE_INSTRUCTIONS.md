@@ -263,8 +263,9 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
 - **Mobile gentle app shell, all nine pages.** Below 900px, a translucent rounded bottom bar gives
   direct access to Home, About, Work, Community and Book. The current page group is highlighted on
   Home, About, the three Work pages and Community. The three legal pages show the bar without a
-  false active state. The original hamburger drawer remains available for the complete navigation.
-  The bottom Work item is a button on phone and tablet. It opens a menu above the bar with direct
+  false active state. Below 900px, the top header shows a Book a Consultation Call pill instead
+  of the former hamburger and drawer. The bottom Work item is a button on phone and tablet.
+  It opens a menu above the bar with direct
   links to Psychotherapy sessions, Supervision sessions and Workplace Wellbeing. `aria-expanded`,
   the native `hidden` state, outside-click closing and Escape closing keep the selector accessible.
   The desktop Work With Me dropdown and all desktop navigation remain unchanged.
@@ -442,7 +443,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   style (Private Practice, Xavier's College, Cultfit, iCall, CanKids, Budhrani Trust), and a small
   embedded "Contact me" section. Shares the homepage's design system (own copy of the CSS, not a
   shared stylesheet) but is a fully separate file; built without touching `index.html` per explicit
-  instruction. All homepage nav "About" references (top nav, mobile drawer, hero button, footer,
+  instruction. All homepage nav "About" references (top nav, the then-existing mobile drawer,
+  hero button, footer,
   and the glimpse-links "Curious about me" card) now point to `about.html`.
 - **Work With Me, Psychotherapy** (`psychotherapy.html`, built): hero using the staged
   `assets/therapy-hero.jpg` artwork, a concerns recap, a **logistics infographic** (days, duration,
@@ -543,7 +545,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     The introductory paragraph, availability notes and button follow it. A phone-only image copy is
     shown while the original hero image wrapper is hidden. From 640px upward, the phone copy is
     hidden and the original hero order and layout remain unchanged.
-  - **In the nav dropdown and mobile drawer this page is labelled "Workplace Wellbeing"**, matching
+  - **In the desktop nav dropdown and mobile bottom Work selector this page is labelled "Workplace Wellbeing"**, matching
     its own headline. The footer link and the homepage Work With Me card still say "For
     organisations", and the browser tab title is still "For Organisations Â· Honoring Stories".
     That split is deliberate as of the last request, not an oversight.
@@ -894,8 +896,9 @@ page is built later.
 **Every call-to-action must resolve to one of those three destinations, never to an in-page
 anchor.** The rule, by button:
 - Anything labelled **"Book a Consultation Call"** or **"Book a free exploratory call"**, including
-  the nav button in the header and the mobile drawer on every page, opens the **cal.com booking
-  link** in a new tab. The nav button used to point at `#contact`, which merely scrolled down the
+  the desktop nav button and the phone/tablet header button on every page, opens the **cal.com
+  booking link** in a new tab. The nav button used to point at `#contact`, which merely
+  scrolled down the
   page, and on the three legal pages was dead outright because they have no contact section.
 - **"Start a conversation"** and **"Email me"** open **mailto:feelseen@honoringstories.com**,
   same tab (a mailto must not open a blank tab).
@@ -1103,6 +1106,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Replaced the phone and tablet hamburger with a booking button | Below 900px on all nine pages, the top-right hamburger and its drawer are removed. A Book a Consultation Call pill now occupies that header position and opens the existing cal.com link in a new tab. The fixed bottom navigation continues to provide page access, including the three-choice Work selector. Laptop navigation at 900px and wider is unchanged. |
 | Added an expandable indicator above the bottom-nav Work icon | On all nine pages below 900px, a tiny chevron now sits above Work and rotates when its three-choice menu opens. It is absolutely positioned so the existing icon and label alignment do not move. Desktop navigation remains unchanged. |
 | Replaced the Workplace About portrait with harshita-home | Across phone, tablet and laptop, the circular portrait in “A little about me” now uses `assets/harshita-home.png`. Its 220px circle, 50% 14% crop, soft shadow, reveal animation and responsive grid remain unchanged. |
 | Replaced the About bio portrait with redpic | Across phone, tablet and laptop, the About bio now uses the transparent `assets/redpic.png` chair portrait. The existing responsive size cap, centring, grid position and reveal animation remain unchanged so the new cut-out blends into the cream section. |

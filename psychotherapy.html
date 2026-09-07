@@ -107,21 +107,21 @@
   .nav-links a:not(.nav-cta):hover, .nav-links a:not(.nav-cta):focus-visible { color: var(--deep-purple); text-shadow: 0 0 10px rgba(122, 77, 143, 0.5), 0 0 22px rgba(122, 77, 143, 0.26); }
   .nav-cta { background: var(--deep-purple); color: var(--cream-warm) !important; padding: 0.55rem 1.25rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500; transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle); }
   .nav-cta:hover { background: var(--rose); transform: translateY(-1px); }
-  .nav-toggle { display: block; background: none; border: none; width: 36px; height: 36px; cursor: pointer; padding: 0; position: relative; }
-  @media (min-width: 900px) { .nav-toggle { display: none; } }
-  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--deep-purple); margin: 0 auto; transition: all 0.4s var(--ease-gentle); position: absolute; left: 50%; transform: translateX(-50%); }
-  .nav-toggle span:nth-child(1) { top: 12px; } .nav-toggle span:nth-child(2) { top: 18px; } .nav-toggle span:nth-child(3) { top: 24px; }
-  .nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: translateX(-50%) rotate(45deg); }
-  .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
-  .nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: translateX(-50%) rotate(-45deg); }
-  .nav-drawer { position: fixed; top: 64px; left: 0; right: 0; background: var(--cream-warm); padding: 2rem 1.5rem; transform: translateY(-120%); transition: transform 0.5s var(--ease-gentle); border-bottom: 1px solid var(--line); z-index: 99; }
-  .nav.open .nav-drawer { transform: translateY(0); }
-  @media (min-width: 900px) { .nav-drawer { display: none; } }
-  .nav-drawer a { display: block; padding: 0.75rem 0; font-size: 1.05rem; font-family: var(--font-display); color: var(--charcoal); border-bottom: 1px solid var(--line); }
-  .nav-drawer a:last-child { border-bottom: none; }
-  /* Drawer has no hover, so both Work With Me pages are always listed, indented under a plain label. */
-  .nav-drawer-label { display: block; padding: 0.75rem 0; font-size: 1.05rem; font-family: var(--font-display); color: var(--charcoal); border-bottom: 1px solid var(--line); }
-  .nav-drawer a.nav-drawer-sub { padding-left: 1.1rem; font-size: 0.98rem; color: var(--charcoal-soft); }
+  .mobile-header-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+    border-radius: 999px;
+    background: var(--deep-purple);
+    color: var(--cream-warm);
+    font-size: clamp(0.7rem, 3vw, 0.84rem);
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  @media (min-width: 900px) { .mobile-header-cta { display: none; } }
+
   /* Nav dropdown: the label is not a link, it only opens the menu. :focus-within keeps it keyboard reachable. */
   .nav-dropdown { position: relative; }
   .nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 0.35rem; background: none; border: none; padding: 0; cursor: default; font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; color: var(--charcoal-soft); transition: color 0.4s var(--ease-gentle), text-shadow 0.45s var(--ease-gentle); }
@@ -415,21 +415,9 @@
       <a href="community.html">Community</a>
       <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="nav-cta">Book a Consultation Call</a>
     </div>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="nav-drawer">
-    <a href="about.html" onclick="document.getElementById('nav').classList.remove('open')">About</a>
-    <span class="nav-drawer-label">Work With Me</span>
-    <a href="psychotherapy.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Psychotherapy sessions</a>
-    <a href="supervision.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Supervision sessions</a>
-    <a href="workplace-wellbeing.html" class="nav-drawer-sub" onclick="document.getElementById('nav').classList.remove('open')">Workplace Wellbeing</a>
-    <a href="community.html" onclick="document.getElementById('nav').classList.remove('open')">Community</a>
-    <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" onclick="document.getElementById('nav').classList.remove('open')">Book a Consultation Call</a>
+    <a href="https://cal.com/harshita-sarda-yllcdj/30min" target="_blank" rel="noopener" class="mobile-header-cta">Book a Consultation Call</a>
   </div>
 </nav>
-
 <nav class="mobile-app-nav" aria-label="Mobile primary navigation">
   <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg><span>Home</span></a>
   <a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg><span>About</span></a>

@@ -95,8 +95,8 @@ Every page has the same skeleton. Open any of them in a text editor and you will
       <style>  ... ALL THE CSS FOR THIS PAGE ...  </style>
   </head>
   <body>
-      the top menu           (identical on all 9 pages)
-      the mobile menu        (identical on all 9 pages)
+      the top header         (identical on all 9 pages)
+      the mobile bottom navigation   (identical on all 9 pages)
       the dots down the right edge   (page specific)
       the page banner
       ... the page's own sections ...
@@ -111,8 +111,10 @@ Every page has the same skeleton. Open any of them in a text editor and you will
 The four blocks marked "identical on all 9 pages" are the shared furniture. They are copied, not
 shared. That is the trade-off described in the README.
 
-On mobile, all nine pages also carry a fixed five-item bottom navigation for Home, About, Work,
-Community and Book. It is hidden at 900px and wider, so it does not alter the laptop version. Phone,
+On mobile and tablet, the top-right header control is a Book a Consultation Call pill that opens the
+calendar in a new tab. It replaces the former hamburger and drawer across all nine pages. All nine
+pages also carry a fixed five-item bottom navigation for Home, About, Work, Community and Book.
+Both mobile elements are hidden at 900px and wider, so they do not alter the laptop version. Phone,
 tablet and laptop are separate scopes: phone rules end at 639px, tablet spans 640px through 899px,
 and laptop starts at 900px. The bottom navigation is a documented exception that covers both phone
 and tablet. A change must be applied only to the version Harshita names.
@@ -172,7 +174,7 @@ Use this before changing anything, to see what else you will have to touch.
 
 | If you change this | You must also touch |
 | --- | --- |
-| The top menu | All 9 page files, twice each: the desktop menu and the mobile menu |
+| The top header | All 9 page files: the desktop navigation and the phone/tablet booking button |
 | The footer | All 9 page files |
 | The floating WhatsApp button | All 9 page files |
 | The mobile bottom navigation | All 9 page files, mobile rules and markup |
@@ -190,7 +192,7 @@ Use this before changing anything, to see what else you will have to touch.
 
 | What it does | Page | Notes |
 | --- | --- | --- |
-| Mobile menu open and close | all 9 | |
+| Mobile bottom Work selector open and close | all 9 | |
 | Scroll animations, things fading in | all 9 | Switched off automatically for anyone whose device asks for reduced motion |
 | The dots down the right edge highlighting as you scroll | 6 | Not on the legal pages |
 | Numbers counting up | `index.html` | In the glimpse section |

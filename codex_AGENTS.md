@@ -122,7 +122,7 @@ look better.
 
 ## When adding or renaming a page
 
-1. The nav dropdown and the mobile drawer, on **all nine** pages.
+1. The desktop nav dropdown and the phone/tablet bottom Work selector, on **all nine** pages.
 2. The footer link list, on all nine.
 3. The three error pages, which link to the main five.
 4. `sitemap.xml`.
