@@ -134,6 +134,8 @@ Work With Me dropdown remains unchanged.
 
 The About bio uses `assets/redpic.png` at phone, tablet and laptop widths. It remains inside the
 existing `.full-photo` and reveal structure, with a 400px maximum width and automatic height.
+Intersecting masks feather only the final 42px on the right and 50px at the bottom, leaving the
+source asset, top edge, left edge and layout unchanged.
 
 The Workplace Wellbeing About block uses `assets/harshita-home.png` in the existing 220px
 circular `.dp-photo` at phone, tablet and laptop widths. Its crop, shadow, reveal animation and

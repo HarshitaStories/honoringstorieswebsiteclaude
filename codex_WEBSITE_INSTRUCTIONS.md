@@ -434,7 +434,8 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   - **The bio portrait is `assets/redpic.png` across phone, tablet and laptop.** It is a
     1086x1448 transparent cut-out of Harshita seated in a beige chair. `.full-photo` retains its
     400px maximum width, automatic aspect ratio and centred placement inside the existing reveal
-    wrapper, so the page cream shows through around the cut-out and no box, radius or mask is added.
+    wrapper. Two intersecting gradient masks feather the final 42px at the right and 50px at the
+    bottom, softening the source image's hard crop lines without affecting the top or left edge.
   - The bio is **truncated behind a "Read more" toggle**: the first two paragraphs always show,
     the remaining four (including the closing italic `p.bio-quote`) sit inside `.bio-more` and
     expand on click, with the link text flipping to "Read less". The collapse uses the
@@ -1123,6 +1124,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Feathered the About portrait's right and bottom crop lines | Across phone, tablet and laptop, intersecting gradient masks now fade only the final 42px on the right and 50px at the bottom of `assets/redpic.png`. The source image, 400px size cap, position, top edge, left edge and surrounding layout remain unchanged. |
 | Reduced and inset paragraph text on phones | Below 640px on all nine pages, every `<p>` uses 80% font sizing and 1rem of inline padding. This gives long paragraph copy breathing room at both screen edges while leaving headings and other text alone. Tablet and laptop remain unchanged. |
 | Replaced the phone and tablet hamburger with a booking button | Below 900px on all nine pages, the top-right hamburger and its drawer are removed. A Book a Consultation Call pill now occupies that header position and opens the existing cal.com link in a new tab. The fixed bottom navigation continues to provide page access, including the three-choice Work selector. Laptop navigation at 900px and wider is unchanged. |
 | Added an expandable indicator above the bottom-nav Work icon | On all nine pages below 900px, a tiny chevron now sits above Work and rotates when its three-choice menu opens. It is absolutely positioned so the existing icon and label alignment do not move. Desktop navigation remains unchanged. |
