@@ -190,19 +190,10 @@
     opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle);
   }
   .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
-  /* The photograph carries its own rounded corners, so no border-radius is set
-     here: adding a second, smaller one would clip inside the first and leave a
-     faint step on each corner.
-
-     Those corners arrived painted white rather than left clear, which would
-     have shown as four white notches against the cream. They were flood filled
-     to transparent, which is also why this is WebP: it is the only format that
-     keeps alpha and still compresses a photograph properly. 1995 KB to 128 KB.
-
-     max-width is set against the bio text beside it. This image is landscape at
-     1421:1107, where the previous one was a tall narrow cut-out, so the 175px
-     that suited that would render this postage stamp sized. 400px gives it
-     about 312px of height, with align-items:start keeping the row tidy. */
+  /* redpic is a transparent cut-out, so the page cream shows around the chair
+     and lets the portrait blend into the section without a box, radius or mask.
+     The existing 400px cap, automatic aspect ratio, centred placement, bio grid
+     and reveal wrapper apply at phone, tablet and laptop widths. */
   .full-photo {
     display: block;
     width: 100%;
@@ -477,7 +468,7 @@
     </div>
     <div class="bio-inner">
       <div class="reveal">
-        <img class="full-photo" src="assets/harshita-about.webp" alt="Harshita seated at a marble table, smiling, arms folded, with a large leafed plant beside her." />
+        <img class="full-photo" src="assets/redpic.png" alt="Harshita seated in a beige armchair, wearing a patterned red, cream and navy dress." />
       </div>
       <div class="bio-text reveal delay-1" id="bioText">
         <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>

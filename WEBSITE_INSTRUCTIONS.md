@@ -413,6 +413,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   is de-duplicated from the near-identical "About me page" and "Approach as a therapist" source
   docs (used the fuller version once), with the age range stated as "18+" (not the source docs'
   "20 to 65").
+  - **The bio portrait is `assets/redpic.png` across phone, tablet and laptop.** It is a
+    1086x1448 transparent cut-out of Harshita seated in a beige chair. `.full-photo` retains its
+    400px maximum width, automatic aspect ratio and centred placement inside the existing reveal
+    wrapper, so the page cream shows through around the cut-out and no box, radius or mask is added.
   - The bio is **truncated behind a "Read more" toggle**: the first two paragraphs always show,
     the remaining four (including the closing italic `p.bio-quote`) sit inside `.bio-more` and
     expand on click, with the link text flipping to "Read less". The collapse uses the
@@ -1049,6 +1053,7 @@ already caused one missed change.
 | `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
 | `assets/supervision-hero.jpg` | 159 KB | `supervision.html` | Illustration, backdrop flattened to page cream. |
 | `assets/workplace-wellbeing.png` | 893 KB | `workplace-wellbeing.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
+| `assets/redpic.png` | 2.1 MB | `about.html` | About bio portrait, transparent cut-out, 1086x1448. Uses the existing 400px responsive cap. |
 | `assets/harshita-organisations.jpg` | 62 KB | `workplace-wellbeing.html` | Portrait in the About block, 220px circle at `object-position: 50% 14%`. |
 | `assets/community-hero.jpg` | 77 KB | `community.html` | Full-bleed repeating band at the top of the page. |
 | `assets/sharedwaysofcoping.jpg` | 100 KB | `community.html` | Section illustration, backdrop flattened to cream-warm. |
@@ -1099,6 +1104,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Replaced the About bio portrait with redpic | Across phone, tablet and laptop, the About bio now uses the transparent `assets/redpic.png` chair portrait. The existing responsive size cap, centring, grid position and reveal animation remain unchanged so the new cut-out blends into the cream section. |
 | Added phone swipe navigation to the homepage testimonials | Below 640px, swiping left on the testimonial card moves forward and swiping right moves back. A 45px horizontal threshold and direction check preserve vertical scrolling. Existing arrows, dots, pause control and autoplay remain available, and tablet and laptop behavior is unchanged. |
 | Shortened the third homepage statistic label on phones | Below 640px, the 3,000+ statistic reads Sessions so it stays compact in the three-column row. Tablet and laptop retain Sessions completed. The number and counter behaviour are unchanged. |
 

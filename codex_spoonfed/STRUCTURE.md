@@ -123,6 +123,9 @@ The markup, styles and small interaction script are repeated in all nine HTML fi
 to this selector must therefore be made and tested nine times. It is hidden with the whole bottom bar
 at 900px and wider, where the existing desktop Work With Me dropdown remains unchanged.
 
+The About bio uses `assets/redpic.png` at phone, tablet and laptop widths. It remains inside the
+existing `.full-photo` and reveal structure, with a 400px maximum width and automatic height.
+
 On the homepage below 640px, CSS grid ordering places the portrait directly after the main heading,
 followed by the supporting paragraph and buttons. The markup is not duplicated. Tablet retains the
 stacked text then portrait order, and laptop retains the two-column hero.
@@ -311,7 +314,7 @@ appearance; the only thing a visitor sees is the browser tab.
 Harshita's seated black-top portrait on the site cream. The title and description shown beneath or
 beside it come from each page's Open Graph and Twitter metadata, not from text inside the image.
 Sharing apps decide whether to use an expanded card or a compact thumbnail. The site cannot force
-that layout. The older ssets/landing-page-preview.png and ssets/share-card.png files are
+that layout. The older `assets/landing-page-preview.png` and `assets/share-card.png` files are
 retained but unused so the preview change remains reversible.
 
 The homepage alone carries a block of structured data. Everything in it is
