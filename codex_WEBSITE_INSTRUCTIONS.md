@@ -410,8 +410,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
        (`.meta-slide` / `.body-slide`, matched by index) so a single prev/next/dot/autoplay
        carousel advances them together, with an added pause/play toggle button
        (`#carPlayPause`) that stops/resumes the 5s autoplay. Nav controls (arrows, dots,
-       play/pause) sit in one centered row below the card. Keep this structure; don't revert to
-       the single-column quote-only layout.
+       play/pause) sit in one centered row below the card. On phones below 640px, a left swipe
+       on the card advances and a right swipe returns to the previous testimonial. The gesture
+       requires clear horizontal movement so vertical reading and page scrolling are not captured.
+       Keep this structure; don't revert to the single-column quote-only layout.
   - Full qualifications and the full "why this fits" narrative are intentionally **not** on the
     homepage anymore. They belong on the About page once built. This is an accepted, explicit
     tradeoff, not an oversight. The full testimonial set, by contrast, lives directly on the
@@ -1109,6 +1111,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Added phone swipe navigation to the homepage testimonials | Below 640px, swiping left on the testimonial card moves forward and swiping right moves back. A 45px horizontal threshold and direction check preserve vertical scrolling. Existing arrows, dots, pause control and autoplay remain available, and tablet and laptop behavior is unchanged. |
 | Shortened the third homepage statistic label on phones | Below 640px, the 3,000+ statistic reads Sessions so it stays compact in the three-column row. Tablet and laptop retain Sessions completed. The number and counter behaviour are unchanged. |
 
 ### 2026-09-05

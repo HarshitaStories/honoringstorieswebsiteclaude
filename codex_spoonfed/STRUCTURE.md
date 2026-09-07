@@ -185,7 +185,7 @@ Use this before changing anything, to see what else you will have to touch.
 | Scroll animations, things fading in | all 9 | Switched off automatically for anyone whose device asks for reduced motion |
 | The dots down the right edge highlighting as you scroll | 6 | Not on the legal pages |
 | Numbers counting up | `index.html` | In the glimpse section |
-| Testimonials sliding | `index.html` | 8 real testimonials, used with permission |
+| Testimonials sliding | `index.html` | 8 real testimonials, used with permission. Phones also support left and right swipes; arrows, dots and autoplay remain. |
 | FAQ questions opening | psychotherapy, supervision, corporates | |
 | Price changing by country | psychotherapy, supervision | Explained below |
 | Confidentiality panel expanding | `workplace-wellbeing.html` | |

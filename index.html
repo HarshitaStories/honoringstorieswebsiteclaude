@@ -1057,6 +1057,7 @@
     .testimonial-grid { grid-template-columns: 1fr; gap: 1.75rem; }
     .testimonial-meta { border-right: none !important; border-bottom: 1px solid var(--line); padding: 0 0 1.5rem !important; }
   }
+  @media (max-width: 639px) { .testimonial-card { touch-action: pan-y; } }
   .testimonial-meta {
     position: relative;
     border-right: 1px solid var(--line);
@@ -2019,8 +2020,8 @@
     statIo.observe(statsRow);
   }
 
-  // Testimonial carousel: meta (name/quals) and body (quote) slide in sync,
-  // autoslide every 5s, manual prev/next/dots reset the timer
+  // Testimonial carousel: meta (name/quals) and body (quote) slide in sync.
+  // Autoplay runs every 5s; manual arrows, dots and phone swipes reset the timer.
   const metaSlides = document.querySelectorAll('.meta-slide');
   const bodySlides = document.querySelectorAll('.body-slide');
   const dotsWrap = document.getElementById('carDots');
@@ -2056,6 +2057,25 @@
 
     document.getElementById('carNext').addEventListener('click', () => goTo(idx + 1, true));
     document.getElementById('carPrev').addEventListener('click', prev);
+
+    const swipeCard = document.querySelector('.testimonial-card');
+    const phoneSwipe = window.matchMedia('(max-width: 639px)');
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    if (swipeCard) {
+      swipeCard.addEventListener('touchstart', (event) => {
+        if (!phoneSwipe.matches || event.touches.length !== 1) return;
+        swipeStartX = event.touches[0].clientX;
+        swipeStartY = event.touches[0].clientY;
+      }, { passive: true });
+      swipeCard.addEventListener('touchend', (event) => {
+        if (!phoneSwipe.matches || event.changedTouches.length !== 1) return;
+        const deltaX = event.changedTouches[0].clientX - swipeStartX;
+        const deltaY = event.changedTouches[0].clientY - swipeStartY;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+        goTo(idx + (deltaX < 0 ? 1 : -1), true);
+      }, { passive: true });
+    }
 
     const playPauseBtn = document.getElementById('carPlayPause');
     const pauseIcon = document.getElementById('carPauseIcon');
