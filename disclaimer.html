@@ -308,8 +308,11 @@
   }
   @media (max-width: 639px) {
     p {
-      font-size: 80% !important;
       padding-inline: 1rem !important;
+    }
+    .hero p,
+    .page-hero p {
+      padding-inline: 0 !important;
     }
   }
 </style></head>
@@ -538,5 +541,21 @@
     const closeOnDesktop = event => { if (event.matches) closeMenu(); };
     if (desktop.addEventListener) desktop.addEventListener('change', closeOnDesktop);
     else desktop.addListener(closeOnDesktop);
+  })();
+</script><script>
+  (() => {
+    const phone = window.matchMedia('(max-width: 639px)');
+    const paragraphs = Array.from(document.querySelectorAll('p')).filter(paragraph => !paragraph.closest('.hero, .page-hero'));
+    const syncPhoneParagraphSizes = () => {
+      paragraphs.forEach(paragraph => paragraph.style.removeProperty('font-size'));
+      if (!phone.matches) return;
+      paragraphs.forEach(paragraph => {
+        const originalSize = parseFloat(getComputedStyle(paragraph).fontSize);
+        paragraph.style.setProperty('font-size', `${originalSize * 0.9}px`, 'important');
+      });
+    };
+    syncPhoneParagraphSizes();
+    if (phone.addEventListener) phone.addEventListener('change', syncPhoneParagraphSizes);
+    else phone.addListener(syncPhoneParagraphSizes);
   })();
 </script></body></html>

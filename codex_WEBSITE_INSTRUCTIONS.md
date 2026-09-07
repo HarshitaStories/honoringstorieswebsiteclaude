@@ -288,11 +288,13 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   in the homepage Work With Me grid, Customised plans in the Workplace Wellbeing offer grid,
   Experienced in the Supervision track grid, and What we might talk about in the Community
   concerns grid. Each uses four equal tracks, with ordinary cards spanning two and the last card spanning the middle two. The centring rules end at 899px, so the laptop layouts are unchanged.
-- **Phone paragraph breathing room, all nine pages.** Below 640px, every `<p>` element uses
-  `font-size: 80% !important` and `padding-inline: 1rem !important`. This gives paragraph copy
-  16px of inner space on both sides at the 16px root size and makes it visually 20% smaller.
-  Headings, labels, buttons and other non-paragraph text are unchanged. The rule ends at 639px,
-  so tablet and laptop typography and spacing remain unchanged.
+- **Phone paragraph breathing room, all nine pages.** Below 640px, non-hero `<p>` elements receive
+  `padding-inline: 1rem !important`. A small repeated script reads each paragraph's own original
+  computed size and applies exactly 90% of that value, avoiding the uneven results of a generic
+  percentage declaration inside components with different inherited sizes. Paragraphs inside
+  `.hero` and `.page-hero` are excluded from both changes. Headings, labels, buttons and other
+  non-paragraph text are unchanged. The script removes its inline sizes when the viewport leaves
+  the phone range, so tablet and laptop typography and spacing remain unchanged.
 
 ---
 
@@ -1120,12 +1122,18 @@ by `.gitignore` because they carry personal data. Keep it that way.
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
 
+### 2026-09-08
+
+| Decision / change | Reason |
+| --- | --- |
+| Reduced non-hero phone paragraphs by 10% and restored hero copy | Below 640px on all nine pages, each non-hero `<p>` is measured at its own original computed size and rendered at exactly 90% with 1rem of inline padding. Paragraphs inside `.hero` and `.page-hero` receive neither change. Tablet and laptop remain unchanged. This replaces the 80% phone rule below. |
+
 ### 2026-09-07
 
 | Decision / change | Reason |
 | --- | --- |
 | Feathered the About portrait's right and bottom crop lines | Across phone, tablet and laptop, intersecting gradient masks now fade only the final 42px on the right and 50px at the bottom of `assets/redpic.png`. The source image, 400px size cap, position, top edge, left edge and surrounding layout remain unchanged. |
-| Reduced and inset paragraph text on phones | Below 640px on all nine pages, every `<p>` uses 80% font sizing and 1rem of inline padding. This gives long paragraph copy breathing room at both screen edges while leaving headings and other text alone. Tablet and laptop remain unchanged. |
+| Reduced and inset paragraph text on phones | Below 640px on all nine pages, every `<p>` used 80% font sizing and 1rem of inline padding. This was replaced on 2026-09-08 because hero copy needed to remain original and inherited component sizes made a generic percentage uneven. |
 | Replaced the phone and tablet hamburger with a booking button | Below 900px on all nine pages, the top-right hamburger and its drawer are removed. A Book a Consultation Call pill now occupies that header position and opens the existing cal.com link in a new tab. The fixed bottom navigation continues to provide page access, including the three-choice Work selector. Laptop navigation at 900px and wider is unchanged. |
 | Added an expandable indicator above the bottom-nav Work icon | On all nine pages below 900px, a tiny chevron now sits above Work and rotates when its three-choice menu opens. It is absolutely positioned so the existing icon and label alignment do not move. Desktop navigation remains unchanged. |
 | Replaced the Workplace About portrait with harshita-home | Across phone, tablet and laptop, the circular portrait in “A little about me” now uses `assets/harshita-home.png`. Its 220px circle, 50% 14% crop, soft shadow, reveal animation and responsive grid remain unchanged. |
