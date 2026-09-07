@@ -288,13 +288,14 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   in the homepage Work With Me grid, Customised plans in the Workplace Wellbeing offer grid,
   Experienced in the Supervision track grid, and What we might talk about in the Community
   concerns grid. Each uses four equal tracks, with ordinary cards spanning two and the last card spanning the middle two. The centring rules end at 899px, so the laptop layouts are unchanged.
-- **Phone paragraph breathing room, all nine pages.** Below 640px, non-hero `<p>` elements receive
-  `padding-inline: 1rem !important`. A small repeated script reads each paragraph's own original
-  computed size and applies exactly 90% of that value, avoiding the uneven results of a generic
-  percentage declaration inside components with different inherited sizes. Paragraphs inside
-  `.hero` and `.page-hero` are excluded from both changes. Headings, labels, buttons and other
-  non-paragraph text are unchanged. The script removes its inline sizes when the viewport leaves
-  the phone range, so tablet and laptop typography and spacing remain unchanged.
+- **Phone content boundary and paragraph sizing, all nine pages.** Below 640px, every standard
+  `.wrap` uses 2.25rem, or 36px, of inline padding and `overflow-wrap: anywhere`. This keeps page
+  headings, paragraphs, text links, FAQ labels, legal copy and footer text within one shared mobile
+  boundary, including long addresses that would otherwise cross it. Navigation controls retain
+  their own touch-safe spacing. A small repeated script reads each non-hero paragraph's original
+  computed size and applies exactly 90% of that value. Paragraphs inside `.hero` and `.page-hero`
+  retain their original font size. The rule and script end at 639px, so tablet and laptop remain
+  unchanged.
 
 ---
 
@@ -1126,6 +1127,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Unified the phone content boundary across all page text | Below 640px on all nine pages, the standard wrapper now uses 36px of padding on both sides and permits safe wrapping of long text. This preserves the existing paragraph boundary while bringing headings, text links, FAQ labels, legal copy and footer copy inside it. Navigation keeps its own spacing, and tablet and laptop are unchanged. |
 | Reduced non-hero phone paragraphs by 10% and restored hero copy | Below 640px on all nine pages, each non-hero `<p>` is measured at its own original computed size and rendered at exactly 90% with 1rem of inline padding. Paragraphs inside `.hero` and `.page-hero` receive neither change. Tablet and laptop remain unchanged. This replaces the 80% phone rule below. |
 
 ### 2026-09-07

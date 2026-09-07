@@ -119,11 +119,13 @@ tablet and laptop are separate scopes: phone rules end at 639px, tablet spans 64
 and laptop starts at 900px. The bottom navigation is a documented exception that covers both phone
 and tablet. A change must be applied only to the version Harshita names.
 
-Across the nine main pages, non-hero paragraph elements have a phone-only rule below 640px that
-adds 1rem of inline padding. A repeated script measures each paragraph's original computed font
-size and applies exactly 90% of that value on phones. It excludes paragraphs inside `.hero` and
-`.page-hero`, and removes its inline sizes outside the phone range. This preserves the original hero,
-tablet and laptop paragraph styles while avoiding uneven percentage inheritance inside cards.
+Across the nine main pages, every standard `.wrap` has 2.25rem, or 36px, of inline padding below
+640px. This places headings, paragraphs, text links, FAQ labels, legal copy and footer text inside
+one consistent phone boundary. `overflow-wrap: anywhere` prevents long addresses from crossing it.
+Navigation controls keep their own touch-safe spacing. A repeated script measures each non-hero
+paragraph's original computed font size and applies exactly 90% of that value on phones. It excludes
+paragraphs inside `.hero` and `.page-hero`, and removes its inline sizes outside the phone range.
+Tablet and laptop styles remain unchanged.
 
 Within that bottom navigation, Work is a button rather than a direct page link. On phone and tablet
 it opens a three-link panel for Psychotherapy sessions, Supervision sessions and Workplace Wellbeing.
