@@ -1112,6 +1112,11 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Removed the Workplace Wellbeing On confidentiality button and expandable panel on
+all devices at Harshita's request, including its dedicated CSS and toggle script.
+This supersedes the earlier panel requirement. Service descriptions, metadata and
+legal policies are unchanged. The removed content remains recoverable in Git history.
+
 Closing section footer spacing: add 2rem (32px) to the bottom padding of #contact
 on the six main pages at every viewport size. Bottom padding is now 88px on phones,
 128px at 640-767px, and 160px from 768px. Top padding and footer styling are unchanged.

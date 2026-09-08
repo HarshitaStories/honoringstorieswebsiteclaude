@@ -299,26 +299,6 @@
      shadow: a tight halo hugging the pill, and a softer drop beneath it. */
   .theme-pill:hover { transform: translateY(-2px); border-color: var(--purple-soft); color: var(--deep-purple); box-shadow: 0 0 16px rgba(122, 77, 143, 0.25), 0 10px 26px -14px rgba(122, 77, 143, 0.55); }
   .theme-note { text-align: center; font-size: 0.9rem; color: var(--muted); font-style: italic; margin: 1.5rem auto 0; }
-  /* Confidentiality gets its own block rather than a line in the copy: for an
-     organisation it is usually the deciding question, and for the employee it
-     is what makes the space usable at all. */
-  /* ---- Confidentiality: collapsible panel ---- */
-  .info-block { max-width: 720px; margin: 3.5rem auto 0; text-align: center; }
-  .info-btn { display: inline-flex; align-items: center; gap: 0.65rem; background: var(--cream-warm); border: 1px solid var(--line); border-radius: 999px; padding: 0.7rem 1.25rem 0.7rem 0.75rem; cursor: pointer; font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--deep-purple); transition: border-color 0.4s var(--ease-gentle), box-shadow 0.4s var(--ease-gentle), transform 0.35s var(--ease-out); }
-  .info-btn:hover, .info-btn:focus-visible { border-color: var(--rose-soft); box-shadow: 0 14px 30px -18px rgba(91, 46, 107, 0.35); transform: translateY(-2px); }
-  .info-mark { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--deep-purple); color: var(--cream-warm); font-family: var(--font-display); font-style: italic; font-size: 1.05rem; line-height: 1; }
-  .info-chevron { width: 15px; height: 15px; flex-shrink: 0; color: var(--purple-soft); transition: transform 0.45s var(--ease-gentle); }
-  .info-btn[aria-expanded="true"] .info-chevron { transform: rotate(180deg); }
-  /* 0fr to 1fr animates to the content's real height. A max-height guess would
-     either clip long text or ease against a height that is not there. */
-  .info-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.55s var(--ease-gentle); }
-  .info-panel.is-open { grid-template-rows: 1fr; }
-  .info-panel-inner { overflow: hidden; }
-  /* The card keeps the look the panel had when it sat open on the page. Text
-     stays left aligned inside it: three centred paragraphs are hard to read. */
-  .info-panel-card { margin-top: 1.25rem; text-align: left; background: var(--cream-warm); border: 1px solid var(--line); border-left: 3px solid var(--rose-soft); border-radius: 14px; padding: 1.75rem 1.85rem; }
-  .info-panel-card p { color: var(--charcoal-soft); font-size: 0.98rem; line-height: 1.8; }
-  .info-panel-card p:last-child { margin-bottom: 0; }
 
   /* ========== WHATSAPP FLOAT ========== */
   /* Deliberately quiet: site palette rather than WhatsApp green, and a slow
@@ -501,29 +481,6 @@
       </div>
     </div>
 
-    <!-- Confidentiality, folded away under the three cards. The trigger keeps
-         the words beside the icon: a bare "i" is easy to scroll past, and for
-         an employer weighing this up it is usually the deciding question. -->
-    <div class="info-block reveal delay-3">
-      <button type="button" class="info-btn" id="confidentialityBtn"
-              aria-expanded="false" aria-controls="confidentialityPanel">
-        <span class="info-mark" aria-hidden="true">i</span>
-        <span>On confidentiality</span>
-        <svg class="info-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <!-- The 0fr to 1fr grid trick animates to the content's real height,
-           which a max-height guess cannot do without either clipping long text
-           or easing against a height that is not there. -->
-      <div class="info-panel" id="confidentialityPanel" role="region" aria-labelledby="confidentialityBtn">
-        <div class="info-panel-inner">
-          <div class="info-panel-card">
-            <p>This tends to be the question underneath all the others, so it is worth saying plainly.</p>
-            <p>What an individual shares with me stays with them. Organisations do not receive names, notes, or any account of what was discussed. Where it is useful, I can share broad themes at a group level, with nothing that could identify a person. The one exception is a risk of serious harm, which is discussed openly upfront.</p>
-            <p>This is not a technicality. People only use these spaces when they trust them, and that trust is what makes the work worth doing.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -801,19 +758,6 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* Confidentiality panel. aria-expanded on the button is the single source of
-     truth for open state, so the chevron, the grid row and assistive tech can
-     never disagree with each other. */
-  (function () {
-    const btn = document.getElementById('confidentialityBtn');
-    const panel = document.getElementById('confidentialityPanel');
-    if (!btn || !panel) return;
-    btn.addEventListener('click', function () {
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      panel.classList.toggle('is-open', !open);
-    });
-  })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
