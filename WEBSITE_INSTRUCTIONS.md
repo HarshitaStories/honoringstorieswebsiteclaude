@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Homepage hero replacement, 2026-09-09: use the supplied assets/homehero.png across all
+devices instead of assets/newhomepicfeather.png. Preserve natural proportions, existing
+responsive placement, mobile centring and right/bottom feather masks. Do not alter the
+face or source image. Retain the previous asset for rollback; other portraits stay unchanged.
+
 Mobile closing gap reversal, 2026-09-09: Harshita revoked the last change. The six main
 pages now use 7rem (112px) bottom padding below 640px again. The 14rem (224px) increase
 described below was rejected. Tablet, laptop and legal pages remain unchanged.
