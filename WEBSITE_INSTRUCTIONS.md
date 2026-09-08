@@ -347,9 +347,9 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
     - `assets/harshita-home 2.png` is the older grey-studio-backdrop photo, now unused.
   - **The glimpse photo is `assets/harshita-glimpse.webp`.** It retains its full natural
     proportions with `width: 100%; height: auto` and no cover crop. Across phone, tablet and laptop,
-    intersecting masks soften the outer 12% on all four edges, matching the approved About photo
-    treatment. This supersedes the earlier no-feather decision after Harshita requested that the
-    visible chair crop edges blend into the page. The face and source asset are not edited.
+    intersecting masks soften only the final 10% at the right and bottom crop edges. The top and
+    left stay fully opaque, preserving the hair and face. The four-edge fade was rejected because
+    it washed out the hair and created a halo. The face and source asset are not edited.
     `assets/harshita-chair.jpg` is the previous rectangular photo, kept but unused.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
@@ -1114,6 +1114,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Removed the halo from the homepage glimpse portrait | Replaced the four-edge fade with right and bottom edge fades only. The top and left remain opaque so the hair and head are not washed out; applies across devices. |
 | Softened the homepage glimpse photo edges | Applied the approved About four-edge feather to the homepage chair portrait across all devices, preserving its full composition, dimensions and natural proportions. |
 | Restored the full About photograph while retaining soft edges | Harshita rejected the taller crop because the plant and chair must remain visible. The natural rectangular composition is restored across all devices, retaining the four-edge feather without cropping or stretching. |
 | Made the About plant portrait taller and feathered its edges | A 4:5 cover frame with intersecting four-edge masks replaces the unmasked landscape presentation across phone, tablet and laptop. This blends the edges into the page without stretching or editing the face. |
