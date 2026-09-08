@@ -1112,6 +1112,15 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Workplace theme illustration transparency: all eight cards now load actual RGBA
+`assets/themes/*-alpha.webp` assets on phone, tablet and laptop. Border-connected
+cream paper was extracted with the compiled flood-fill method, with soft alpha
+edges and colour decontamination. Enclosed artwork and pencil detail are retained.
+The seven wide exports centre their exact transparent square on a transparent canvas;
+stress retains its original complete composition in the existing responsive frame.
+The former CSS multiply blend is removed. Card colours, captions, sizing and layout
+are unchanged. Earlier opaque WebP assets remain for rollback; do not load those.
+
 Mobile testimonial dots: below 640px, keep all dots in one non-wrapping horizontal
 scroll row with non-shrinking dots and tighter control gaps. Additional reviews
 overflow within the dot row rather than wrapping or widening the page. Changing
