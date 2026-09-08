@@ -1112,6 +1112,12 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Homepage hero update: the requested prepared transparent portrait `assets/newhomepicfeather.png`
+(1086x1448) replaces `assets/harshita-home.webp` across phone, tablet and laptop. Retain the
+existing responsive hero placement, cream background blending and bottom-only image fade.
+Do not apply a radial fade over the face or hair. Earlier hero asset references describe
+the previous portrait; the Workplace About portrait and social preview are separate assets.
+
 | Decision / change | Reason |
 | --- | --- |
 | Removed the halo from the homepage glimpse portrait | Replaced the four-edge fade with right and bottom edge fades only. The top and left remain opaque so the hair and head are not washed out; applies across devices. |
