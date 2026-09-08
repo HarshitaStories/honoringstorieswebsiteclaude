@@ -1124,6 +1124,12 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Closing section footer spacing: add 2rem (32px) to the bottom padding of #contact
+on the six main pages at every viewport size. Bottom padding is now 88px on phones,
+128px at 640-767px, and 160px from 768px. Top padding and footer styling are unchanged.
+This supersedes the earlier equal top/bottom spacing preference. Retain the explicit
+legal-page exclusion; no legal page spacing changes were made.
+
 Desktop current-page navigation: from 900px, Home, About or Community receives a
 rounded translucent glass pill with a soft purple glow on its own page. Work With Me
 receives that treatment on all three service pages. The pill uses a non-interactive
