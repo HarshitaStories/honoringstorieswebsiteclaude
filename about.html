@@ -191,16 +191,13 @@
   /* This is the prepared website copy of aboutfinal.png. The source photograph
      carries rounded corners, and its painted white corner notches were cleared
      to transparency in harshita-about.webp so the image blends into the cream.
-     A 4:5 frame and four-edge feather blend the portrait into the page. */
+     The full landscape photograph keeps its natural ratio, with soft edges. */
   .full-photo {
     display: block;
     width: 100%;
     height: auto;
     max-width: 400px;
     margin: 0 auto;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: 50% 50%;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
     -webkit-mask-composite: source-in;
