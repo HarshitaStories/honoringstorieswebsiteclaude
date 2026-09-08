@@ -1112,6 +1112,11 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Homepage portrait alignment: at 900px and wider, replace the old -55px top margin
+with zero and translate the portrait up by 2.97% of its own height. The new image's
+opaque hair starts at row 43 of 1448, so this aligns its visible top with the text
+column rather than lifting the head above it. Phone and tablet positioning is retained.
+
 Homepage hero update: the requested prepared transparent portrait `assets/newhomepicfeather.png`
 (1086x1448) replaces `assets/harshita-home.webp` across phone, tablet and laptop. Retain the
 existing responsive hero placement, cream background blending and bottom-only image fade.

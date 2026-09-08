@@ -643,13 +643,11 @@
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
   }
-  /* Sized so her visible height matches the text column: hairline level with the
-     eyebrow at the top, lower edge finishing level with the bottom of the
-     buttons. The source carries ~10.6% dead transparent space above her hair,
-     so the image box has to start higher than the text does for her hair, not
-     the box, to line up. That empty strip is transparent, so nothing shows in it. */
+  /* The new portrait's visible hair begins at row 43 of 1448. Compensate for
+     that 2.97% transparent strip to align the hairline with the text column. */
   @media (min-width: 900px) {
-    .hero-photo { margin-top: -55px; }
+    .hero-photo { margin-top: 0; }
+    .hero-photo-frame img { transform: translateX(-8.5%) translateY(-2.97%); }
   }  @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
