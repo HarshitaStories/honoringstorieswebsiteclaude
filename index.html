@@ -989,6 +989,10 @@
     width: 100%;
     height: auto;
     display: block;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
   }
   .testimonial-card {
     background: var(--cream-warm);

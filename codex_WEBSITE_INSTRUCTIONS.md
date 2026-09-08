@@ -357,15 +357,11 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
       eye whites are white too, so a plain "remove all white" pass punches holes through them.
       Any future re-cut must preserve that border-connected constraint.
     - `assets/harshita-home 2.png` is the older grey-studio-backdrop photo, now unused.
-  - **The glimpse photo is `assets/harshita-glimpse.png`, a transparent cut-out.** `.glimpse-visual
-    img` therefore carries **no edge feathering and no crop**, only `width: 100%; height: auto`.
-    Both were removed deliberately when the photo changed:
-    - The old four-edge mask suited a rectangular photo ending on a hard boundary. A cut-out
-      already dissolves into the page, so the mask would fade the artwork itself rather than an
-      edge that is no longer there.
-    - The old `aspect-ratio: 4/5; object-fit: cover` cropped to a ratio the current file does not
-      have, taking slices off it for nothing.
-    If a future photo is a plain rectangle again, put both back; if it is a cut-out, leave them off.
+  - **The glimpse photo is `assets/harshita-glimpse.webp`.** It retains its full natural
+    proportions with `width: 100%; height: auto` and no cover crop. Across phone, tablet and laptop,
+    intersecting masks soften the outer 12% on all four edges, matching the approved About photo
+    treatment. This supersedes the earlier no-feather decision after Harshita requested that the
+    visible chair crop edges blend into the page. The face and source asset are not edited.
     `assets/harshita-chair.jpg` is the previous rectangular photo, kept but unused.
   - The glimpse section (`#glimpse`) replaced four separate sections (why-this-fits narrative,
     Work With Me preview, testimonials carousel, qualifications timeline) with a compact block:
@@ -1130,6 +1126,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Softened the homepage glimpse photo edges | Applied the approved About four-edge feather to the homepage chair portrait across all devices, preserving its full composition, dimensions and natural proportions. |
 | Restored the full About photograph while retaining soft edges | Harshita rejected the taller crop because the plant and chair must remain visible. The natural rectangular composition is restored across all devices, retaining the four-edge feather without cropping or stretching. |
 | Made the About plant portrait taller and feathered its edges | A 4:5 cover frame with intersecting four-edge masks replaces the unmasked landscape presentation across phone, tablet and laptop. This blends the edges into the page without stretching or editing the face. |
 | Added the location box to the About bio | The About bio now shows two separate stacked availability boxes: Sessions offered in English and Hindi, and Online or in person in Mumbai. Both remain outside Read more and visible across device sizes, matching the service-page icons and pill styling. |
