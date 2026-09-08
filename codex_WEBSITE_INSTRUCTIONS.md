@@ -250,7 +250,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   still visible". Keep it that way, do not raise the opacity or speed it up. An italic glass pill
   tooltip ("Reach out on WhatsApp", same treatment as the section-rail labels) appears on hover and
   is hidden below 600px. The existing reduced-motion rule already flattens the pulse.
-- The footer logo is the real brand logo image (`assets/Whitelogo.png`, feather, cupped hands,
+- The footer logo is the real brand logo image (`assets/Footercolor.png`, feather, cupped hands,
   wordmark, tagline), not the earlier hand-drawn inline SVG approximation. It is **45px tall and
   centred in its column**, both horizontally and vertically. It was 64px and pinned to the top
   left, which left it in the corner of a large empty area, since the brand column holds nothing
@@ -1071,7 +1071,7 @@ already caused one missed change.
 | File | Size | Used by | Notes |
 | --- | --- | --- | --- |
 | `assets/logo.png` | 26 KB | all 9 | Favicon and nav logo. |
-| `assets/Whitelogo.png` | 16 KB | all 9 | Footer logo. 45px tall, centred in its column. |
+| `assets/Footercolor.png` | 8 KB | all 9 | Footer logo. 45px tall, centred in its column. |
 | `assets/harshita-home.png` | 979 KB | `index.html`, `workplace-wellbeing.html` | Transparent hero cut-out, also used in the Workplace About circle. Must stay PNG. Heaviest asset on the site. |
 | `assets/harshita-glimpse.png` | 166 KB | `index.html` | Glimpse-section portrait, transparent cut-out, 340x319. Low resolution for its slot; a larger original would improve it. |
 | `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
@@ -1129,6 +1129,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Replaced the footer logo with Footercolor | All nine pages now load the supplied `assets/Footercolor.png` across phone, tablet and laptop, retaining the existing 45px height and centred placement. The previous white logo remains available for reversibility. |
 | Restored the About bio portrait from aboutfinal | Across phone, tablet and laptop, the About bio again uses `assets/harshita-about.webp`, the prepared website copy of `aboutfinal.png`. Its approved 400px cap, natural aspect ratio, centred placement, bio grid position and reveal effect are restored, and the redpic-specific feather masks are removed. |
 | Unified the phone content boundary across all page text | Below 640px on all nine pages, the standard wrapper now uses 36px of padding on both sides and permits safe wrapping of long text. This preserves the existing paragraph boundary while bringing headings, text links, FAQ labels, legal copy and footer copy inside it. Navigation keeps its own spacing, and tablet and laptop are unchanged. |
 | Reduced non-hero phone paragraphs by 10% and restored hero copy | Below 640px on all nine pages, each non-hero `<p>` is measured at its own original computed size and rendered at exactly 90% with 1rem of inline padding. Paragraphs inside `.hero` and `.page-hero` receive neither change. Tablet and laptop remain unchanged. This replaces the 80% phone rule below. |
