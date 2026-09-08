@@ -437,9 +437,10 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   - **The bio portrait is the prepared `aboutfinal` photograph across phone, tablet and laptop.**
     The page loads `assets/harshita-about.webp`, the 1421x1107 website copy of `aboutfinal.png` with
     its painted white corner notches cleared to transparency so it blends into the cream section.
-    `.full-photo` uses the earlier approved 400px maximum width, automatic aspect ratio and centred
-    placement inside the existing reveal wrapper. The redpic-specific right and bottom masks are
-    removed because they do not belong on this landscape photograph.
+    `.full-photo` uses a 400px maximum width and a taller 4:5 frame with `object-fit: cover` and
+    centred positioning. Two intersecting linear masks fade the outer 12% on all four edges into
+    the page cream. This replaces the natural landscape ratio after Harshita requested a taller,
+    blended photograph. The source asset and facial proportions remain unchanged on all devices.
   - The bio is **truncated behind a "Read more" toggle**: the first two paragraphs always show,
     the remaining four (including the closing italic `p.bio-quote`) sit inside `.bio-more` and
     expand on click, with the link text flipping to "Read less". The collapse uses the
@@ -1129,6 +1130,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Made the About plant portrait taller and feathered its edges | A 4:5 cover frame with intersecting four-edge masks replaces the unmasked landscape presentation across phone, tablet and laptop. This blends the edges into the page without stretching or editing the face. |
 | Added the location box to the About bio | The About bio now shows two separate stacked availability boxes: Sessions offered in English and Hindi, and Online or in person in Mumbai. Both remain outside Read more and visible across device sizes, matching the service-page icons and pill styling. |
 | Replaced the footer logo with Footercolor | All nine pages now load the supplied `assets/Footercolor.png` across phone, tablet and laptop, retaining the existing 45px height and centred placement. The previous white logo remains available for reversibility. |
 | Restored the About bio portrait from aboutfinal | Across phone, tablet and laptop, the About bio again uses `assets/harshita-about.webp`, the prepared website copy of `aboutfinal.png`. Its approved 400px cap, natural aspect ratio, centred placement, bio grid position and reveal effect are restored, and the redpic-specific feather masks are removed. |
