@@ -1112,6 +1112,18 @@
     gap: 0.5rem;
     max-width: 220px;
   }
+  @media (max-width: 639px) {
+    .carousel-nav { gap: 0.75rem; }
+    .glimpse-dots {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 6px 0;
+    }
+    .glimpse-dots button { flex-shrink: 0; }
+  }
   .glimpse-dots button {
     width: 7px; height: 7px;
     border-radius: 50%;
@@ -2007,6 +2019,11 @@
       metaSlides[idx].classList.add('active');
       bodySlides[idx].classList.add('active');
       dots[idx].classList.add('active');
+      if (window.matchMedia('(max-width: 639px)').matches) {
+        const dotBox = dots[idx].getBoundingClientRect();
+        const rowBox = dotsWrap.getBoundingClientRect();
+        dotsWrap.scrollLeft += dotBox.left + dotBox.width / 2 - rowBox.left - rowBox.width / 2;
+      }
       if (manual) restart();
     }
     function next() { goTo(idx + 1); }

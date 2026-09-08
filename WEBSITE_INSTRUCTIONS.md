@@ -1112,6 +1112,11 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Mobile testimonial dots: below 640px, keep all dots in one non-wrapping horizontal
+scroll row with non-shrinking dots and tighter control gaps. Additional reviews
+overflow within the dot row rather than wrapping or widening the page. Changing
+reviews scrolls the active dot into view. Tablet and laptop rules remain unchanged.
+
 Homepage approach paragraph: below 640px, `.glimpse-trust p` uses text-align: left
 instead of justify, removing stretched word spacing. Existing font sizing and padding
 are retained. Tablet and laptop alignment are unchanged.
