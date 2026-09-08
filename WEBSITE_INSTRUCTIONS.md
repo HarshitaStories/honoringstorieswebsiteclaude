@@ -1112,6 +1112,11 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Desktop workplace themes: from 900px, display four equal columns and two rows
+within the existing page wrap. The grid uses the available wrap width for readable
+captions. Keep 2.5:1 illustrations, existing order and card styles. Mobile and
+tablet grid rules are unchanged. This supersedes the earlier two-column desktop grid.
+
 Mobile workplace theme grid: after clarification, Harshita chose two cards across
 and four rows down below 640px. Retain square artwork above each caption, with
 12px gaps, 16px card corners and compact readable captions. Keep the existing

@@ -282,6 +282,7 @@
      grid tracks give a symmetric left-to-right block. */
   .theme-pills { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; max-width: 880px; margin: 0 auto; }
   @media (min-width: 720px) { .theme-pills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .theme-pills { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 100%; } }
   /* Border is a stronger purple than the site's --line, which at 0.14 alpha
      almost vanished against the cream these pills sit on. */
   .theme-pill { display: flex; flex-direction: column; min-width: 0; overflow: hidden; text-align: center; background: var(--cream); border: 1px solid rgba(91, 46, 107, 0.3); border-radius: 22px; padding: 0; margin: 0; font-size: 0.92rem; line-height: 1.45; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
