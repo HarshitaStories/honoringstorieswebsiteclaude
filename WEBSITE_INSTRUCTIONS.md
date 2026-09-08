@@ -1112,6 +1112,10 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Laptop navigation: all nine main pages now include Home linking to index.html before
+About in .nav-links. This navigation is visible from 900px upward only. The homepage
+link carries aria-current on index.html; phone and tablet navigation remain unchanged.
+
 Workplace theme illustration transparency: all eight cards now load actual RGBA
 `assets/themes/*-alpha.webp` assets on phone, tablet and laptop. Border-connected
 cream paper was extracted with the compiled flood-fill method, with soft alpha
