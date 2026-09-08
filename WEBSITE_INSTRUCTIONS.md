@@ -1117,6 +1117,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Added the location box to the About bio | The About bio now shows two separate stacked availability boxes: Sessions offered in English and Hindi, and Online or in person in Mumbai. Both remain outside Read more and visible across device sizes, matching the service-page icons and pill styling. |
 | Replaced the footer logo with Footercolor | All nine pages now load the supplied `assets/Footercolor.png` across phone, tablet and laptop, retaining the existing 45px height and centred placement. The previous white logo remains available for reversibility. |
 | Restored the About bio portrait from aboutfinal | Across phone, tablet and laptop, the About bio again uses `assets/harshita-about.webp`, the prepared website copy of `aboutfinal.png`. Its approved 400px cap, natural aspect ratio, centred placement, bio grid position and reveal effect are restored, and the redpic-specific feather masks are removed. |
 | Unified the phone content boundary across all page text | Below 640px on all nine pages, the standard wrapper now uses 36px of padding on both sides and permits safe wrapping of long text. This preserves the existing paragraph boundary while bringing headings, text links, FAQ labels, legal copy and footer copy inside it. Navigation keeps its own spacing, and tablet and laptop are unchanged. |
