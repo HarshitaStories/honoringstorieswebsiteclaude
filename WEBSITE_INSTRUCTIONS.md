@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Desktop hero alignment, 2026-09-09: centre the entire homepage text-and-buttons column
+vertically with the portrait from 900px upward. This replaces the earlier top-aligned
+layout and removes its -2.97% photo Y offset. Keep horizontal placement, image sizing
+and feathering unchanged. Mobile and tablet remain unchanged.
+
 Header consultation hover fix, 2026-09-09: on all nine pages below 900px, the mobile
 and tablet header button now matches the desktop hover: cream text, rose background,
 1px upward movement and the same transition. Override the general pink link-hover

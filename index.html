@@ -476,15 +476,12 @@
     gap: 3rem;
     align-items: center;
   }
-  /* Matches .page-hero-inner on the Psychotherapy/Supervision pages. Those
-     centre their columns because the illustration and the text are near equal
-     height; here the cut-out portrait is noticeably taller, so the columns are
-     top-aligned to keep the eyebrow level with "For individuals" over there. */
+  /* On desktop, centre the complete text-and-buttons block with the portrait. */
   @media (min-width: 900px) {
     .hero-inner {
       grid-template-columns: 1.05fr 0.95fr;
       gap: 4rem;
-      align-items: flex-start;
+      align-items: center;
     }
   }
   /* On phones the portrait follows the main heading, before the supporting
@@ -649,11 +646,10 @@
   @media (max-width: 639px) {
     .hero-photo-frame img { transform: none; }
   }
-  /* The new portrait's visible hair begins at row 43 of 1448. Compensate for
-     that 2.97% transparent strip to align the hairline with the text column. */
+  /* Preserve horizontal placement without the former top-alignment offset. */
   @media (min-width: 900px) {
     .hero-photo { margin-top: 0; }
-    .hero-photo-frame img { transform: translateX(-8.5%) translateY(-2.97%); }
+    .hero-photo-frame img { transform: translateX(-8.5%); }
   }  @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
