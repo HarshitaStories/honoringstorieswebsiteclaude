@@ -280,11 +280,15 @@
   /* A grid rather than a wrapping flex row. Flex sized each pill to its own
      text, so rows ended up ragged and the column edges never lined up. Equal
      grid tracks give a symmetric left-to-right block. */
-  .theme-pills { display: grid; grid-template-columns: 1fr; gap: 0.8rem; max-width: 880px; margin: 0 auto; }
-  @media (min-width: 640px) { .theme-pills { grid-template-columns: repeat(2, 1fr); } }
+  .theme-pills { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; max-width: 880px; margin: 0 auto; }
+  @media (min-width: 720px) { .theme-pills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   /* Border is a stronger purple than the site's --line, which at 0.14 alpha
      almost vanished against the cream these pills sit on. */
-  .theme-pill { display: flex; align-items: center; justify-content: center; text-align: center; background: var(--cream-warm); border: 1px solid rgba(91, 46, 107, 0.3); border-radius: 999px; padding: 0.75rem 1.2rem; font-size: 0.92rem; line-height: 1.45; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
+  .theme-pill { display: flex; flex-direction: column; min-width: 0; overflow: hidden; text-align: center; background: var(--cream); border: 1px solid rgba(91, 46, 107, 0.3); border-radius: 22px; padding: 0; margin: 0; font-size: 0.92rem; line-height: 1.45; color: var(--charcoal-soft); transition: transform 0.5s var(--ease-gentle), border-color 0.5s var(--ease-gentle), color 0.5s var(--ease-gentle), box-shadow 0.5s var(--ease-gentle); }
+  .theme-pill picture { display: block; position: relative; flex: none; width: 100%; aspect-ratio: 1; }
+  .theme-pill img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  .theme-pill figcaption { display: flex; align-items: center; justify-content: center; flex: 1; width: 100%; padding: 1rem 1.2rem; background: var(--cream-warm); border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .theme-pill picture { aspect-ratio: 2.5; } }
   /* The same purple bloom used on the nav, as a box-shadow rather than a text
      shadow: a tight halo hugging the pill, and a softer drop beneath it. */
   .theme-pill:hover { transform: translateY(-2px); border-color: var(--purple-soft); color: var(--deep-purple); box-shadow: 0 0 16px rgba(122, 77, 143, 0.25), 0 10px 26px -14px rgba(122, 77, 143, 0.55); }
@@ -519,14 +523,38 @@
       </div>
     </div>
     <div class="theme-pills reveal delay-1">
-      <span class="theme-pill">Stress, burnout, and the space between the two</span>
-      <span class="theme-pill">Emotional regulation in high-pressure work</span>
-      <span class="theme-pill">Boundaries, and what makes them hard to hold at work</span>
-      <span class="theme-pill">Communication, difficult conversations, and repair</span>
-      <span class="theme-pill">Psychological safety within teams</span>
-      <span class="theme-pill">Supporting a colleague who is struggling</span>
-      <span class="theme-pill">Navigating change, uncertainty, and transitions</span>
-      <span class="theme-pill">Rest, and why it is often the first thing to go</span>
+      <figure class="theme-pill">
+        <picture><img src="assets/themes/stress-burnout.webp" alt="" loading="lazy" decoding="async" width="1672" height="941"></picture>
+        <figcaption>Stress, burnout, and the space between the two</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/emotional-regulation-high-pressure-work-2.5x1.webp"><img src="assets/themes/emotional-regulation-high-pressure-work-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Emotional regulation in high-pressure work</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/workplace-boundaries-2.5x1.webp"><img src="assets/themes/workplace-boundaries-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Boundaries, and what makes them hard to hold at work</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/difficult-conversations-repair-2.5x1.webp"><img src="assets/themes/difficult-conversations-repair-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Communication, difficult conversations, and repair</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/team-psychological-safety-2.5x1.webp"><img src="assets/themes/team-psychological-safety-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Psychological safety within teams</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/supporting-a-struggling-colleague-2.5x1.webp"><img src="assets/themes/supporting-a-struggling-colleague-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Supporting a colleague who is struggling</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/navigating-change-transitions-2.5x1.webp"><img src="assets/themes/navigating-change-transitions-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Navigating change, uncertainty, and transitions</figcaption>
+      </figure>
+      <figure class="theme-pill">
+        <picture><source media="(min-width: 640px)" srcset="assets/themes/rest-first-thing-to-go-2.5x1.webp"><img src="assets/themes/rest-first-thing-to-go-1x1.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254"></picture>
+        <figcaption>Rest, and why it is often the first thing to go</figcaption>
+      </figure>
     </div>
     <p class="theme-note reveal delay-2">Or bring a theme of your own.</p>
   </div>

@@ -1124,6 +1124,17 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Workplace themes now use option 1: eight shared rounded cards, each illustration above
+its unchanged theme caption inside one purple outline. Two columns begin at 720px;
+narrower screens use one. Picture frames are square below 640px and 2.5:1 from 640px.
+The seven named pairs from Create HS Illustrations plugin are stored as lossless WebP
+copies in `assets/themes/`; artwork pixels and complete compositions are preserved.
+The earlier stress/burnout illustration has only a 1672x941 original, so its complete
+image is contained within either frame with cream space, never cropped or stretched.
+The artwork blends into the cream card with CSS multiply; captions use warm cream.
+Existing purple hover, reveal behaviour, theme order and the invitation below are retained.
+Maintain the mobile `img` and wide `source` together when replacing a paired theme image.
+
 Homepage portrait alignment: at 900px and wider, replace the old -55px top margin
 with zero and translate the portrait up by 2.97% of its own height. The new image's
 opaque hair starts at row 43 of 1448, so this aligns its visible top with the text
