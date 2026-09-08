@@ -188,23 +188,17 @@
     opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-gentle);
   }
   .rail-dot:hover::before, .rail-dot.active::before { opacity: 1; }
-  /* redpic is a transparent cut-out, so the page cream shows around the chair.
-     Right and bottom masks soften the two remaining crop boundaries without
-     changing the image size, centred placement, bio grid or reveal wrapper. */
+  /* This is the prepared website copy of aboutfinal.png. The source photograph
+     carries rounded corners, and its painted white corner notches were cleared
+     to transparency in harshita-about.webp so the image blends into the cream.
+     The landscape image keeps the approved 400px cap, natural aspect ratio,
+     centred placement, bio grid position and reveal wrapper at every width. */
   .full-photo {
     display: block;
     width: 100%;
     height: auto;
     max-width: 400px;
     margin: 0 auto;
-    -webkit-mask-image:
-      linear-gradient(to right, #000 0 calc(100% - 42px), transparent 100%),
-      linear-gradient(to bottom, #000 0 calc(100% - 50px), transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to right, #000 0 calc(100% - 42px), transparent 100%),
-      linear-gradient(to bottom, #000 0 calc(100% - 50px), transparent 100%);
-    mask-composite: intersect;
   }
 
   .bio-inner { display: grid; gap: 2.5rem; align-items: start; }
@@ -480,7 +474,7 @@
     </div>
     <div class="bio-inner">
       <div class="reveal">
-        <img class="full-photo" src="assets/redpic.png" alt="Harshita seated in a beige armchair, wearing a patterned red, cream and navy dress." />
+        <img class="full-photo" src="assets/harshita-about.webp" alt="Harshita seated at a marble table, smiling, arms folded, with a large leafed plant beside her." />
       </div>
       <div class="bio-text reveal delay-1" id="bioText">
         <p>I am Harshita Sarda (she/her), a practicing psychotherapist and supervisor. I hold an MA in Clinical Psychology, along with a Diploma in Counseling Psychology from Xavier's College and a Diploma in Supervision for Mental Health Practice from TISS.</p>

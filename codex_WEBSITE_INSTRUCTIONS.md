@@ -434,11 +434,12 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   is de-duplicated from the near-identical "About me page" and "Approach as a therapist" source
   docs (used the fuller version once), with the age range stated as "18+" (not the source docs'
   "20 to 65").
-  - **The bio portrait is `assets/redpic.png` across phone, tablet and laptop.** It is a
-    1086x1448 transparent cut-out of Harshita seated in a beige chair. `.full-photo` retains its
-    400px maximum width, automatic aspect ratio and centred placement inside the existing reveal
-    wrapper. Two intersecting gradient masks feather the final 42px at the right and 50px at the
-    bottom, softening the source image's hard crop lines without affecting the top or left edge.
+  - **The bio portrait is the prepared `aboutfinal` photograph across phone, tablet and laptop.**
+    The page loads `assets/harshita-about.webp`, the 1421x1107 website copy of `aboutfinal.png` with
+    its painted white corner notches cleared to transparency so it blends into the cream section.
+    `.full-photo` uses the earlier approved 400px maximum width, automatic aspect ratio and centred
+    placement inside the existing reveal wrapper. The redpic-specific right and bottom masks are
+    removed because they do not belong on this landscape photograph.
   - The bio is **truncated behind a "Read more" toggle**: the first two paragraphs always show,
     the remaining four (including the closing italic `p.bio-quote`) sit inside `.bio-more` and
     expand on click, with the link text flipping to "Read less". The collapse uses the
@@ -1076,7 +1077,7 @@ already caused one missed change.
 | `assets/therapy-hero.jpg` | 309 KB | `psychotherapy.html` | Illustration, backdrop flattened to page cream. |
 | `assets/supervision-hero.jpg` | 159 KB | `supervision.html` | Illustration, backdrop flattened to page cream. |
 | `assets/workplace-wellbeing.png` | 893 KB | `workplace-wellbeing.html` | Meeting illustration, background cut to transparency. Third of three versions; the other two were rejected. |
-| `assets/redpic.png` | 2.1 MB | `about.html` | About bio portrait, transparent cut-out, 1086x1448. Uses the existing 400px responsive cap. |
+| `assets/harshita-about.webp` | 128 KB | `about.html` | Prepared website copy of `aboutfinal.png`, 1421x1107, with the painted white corner notches cleared to transparency. Uses the approved 400px responsive cap. |
 | `assets/community-hero.jpg` | 77 KB | `community.html` | Full-bleed repeating band at the top of the page. |
 | `assets/sharedwaysofcoping.jpg` | 100 KB | `community.html` | Section illustration, backdrop flattened to cream-warm. |
 
@@ -1086,6 +1087,7 @@ Kept deliberately, not dead weight to be tidied away. Do not delete without aski
 
 | File | Size | Why it is still here |
 | --- | --- | --- |
+| `assets/redpic.png` | 2.1 MB | Previous About bio portrait, retained so the restoration to the prepared `aboutfinal` photograph remains reversible. |
 | `assets/harshita-organisations.jpg` | 62 KB | Previous Workplace About portrait, retained so the image swap remains reversible. |
 | `assets/harshita-chair.jpg` | 169 KB | Previous glimpse photo, a plain rectangle. If the glimpse photo ever goes back to a rectangle, this is the one, and the feathering CSS described in section 4 goes back with it. |
 | `assets/harshita-home-source.png` | 575 KB | Original of the hero cut-out, before background removal. |
@@ -1127,6 +1129,7 @@ Reversals are included on purpose: they show what has already been rejected.
 
 | Decision / change | Reason |
 | --- | --- |
+| Restored the About bio portrait from aboutfinal | Across phone, tablet and laptop, the About bio again uses `assets/harshita-about.webp`, the prepared website copy of `aboutfinal.png`. Its approved 400px cap, natural aspect ratio, centred placement, bio grid position and reveal effect are restored, and the redpic-specific feather masks are removed. |
 | Unified the phone content boundary across all page text | Below 640px on all nine pages, the standard wrapper now uses 36px of padding on both sides and permits safe wrapping of long text. This preserves the existing paragraph boundary while bringing headings, text links, FAQ labels, legal copy and footer copy inside it. Navigation keeps its own spacing, and tablet and laptop are unchanged. |
 | Reduced non-hero phone paragraphs by 10% and restored hero copy | Below 640px on all nine pages, each non-hero `<p>` is measured at its own original computed size and rendered at exactly 90% with 1rem of inline padding. Paragraphs inside `.hero` and `.page-hero` receive neither change. Tablet and laptop remain unchanged. This replaces the 80% phone rule below. |
 
