@@ -629,19 +629,21 @@
     z-index: 1;
     width: 100%;
     display: block;
-    /* She sits right-of-centre in the source file: 17.5% empty margin on the
-       left against 0.5% on the right. Nudging left evens the margins. */
+    /* Preserve the approved tablet and laptop horizontal placement. */
     transform: translateX(-8.5%);
-    /* The ONLY mask on the photo, and only along the bottom, because the source
-       crops her at the chest and would otherwise end on a hard horizontal cut.
-       Her face and hair stay fully opaque. Do not put a radial mask back on the
-       frame: that is what was fading the subject. */
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%);
+    /* Feather only the bottom and final 10% of the right crop edge.
+       Keep the face, hair and top edge opaque to avoid the rejected halo. */
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%), linear-gradient(to right, #000 90%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 80%, rgba(0, 0, 0, 0.6) 91%, rgba(0, 0, 0, 0) 100%), linear-gradient(to right, #000 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
+  }
+  @media (max-width: 639px) {
+    .hero-photo-frame img { transform: none; }
   }
   /* The new portrait's visible hair begins at row 43 of 1448. Compensate for
      that 2.97% transparent strip to align the hairline with the text column. */

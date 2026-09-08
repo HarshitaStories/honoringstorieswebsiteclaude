@@ -1124,6 +1124,12 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Homepage hero edge and centring update: intersect the existing bottom fade with a
+right-edge fade over the final 10% on all devices. Keep the face, hair and top edge
+opaque, with no radial mask over the portrait. Below 640px only, remove the old
+translateX(-8.5%) so the image is centred within its frame and the mobile padding.
+Tablet horizontal placement and laptop text alignment remain as approved.
+
 Footer logo replaced with `assets/Finalfooterlogo.png` on all nine main pages at
 phone, tablet and laptop widths. Existing size, centring and styles are retained.
 This supersedes the earlier Footercolor asset references; the older file is kept.
