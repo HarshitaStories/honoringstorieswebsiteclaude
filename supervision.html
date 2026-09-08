@@ -352,6 +352,10 @@
   @media (max-width: 639px) {
     .wrap { padding-inline: 2.25rem; overflow-wrap: anywhere; }
   }
+  @media (min-width: 900px) {
+    .nav-links .nav-current { position: relative; isolation: isolate; color: var(--deep-purple); text-shadow: 0 0 12px rgba(122, 77, 143, 0.28); }
+    .nav-links .nav-current::before { content: ''; position: absolute; inset: -0.55rem -0.8rem; z-index: -1; pointer-events: none; border-radius: 999px; background: rgba(253, 250, 242, 0.62); border: 1px solid rgba(255, 255, 255, 0.8); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 16px rgba(178, 149, 196, 0.25), 0 6px 18px -10px rgba(91, 46, 107, 0.4); }
+  }
 </style></head>
 <body>
 
@@ -365,7 +369,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <div class="nav-dropdown">
-        <button class="nav-dropdown-toggle" type="button" aria-haspopup="true">
+        <button class="nav-dropdown-toggle nav-current" type="button" aria-haspopup="true">
           Work With Me
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>

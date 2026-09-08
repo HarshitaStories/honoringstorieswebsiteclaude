@@ -1124,6 +1124,12 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Desktop current-page navigation: from 900px, Home, About or Community receives a
+rounded translucent glass pill with a soft purple glow on its own page. Work With Me
+receives that treatment on all three service pages. The pill uses a non-interactive
+pseudo-element so header spacing is unchanged. Legal pages have no false active item.
+The shared desktop CSS is present on all nine pages; phone and tablet are unaffected.
+
 Desktop workplace themes: from 900px, display four equal columns and two rows
 within the existing page wrap. The grid uses the available wrap width for readable
 captions. Keep 2.5:1 illustrations, existing order and card styles. Mobile and
