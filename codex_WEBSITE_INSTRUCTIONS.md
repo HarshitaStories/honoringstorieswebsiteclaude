@@ -1,5 +1,9 @@
 # Honoring Stories Â· Website Instructions
 
+Mobile closing gap reversal, 2026-09-09: Harshita revoked the last change. The six main
+pages now use 7rem (112px) bottom padding below 640px again. The 14rem (224px) increase
+described below was rejected. Tablet, laptop and legal pages remain unchanged.
+
 Mobile closing gap update, 2026-09-08: Harshita requested a significant increase below the
 final call-to-action buttons. On the six main pages, below 640px only, #contact bottom
 padding is now 14rem (224px), doubled from 7rem (112px). This supersedes the earlier
