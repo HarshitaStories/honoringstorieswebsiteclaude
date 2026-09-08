@@ -289,6 +289,11 @@
   .theme-pill img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .theme-pill figcaption { display: flex; align-items: center; justify-content: center; flex: 1; width: 100%; padding: 1rem 1.2rem; background: var(--cream-warm); border-top: 1px solid var(--line); }
   @media (min-width: 640px) { .theme-pill picture { aspect-ratio: 2.5; } }
+  @media (max-width: 639px) {
+    .theme-pills { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+    .theme-pill { border-radius: 16px; }
+    .theme-pill figcaption { padding: 0.75rem 0.5rem; font-size: 0.82rem; line-height: 1.45; }
+  }
   /* The same purple bloom used on the nav, as a box-shadow rather than a text
      shadow: a tight halo hugging the pill, and a softer drop beneath it. */
   .theme-pill:hover { transform: translateY(-2px); border-color: var(--purple-soft); color: var(--deep-purple); box-shadow: 0 0 16px rgba(122, 77, 143, 0.25), 0 10px 26px -14px rgba(122, 77, 143, 0.55); }
