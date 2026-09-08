@@ -1112,6 +1112,12 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Closing gap correction: on the six main pages, #contact now has 7rem bottom padding
+on phones and 16rem from tablet upward. This matches the visible separation created by
+the preceding section's bottom padding plus the closing section's top padding, so the
+gap below the call-to-action buttons equals the gap above the closing heading. Legal
+pages remain unchanged.
+
 Removed the Workplace Wellbeing On confidentiality button and expandable panel on
 all devices at Harshita's request, including its dedicated CSS and toggle script.
 This supersedes the earlier panel requirement. Service descriptions, metadata and
