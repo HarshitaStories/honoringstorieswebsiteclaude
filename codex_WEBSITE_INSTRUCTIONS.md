@@ -1124,6 +1124,10 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Homepage approach paragraph: below 640px, `.glimpse-trust p` uses text-align: left
+instead of justify, removing stretched word spacing. Existing font sizing and padding
+are retained. Tablet and laptop alignment are unchanged.
+
 Homepage hero edge and centring update: intersect the existing bottom fade with a
 right-edge fade over the final 10% on all devices. Keep the face, hair and top edge
 opaque, with no radial mask over the portrait. Below 640px only, remove the old
