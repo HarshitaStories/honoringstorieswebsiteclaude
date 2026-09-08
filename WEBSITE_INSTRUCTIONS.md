@@ -1112,6 +1112,10 @@ Reversals are included on purpose: they show what has already been rejected.
 
 ### 2026-09-08
 
+Footer logo replaced with `assets/Finalfooterlogo.png` on all nine main pages at
+phone, tablet and laptop widths. Existing size, centring and styles are retained.
+This supersedes the earlier Footercolor asset references; the older file is kept.
+
 Workplace themes now use option 1: eight shared rounded cards, each illustration above
 its unchanged theme caption inside one purple outline. Two columns begin at 720px;
 narrower screens use one. Picture frames are square below 640px and 2.5:1 from 640px.
