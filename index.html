@@ -297,6 +297,10 @@
     line-height: 1.2;
     white-space: nowrap;
   }
+  @media (max-width: 899px) {
+    .mobile-header-cta { transition: background 0.4s var(--ease-gentle), transform 0.4s var(--ease-gentle); }
+    .mobile-header-cta:hover { color: var(--cream-warm); background: var(--rose); transform: translateY(-1px); }
+  }
   @media (min-width: 900px) { .mobile-header-cta { display: none; } }
 
   /* ========== NAV DROPDOWN (Work With Me) ========== */

@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Header consultation hover fix, 2026-09-09: on all nine pages below 900px, the mobile
+and tablet header button now matches the desktop hover: cream text, rose background,
+1px upward movement and the same transition. Override the general pink link-hover
+text rule. Desktop styles and legal page content/spacing remain unchanged.
+
 Homepage hero replacement, 2026-09-09: use the supplied assets/homehero.png across all
 devices instead of assets/newhomepicfeather.png. Preserve natural proportions, existing
 responsive placement, mobile centring and right/bottom feather masks. Do not alter the
