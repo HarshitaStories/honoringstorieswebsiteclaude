@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Mobile closing gap update, 2026-09-08: Harshita requested a significant increase below the
+final call-to-action buttons. On the six main pages, below 640px only, #contact bottom
+padding is now 14rem (224px), doubled from 7rem (112px). This supersedes the earlier
+mobile equal-gap target. Tablet, laptop and the three legal pages remain unchanged.
+
 This file is the living source of truth for building this site. It is updated every time new
 instructions, content, or decisions come in during a session, including reversals of earlier
 decisions. If something here conflicts with an older memory or an earlier commit message, this
