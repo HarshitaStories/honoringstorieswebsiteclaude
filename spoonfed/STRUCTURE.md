@@ -4,6 +4,13 @@
 
 ## Audit maintenance update, 2026-09-09
 
+Image loading update: referenced -lossless PNG/WebP copies preserve exact decoded pixels
+and native dimensions. Keep original assets for rollback. Do not use lossy compression
+or resize without approval. Hero images are prioritised, lower-page images load lazily,
+and intrinsic dimensions reserve space. Responsive theme sources remain paired.
+WebP files have the same one-month cache policy as PNG; use a new filename when replacing
+an image. All nine public pages and four error pages use the compressed shared images.
+
 All note changes must use hs_update_notes in lib.php. Its separate lock covers the
 read, modification and atomic save. Do not restore the old hs_save_notes pattern.
 Damaged stores reject writes rather than overwriting notes. Test with synthetic notes

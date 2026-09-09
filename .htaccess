@@ -104,6 +104,7 @@ RedirectMatch 404 /\.git
   # Images are the heavy part of this site and change rarely, so let browsers
   # hold on to them. If one is replaced, its filename usually changes too.
   ExpiresByType image/png  "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType image/svg+xml "access plus 1 month"
   ExpiresByType image/x-icon "access plus 1 month"

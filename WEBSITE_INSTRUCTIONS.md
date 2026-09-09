@@ -1,5 +1,17 @@
 # Honoring Stories Â· Website Instructions
 
+Lossless image loading optimisation, 2026-09-09:
+All images referenced by the nine public pages and four error pages were tested for
+lossless recompression. Install only smaller results, retaining every original file.
+21 assets use -lossless copies, saving 1,310,920 bytes across the unique replaced files.
+Decoded RGBA pixels, transparency and native dimensions are identical. No resizing,
+colour reduction or lossy recompression was used. Already-efficient files stay unchanged.
+Social previews and platform icons remain PNG; other smaller copies use WebP.
+Images reserve their intrinsic dimensions and use asynchronous decoding. Hero images
+are prioritised; below-fold portraits, supporting artwork and footer logos load lazily.
+Existing lazy theme loading, responsive sources, feather masks and CSS sizing stay intact.
+WebP images receive the same one-month browser cache policy as other images.
+
 Audit fixes approved, 2026-09-09:
 - Privacy Policy describes Hostinger note storage, browser local storage and admin
   sessions. Service confidentiality FAQs now agree with its existing limits.
