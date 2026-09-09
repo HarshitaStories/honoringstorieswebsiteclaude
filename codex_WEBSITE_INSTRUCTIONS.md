@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Homepage preview description, 2026-09-09: use Harshita's supplied wording in the
+description, og:description and twitter:description metadata:
+"Trauma-informed, Queer-Affirmative psychotherapy and supervision for adults globally and in person in Andheri west, Mumbai"
+The preview title, image, on-page copy and other pages' metadata remain unchanged.
+
 Lossless image loading optimisation, 2026-09-09:
 All images referenced by the nine public pages and four error pages were tested for
 lossless recompression. Install only smaller results, retaining every original file.
