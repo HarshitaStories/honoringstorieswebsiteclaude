@@ -1,5 +1,9 @@
 # Honoring Stories Â· Website Instructions
 
+Preview terminology, 2026-09-09: call the service Supervision, not Clinical supervision,
+in preview metadata. Update Supervision's three description tags and the homepage's
+structured-data description/service names. Visible page content remains unchanged.
+
 Homepage preview description, 2026-09-09: use Harshita's supplied wording in the
 description, og:description and twitter:description metadata:
 "Trauma-informed, Queer-Affirmative psychotherapy and supervision for adults globally and in person in Andheri west, Mumbai"
