@@ -1,5 +1,24 @@
 # Honoring Stories Â· Website Instructions
 
+Audit fixes approved, 2026-09-09:
+- Privacy Policy describes Hostinger note storage, browser local storage and admin
+  sessions. Service confidentiality FAQs now agree with its existing limits.
+- Tele MANAS (14416) replaces KIRAN in all nine footers and the Disclaimer.
+  Source: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2100706&lang=2&reg=3
+- Correct Mariwala Health Initiative, clarify workplace introductory copy, use
+  first-person delivery wording and proofread the two-week notice answer.
+- Logistics include in-person sessions. Currency labels use INR, with fees unchanged.
+- About has an h1 with identical styling. Workplace themes use two columns at
+  640-899px, eliminating the intermediate one-column layout.
+- Lossless homehero.webp is 1,360,020 bytes versus 2,083,359 bytes for the PNG,
+  with identical RGBA pixels and dimensions. Retain the PNG for rollback.
+  Existing alignment, feather masks, mobile centring and legal spacing are unchanged.
+- hs_update_notes holds notes.lock across reading, modifying and atomic saving.
+  Submissions, reactions and moderation all use it; damaged stores reject writes.
+  Isolated PHP 8.3 tests retained 32 concurrent submissions and 32 reactions,
+  deduplicated parallel identical notes and withheld pending notes from the public API.
+  No real notes or credentials were changed.
+
 Desktop hero alignment, 2026-09-09: centre the entire homepage text-and-buttons column
 vertically with the portrait from 900px upward. This replaces the earlier top-aligned
 layout and removes its -2.97% photo Y offset. Keep horizontal placement, image sizing

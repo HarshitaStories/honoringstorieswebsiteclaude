@@ -53,31 +53,32 @@ if ($note === '') {
     hs_fail('Please write something before sharing.');
 }
 
-$notes = hs_load_notes();
-
-if (count($notes) >= MAX_NOTES) {
-    hs_fail('This space is not accepting new notes just now.', 503);
-}
-
-/* Two identical notes in quick succession is almost always a double click or a
-   refresh, not two people. Accept it quietly rather than storing it twice. */
-foreach (array_slice($notes, -25) as $existing) {
-    if (($existing['note'] ?? '') === $note) {
-        echo json_encode(['ok' => true]);
-        exit;
+$full = false;
+$ok = hs_update_notes(static function (array &$notes) use ($note, &$full): bool {
+    if (count($notes) >= MAX_NOTES) {
+        $full = true;
+        return false;
     }
-}
+    // Check duplicates while holding the same lock as the append.
+    foreach (array_slice($notes, -25) as $existing) {
+        if (($existing['note'] ?? '') === $note) {
+            return false;
+        }
+    }
+    $notes[] = [
+        'id'        => hs_new_id(),
+        'note'      => $note,
+        'status'    => 'pending',
+        'submitted' => hs_now(),
+        'decided'   => null,
+    ];
+    return true;
+});
 
-$notes[] = [
-    'id'        => hs_new_id(),
-    'note'      => $note,
-    'status'    => 'pending',
-    'submitted' => hs_now(),
-    'decided'   => null,
-];
-
-if (!hs_save_notes($notes)) {
+if (!$ok) {
     hs_fail('That could not be saved just now. Please try again in a moment.', 500);
 }
-
+if ($full) {
+    hs_fail('This space is not accepting new notes just now.', 503);
+}
 echo json_encode(['ok' => true]);

@@ -73,7 +73,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
     } else {
         $id     = (string) ($_POST['id'] ?? '');
         $action = (string) $_POST['action'];
-        $notes  = hs_load_notes();
+        $ok = hs_update_notes(static function (array &$notes) use ($id, $action, &$flash): bool {
         $found  = false;
 
         foreach ($notes as $i => $entry) {
@@ -110,7 +110,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
             break;
         }
 
-        if ($found && !hs_save_notes($notes)) {
+            return $found;
+        });
+        if (!$ok) {
             $flash = 'That could not be saved. Check the data folder is writable.';
         }
     }

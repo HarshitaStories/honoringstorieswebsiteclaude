@@ -31,9 +31,7 @@ function hs_ensure_storage(): void
     if (!file_exists($htaccess)) {
         @file_put_contents($htaccess, "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\n    Order deny,allow\n    Deny from all\n</IfModule>\n");
     }
-    if (!file_exists(NOTES_FILE)) {
-        @file_put_contents(NOTES_FILE, "[]");
-    }
+    // A missing notes store is created only inside the update lock.
 }
 
 /**
@@ -64,22 +62,13 @@ function hs_load_notes(): array
 }
 
 /**
- * Writes every entry back.
- *
- * Writes to a temporary file and renames it into place. A rename is atomic on
- * the same filesystem, so a visitor reading the file mid-write can never catch
- * it half written. The lock stops two submissions arriving at the same instant
- * from overwriting each other.
+ * Hold one lock across reading, changing and saving the store.
+ * A callback returning false leaves the store unchanged, without an error.
+ * Keep the lock separate from notes.json for atomic replacement on Windows.
  */
-function hs_save_notes(array $notes): bool
+function hs_update_notes(callable $change): bool
 {
     hs_ensure_storage();
-
-    /* The lock is taken on a separate file, never on notes.json itself.
-       Windows refuses to rename over a file that has an open handle, so
-       locking the data file and then renaming onto it fails with "Access is
-       denied". Linux allows it, which is worse: the bug would hide in
-       production and only appear on a Windows machine. */
     $lock = @fopen(LOCK_FILE, 'c');
     if ($lock === false) {
         return false;
@@ -89,29 +78,43 @@ function hs_save_notes(array $notes): bool
         return false;
     }
 
-    $json = json_encode(
-        array_values($notes),
-        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-    );
-
-    /* Every file call is silenced. These endpoints answer in JSON, and a PHP
-       warning printed mid-response both corrupts the JSON and sends headers
-       early, which stops the error status being set at all. Failures are
-       reported through the return value instead. */
-    $ok = false;
-    if ($json !== false) {
-        $tmp = NOTES_FILE . '.tmp';
-        if (@file_put_contents($tmp, $json) !== false) {
-            $ok = @rename($tmp, NOTES_FILE);
-            if (!$ok) {
-                @unlink($tmp);
+    try {
+        $raw = file_exists(NOTES_FILE) ? @file_get_contents(NOTES_FILE) : '[]';
+        $notes = $raw === false ? null : json_decode($raw, true);
+        // Never overwrite a damaged or unreadable store with an empty list.
+        if (!is_array($notes)) {
+            return false;
+        }
+        if (isset($notes['notes']) && is_array($notes['notes'])) {
+            $notes = $notes['notes'];
+        }
+        foreach ($notes as $entry) {
+            if (!is_array($entry) || !isset($entry['note']) || !is_string($entry['note'])) {
+                return false;
             }
         }
+        $notes = array_values($notes);
+        if ($change($notes) === false) {
+            return true;
+        }
+        $json = json_encode($notes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if ($json === false) {
+            return false;
+        }
+        $tmp = NOTES_FILE . '.tmp';
+        if (@file_put_contents($tmp, $json) !== strlen($json)) {
+            @unlink($tmp);
+            return false;
+        }
+        if (!@rename($tmp, NOTES_FILE)) {
+            @unlink($tmp);
+            return false;
+        }
+        return true;
+    } finally {
+        flock($lock, LOCK_UN);
+        fclose($lock);
     }
-
-    flock($lock, LOCK_UN);
-    fclose($lock);
-    return $ok;
 }
 
 /** Just the approved ones, newest first. This is all the public page ever sees. */
@@ -204,19 +207,22 @@ function hs_check_password(string $plain): bool
  *  visible to anyone, so a vote on it could only be forged. */
 function hs_add_relate(string $id): ?int
 {
-    $notes = hs_load_notes();
-    foreach ($notes as $i => $entry) {
-        if (($entry['id'] ?? '') !== $id) {
-            continue;
+    $count = null;
+    $ok = hs_update_notes(static function (array &$notes) use ($id, &$count): bool {
+        foreach ($notes as $i => $entry) {
+            if (($entry['id'] ?? '') !== $id) {
+                continue;
+            }
+            if (($entry['status'] ?? '') !== 'approved') {
+                return false;
+            }
+            $count = (int) ($entry['relates'] ?? 0) + 1;
+            $notes[$i]['relates'] = $count;
+            return true;
         }
-        if (($entry['status'] ?? '') !== 'approved') {
-            return null;
-        }
-        $count = (int) ($entry['relates'] ?? 0) + 1;
-        $notes[$i]['relates'] = $count;
-        return hs_save_notes($notes) ? $count : null;
-    }
-    return null;
+        return false;
+    });
+    return $ok ? $count : null;
 }
 
 /** Approved notes, most related to least. Notes nobody has ticked yet are

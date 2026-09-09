@@ -121,9 +121,8 @@ Changes can take a few hours to take effect worldwide.
 
 - **A lawyer has not read the Disclaimer, Privacy Policy or Terms.** They are
   written and live. Get them checked.
-- **The Privacy Policy does not yet mention the coping notes.** It was written
-  when submissions went to Google Forms. They now go to your own server, which
-  is a smaller and simpler claim, but the wording should be brought up to date.
+- **The Privacy Policy was updated on 9 September 2026** to describe coping notes,
+  Hostinger storage and browser local storage. Professional legal review is still needed.
 - **The `admin` folder** holds an abandoned attempt at a different admin system.
   It is blocked by `.htaccess` and does nothing. It can be deleted.
 

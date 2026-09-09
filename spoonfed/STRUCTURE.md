@@ -2,6 +2,15 @@
 | Where notes are stored | `lib.php` only. The other scripts go through it |
 # Structure: what every file is, and what depends on what
 
+## Audit maintenance update, 2026-09-09
+
+All note changes must use hs_update_notes in lib.php. Its separate lock covers the
+read, modification and atomic save. Do not restore the old hs_save_notes pattern.
+Damaged stores reject writes rather than overwriting notes. Test with synthetic notes
+in an isolated directory, never by modifying the live store.
+The homepage uses lossless assets/homehero.webp; retain homehero.png for rollback.
+The Privacy Policy now describes Hostinger storage and browser local storage.
+
 ---
 
 ## 1. The folder tree
