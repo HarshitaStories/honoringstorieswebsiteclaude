@@ -1505,7 +1505,19 @@
         /* Entries are kept whole rather than reduced to strings: the pad needs
            each note's id to record a tick against it, and its running count. */
         const notes = entries.filter(e => e && typeof e.note === 'string' && e.note.trim());
-        if (notes.length) buildPad(notes);
+        if (notes.length) {
+          // Avoid repeating the first note on this browser when alternatives exist.
+          try {
+            const key = 'hs_last_first_note';
+            const previous = localStorage.getItem(key);
+            if (notes.length > 1 && notes[0].id === previous) {
+              const next = 1 + Math.floor(Math.random() * (notes.length - 1));
+              [notes[0], notes[next]] = [notes[next], notes[0]];
+            }
+            localStorage.setItem(key, notes[0].id);
+          } catch (e) { /* Storage unavailable: keep the server's random order. */ }
+          buildPad(notes);
+        }
         else showEmpty('No notes have been shared here yet. If something has helped you, you are warmly invited to be the first.');
       })
       .catch(() => {

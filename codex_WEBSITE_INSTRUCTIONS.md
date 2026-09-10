@@ -1,5 +1,10 @@
 # Honoring Stories Â· Website Instructions
 
+Random approved notes, 2026-09-10: remove reaction-based ranking. The public API
+shuffles all approved notes on each request. The Community page remembers the last
+first note locally and swaps it with a random alternative if it repeats, when two
+or more notes exist. If browser storage is blocked, ordering is still random but
+repeats are possible. Reactions, moderation and private data protections are unchanged.
 Preview terminology, 2026-09-09: call the service Supervision, not Clinical supervision,
 in preview metadata. Update Supervision's three description tags and the homepage's
 structured-data description/service names. Visible page content remains unchanged.

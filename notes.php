@@ -20,8 +20,8 @@ $notes = array_map(static function ($e) {
        notes they have already ticked. It is a random string and says nothing
        about who wrote the note or when.
 
-       The relate count is NOT sent. It decides the order these arrive in, and
-       that ordering is done here, on the server. Sending the number as well
+       The relate count is NOT sent and never affects the random order.
+       Sending the number as well
        would put a running tally of other people's agreement beside something
        somebody wrote about a hard day, which turns a quiet gesture into a
        score. It also keeps the tallies from being read straight off the page.
@@ -33,6 +33,6 @@ $notes = array_map(static function ($e) {
         'id'   => $e['id'] ?? '',
         'note' => $e['note'],
     ];
-}, hs_ranked_notes());
+}, hs_random_notes());
 
 echo json_encode($notes, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

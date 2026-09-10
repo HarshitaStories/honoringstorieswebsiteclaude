@@ -2,6 +2,12 @@
 | Where notes are stored | `lib.php` only. The other scripts go through it |
 # Structure: what every file is, and what depends on what
 
+Random approved notes, 2026-09-10: remove reaction-based ranking. The public API
+shuffles all approved notes on each request. The Community page remembers the last
+first note locally and swaps it with a random alternative if it repeats, when two
+or more notes exist. If browser storage is blocked, ordering is still random but
+repeats are possible. Reactions, moderation and private data protections are unchanged.
+
 ## Audit maintenance update, 2026-09-09
 
 Image loading update: referenced -lossless PNG/WebP copies preserve exact decoded pixels
@@ -290,7 +296,7 @@ the visitor's browser.
 | File | Reached by | What it does |
 | --- | --- | --- |
 | `submit.php` | The Community page, when someone presses Share | Checks the note, stores it as pending. Never publishes. |
-| `notes.php` | The Community page, on load | Returns **approved notes only**, ordered most related first |
+| `notes.php` | The Community page, on load | Returns **approved notes only**, randomly ordered |
 | `relate.php` | The relate button | Adds one to a note's tally |
 | `admin.php` | You, by typing the address | Login, then approve, edit, unpublish, delete |
 | `lib.php` | The other four | Shared reading and writing. Never opened directly. |

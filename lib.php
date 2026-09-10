@@ -225,21 +225,10 @@ function hs_add_relate(string $id): ?int
     return $ok ? $count : null;
 }
 
-/** Approved notes, most related to least. Notes nobody has ticked yet are
- *  shuffled rather than left in submission order, so an unticked note is not
- *  permanently buried at the bottom by the accident of when it arrived. */
-function hs_ranked_notes(): array
+/** Approved notes in a fresh random order, independent of reactions. */
+function hs_random_notes(): array
 {
-    $approved = array_filter(hs_load_notes(), static fn($e) => ($e['status'] ?? '') === 'approved');
-
-    $rated = [];
-    $unrated = [];
-    foreach ($approved as $e) {
-        if ((int) ($e['relates'] ?? 0) > 0) { $rated[] = $e; } else { $unrated[] = $e; }
-    }
-
-    usort($rated, static fn($a, $b) => ((int) $b['relates']) <=> ((int) $a['relates']));
-    shuffle($unrated);
-
-    return array_merge($rated, $unrated);
+    $approved = array_values(array_filter(hs_load_notes(), static fn($e) => ($e['status'] ?? '') === 'approved'));
+    shuffle($approved);
+    return $approved;
 }
