@@ -1,5 +1,12 @@
 # Honoring Stories Â· Website Instructions
 
+Phone active navigation glass treatment, 2026-09-11: below 640px, replace the
+flat pink background on the current bottom-navigation item with the desktop
+current-link treatment: translucent cream, white highlight border, full pill
+corners, backdrop blur and a soft purple shadow. Apply it on all nine pages.
+The navigation structure, current-page mapping, tablet styling from 640px to
+899px, desktop styling and the non-current Work open state remain unchanged.
+
 Random approved notes, 2026-09-10: remove reaction-based ranking. The public API
 shuffles all approved notes on each request. The Community page remembers the last
 first note locally and swaps it with a random alternative if it repeats, when two
