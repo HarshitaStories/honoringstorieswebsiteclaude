@@ -2,6 +2,9 @@
 | Where notes are stored | `lib.php` only. The other scripts go through it |
 # Structure: what every file is, and what depends on what
 
+Footer update, 2026-09-15: all nine pages carry the short crisis-service sentence
+without helpline names or numbers. Apply future footer edits to all nine files.
+
 Random approved notes, 2026-09-10: remove reaction-based ranking. The public API
 shuffles all approved notes on each request. The Community page remembers the last
 first note locally and swaps it with a random alternative if it repeats, when two

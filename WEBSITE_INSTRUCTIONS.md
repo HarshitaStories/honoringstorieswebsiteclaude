@@ -1183,6 +1183,15 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 ## 9. Change history
 
+### 2026-09-15
+
+Replaced the crisis notice and helpline list in all nine page footers with:
+"This is not a crisis service. If you need immediate support, please contact
+mental health helpline numbers." Names and numbers are removed from the footer
+on phone, tablet, and laptop. The homepage footer sentence can wrap at every
+width. The Disclaimer body remains unchanged. This supersedes earlier footer
+helpline requirements. Published separately from the local milestone archive.
+
 Every commit on `master`, newest first, as the record of how the approved version was reached.
 Reversals are included on purpose: they show what has already been rejected.
 
