@@ -1195,6 +1195,15 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 ## 9. Change history
 
+### 2026-09-15 Privacy Policy and remaining helpline references
+
+Published the prepared Privacy Policy wording about planned Google Analytics.
+Analytics remains inactive until a Measurement ID and visitor consent controls
+are configured. Removed the Disclaimer's helpline names and numbers and replaced
+them with the user's crisis-service sentence. Community, Terms and the four error
+pages no longer direct visitors to the removed list. This supersedes the earlier
+decision to keep the Disclaimer list. All device sizes use the updated markup.
+
 ### 2026-09-15
 
 Replaced the crisis notice and helpline list in all nine page footers with:

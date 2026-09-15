@@ -2,6 +2,10 @@
 | Where notes are stored | `lib.php` only. The other scripts go through it |
 # Structure: what every file is, and what depends on what
 
+2026-09-15: the Privacy Policy describes planned, inactive Google Analytics.
+No tracking tag is installed. The Disclaimer helpline list has also been removed;
+Community, Terms and error-page support text now match the generic crisis notice.
+
 Footer update, 2026-09-15: all nine pages carry the short crisis-service sentence
 without helpline names or numbers. Apply future footer edits to all nine files.
 
