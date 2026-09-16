@@ -1195,6 +1195,14 @@ by `.gitignore` because they carry personal data. Keep it that way.
 
 ## 9. Change history
 
+### 2026-09-15 Coping notebook timing
+
+The automatic page-turn cycle is now five seconds on every device, including the
+existing 1150ms animation. Previously a 5000ms hold followed each animation, making
+successive turns 6150ms apart. After animation, the next wait is 3850ms. Initial
+display and resume still wait five seconds; reduced motion uses a five-second
+wait without animation. Hover, focus, visibility and arrow behavior are retained.
+
 ### 2026-09-15 Privacy Policy and remaining helpline references
 
 Published the prepared Privacy Policy wording about planned Google Analytics.

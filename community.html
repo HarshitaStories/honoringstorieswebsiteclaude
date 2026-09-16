@@ -1213,7 +1213,7 @@
        turn reveals. */
     const stillMode = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const TURN_MS   = 1150;   // must match the CSS transition on .is-turning
-    const HOLD_MS   = 5000;   // time a note stays up before the page turns
+    const INTERVAL_MS = 5000; // total automatic cycle, including the page-turn animation
 
     /* Notes are shown without a closing full stop. On a page of fragments a
        trailing dot reads as clutter, and people punctuate inconsistently.
@@ -1383,9 +1383,9 @@
       // One note has nothing to turn to, so the arrows would be pretending.
       if (entries.length < 2) { prevBtn.hidden = true; nextBtn.hidden = true; return; }
 
-      function schedule() {
+      function schedule(delay = INTERVAL_MS) {
         clearTimeout(timer);
-        if (!paused) timer = setTimeout(turn, HOLD_MS);
+        if (!paused) timer = setTimeout(turn, delay);
       }
 
       /* Turning, either way.
@@ -1468,7 +1468,7 @@
       function finishTurn() {
         turning = false;
         setArrows(true);
-        schedule();
+        schedule(INTERVAL_MS - (stillMode ? 0 : TURN_MS));
       }
 
       /* Both arrows are dimmed while a page is in motion. Without this a second
