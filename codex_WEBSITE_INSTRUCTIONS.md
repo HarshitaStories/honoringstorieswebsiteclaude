@@ -1,5 +1,12 @@
 # Honoring Stories Â· Website Instructions
 
+Peer testimonial addition, 2026-09-18: add Kriti Pahuja's approved testimonial to
+the homepage carousel as the ninth review. Show her supplied education as "MSC in
+Counselling Psychology" and experience as "7+ years experience". Preserve the
+review text exactly as supplied, including wording, punctuation and capitalisation.
+The established carousel layout, controls, five-second autoplay, phone swipe
+behaviour and one-line mobile dot row remain unchanged.
+
 Phone active navigation glass treatment, 2026-09-11: below 640px, replace the
 flat pink background on the current bottom-navigation item with the desktop
 current-link treatment: translucent cream, white highlight border, full pill
@@ -613,7 +620,7 @@ use. This was explicitly requested and must be treated as permanent, not a one-t
   like "I'll"/"we'll"/"you'll", spell them out as "I will"/"we will"/"you will" throughout FAQ copy
   (and the word "cadence" was flagged as not simple enough, replaced with "schedule" in the
   supervision "how often will we meet" answer).
-- **Peer Testimonials** page (not yet built): all 8 real testimonials in full.
+- **Peer Testimonials** page (not yet built): all 9 real testimonials in full.
 - **Work With Me, For Organisations** (`workplace-wellbeing.html`, built): the third entry in the Work With
   Me dropdown, aimed at companies and teams. Built from the `psychotherapy.html` template so nav,
   footer and styling stay identical. Copy was drafted and approved by the user before any building.
@@ -961,16 +968,16 @@ build this section until the actual content is supplied, other than reserving a 
 placeholder slot in the site plan (see Open Items).
 
 ### Peer testimonials
-8 real testimonials collected via Google Form, all with explicit consent for name, education,
+9 real testimonials collected with explicit consent for name, education,
 years of experience, and testimonial text to appear on the site. Full text lives in this repo's
 private working notes, not committed, because the source spreadsheet contains personal emails.
 
-The homepage glimpse section (see section 4) shows all 8 in an **autosliding carousel**: one
+The homepage glimpse section (see section 4) shows all 9 in an **autosliding carousel**: one
 quote visible at a time, manual prev/next arrow buttons plus dot navigation, autoplay every 5
 seconds that resets whenever someone interacts manually. This reverses an earlier decision to
-show only a 1-quote static teaser; the user explicitly asked for all 8 back with autoplay. Order:
+show only a 1-quote static teaser; the user explicitly asked for the full set with autoplay. Order:
 Deepapriya Vishwanthan, Rinkle Jain, Aaushi Shah, Sanika Nanal, Anis Syed, Zahra Diwan, Rajshree,
-Ananyaa Kale. The same full set should be reused (not re-collected) if a dedicated Testimonials
+Ananyaa Kale, Kriti Pahuja. The same full set should be reused (not re-collected) if a dedicated Testimonials
 page is built later.
 
 ### Helpline numbers (footer only, quiet placement, non-crisis-service disclaimer alongside)
@@ -1079,7 +1086,7 @@ absence.
   her behalf without asking. Until this is done, publishing a note means editing `notes.json`
   directly on GitHub's own web editor, which works today with no setup required. Once the
   connection exists, add its `base_url` to the commented line in `admin/config.yml`.
-- Peer Testimonials page (full 8 testimonials). The 8 already run in the homepage carousel, and
+- Peer Testimonials page (full 9 testimonials). The 9 already run in the homepage carousel, and
   Harshita has not decided whether a separate page is wanted.
 - **Legal review of the three policy pages.** They are written and live, and the footer links are
   wired, but a lawyer has not yet been through them. Do this before the site is public.
