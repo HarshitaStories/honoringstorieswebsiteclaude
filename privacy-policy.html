@@ -329,7 +329,7 @@
       backdrop-filter: blur(16px) saturate(150%);
     }
   }
-</style></head>
+</style><link rel="stylesheet" href="assets/analytics-consent.css?v=1"><script defer src="assets/analytics-consent.js?v=1"></script></head>
 <body>
 
 <!-- ========== NAV ========== -->
@@ -395,10 +395,11 @@
       <p>This policy explains what personal information is collected, why, and what choices you have. Questions about this policy: <a href="mailto:feelseen@honoringstories.com">feelseen@honoringstories.com</a></p>
 
       <h2>1. What this website itself collects</h2>
-      <p>Google Analytics is not active on this website yet, and this site runs no advertising trackers. The Community page uses local storage in your browser to remember sharing activity, the note shown first on your last visit, and which notes you have marked as &ldquo;I can relate&rdquo;. You can clear this through your browser settings. The password-protected administration area uses a session cookie for login.</p>
-      <h3>Planned website analytics</h3>
-      <p>I plan to use Google Analytics 4 to understand how people use this website, such as which pages are visited and what kind of device is used. If it is enabled, I will ask for your choice before the analytics tag loads. Declining will not affect your access to the website. You will be able to change your choice later.</p>
-      <p>With your permission, Google Analytics may receive the page address and title, approximate location, and browser and device information. It may set a first-party cookie, such as <code>_ga</code>, to distinguish visits. A page visit can indicate interest in a service, so I will use the information only to understand website use, not for advertising or to identify visitors. I will not send your coping notes, enquiry text, consent-form answers, clinical records, or payment details to Analytics. The policy will be checked again when analytics is activated so that it matches the final setup.</p>
+      <p>This website uses optional Google Analytics and runs no advertising trackers. The Community page uses local storage in your browser to remember sharing activity, the note shown first on your last visit, and which notes you have marked as &ldquo;I can relate&rdquo;. Your analytics choice is also stored locally for up to 180 days. You can clear this through your browser settings. The password-protected administration area uses a session cookie for login.</p>
+      <h3 id="website-analytics">Optional website analytics</h3>
+      <p>I use Google Analytics 4 to understand visits to this website. The Google Analytics tag loads only after you select Accept. If you decline or make no choice, it does not load. Declining does not affect your access to the website. You can use Analytics preferences in any page footer to change your choice.</p>
+      <p>After acceptance, Google receives page-view and session information, including the page address and title, referring website, and browser and device information. Google processes your IP address to derive approximate location. The integration removes query strings and fragments from the page address and sends only the referring website's origin. Analytics cookies, including <code>_ga</code> and <code>_ga_*</code>, are configured to expire after 180 days. If you withdraw permission, this website disables future Analytics collection, removes its accessible Analytics cookies and reloads the page. This does not erase information already collected.</p>
+      <p>A page visit can indicate interest in a service. I use Analytics only to understand website use, not for advertising or to identify visitors. Google Signals and advertising personalisation are disabled in this integration. I do not send coping notes, enquiry text, consent-form answers, clinical records or payment details to Analytics. Google's processing is described in its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
       <p><strong>External services.</strong> Page fonts are loaded from Google Fonts. When a page opens, your browser requests those font files from Google's servers, and in doing so Google receives your IP address and basic browser information. This happens on every page and is outside my control. Google's handling of that data is governed by its own privacy policy.</p>
 
       <h2>2. Information you give me directly</h2>
@@ -441,7 +442,7 @@
 
       <h2>6. Who else may handle your information</h2>
       <ul>
-        <li><strong>Google</strong> (Forms, spreadsheets, email, fonts, and Analytics only if you choose to allow it once enabled)</li>
+        <li><strong>Google</strong> (Forms, spreadsheets, email, fonts, and Analytics only if you choose to allow it)</li>
         <li><strong>Hostinger</strong> (website hosting and storage of coping notes; hosting logs may contain technical details such as IP addresses)</li>
         <li><strong>Cal.com</strong> (scheduling)</li>
         <li><strong>WhatsApp, owned by Meta</strong> (messaging, if you choose it)</li>
@@ -523,6 +524,7 @@
       <div class="footer-links">
         <a href="disclaimer.html">Disclaimer</a>
         <a href="privacy-policy.html">Privacy Policy</a>
+        <button type="button" data-analytics-preferences hidden>Analytics preferences</button>
         <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
       </div>
     </div>

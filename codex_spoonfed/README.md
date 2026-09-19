@@ -1,5 +1,24 @@
 # Honoring Stories website: the spoonfed copy
 
+Google Analytics installation, 2026-09-19 (supersedes earlier planned/inactive descriptions):
+The nine public pages load assets/analytics-consent.js and assets/analytics-consent.css.
+This is a deliberate shared-file exception to the otherwise self-contained pages.
+GA4 uses public Measurement ID G-X8CMDXXHBT; it is an identifier, not a password or API secret.
+The Google tag is blocked until Accept, including no cookieless consent pings before acceptance.
+Accept and Decline have equal styling. Analytics preferences in every footer reopens the panel.
+Consent is stored locally for 180 days; blocked storage means visitors may be asked again.
+Declining after acceptance disables GA, clears accessible _ga cookies and reloads the page.
+Other open tabs react to changed consent. Advertising consent stays denied, Google Signals
+and advertising personalisation are disabled. Only the production apex and www hosts load GA.
+The configuration sends page visits, strips page query strings/fragments and reduces referrers
+to their origin. No form contents, coping notes or booking details are sent by this integration.
+Keep Enhanced measurement, Google Signals and advertising features off in the Analytics console.
+A click on a booking link is not a completed booking; no booking conversion tracking is installed.
+Privacy Policy now describes this implementation. Cookie lifetime is 180 days.
+On deployment verify Accept in GA Realtime and no GA requests before consent or after Decline.
+Do not add an unconditional Google tag elsewhere. Publish both shared assets with all nine pages.
+Milestone A remains frozen; handoff archives need rebuilding before being used as current copies.
+
 **Everything needed to rebuild and run this website, explained from zero.**
 
 Updated 2026-08-30, revised later the same day with the search metadata, the
